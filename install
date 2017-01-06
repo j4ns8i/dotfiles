@@ -1,0 +1,21 @@
+#!/bin/bash
+
+CONFIG_DIR='.config'
+RESOURCES_DIR='resources'
+
+# Install homebrew
+/usr/bin/ruby -e ${RESOURCES_DIR}/_install_homebrew
+
+# Install bundle - Brew can use Brewfiles with the brew bundle command
+brew tap homebrew/bundle
+brew bundle --file=${RESOURCES_DIR}/Brewfile
+
+# Get vim-plug and set up nvim config
+mkdir -p ${HOME}/${CONFIG_DIR}/nvim/autoload
+cp ${RESOURCES_DIR}/plug.vim ${HOME}/${CONFIG_DIR}/nvim/autoload/
+ln -sf ${HOME}/${CONFIG_DIR}/nvim ${HOME}/.vim
+cp ${RESOURCES_DIR}/vimrc ~/.${HOME}/${CONFIG_DIR}/nvim/init.vim
+ln -sf ${HOME}/${CONFIG_DIR}/nvim/init.vim ${HOME}/.vimrc
+
+# Install python packages
+pip install -r ${RESOURCES_DIR}/requirements.txt
