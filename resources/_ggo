@@ -1,0 +1,5 @@
+#compdef ggo
+
+local -a orgs
+orgs=( $(find $SRC/git.viasat.com -maxdepth 1 -type d -mindepth 1 | sed 's|.*\/\(.*\)$|\1|') )
+_describe 'values' orgs

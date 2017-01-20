@@ -1,0 +1,5 @@
+#compdef ggr
+
+local -a repos
+repos=( $(tree -f $SRC -L 4 -a | grep -E '\.git$' | sed -E 's|.*\/(.+)\/\.git$|\1|') )
+_describe 'values' repos

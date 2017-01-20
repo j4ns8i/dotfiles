@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-CONFIG_DIR='.config'
+CONFIG_DIR="${HOME}/.config"
 RESOURCES_DIR='resources'
 
 # Install homebrew
@@ -10,12 +10,54 @@ RESOURCES_DIR='resources'
 brew tap homebrew/bundle
 brew bundle --file=${RESOURCES_DIR}/Brewfile
 
-# Get vim-plug and set up nvim config
-mkdir -p ${HOME}/${CONFIG_DIR}/nvim/autoload
-cp ${RESOURCES_DIR}/plug.vim ${HOME}/${CONFIG_DIR}/nvim/autoload/
-ln -sf ${HOME}/${CONFIG_DIR}/nvim ${HOME}/.vim
-cp ${RESOURCES_DIR}/vimrc ~/.${HOME}/${CONFIG_DIR}/nvim/init.vim
-ln -sf ${HOME}/${CONFIG_DIR}/nvim/init.vim ${HOME}/.vimrc
-
 # Install python packages
 pip install -r ${RESOURCES_DIR}/requirements.txt
+
+# Get vim-plug and set up nvim config
+mkdir -p ${CONFIG_DIR}/nvim/autoload
+cp ${RESOURCES_DIR}/plug.vim ${CONFIG_DIR}/nvim/autoload/
+ln -sf ${CONFIG_DIR}/nvim ${HOME}/.vim
+cp ${RESOURCES_DIR}/vimrc ${CONFIG_DIR}/nvim/init.vim
+ln -sf ${CONFIG_DIR}/nvim/init.vim ${HOME}/.vimrc
+
+# oh-my-zsh
+cp -R ${RESOURCES_DIR}/oh-my-zsh ${HOME}/.oh-my-zsh
+mkdir -p ${HOME}/.oh-my-zsh/custom/etc
+
+# Powerline
+cp -R ${RESOURCES_DIR}/powerline ${CONFIG_DIR}/powerline
+ln -sf ${CONFIG_DIR}/powerline ${HOME}/.oh-my-zsh/custom/etc/powerline
+
+# Completions
+mkdir -p ${HOME}/.oh-my-zsh/completions
+cp ${RESOURCES_DIR}/zsh-completions/src/* ${HOME}/.oh-my-zsh/completions
+cp ${RESOURCES_DIR}/_ggr ${RESOURCES_DIR}/_ggo ${HOME}/.oh-my-zsh/completions
+
+# Git
+mkdir -p ${CONFIG_DIR}/git
+cp ${RESOURCES_DIR}/gitconfig ${CONFIG_DIR}/git/config
+
+# Change shell to zsh if all goes as expected
+ZSH_PATH="$(sed -n 1p /etc/paths)/zsh"
+if [[ -f $ZSH_PATH ]] && [[ ${ZSH_PATH} != ${SHELL} ]]; then
+    echo "Change shell to ${ZSH_PATH}? [y/n]"
+    read RESPONSE
+    if [[ ${RESPONSE} = 'y' ]]; then
+        IN_ETC_SHELLS=$(grep ${ZSH_PATH} /etc/shells)
+        if [[ -z ${IN_ETC_SHELLS} ]]; then
+            echo "Adding ${ZSH_PATH} to /etc/shells"
+            sudo sh -c "echo ${ZSH_PATH} >> /etc/shells"
+        fi
+        CHSH_CMD="chsh -s ${ZSH_PATH}";
+        echo ${CHSH_CMD};
+        eval ${CHSH_CMD}
+    else
+        echo "Leaving the default shell as it is."
+    fi
+elif [[ ${ZSH_PATH} = ${SHELL} ]]; then
+    echo "Nice, you're already using zsh."
+else
+    echo "${ZSH_PATH} was not found."
+fi
+
+cp ${RESOURCES_DIR}/zshrc ${HOME}/.zshrc
