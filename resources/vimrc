@@ -81,6 +81,7 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+set softtabstop=4
 
 " Auto indent and wrap lines
 set ai
@@ -91,25 +92,6 @@ set backspace=2
 
 " Auto remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
-
-"""""""""""""""""""""""""""""""""""
-" Grep
-"""""""""""""""""""""""""""""""""""
-nnoremap <leader>g :set operatorfunc=GrepOperator<cr>g@
-vnoremap <leader>g :<c-u>call GrepOperator(visualmode())<cr>
-
-function! GrepOperator(type)
-    if a:type ==# 'v'
-        normal! `<v`>y
-    elseif a:type ==# 'char'
-        normal! `[v`]y
-    else
-        return
-    endif
-
-    silent execute "grep! -nHIRs " . shellescape(@@) . " ."
-    copen
-endfunction
 
 """""""""""""""""""""""""""""""""""
 " Window Management Stuff
@@ -171,7 +153,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
-" Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
+Plug 'rizzatti/dash.vim'
 if has('nvim')
     Plug 'shougo/deoplete.nvim'
 endif
@@ -179,7 +162,6 @@ endif
 " On Command
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'scrooloose/nerdtree', {'on':  'NERDTreeToggle'}
-Plug 'rizzatti/dash.vim', {'on': 'Dash'}
 Plug 'kien/rainbow_parentheses.vim', {'on': 'RainbowParenthesesToggleAll'}
 
 " On File Type
@@ -208,7 +190,7 @@ nnoremap <leader>PU :PlugUpdate<cr>
 " Neomake stuff
 let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_python_flake8_maker = {
-    \ 'args': ['--ignore=E501']
+    \ 'args': ['--ignore=E501,E303,E302,E251,E221']
     \ }
 let g:neomake_error_sign = {
     \ 'text': '✗',
@@ -220,6 +202,7 @@ let g:neomake_info_sign = {
     \ 'text': '>',
     \ }
 let g:neomake_airline = 1
+let g:neomake_logfile='/tmp/neomake_err.log'
 
 autocmd! BufReadPost * Neomake
 autocmd! BufWritePost * Neomake
@@ -261,8 +244,6 @@ endfunction
 " close the TagBar after selection
 nnoremap <leader>tag :TagbarOpen fjc<cr>
 
-" Toggle NERDTree
-nnoremap <F6> :NERDTreeToggle<cr>
 " List Tasks
 nnoremap <leader>l :TaskList<cr>
 
@@ -295,4 +276,12 @@ let g:airline_theme="papercolor"
 hi Search ctermfg=black
 hi Visual cterm=reverse ctermbg=black
 
-nnoremap <leader>h :noh<cr>
+" Remove current highlighting
+nnoremap <leader>noh :noh<cr>
+" Toggle NERDTree
+nnoremap <leader>nt :NERDTreeToggle<cr>
+
+" GitGutter
+nnoremap <leader>ggu :GitGutterUndoHunk<cr>
+nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
+nnoremap <leader>ggc :pclose<cr>
