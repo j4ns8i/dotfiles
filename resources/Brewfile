@@ -1,4 +1,5 @@
 tap 'neovim/neovim'
+brew 'fzf'
 brew 'neovim'
 brew 'python'
 brew 'python3'
