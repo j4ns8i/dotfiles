@@ -8,6 +8,7 @@ function _configure_iterm2() {
     _print_status "Configuring iTerm2..."
     cp -R ${RESOURCES_DIR}/iterm2 ${CONFIG_DIR}/
     source ${RESOURCES_DIR}/fonts/install.sh
+    sed -i .bak "s|/Users/justinsmalkowski/code/src/external/dotfiles/resources/iterm2|${CONFIG_DIR}/iterm2|" ${CONFIG_DIR}/iterm2/com.googlecode.iterm2.plist
 }
 
 function _configure_homebrew() {
