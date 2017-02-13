@@ -9,11 +9,9 @@ export SRC=${BASE}/src
 export FZF_DEFAULT_OPTS='--height=100% --exact'
 
 alias ll='ls -AlhF'
+alias venv2="source ${BASE}/venv2/bin/activate"
 alias venv3="source ${BASE}/venv3/bin/activate"
-alias venv="source ${BASE}/venv/bin/activate"
 alias vim="nvim"
-alias myip="ifconfig en0"
-alias vpnip="ifconfig utun1"
 
 function ggo {
     # Go to a github organization
