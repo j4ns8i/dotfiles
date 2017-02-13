@@ -6,7 +6,7 @@ RESOURCES_DIR="$( cd `dirname $0` && pwd )/resources"
 
 function _configure_iterm2() {
     _print_status "Configuring iTerm2..."
-    ln -sf ${RESOURCES_DIR}/iterm2 ${CONFIG_DIR}/iterm2
+    ln -sf ${RESOURCES_DIR}/iterm2 ${CONFIG_DIR}/
     source ${RESOURCES_DIR}/fonts/install.sh
 }
 
@@ -94,15 +94,13 @@ function _configure_nvim() {
 function _configure_ohmyzsh() {
     # oh-my-zsh
     _print_status "Installing oh-my-zsh... "
-    cp -R ${RESOURCES_DIR}/oh-my-zsh ${HOME}/.oh-my-zsh
-    mkdir -p ${HOME}/.oh-my-zsh/custom/etc
+    cp -R ${RESOURCES_DIR}/oh-my-zsh/ ${HOME}/.oh-my-zsh
 }
 
 function _configure_powerline() {
     # Powerline
     _print_status "Installing powerline... "
     cp -R ${RESOURCES_DIR}/powerline ${CONFIG_DIR}/powerline
-    ln -sf ${CONFIG_DIR}/powerline ${HOME}/.oh-my-zsh/custom/etc/
 }
 
 function _configure_completions() {
