@@ -1,3 +1,6 @@
 [submodule "resources/zsh-completions"]
 	path = resources/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "resources/fonts"]
+	path = resources/fonts
+	url = https://github.com/powerline/fonts
