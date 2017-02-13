@@ -6,7 +6,7 @@ RESOURCES_DIR="$( cd `dirname $0` && pwd )/resources"
 
 function _configure_iterm2() {
     _print_status "Configuring iTerm2..."
-    ln -sf ${RESOURCES_DIR}/iterm2 ${CONFIG_DIR}/
+    cp -R ${RESOURCES_DIR}/iterm2 ${CONFIG_DIR}/
     source ${RESOURCES_DIR}/fonts/install.sh
 }
 
