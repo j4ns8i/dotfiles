@@ -4,6 +4,10 @@ export GOPATH=${BASE}
 export LESS=-R
 export SRC=${BASE}/src
 
+# Add new paths to $PATH if they dont already exist
+[[ ${${(s.:.)PATH}[(i)/usr/local/sbin]} -gt ${#${(s.:.)PATH}} ]] && export PATH="/usr/local/sbin:${PATH}"
+[[ ${${(s.:.)PATH}[(i)/usr/local/bin]} -gt ${#${(s.:.)PATH}} ]] && export PATH="/usr/local/bin:${PATH}"
+
 # Make ctrl-R full screen with fzf
 # export FZF_TMUX_HEIGHT=100%
 export FZF_DEFAULT_OPTS='--height=100% --exact'
