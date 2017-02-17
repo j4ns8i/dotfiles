@@ -90,6 +90,7 @@ function _configure_nvim() {
     ln -sf ${CONFIG_DIR}/nvim ${HOME}/.vim
     cp ${RESOURCES_DIR}/vimrc ${CONFIG_DIR}/nvim/init.vim
     ln -sf ${CONFIG_DIR}/nvim/init.vim ${HOME}/.vimrc
+    nvim -c "PlugInstall" -c "PlugUpdate" -c "qa" --headless
 }
 
 function _configure_ohmyzsh() {
@@ -168,3 +169,6 @@ for s in ${CONFIG_MODULES[@]}; do
     echo "Done.
 "
 done
+
+_print_status "All done!\
+You should probably just exit iTerm2 and relaunch it to load the new configurations"

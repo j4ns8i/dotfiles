@@ -285,3 +285,6 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 nnoremap <leader>ggu :GitGutterUndoHunk<cr>
 nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
 nnoremap <leader>ggc :pclose<cr>
+
+" Search and replace
+nnoremap <leader>sar :%s/<C-R><C-W>//gc<left><left><left>
