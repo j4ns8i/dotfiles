@@ -1,7 +1,7 @@
 ipython-genutils==0.1.0
 ipython==5.1.0
 ipywidgets==5.2.2
-neovim==0.1.12
+neovim==0.1.13
 powerline-gitstatus==1.2.1
 powerline-status==2.5
 requests==2.11.1
