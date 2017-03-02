@@ -1,13 +1,12 @@
-""""""""""""""""""""""""""""""""""""""""""""""""
-" Generic setup
-""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+" => Options and variables
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 let mapleader = ","
+filetype plugin indent on
+colorscheme pablo
+let g:airline_theme="bubblegum"
 
-"""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""
 " Turn on the Wild menu
 set wildmenu
 " Ignore compiled files
@@ -27,12 +26,14 @@ set scrolloff=5
 " Number of lines to jump when scrolling off screen
 " -# = percentage
 set scrolljump=-10
+" When splitting windows, keep what you're working on in the main position
+set splitbelow
+set splitright
 
-" Set the paste toggle
-map <F10> :set paste<cr>
-map <F11> :set nopaste<cr>
-imap <F10> <C-O>:set paste<CR>
-imap <F11> <nop>
+" Make searches legible
+hi Search ctermfg=black
+hi Visual cterm=reverse ctermbg=black
+
 set pastetoggle=<F11>
 
 " Quick funtion that will
@@ -42,33 +43,14 @@ autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
 " Use Unix as the standard file type
 set ffs=unix,mac,dos
 
-""""""""""""""""""""""""""""
-" => Tags
-""""""""""""""""""""""""""""
 " setup tags
 set tags=./.tags;/
 
-""""""""""""""""""""""""""""
-" => Files, backups and undo
-""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git etc.
 set nobackup
 set nowb
 set noswapfile
 
-" Echo the full path of file being edited
-nnoremap <leader>f :echo expand('%:p')<cr>
-
-" Source and Edit nvim/init
-nnoremap <leader>src :source ~/.config/nvim/init.vim<cr>
-nnoremap <leader>erc :vsp ~/.config/nvim/init.vim<cr>
-
-" Sudo save a file
-nnoremap <leader>save :w !sudo dd of=%<cr>
-
-""""""""""""""""""""""""""""
-" => Text, tab and indent related
-""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
 
@@ -93,9 +75,81 @@ set backspace=2
 " Auto remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
 
-"""""""""""""""""""""""""""""""""""
-" Window Management Stuff
-"""""""""""""""""""""""""""""""""""
+set background=dark
+
+" Ultisnips stuff
+let g:UltiSnipsEditSplit="context"
+let g:UltiSnipsListSnippets="<c-s-tab>"
+let g:ultisnips_python_style="sphinx"
+
+" Neomake stuff
+let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_python_flake8_maker = {
+    \ 'args': ['--ignore=E501,E402,E303,E302,E251,E221']
+    \ }
+let g:neomake_error_sign = {
+    \ 'text': '✗',
+    \ }
+let g:neomake_warning_sign = {
+    \ 'text': '⚠',
+    \ }
+let g:neomake_info_sign = {
+    \ 'text': '>',
+    \ }
+let g:neomake_airline = 1
+let g:neomake_logfile='/tmp/neomake_err.log'
+let g:syntastic_python_flake8_post_args='--ignore=E501,E402,E303,E302,E251,E221'
+autocmd! BufReadPost * Neomake
+autocmd! BufWritePost * Neomake
+
+" Status Bar Stuff
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+
+" ctrl-p stuff
+let g:ctrlp_user_command = ['.git', 'git -C %s ls-files -co --exclude-standard']
+
+if exists(':DeopleteEnable')
+    let g:deoplete#enable_at_startup = 1
+endif
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
+
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+" Remaps
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+" Operator maps to get inside () '' // and "
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap in) :<c-u>normal! F)vi)<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap in} :<c-u>normal! F}vi}<cr>
+onoremap in[ :<c-u>normal! f[vi[<cr>
+onoremap in] :<c-u>normal! F]vi]<cr>
+onoremap in' :<c-u>normal! f'vi'<cr>
+onoremap il' :<c-u>normal! F'vi'<cr>
+onoremap in" :<c-u>normal! f"vi"<cr>
+onoremap il" :<c-u>normal! F"vi"<cr>
+onoremap il" :<c-u>normal! F"vi"<cr>
+onoremap i/ :<c-u>normal! T/vt/<cr>
+
+" Set the paste toggle
+map <F10> :set paste<cr>
+map <F11> :set nopaste<cr>
+imap <F10> <C-O>:set paste<CR>
+imap <F11> <nop>
+
 " Move to next or previous tab
 nnoremap <leader>T :tabn<cr>
 nnoremap <leader>P :tabp<cr>
@@ -108,33 +162,65 @@ nnoremap <leader>> :vertical resize +10<cr>
 nnoremap <leader>wvh <C-w>t<C-w>K
 nnoremap <leader>whv <C-w>t<C-w>H
 
-set background=dark
+" Like gf but split window
+nnoremap gs :wincmd f<cr>
+nnoremap gS :vertical wincmd f<cr>
 
-"""""""""""""""""""""""""""""""""""
-" Neovim terminal support
-"""""""""""""""""""""""""""""""""""
+" Echo the full path of file being edited
+nnoremap <leader>f :echo expand('%:p')<cr>
+
+" Source and Edit nvim/init
+nnoremap <leader>src :source ~/.config/nvim/init.vim<cr>
+nnoremap <leader>erc :vsp ~/.config/nvim/init.vim<cr>
+
+" Sudo save a file
+nnoremap <leader>save :w !sudo dd of=%<cr>
+
+nnoremap <leader>PI :PlugInstall<cr>
+nnoremap <leader>PU :PlugUpdate<cr>
+
+" Tabular stuff - see http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
+if exists(":Tabularize")
+    nnoremap <leader>a= :Tabularize /=<CR>
+    vnoremap <leader>a= :Tabularize /=<CR>
+    nnoremap <leader>a: :Tabularize /:\zs<CR>
+    vnoremap <leader>a: :Tabularize /:\zs<CR>
+endif
+
+" Move to the TagBar if already opened or open and focus
+" close the TagBar after selection
+nnoremap <leader>tag :TagbarOpen fjc<cr>
+
+" List Tasks
+nnoremap <leader>l :TaskList<cr>
+
+" Rainbow Parens stuff
+nnoremap <leader>( :RainbowParenthesesToggleAll<cr>
+
+" Remove current highlighting
+nnoremap <leader>/ :noh<cr>
+
+" Toggle NERDTree
+nnoremap <leader>nt :NERDTreeToggle<cr>
+
+" GitGutter
+nnoremap <leader>ggu :GitGutterUndoHunk<cr>
+nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
+nnoremap <leader>ggc :pclose<cr>
+
+" Search and replace
+nnoremap <leader>sar :%s/<C-R><C-W>//gc<left><left><left>
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
 
-"""""""""""""""""""""""""""""""""""
-" Operator Maps
-"""""""""""""""""""""""""""""""""""
-" Operator maps to get inside () '' and "
-onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap in) :<c-u>normal! F)vi)<cr>
-onoremap in{ :<c-u>normal! f{vi{<cr>
-onoremap in} :<c-u>normal! F}vi}<cr>
-onoremap in[ :<c-u>normal! f[vi[<cr>
-onoremap in] :<c-u>normal! F]vi]<cr>
-onoremap in' :<c-u>normal! f'vi'<cr>
-onoremap il' :<c-u>normal! F'vi'<cr>
-onoremap in" :<c-u>normal! f"vi"<cr>
-onoremap il" :<c-u>normal! F"vi"<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-plug setup
-""""""""""""""""""""""""""""""""""""""""""""""""
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+" Plugins
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -154,7 +240,7 @@ Plug 'majutsushi/tagbar'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/syntastic'
-Plug 'rizzatti/dash.vim'
+Plug 'rhysd/devdocs.vim'
 if has('nvim')
     Plug 'shougo/deoplete.nvim'
 endif
@@ -169,7 +255,6 @@ Plug 'fatih/vim-go', {'for': ['go']}
 Plug 'mitsuhiko/vim-jinja', {'for': ['jinja']}
 Plug 'mxw/vim-jsx', {'for': ['jsx']}
 Plug 'pangloss/vim-javascript', {'for': ['javascript']}
-Plug 'artur-shaik/vim-javacomplete2', {'for': ['java']}
 Plug 'stephpy/vim-yaml', {'for': ['yaml']}
 Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
 Plug 'derekwyatt/vim-scala', {'for': ['scala']}
@@ -178,113 +263,3 @@ Plug 'vim-scripts/SQLUtilities', {'for': ['sql']}
 Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
 
 call plug#end()
-
-nnoremap <leader>PI :PlugInstall<cr>
-nnoremap <leader>PU :PlugUpdate<cr>
-
-"""""""""""""""""""""""""""""""
-" => Plugin Config
-"""""""""""""""""""""""""""""""
-" colorscheme
-" colorscheme base16-google.dark
-" Neomake stuff
-let g:neomake_python_enabled_makers = ['flake8']
-let g:neomake_python_flake8_maker = {
-    \ 'args': ['--ignore=E501,E303,E302,E251,E221']
-    \ }
-let g:neomake_error_sign = {
-    \ 'text': '✗',
-    \ }
-let g:neomake_warning_sign = {
-    \ 'text': '⚠',
-    \ }
-let g:neomake_info_sign = {
-    \ 'text': '>',
-    \ }
-let g:neomake_airline = 1
-let g:neomake_logfile='/tmp/neomake_err.log'
-
-autocmd! BufReadPost * Neomake
-autocmd! BufWritePost * Neomake
-
-" Status Bar Stuff
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" Tabular stuff - see http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
-if exists(":Tabularize")
-    nnoremap <leader>a= :Tabularize /=<CR>
-    vnoremap <leader>a= :Tabularize /=<CR>
-    nnoremap <leader>a: :Tabularize /:\zs<CR>
-    vnoremap <leader>a: :Tabularize /:\zs<CR>
-
-endif
-
-" ctrl-p stuff
-let g:ctrlp_user_command = ['.git', 'git -C %s ls-files -co --exclude-standard']
-
-if exists(':DeopleteEnable')
-    let g:deoplete#enable_at_startup = 1
-endif
-
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-
-" Move to the TagBar if already opened or open and focus
-" close the TagBar after selection
-nnoremap <leader>tag :TagbarOpen fjc<cr>
-
-" List Tasks
-nnoremap <leader>l :TaskList<cr>
-
-" Ultisnips stuff
-let g:UltiSnipsEditSplit="context"
-let g:UltiSnipsListSnippets="<c-s-tab>"
-let g:ultisnips_python_style="sphinx"
-
-" Rainbow Parens stuff
-nnoremap <leader>( :RainbowParenthesesToggleAll<cr>
-
-" Dash.vim stuff
-nmap <silent> <leader>d <Plug>DashSearch
-
-" javacomplete stuff
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <F3> <Plug>(JavaComplete-Imports-Add)
-imap <F3> <Plug>(JavaComplete-Imports-Add)
-nmap <F4> <Plug>(JavaComplete-Imports-AddMissing)
-imap <F4> <Plug>(JavaComplete-Imports-AddMissing)
-nmap <F5> <Plug>(JavaComplete-Imports-RemoveMissing)
-imap <F5> <Plug>(JavaComplete-Imports-RemoveMissing)
-
-" Justin's custom stuff
-
-colorscheme delek
-let g:airline_theme="papercolor"
-
-" Make searches legible
-hi Search ctermfg=black
-hi Visual cterm=reverse ctermbg=black
-
-" Remove current highlighting
-nnoremap <leader>noh :noh<cr>
-" Toggle NERDTree
-nnoremap <leader>nt :NERDTreeToggle<cr>
-
-" GitGutter
-nnoremap <leader>ggu :GitGutterUndoHunk<cr>
-nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
-nnoremap <leader>ggc :pclose<cr>
-
-" Search and replace
-nnoremap <leader>sar :%s/<C-R><C-W>//gc<left><left><left>
