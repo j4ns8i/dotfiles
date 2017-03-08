@@ -5,7 +5,7 @@
 let mapleader = ","
 filetype plugin indent on
 colorscheme pablo
-let g:airline_theme="bubblegum"
+let g:airline_theme="behelit"
 
 " Turn on the Wild menu
 set wildmenu
@@ -19,8 +19,6 @@ set smartcase
 set hlsearch
 " Find words as typing out search
 set incsearch
-" Enable extended % matching
-runtime macros/matchit.vim
 " Start scrolling before cursor hits top/bottom
 set scrolloff=5
 " Number of lines to jump when scrolling off screen
@@ -29,6 +27,9 @@ set scrolljump=-10
 " When splitting windows, keep what you're working on in the main position
 set splitbelow
 set splitright
+
+" Use DevDocs as lookup program
+set keywordprg=:DevDocs
 
 " Make searches legible
 hi Search ctermfg=black
@@ -103,8 +104,8 @@ autocmd! BufReadPost * Neomake
 autocmd! BufWritePost * Neomake
 
 " Status Bar Stuff
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_extensions = ['tabline', 'syntastic', 'ctrlp']
 
 
 " ctrl-p stuff
@@ -225,30 +226,31 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Always load
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-surround'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'        " cool bars for the top and bottom
+Plug 'vim-airline/vim-airline-themes' " cool themes for those cool bars
+Plug 'tpope/vim-surround'             " add/change/delete surrounding characters
+Plug 'ctrlpvim/ctrlp.vim'             " sublime-style ctrl-p fuzzy file opening
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'spiroid/vim-ultisnip-scala'
 Plug 'airblade/vim-rooter'
 Plug 'benekastah/neomake'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'         " awesome git/vim integration
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'   " pretty self explanatory
 Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/syntastic'
-Plug 'rhysd/devdocs.vim'
+Plug 'rhysd/devdocs.vim'              " DevDocs integration for api lookups
+Plug 'tmhedberg/matchit'              " %-matching with more than just characters
 if has('nvim')
     Plug 'shougo/deoplete.nvim'
 endif
 
 " On Command
-Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'scrooloose/nerdtree', {'on':  'NERDTreeToggle'}
-Plug 'kien/rainbow_parentheses.vim', {'on': 'RainbowParenthesesToggleAll'}
+Plug 'godlygeek/tabular', {'on': 'Tabularize'}                             " lining up things in margins, like these comments
+Plug 'scrooloose/nerdtree', {'on':  'NERDTreeToggle'}                      " NERDTree file browser of course
+Plug 'kien/rainbow_parentheses.vim', {'on': 'RainbowParenthesesToggleAll'} " rainbow parentheses
 
 " On File Type
 Plug 'fatih/vim-go', {'for': ['go']}
