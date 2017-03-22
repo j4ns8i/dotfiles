@@ -1,4 +1,52 @@
 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+" Plugins
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+call plug#begin('~/.config/nvim/plugged')
+
+" Always load
+Plug 'vim-airline/vim-airline'        " cool bars for the top and bottom
+Plug 'vim-airline/vim-airline-themes' " cool themes for those cool bars
+Plug 'tpope/vim-surround'             " add/change/delete surrounding characters
+Plug 'ctrlpvim/ctrlp.vim'             " sublime-style ctrl-p fuzzy file opening
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'spiroid/vim-ultisnip-scala'
+Plug 'airblade/vim-rooter'
+Plug 'benekastah/neomake'
+Plug 'airblade/vim-gitgutter'         " awesome git/vim integration
+Plug 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar'
+Plug 'terryma/vim-multiple-cursors'   " pretty self explanatory
+Plug 'chriskempson/base16-vim'
+Plug 'scrooloose/syntastic'
+Plug 'rhysd/devdocs.vim'              " DevDocs integration for api lookups
+Plug 'tmhedberg/matchit'              " %-matching with more than just characters
+if has('nvim')
+    Plug 'shougo/deoplete.nvim'
+endif
+
+" On Command
+Plug 'godlygeek/tabular', {'on': 'Tabularize'}                             " lining up things in margins, like these comments
+Plug 'scrooloose/nerdtree', {'on':  'NERDTreeToggle'}                      " NERDTree file browser of course
+Plug 'kien/rainbow_parentheses.vim', {'on': 'RainbowParenthesesToggleAll'} " rainbow parentheses
+
+" On File Type
+Plug 'fatih/vim-go', {'for': ['go']}
+Plug 'mitsuhiko/vim-jinja', {'for': ['jinja']}
+Plug 'mxw/vim-jsx', {'for': ['jsx']}
+Plug 'pangloss/vim-javascript', {'for': ['javascript']}
+Plug 'stephpy/vim-yaml', {'for': ['yaml']}
+Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
+Plug 'derekwyatt/vim-scala', {'for': ['scala']}
+Plug 'hdima/python-syntax', {'for': ['python']}
+Plug 'vim-scripts/SQLUtilities', {'for': ['sql']}
+Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
+
+call plug#end()
+
+
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 " => Options and variables
 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -72,6 +120,9 @@ set wrap
 
 " Set the backspace to work as expected
 set backspace=2
+
+" Do not auto-comment when using o or O
+autocmd FileType * setlocal formatoptions-=o
 
 " Auto remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
@@ -207,6 +258,7 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 " GitGutter
 nnoremap <leader>ggu :GitGutterUndoHunk<cr>
 nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
+nnoremap <leader>ggs :GitGutterStageHunk<cr>
 nnoremap <leader>ggc :pclose<cr>
 
 " Search and replace
@@ -218,50 +270,3 @@ if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
 
-
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-" Plugins
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-call plug#begin('~/.config/nvim/plugged')
-
-" Always load
-Plug 'vim-airline/vim-airline'        " cool bars for the top and bottom
-Plug 'vim-airline/vim-airline-themes' " cool themes for those cool bars
-Plug 'tpope/vim-surround'             " add/change/delete surrounding characters
-Plug 'ctrlpvim/ctrlp.vim'             " sublime-style ctrl-p fuzzy file opening
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'spiroid/vim-ultisnip-scala'
-Plug 'airblade/vim-rooter'
-Plug 'benekastah/neomake'
-Plug 'airblade/vim-gitgutter'         " awesome git/vim integration
-Plug 'tpope/vim-fugitive'
-Plug 'majutsushi/tagbar'
-Plug 'terryma/vim-multiple-cursors'   " pretty self explanatory
-Plug 'chriskempson/base16-vim'
-Plug 'scrooloose/syntastic'
-Plug 'rhysd/devdocs.vim'              " DevDocs integration for api lookups
-Plug 'tmhedberg/matchit'              " %-matching with more than just characters
-if has('nvim')
-    Plug 'shougo/deoplete.nvim'
-endif
-
-" On Command
-Plug 'godlygeek/tabular', {'on': 'Tabularize'}                             " lining up things in margins, like these comments
-Plug 'scrooloose/nerdtree', {'on':  'NERDTreeToggle'}                      " NERDTree file browser of course
-Plug 'kien/rainbow_parentheses.vim', {'on': 'RainbowParenthesesToggleAll'} " rainbow parentheses
-
-" On File Type
-Plug 'fatih/vim-go', {'for': ['go']}
-Plug 'mitsuhiko/vim-jinja', {'for': ['jinja']}
-Plug 'mxw/vim-jsx', {'for': ['jsx']}
-Plug 'pangloss/vim-javascript', {'for': ['javascript']}
-Plug 'stephpy/vim-yaml', {'for': ['yaml']}
-Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
-Plug 'derekwyatt/vim-scala', {'for': ['scala']}
-Plug 'hdima/python-syntax', {'for': ['python']}
-Plug 'vim-scripts/SQLUtilities', {'for': ['sql']}
-Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
-
-call plug#end()
