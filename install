@@ -58,8 +58,7 @@ function _configure_python_packages() {
     _print_status "Installing python packages... "
     pip install virtualenv==15.0.2
 
-    echo "... in venv2 for python 2
-"
+    printf "in venv2 for python 2\n"
     VENV2_PATH="${CODE}/venv2"
     if [[ ! -d ${VENV2_PATH} ]]; then
         echo "Setting up python 2 virtual environment under ${VENV2_PATH}"
@@ -69,9 +68,7 @@ function _configure_python_packages() {
     pip install -r ${RESOURCES_DIR}/requirements.txt
     deactivate
 
-    echo "
-and venv3 for python 3
-"
+    printf "\nand venv3 for python 3\n"
     VENV3_PATH="${CODE}/venv3"
     if [[ ! -d ${VENV3_PATH} ]]; then
         echo "Setting up python 3 virtual environment under ${VENV3_PATH}"
@@ -154,7 +151,11 @@ function _print_status() {
 #  |  |- <org1>
 #  |  |  |- <repo3>
 #  |  |- <org2>
-#  |  |  |- <repo4>
+#  |     |- <repo4>
+#  |
+#  |- venv2
+#  |- venv3
+
 mkdir -p ${CODE}/src/external
 
 git submodule update --init
@@ -174,8 +175,7 @@ CONFIG_MODULES=( \
 
 for s in ${CONFIG_MODULES[@]}; do
     eval ${s} || exit
-    echo "Done.
-"
+    printf "Done.\n"
 done
 
 _print_status "All done!\
