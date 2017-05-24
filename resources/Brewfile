@@ -1,4 +1,5 @@
 tap 'neovim/neovim'
+brew 'ctags'
 brew 'fzf'
 brew 'neovim'
 brew 'python'
