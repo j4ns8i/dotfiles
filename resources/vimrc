@@ -52,11 +52,14 @@ call plug#end()
 
 let mapleader = ","
 filetype plugin indent on
-colorscheme pablo
 let g:airline_theme="behelit"
+set background=dark
+colorscheme pablo
 
 " Turn on the Wild menu
 set wildmenu
+" Better tab completion for wildmenu
+set wildmode=longest,list,full
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc,*/tmp/*,*.zip
 " Always show current position
@@ -76,9 +79,6 @@ set scrolljump=-10
 set splitbelow
 set splitright
 
-" Use DevDocs as lookup program
-set keywordprg=:DevDocs
-
 " Make searches legible
 hi Search ctermfg=black
 hi Visual cterm=reverse ctermbg=black
@@ -88,6 +88,12 @@ set pastetoggle=<F11>
 " Quick funtion that will
 " highlight over 80 columns
 autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
+
+" Set keywordprg according to filetype
+autocmd FileType py,yaml :setlocal keywordprg=:DevDocs
+autocmd FileType vim :setlocal keywordprg=:help
+
+autocmd VimLeave * set guicursor=a:block-blinkon0
 
 " Use Unix as the standard file type
 set ffs=unix,mac,dos
@@ -118,6 +124,10 @@ set softtabstop=4
 set ai
 set wrap
 
+" Create folds based on implementation
+set foldmethod=indent
+set foldnestmax=2
+
 " Set the backspace to work as expected
 set backspace=2
 
@@ -126,8 +136,6 @@ autocmd FileType * setlocal formatoptions-=o
 
 " Auto remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
-
-set background=dark
 
 " Ultisnips stuff
 let g:UltiSnipsEditSplit="context"
@@ -166,15 +174,25 @@ if exists(':DeopleteEnable')
     let g:deoplete#enable_at_startup = 1
 endif
 
+" Tabularize on pipes
 function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+endfunction
+
+" Split help window on longer axis
+function! s:fit_help()
+    if winwidth('%') > winheight('%')
+        vert help
+    else
+        help
+    endif
 endfunction
 
 
@@ -230,6 +248,7 @@ nnoremap <leader>save :w !sudo dd of=%<cr>
 
 nnoremap <leader>PI :PlugInstall<cr>
 nnoremap <leader>PU :PlugUpdate<cr>
+nnoremap <leader>PC :PlugClean<cr>
 
 " Tabular stuff - see http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 if exists(":Tabularize")
@@ -250,7 +269,7 @@ nnoremap <leader>l :TaskList<cr>
 nnoremap <leader>( :RainbowParenthesesToggleAll<cr>
 
 " Remove current highlighting
-nnoremap <leader>/ :noh<cr>
+nnoremap <silent> <leader>/ :noh<cr>
 
 " Toggle NERDTree
 nnoremap <leader>nt :NERDTreeToggle<cr>
@@ -269,4 +288,3 @@ inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
-
