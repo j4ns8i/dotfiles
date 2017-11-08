@@ -104,6 +104,9 @@ autoload -U zmv
 autoload -U promptinit; promptinit
 prompt pure
 
+# Disable auto_cd, where typing a directory name automatically cds into it
+set noautocd
+
 # . /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

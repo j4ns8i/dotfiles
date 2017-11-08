@@ -5,23 +5,22 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Always load
-Plug 'vim-airline/vim-airline'        " cool bars for the top and bottom
-Plug 'vim-airline/vim-airline-themes' " cool themes for those cool bars
 Plug 'tpope/vim-surround'             " add/change/delete surrounding characters
 Plug 'ctrlpvim/ctrlp.vim'             " sublime-style ctrl-p fuzzy file opening
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'spiroid/vim-ultisnip-scala'
-Plug 'airblade/vim-rooter'
+Plug 'flazz/vim-colorschemes'         " extra colorschemes
+
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+Plug 'airblade/vim-rooter'            " changes directory to project root
 Plug 'benekastah/neomake'
 Plug 'airblade/vim-gitgutter'         " awesome git/vim integration
-Plug 'tpope/vim-fugitive'
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'              " nice tag support/functionality
 Plug 'terryma/vim-multiple-cursors'   " pretty self explanatory
-Plug 'chriskempson/base16-vim'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'rhysd/devdocs.vim'              " DevDocs integration for api lookups
 Plug 'tmhedberg/matchit'              " %-matching with more than just characters
+Plug 'itchyny/lightline.vim'          " lightweight version of airline
+Plug 'felixhummel/setcolors.vim'
 if has('nvim')
     Plug 'shougo/deoplete.nvim'
 endif
@@ -42,6 +41,7 @@ Plug 'derekwyatt/vim-scala', {'for': ['scala']}
 Plug 'hdima/python-syntax', {'for': ['python']}
 Plug 'vim-scripts/SQLUtilities', {'for': ['sql']}
 Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
 call plug#end()
 
@@ -52,9 +52,8 @@ call plug#end()
 
 let mapleader = ","
 filetype plugin indent on
-let g:airline_theme="behelit"
 set background=dark
-colorscheme pablo
+colorscheme janah
 
 " Turn on the Wild menu
 set wildmenu
@@ -78,6 +77,16 @@ set scrolljump=-10
 " When splitting windows, keep what you're working on in the main position
 set splitbelow
 set splitright
+
+" Use ripgrep if ya got it!
+if executable("rg")
+    set grepprg=rg\ --vimgrep
+    set grepformat^=%f:%l:%c:%m
+    " Recursively search for word under cursor
+    nnoremap <leader>f :silent grep <C-R><C-W><CR>:cw<CR>
+    " Recursively search for visually selected phrase
+    vnoremap <leader>f y:silent grep '<C-R>"'<CR>:cw<CR>
+endif
 
 " Make searches legible
 hi Search ctermfg=black
@@ -172,6 +181,8 @@ let g:airline_extensions = ['tabline', 'syntastic', 'ctrlp']
 
 " ctrl-p stuff
 let g:ctrlp_user_command = ['.git', 'git -C %s ls-files -co --exclude-standard']
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 if exists(':DeopleteEnable')
     let g:deoplete#enable_at_startup = 1
@@ -198,6 +209,11 @@ function! s:fit_help()
     endif
 endfunction
 
+let g:lightline = {
+    \ 'colorscheme': 'seoul256',
+    \ }
+
+let g:limelight_conceal_ctermfg = 'gray'
 
 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 " Remaps
@@ -239,9 +255,6 @@ nnoremap <leader>whv <C-w>t<C-w>H
 " Like gf but split window
 nnoremap gs :wincmd f<cr>
 nnoremap gS :vertical wincmd f<cr>
-
-" Echo the full path of file being edited
-nnoremap <leader>f :echo expand('%:p')<cr>
 
 " Source and Edit nvim/init
 nnoremap <leader>src :source ~/.config/nvim/init.vim<cr>
@@ -286,6 +299,7 @@ nnoremap <leader>ggc :pclose<cr>
 
 " Search and replace
 nnoremap <leader>sar :%s/<C-R><C-W>//gc<left><left><left>
+vnoremap <leader>sar y:%s/<C-R>"//gc<left><left><left>
 
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
