@@ -96,12 +96,6 @@ function _configure_ohmyzsh() {
     cp -R ${RESOURCES_DIR}/oh-my-zsh/ ${HOME}/.oh-my-zsh
 }
 
-function _configure_powerline() {
-    # Powerline
-    _print_status "Installing powerline... "
-    cp -R ${RESOURCES_DIR}/powerline ${CONFIG_DIR}/powerline
-}
-
 function _configure_completions() {
     # Zsh completions
     _print_status "Install zsh completions... "
@@ -168,7 +162,6 @@ CONFIG_MODULES=( \
     _configure_zsh \
     _configure_python_packages \
     _configure_nvim \
-    _configure_powerline \
     _configure_completions \
     _configure_git
 )
