@@ -4,5 +4,6 @@ ipywidgets==5.2.2
 neovim==0.1.13
 powerline-gitstatus==1.2.1
 powerline-status==2.5
+pywal==1.2.2
 requests==2.11.1
 virtualenv==15.0.2
