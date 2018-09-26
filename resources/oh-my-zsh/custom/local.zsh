@@ -107,58 +107,6 @@ function alnum {
     cat /dev/urandom | gtr -dc 'a-zA-Z0-9' | head -c ${1:-8}
 }
 
-# function dns_cache {
-#     local environments=( atg atgdev exede )
-#     if [[ -n "${VIASAT_USERNAME}" && -n "${VIASAT_IO_PASSWORD}" ]]; then
-#         typeset -agU dns_records
-
-#         # get dns records for each environment specified
-#         for env in $environments; do
-#             local dns_mapping
-#             local -aU records
-#             dns_mapping=$(curl -f -s -u ${VIASAT_USERNAME}:${VIASAT_IO_PASSWORD} \
-#                 https://api.us-or.viasat.io/api/v1/environments/${env}/dns/internal.json)
-
-#             # if curl fails (auth) then exit before you lock your account
-#             if [[ $? -ne 0 ]]; then return 1; fi
-
-#             # grab just hostnames from the dns mapping
-#             records=( $(echo $dns_mapping | jq -r '.[] | select(.type=="A") | .hostname' 2>/dev/null) )
-
-#             # append $env's dns records to global array
-#             set -A dns_records ${dns_records} ${records[@]}
-#             unset dns_mapping records
-#         done
-
-#         echo "${dns_records[*]}" > ~/.cache/dns
-#     else
-#         echo "Must set VIASAT_USERNAME and VIASAT_IO_PASSWORD" >&2
-#         return 1
-#     fi
-# }
-
-# function sshmux {
-#     if [[ "$1" == "" ]]; then
-#         echo "Error: You must provide a hostname pattern" >&2
-#         return 1
-#     fi
-
-#     read -A all_dns < ~/.cache/dns
-
-#     local number_of_matches=${#${(M)all_dns:#${~1}}}
-
-#     if [[ ${number_of_matches} -lt 1 ]]; then
-#         echo "Error: No hostnames matched" >&2
-#         return 1
-#     elif [[ ${number_of_matches} -gt 10 ]]; then
-#         echo "Error: Must only match 10 or fewer hostnames" >&2
-#         echo "Selecting the first 10" >&2
-#         osascript ~/bin/sshmux.applescript ${${(M)all_dns:#${~1}}[1,10]}
-#     else
-#         osascript ~/bin/sshmux.applescript ${(M)all_dns:#${~1}}
-#     fi
-# }
-
 #########################
 #                       #
 # History Configuration #
