@@ -58,7 +58,7 @@ hi DiffAdd ctermbg=NONE ctermfg=2 cterm=NONE
 hi DiffChange ctermbg=NONE ctermfg=8 cterm=NONE
 hi DiffDelete ctermbg=NONE ctermfg=1 cterm=NONE
 hi DiffText ctermbg=NONE ctermfg=4 cterm=NONE
-hi IncSearch ctermbg=3 ctermfg=0 cterm=NONE
+hi IncSearch ctermbg=6 ctermfg=0 cterm=NONE
 hi Search ctermbg=2 ctermfg=0 cterm=NONE
 hi Directory ctermbg=NONE ctermfg=4 cterm=NONE
 hi MatchParen ctermbg=8 ctermfg=0 cterm=NONE
