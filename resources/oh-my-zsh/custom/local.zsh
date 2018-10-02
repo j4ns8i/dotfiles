@@ -78,25 +78,13 @@ function show_colors {
 }
 
 function track {
-    # Get/parse options
-    # Just one option, -n/--new
-    OPTS=$(gnu-getopt -o n -l new -n 'track-options' -- "$@")
-    if [[ $? != 0 ]]; then
-        echo "Failed parsing options" >&2
+    if [[ "${1}" == "" ]]; then
+        echo "ERROR: File name required" >&2
         return 1
     fi
-    eval set -- "$OPTS"
-    NEW_FILE=false
-    while true; do
-        case "$1" in
-            -n | --new ) NEW_FILE=true; shift;;
-            -- ) shift; break;;
-            * ) break;;
-        esac
-    done
 
     FILE_NAME=${TRACKS_DIR}/${1}
-    if $NEW_FILE; then
+    if [[ ! -f "${FILE_NAME}" ]]; then
         # add date (and .md) to name of file
         FILE_NAME="${FILE_NAME}.$(date +%Y%m%d).md"
     fi
