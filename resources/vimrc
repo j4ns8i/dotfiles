@@ -80,13 +80,13 @@ nnoremap <leader>gb :Gblame<cr>
 " =================================
 " gitgutter
 " =================================
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 " GitGutter
-" nnoremap <leader>ggu :GitGutterUndoHunk<cr>
-" nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
-" nnoremap <leader>ggs :GitGutterStageHunk<cr>
-" nnoremap <leader>ggc :pclose<cr>
+nnoremap <leader>ggu :GitGutterUndoHunk<cr>
+nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
+nnoremap <leader>ggs :GitGutterStageHunk<cr>
+nnoremap <leader>ggc :pclose<cr>
 
 " =================================
 " tagbar
@@ -255,13 +255,17 @@ Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
 " =================================
-" vim-markdown
-" markdown niceties
+" vim-indent-guides
+" visual cues for indentation level
 " =================================
-Plug 'gabrielelana/vim-markdown'
-let g:markdown_enable_spell_checking = 0
-let g:markdown_enable_input_abbreviations = 0
-let g:markdown_enable_conceal = 1
+Plug 'Yggdroot/indentLine'
+
+" =================================
+" vim-json
+" json ftplugin for better controls
+" =================================
+Plug 'elzr/vim-json'
+let g:vim_json_syntax_conceal=0
 
 call plug#end()
 
@@ -271,6 +275,9 @@ call plug#end()
 
 set background=dark
 colo wal
+
+" Update gitgutter or anything using CursorHold autocommand event quicker
+set updatetime=1000
 
 " Turn on the Wild menu
 set wildmenu
@@ -324,7 +331,6 @@ set pastetoggle=<F11>
 autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
 
 " Set keywordprg according to filetype
-autocmd FileType python,yaml :setlocal keywordprg=:DevDocs
 autocmd FileType vim :setlocal keywordprg=:help
 
 autocmd VimLeave * set guicursor=a:block-blinkon0
@@ -416,6 +422,15 @@ onoremap i/ :<c-u>normal! T/vt/<cr>
 onoremap <space> t_
 onoremap i<space> :<c-u>normal! T_vt_<cr>
 onoremap a<space> :<c-u>normal! F_vf_<cr>
+
+" Indent conveniences with Tab
+vnoremap > >gv
+vnoremap < <gv
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 
 " Set the paste toggle
 map <F10> :set paste<cr>
