@@ -28,7 +28,9 @@ function _configure_zsh() {
     # Change shell to zsh if all goes as expected
     _print_status "Installing zsh... "
     ZSH_PATH="/usr/local/bin/zsh"
-    if [[ -f $ZSH_PATH ]] && [[ ${ZSH_PATH} != ${SHELL} ]]; then
+    if [[ "$(basename $SHELL)" = "zsh" ]]; then
+        echo "You're already using zsh."
+    elif [[ -f $ZSH_PATH ]] && [[ ${ZSH_PATH} != ${SHELL} ]]; then
         echo "Change shell to ${ZSH_PATH}? [y/n]"
         read RESPONSE
         if [[ ${RESPONSE} = 'y' ]]; then
@@ -43,11 +45,8 @@ function _configure_zsh() {
         else
             echo "Leaving the default shell as it is."
         fi
-    elif [[ ${ZSH_PATH} = ${SHELL} ]]; then
-        echo "Nice, you're already using zsh."
     else
-        echo "${ZSH_PATH} was not found. Did you change where brew installs files?"
-        return 1
+        _error "zsh installation not found"
     fi
 
     cp ${RESOURCES_DIR}/zshrc ${HOME}/.zshrc
@@ -56,37 +55,52 @@ function _configure_zsh() {
 function _configure_python_packages() {
     # Install python packages in virtualenvs for 2 and 3
     _print_status "Installing python packages... "
-    pip install virtualenv==15.0.2
+
+    if ! pip &>/dev/null; then
+        _error \
+"pip doesn't seem to be installed."\
+"\n"\
+"Install python-pip if on debian based system, or check python installation if on MacOS"
+    fi
+    python2 -m pip install virtualenv
+    python3 -m pip install virtualenv
 
     printf "in venv2 for python 2\n"
     VENV2_PATH="${CODE}/venv2"
     if [[ ! -d ${VENV2_PATH} ]]; then
         echo "Setting up python 2 virtual environment under ${VENV2_PATH}"
-        virtualenv -p python2 ${VENV2_PATH}
+        python2 -m virtualenv -p python2 ${VENV2_PATH}
     fi
     source ${VENV2_PATH}/bin/activate
-    pip install -r ${RESOURCES_DIR}/requirements.txt
+    python -m pip install -r ${RESOURCES_DIR}/requirements.txt
     deactivate
 
     printf "\nand venv3 for python 3\n"
     VENV3_PATH="${CODE}/venv3"
     if [[ ! -d ${VENV3_PATH} ]]; then
         echo "Setting up python 3 virtual environment under ${VENV3_PATH}"
-        virtualenv -p python3 ${VENV3_PATH}
+        python3 -m virtualenv -p python3 ${VENV3_PATH}
     fi
     source ${VENV3_PATH}/bin/activate
-    pip install -r ${RESOURCES_DIR}/requirements.txt
+    python -m pip install -r ${RESOURCES_DIR}/requirements.txt
     deactivate
 }
 
 function _configure_nvim() {
     # Get vim-plug and set up nvim config
     _print_status "Configuring neovim... "
+
     mkdir -p ${CONFIG_DIR}/nvim/autoload
     cp ${RESOURCES_DIR}/plug.vim ${CONFIG_DIR}/nvim/autoload/
-    ln -sf ${CONFIG_DIR}/nvim ${HOME}/.vim
+
+    mkdir -p ${CONFIG_DIR}/nvim/colors
+    cp ${RESOURCES_DIR}/vimcolors/* ${CONFIG_DIR}/nvim/colors
+
+    ln -sfT ${CONFIG_DIR}/nvim ${HOME}/.vim
+
     cp ${RESOURCES_DIR}/vimrc ${CONFIG_DIR}/nvim/init.vim
     ln -sf ${CONFIG_DIR}/nvim/init.vim ${HOME}/.vimrc
+
     nvim -c "PlugInstall" -c "PlugUpdate" -c "qa" --headless
 }
 
@@ -123,6 +137,11 @@ function _print_status() {
     # Utility function for printing steps
     echo -e "\033[33;1m${@}\033[0m"
     read -t 1
+}
+
+function _error() {
+    echo -e "\033[31;1m${@}\033[0m"
+    exit 1
 }
 
 ###############################################
