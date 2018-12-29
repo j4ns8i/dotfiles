@@ -95,6 +95,18 @@ function alnum {
     cat /dev/urandom | gtr -dc 'a-zA-Z0-9' | head -c ${1:-8}
 }
 
+function git-me {
+    if [[ -n "${1:#*/*}" ]]; then
+        echo $'No "/" found, doesn\'t look like a repo to me' 1>&2
+        return 1
+    fi
+    repo_owner="${1%/*}"
+    repo_name="${1#*/}"
+    mkdir -p "$SRC/github.com/${repo_owner}/${repo_name}"
+    git -C "$SRC/github.com/${repo_owner}" clone "https://github.com/${repo_owner}/${repo_name}"
+    cd "$SRC/github.com/${repo_owner}/${repo_name}"
+}
+
 #########################
 #                       #
 # History Configuration #

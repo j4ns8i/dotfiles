@@ -125,6 +125,15 @@ function _configure_git() {
     cp ${RESOURCES_DIR}/gitconfig ${CONFIG_DIR}/git/config
 }
 
+function _configure_fzf() {
+    if command -v git &>/dev/null; then
+        if [[ ! -e ~/.fzf ]]; then
+            git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        fi
+        ~/.fzf/install
+    fi
+}
+
 function _configure_screenshots() {
     # It's really nice to have screenshots dumped
     #   somewhere other than Desktop, so this changes
@@ -174,15 +183,16 @@ mkdir -p ${CODE}/src/external
 git submodule update --init
 
 CONFIG_MODULES=( \
-    _configure_iterm2 \
-    _configure_homebrew \
-    _configure_bundle \
-    _configure_ohmyzsh \
-    _configure_zsh \
+    # _configure_iterm2 \
+    # _configure_homebrew \
+    # _configure_bundle \
+    # _configure_ohmyzsh \
+    # _configure_zsh \
     _configure_python_packages \
     _configure_nvim \
     _configure_completions \
-    _configure_git
+    _configure_git \
+    _configure_fzf
 )
 
 for s in ${CONFIG_MODULES[@]}; do
