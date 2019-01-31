@@ -107,6 +107,62 @@ function git-me {
     cd "$SRC/github.com/${repo_owner}/${repo_name}"
 }
 
+function clone {
+    # Check if no arguments given
+    if [[ "${#@[@]}" -eq 0 ]]; then
+        echo "Error: expecting a repository" >&2
+        return 1
+    fi
+
+    # Check if any argument is malformed.
+    for arg in ${@[@]}; do
+        # If the argument doesn't look like a github repo, which is assumed to
+        # look like github.com:jsmalkowski/dotfiles or (site[:/])?(org)/(repo)
+        #
+        # Site is optional, defaults to github.com.
+        # If : is specified, uses ssh protocol.
+        # If / is specified, uses https protocol
+        if [[ ! "${arg//[^:\/]}" =~ "^[:/]?/$" ]] ||
+                [[ ${#${=arg//[:\/]/ }} -ne $(( ${#arg//[^:\/]} + 1 )) ]]; then
+            echo "Bad pattern: $arg" >&2
+            echo "Expecting (site[:/])(org)/(repo)" >&2
+            return 1
+        fi
+    done
+
+    # Here's where the magic happens
+    for arg in ${@[@]}; do
+        # Determine the protocol for cloning
+        local protocol separator
+        if [[ "${arg//[^:\/]}" = ":/" ]]; then
+            protocol='git@'
+            separator=':'
+        else
+            protocol='https://'
+            separator='/'
+        fi
+
+        # Split argument into array of ( optional_site org repo )
+        local arg_array=( ${=arg//[:\/]/ } )
+
+        # Determine the site to clone from
+        local site org repo
+        if [[ "${#arg_array}" -eq 3 ]]; then
+            site="${arg_array[1]}"
+            org="${arg_array[2]}"
+            repo="${arg_array[3]}"
+        else
+            site="github.com"
+            org="${arg_array[1]}"
+            repo="${arg_array[2]}"
+        fi
+
+        # Create the directory and clone it
+        mkdir -p $SRC/$site/$org
+        git -C $SRC/$site/$org clone ${protocol}${site}${separator}${org}/${repo}
+    done
+}
+
 #########################
 #                       #
 # History Configuration #
