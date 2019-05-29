@@ -1,0 +1,36 @@
+---
+
+- name: create {{ git_base_dir }} for github projects
+  file:
+    path: "{{ git_base_dir }}"
+    state: directory
+
+- name: create ~/.config/zsh and directories under it
+  file:
+    path: "{{ ansible_user_dir }}/.config/zsh/{{ item }}"
+    state: directory
+  loop:
+    - completions
+    - functions
+
+- name: clone oh-my-zsh (for useful plugins)
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh"
+
+- name: link to oh-my-zsh nvm plugins from ~/.config/zsh
+  file:
+    path: "{{ ansible_user_dir }}/.config/zsh/completions/_nvm"
+    src: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh/plugins/nvm/_nvm"
+    state: link
+
+- name: link to oh-my-zsh
+  file:
+    path: "{{ ansible_user_dir }}/.config/zsh/functions/nvm.plugin.zsh"
+    src: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh/plugins/nvm/nvm.plugin.zsh"
+    state: link
+
+- name: install fzf
+  package:
+    name: fzf
+    state: present

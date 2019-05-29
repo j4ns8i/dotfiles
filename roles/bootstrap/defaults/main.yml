@@ -1,0 +1,3 @@
+---
+
+git_base_dir: "{{ ansible_user_dir }}/code/src"
