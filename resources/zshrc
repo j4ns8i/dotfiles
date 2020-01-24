@@ -1,14 +1,37 @@
+# File structure:
+# ❯ tree ~/.config/zsh
+# ~/.config/zsh
+# ├── completions
+# │   ├── _ggo
+# │   ├── _ggr
+# │   ├── _nvm -> ~/code/src/github.com/robbyrussell/oh-my-zsh/plugins/nvm/_nvm
+# │   ├── _pip
+# │   ├── _status
+# │   └── _track
+# ├── functions
+# │   ├── async
+# │   ├── colored-man-pages.plugin.zsh
+# │   ├── nvm.plugin.zsh -> ~/code/src/github.com/robbyrussell/oh-my-zsh/plugins/nvm/nvm.plugin.zsh
+# │   ├── pip.plugin.zsh
+# │   └── prompt_pure_setup
+# └── runcommands
+#     ├── atg.zsh -> ~/code/src/git.viasat.com/ATG/stdlib/bash/atg.sh
+#     ├── lfcd.sh -> ~/code/src/github.com/gokcehan/lf/etc/lfcd.sh
+#     ├── local.zsh
+#     ├── viasat.zsh
+#     └── zsh-history-substring-search.zsh -> ~/code/src/github.com/zsh-users/zsh-history-substring-search/zsh-history-substring-search.zsh
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=${HOME}/.oh-my-zsh
+# export ZSH=${HOME}/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
-export ZSH_THEME=purest
+# export ZSH_THEME=purest
+export ZSH_THEME=""
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -40,55 +63,33 @@ COMPLETION_WAITING_DOTS="true"
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(pip virtualenv)
+plugins=(pip colored-man-pages quitcd nvm)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
-# User configuration
+export ZSH_CONFIG_DIR=~/.config/zsh
 
-# export MANPATH="/usr/local/man:$MANPATH"
+fpath=(${ZSH_CONFIG_DIR}/functions ${ZSH_CONFIG_DIR}/completions $fpath)
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# from coreutils brew formula
+eval $(gdircolors)
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+autoload -U colors && colors
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' completions 1
+zstyle ':completion:*' expand prefix suffix
 zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # color completions according to LS_COLORS
+# zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' menu select # highlight selected menu items
 zstyle ':completion:*' substitute 1
 zstyle :compinstall filename '/Users/jsmalkowski/.zshrc'
 
@@ -100,13 +101,49 @@ setopt extendedglob
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+for rc in ${ZSH_CONFIG_DIR}/runcommands/*; do
+    source $rc
+done
+
+# up or down to search commands
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# but disable highlighting
+unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND
+unset HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND
+
+# shift-tab reverses menu completion
+bindkey '^[[Z' reverse-menu-complete
+
+bindkey -s '^o' 'lfcd\n'
+
+# for rc in ${ZSH_CONFIG_DIR}/functions/*; do
+#     source $rc
+# done
+
 autoload -U zmv
 autoload -U promptinit; promptinit
+zstyle :prompt:pure:prompt:success color 2
+zstyle :prompt:pure:prompt:error   color 1
+zstyle :prompt:pure:virtualenv     color 8
+zstyle :prompt:pure:git:branch     color 8
+zstyle :prompt:pure:git:action     color 8
+zstyle :prompt:pure:git:dirty      color 13
+zstyle :prompt:pure:git:arrow      color 6
 prompt pure
 
 # Disable auto_cd, where typing a directory name automatically cds into it
-set +J
+setopt +o AUTO_CD
+# Push directories from cd onto the directory stack
+setopt -o AUTO_PUSHD
+# But don't push duplicate directories
+setopt -o PUSHD_IGNORE_DUPS
+# Enable shared history
+setopt -o SHARE_HISTORY
+# Skip over duplicates when iterating through past commands
+setopt -o HIST_FIND_NO_DUPS
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-~/code/venv3/bin/wal -r
+# load fzf configuration
+if [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+fi

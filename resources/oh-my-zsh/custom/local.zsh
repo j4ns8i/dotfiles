@@ -1,9 +1,19 @@
 export BASE=~/code
 export EDITOR=nvim
 export GOPATH=${BASE}
-export LESS=-R
+export GIT_PAGER='less -FRX'
+export NNN_RESTRICT_NAV_OPEN=1
+# export LESS=-cFRX
 export SRC=${BASE}/src
 export TRACKS_DIR=${HOME}/scratch/tracks
+# export RPROMPT="%F{red}${RANGER_LEVEL}%f%F{cyan}%t%f"
+# export PURE_PREPROMPT='%F{blue}%2~%f'
+export WORDCHARS=${WORDCHARS/\/}
+
+# Make ctrl-R full screen with fzf
+# export FZF_TMUX_HEIGHT=100%
+export FZF_DEFAULT_OPTS='--height=100% --exact'
+export FZF_CTRL_T_OPTS="--layout=reverse"
 
 # Add new paths to $PATH if they dont already exist
 function add_to_path() {
@@ -17,13 +27,11 @@ add_to_path "$HOME/bin"
 add_to_path "$GOPATH/bin"
 add_to_path "/usr/local/opt/scala@2.11/bin"
 
-# Make ctrl-R full screen with fzf
-# export FZF_TMUX_HEIGHT=100%
-export FZF_DEFAULT_OPTS='--height=100% --exact'
-
-alias l='ls -AF'
-alias ll='ls -AlhF'
-alias llt='ls -thrAlF'
+# for coreutils brew package on macOS - won't work on linux
+alias ls='gls --color'
+alias l='ls --color -AF'
+alias ll='ls --color -AlhF'
+alias llt='ls --color -thrAlF'
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias v2="source ${BASE}/venv2/bin/activate"
 alias v3="source ${BASE}/venv3/bin/activate"
@@ -32,9 +40,11 @@ alias vimdiff="nvim -d"
 alias view="nvim -R"
 alias whats="dig +short"
 alias evrc="vim ~/.vimrc"
-alias elocal="vim ~/.config/zsh/local.zsh; source ~/.config/zsh/local.zsh"
+alias elocal="vim ~/.config/zsh/runcommands/local.zsh; source ~/.config/zsh/runcommands/local.zsh"
 alias vscode="open -a 'Visual Studio Code'"
-alias sshmux="noglob sshmux.zsh"
+alias sshmux="noglob sshmux"
+alias k=kubectl
+alias -g L="| less"
 
 # function vimgrep {
 #     echo "\"${@[*]}\""
@@ -67,8 +77,8 @@ function ggr {
 
 function show_colors {
     for x in 0 1 4 5 7 8; do
-        for i in {30,37}; do
-            for a in {40,47}; do
+        for i in {30..37}; do
+            for a in {40..47}; do
                 echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
             done
             echo
@@ -78,6 +88,22 @@ function show_colors {
 }
 
 function track {
+    # Get/parse options
+    # Just one option, -n/--new
+    # OPTS=$(gnu-getopt -o n -l new -n 'track-options' -- "$@")
+    # if [[ $? != 0 ]]; then
+    #     echo "Failed parsing options" >&2
+    #     return 1
+    # fi
+    # eval set -- "$OPTS"
+    # NEW_FILE=false
+    # while true; do
+    #     case "$1" in
+    #         -n | --new ) NEW_FILE=true; shift;;
+    #         -- ) shift; break;;
+    #         * ) break;;
+    #     esac
+    # done
     if [[ "${1}" == "" ]]; then
         echo "ERROR: File name required" >&2
         return 1
@@ -93,18 +119,6 @@ function track {
 
 function alnum {
     cat /dev/urandom | gtr -dc 'a-zA-Z0-9' | head -c ${1:-8}
-}
-
-function git-me {
-    if [[ -n "${1:#*/*}" ]]; then
-        echo $'No "/" found, doesn\'t look like a repo to me' 1>&2
-        return 1
-    fi
-    repo_owner="${1%/*}"
-    repo_name="${1#*/}"
-    mkdir -p "$SRC/github.com/${repo_owner}/${repo_name}"
-    git -C "$SRC/github.com/${repo_owner}" clone "https://github.com/${repo_owner}/${repo_name}"
-    cd "$SRC/github.com/${repo_owner}/${repo_name}"
 }
 
 function clone {
@@ -162,6 +176,57 @@ function clone {
         git -C $SRC/$site/$org clone ${protocol}${site}${separator}${org}/${repo}
     done
 }
+# function dns_cache {
+#     local environments=( atg atgdev exede )
+#     if [[ -n "${VIASAT_USERNAME}" && -n "${VIASAT_IO_PASSWORD}" ]]; then
+#         typeset -agU dns_records
+
+#         # get dns records for each environment specified
+#         for env in $environments; do
+#             local dns_mapping
+#             local -aU records
+#             dns_mapping=$(curl -f -s -u ${VIASAT_USERNAME}:${VIASAT_IO_PASSWORD} \
+#                 https://api.us-or.viasat.io/api/v1/environments/${env}/dns/internal.json)
+
+#             # if curl fails (auth) then exit before you lock your account
+#             if [[ $? -ne 0 ]]; then return 1; fi
+
+#             # grab just hostnames from the dns mapping
+#             records=( $(echo $dns_mapping | jq -r '.[] | select(.type=="A") | .hostname' 2>/dev/null) )
+
+#             # append $env's dns records to global array
+#             set -A dns_records ${dns_records} ${records[@]}
+#             unset dns_mapping records
+#         done
+
+#         echo "${dns_records[*]}" > ~/.cache/dns
+#     else
+#         echo "Must set VIASAT_USERNAME and VIASAT_IO_PASSWORD" >&2
+#         return 1
+#     fi
+# }
+
+# function sshmux {
+#     if [[ "$1" == "" ]]; then
+#         echo "Error: You must provide a hostname pattern" >&2
+#         return 1
+#     fi
+
+#     read -A all_dns < ~/.cache/dns
+
+#     local number_of_matches=${#${(M)all_dns:#${~1}}}
+
+#     if [[ ${number_of_matches} -lt 1 ]]; then
+#         echo "Error: No hostnames matched" >&2
+#         return 1
+#     elif [[ ${number_of_matches} -gt 10 ]]; then
+#         echo "Error: Must only match 10 or fewer hostnames" >&2
+#         echo "Selecting the first 10" >&2
+#         osascript ~/bin/sshmux.applescript ${${(M)all_dns:#${~1}}[1,10]}
+#     else
+#         osascript ~/bin/sshmux.applescript ${(M)all_dns:#${~1}}
+#     fi
+# }
 
 #########################
 #                       #

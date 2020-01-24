@@ -12,23 +12,25 @@ call plug#begin('~/.config/nvim/plugged')
 " add/change/delete surrounding characters
 " =================================
 Plug 'tpope/vim-surround'
+" ys<motion><mapping> to surround with things like quotes, parens, etc.
+" <visual>S<mapping> to surround visually selected area
 
 " =================================
 " ctrl-p
 " sublime-style ctrl-p fuzzy file opening
 " =================================
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_user_command = ['.git', 'git -C %s ls-files -co --exclude-standard']
-let g:ctrlp_extensions = ['mixed']
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_cmd = 'CtrlPMRU'
-let g:ctrlp_max_files = 5000
+" Plug 'ctrlpvim/ctrlp.vim'
+" let g:ctrlp_user_command = ['.git', 'git -C %s ls-files -co --exclude-standard']
+" let g:ctrlp_extensions = ['mixed']
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_cmd = 'CtrlPMRU'
+" let g:ctrlp_max_files = 5000
 
 " =================================
 " vim-colorschemes
 " extra colorschemes
 " =================================
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 
 " =================================
 " vim-rooter
@@ -51,7 +53,7 @@ let g:neomake_error_sign = {
     \ 'text': '✗',
     \ }
 let g:neomake_warning_sign = {
-    \ 'text': '⚠',
+    \ 'text': '!',
     \ }
 let g:neomake_info_sign = {
     \ 'text': '>',
@@ -67,6 +69,7 @@ autocmd! BufWritePost * Neomake
 Plug 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1             " add spaces after comment marker
 let g:NERDDefaultAlign = 'left'       " align comment markers flush against the left border
+let g:NERDCustomDelimiters = { 'pug': { 'left': '//' } }
 
 " =================================
 " vim-fugitive
@@ -96,7 +99,7 @@ Plug 'majutsushi/tagbar'
 
 " Move to the TagBar if already opened or open and focus
 " close the TagBar after selection
-nnoremap <leader>tag :TagbarOpen fjc<cr>
+nnoremap <leader>tag :TagbarOpen fj<cr>
 
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
@@ -111,7 +114,7 @@ let g:tagbar_type_markdown = {
 " vim-multiple-cursors
 " pretty self explanatory
 " =================================
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 
 " =================================
 " devdocs
@@ -132,11 +135,13 @@ Plug 'tmhedberg/matchit'
 Plug 'itchyny/lightline.vim'
 
 let g:lightline = {
-    \ 'colorscheme': 'seoul256',
+    \ 'colorscheme': 'justin',
     \ 'active': {
     \   'right': [ [ 'lineinfo' ],
     \               [ 'percent'  ],
     \               [ 'filetype' ] ] },
+    \ 'inactive': {
+    \   'left': [ [ 'filename', 'modified' ] ] }
     \ }
 
 " =================================
@@ -148,12 +153,11 @@ Plug 'felixhummel/setcolors.vim'
 " deoplete
 " =================================
 if has('nvim')
-    Plug 'shougo/deoplete.nvim'
+    " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python']}
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
-if exists(':DeopleteEnable')
-    let g:deoplete#enable_at_startup = 1
-endif
+let g:deoplete#enable_at_startup = 1
 
 " On Command
 
@@ -187,10 +191,10 @@ endif
 " NERDTree
 " NERDTree file browser of course
 " =================================
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 
 " Toggle NERDTree
-nnoremap <leader>nt :NERDTreeToggle<cr>
+" nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " =================================
 " rainbow parens
@@ -202,7 +206,8 @@ Plug 'kien/rainbow_parentheses.vim'
 " =================================
 " vim-go
 " =================================
-Plug 'fatih/vim-go', {'for': ['go']}
+Plug 'fatih/vim-go', {'for': ['go'], 'do': ':GoInstallBinaries'}
+let g:go_metalinter_deadline = "1s"
 
 " =================================
 " vim-jinja
@@ -210,14 +215,22 @@ Plug 'fatih/vim-go', {'for': ['go']}
 Plug 'mitsuhiko/vim-jinja', {'for': ['jinja']}
 
 " =================================
-" vim-jsx
-" =================================
-Plug 'mxw/vim-jsx', {'for': ['jsx']}
-
-" =================================
 " vim-javascript
 " =================================
 Plug 'pangloss/vim-javascript', {'for': ['javascript']}
+
+" =================================
+" deoplete-ternjs
+" javascript source for deoplete
+" =================================
+Plug 'carlitux/deoplete-ternjs', {'for': ['javascript.jsx'], 'do': 'npm install -g tern'}
+" let g:deoplete#sources#ternjs#docs = 1
+" let g:deoplete#sources#ternjs#types = 1
+
+" =================================
+" vim-jsx
+" =================================
+Plug 'amadeus/vim-jsx', {'for': ['jsx']}
 
 " =================================
 " vim-yaml
@@ -240,6 +253,12 @@ Plug 'derekwyatt/vim-scala', {'for': ['scala']}
 Plug 'hdima/python-syntax', {'for': ['python']}
 
 " =================================
+" deoplete-jedi
+" python source for deoplete
+" =================================
+Plug 'deoplete-plugins/deoplete-jedi', {'for': ['python']}
+
+" =================================
 " SQLUtilities
 " =================================
 Plug 'vim-scripts/SQLUtilities', {'for': ['sql']}
@@ -255,6 +274,11 @@ Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
 " =================================
+" vim-less
+" =================================
+" Plug 'groenewege/vim-less', {'for': ['less']}
+
+" =================================
 " vim-indent-guides
 " visual cues for indentation level
 " =================================
@@ -265,7 +289,18 @@ Plug 'Yggdroot/indentLine'
 " json ftplugin for better controls
 " =================================
 Plug 'elzr/vim-json'
+" don't conceal json quotes, etc.
 let g:vim_json_syntax_conceal=0
+
+" =================================
+" vim-markdown
+" markdown ftplugin for better controls
+" =================================
+Plug 'tpope/vim-markdown'
+" specific syntax highlighting within code blocks
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+" don't conceal markdown formatting
+let g:markdown_syntax_conceal = 0
 
 call plug#end()
 
@@ -301,15 +336,24 @@ set hlsearch
 " Find words as typing out search
 set incsearch
 
-" Show the results of a substitution while you type (but not in a split window
-set inccommand=nosplit
+if has('nvim')
+    " Show the results of a substitution while you type (but not in a split window
+    set inccommand=nosplit
+endif
+
+" Break at reasonable character (see 'breakat') for wrapped lines
+set linebreak
+" Indent wrapped lines accordingly
+set breakindent
+" Set characters to designate the continued lines
+set showbreak=\ \ \\\  " this comment only exists so this value's trailing space doesn't get deleted by an autocmd below
 
 " Start scrolling before cursor hits top/bottom
-set scrolloff=5
+set scrolloff=3
 
 " Number of lines to jump when scrolling off screen
 " -# = percentage
-set scrolljump=-10
+set scrolljump=-30
 
 " When splitting windows, keep what you're working on in the main position
 set splitbelow
@@ -327,13 +371,20 @@ endif
 
 set pastetoggle=<F11>
 
-" Quick funtion that will highlight over 80 columns
+" Quick funtion that will highlight over 80 columns on cpp files
 autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
 
 " Set keywordprg according to filetype
 autocmd FileType vim :setlocal keywordprg=:help
+autocmd FileType yaml :setlocal keywordprg=:DevDocs
 
-autocmd VimLeave * set guicursor=a:block-blinkon0
+" Disable expensive and broken markdown code block highlighting
+autocmd syntax markdown syntax clear markdownCodeBlock
+
+" Set textwidth to 80 for markdown
+autocmd FileType markdown :setlocal textwidth=80
+
+" autocmd VimLeave * set guicursor=a:hor1-blinkon0
 
 " Use Unix as the standard file type
 set ffs=unix,mac,dos
@@ -376,6 +427,15 @@ set nrformats+=alpha
 
 " Set the backspace to work as expected
 set backspace=2
+
+" Set persistent undo and undodir
+set undodir=~/.config/nvim
+set undofile
+
+" Set 24-bit colors
+" set termguicolors
+
+set rtp+=/usr/local/opt/fzf
 
 " Do not auto-comment when using o or O
 autocmd FileType * setlocal formatoptions-=o
@@ -466,23 +526,42 @@ nnoremap <leader>PI :PlugInstall<cr>
 nnoremap <leader>PU :PlugUpdate<cr>
 nnoremap <leader>PC :PlugClean<cr>
 
+" Backspace alternates buffers
+nnoremap <BS> <C-^>
+
+" use ctrl-p as shortcut for :FZF
+nnoremap <C-p> :FZF<cr>
+
+" Use backtick over single quotes for jumping
+nnoremap ' `
+
+nnoremap <leader>mks :mksession!<cr>
+
 " Remove current highlighting
 nnoremap <silent> <leader>/ :noh<cr>
 
 " Search and replace
 nnoremap <leader>sar :%s/<C-R><C-W>//gc<left><left><left>
-vnoremap <leader>sar "sy:%s/<C-R>s//gc<left><left><left>
+vnoremap <leader>sar "sy:%s/\<<C-R>s\>//gc<left><left><left>
 
 " Resize pane to its height
 nnoremap <leader>ww :execute "resize " . line('$')<cr>gg
 
-nnoremap <leader>pass :let @p = system('openssl rand -base64 16 \| head -c 20')<cr>
+nnoremap <leader>pass :let @p = system('openssl rand -base64 16 \| head -c 20')<cr>:echo @p<cr>
 
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
+" base64 decoding and encoding
+vnoremap <leader>64d c<c-r>=system('base64 --decode', @")<cr><esc>
+vnoremap <leader>64e c<c-r>=system('base64', @")<cr><esc>
+
+" Make <ESC> exit terminal insert mode
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
+
+" Load completion for go
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 function! SynGroup()
     let l:s = synID(line('.'), col('.'), 1)
