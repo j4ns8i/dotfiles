@@ -1,0 +1,278 @@
+filetype plugin indent on
+let mapleader = ","
+
+" source ~/.config/nvim/plugins.vim
+
+
+" =================================
+" Options and variables
+" =================================
+
+set background=dark
+colo wal
+
+" Update gitgutter or anything using CursorHold autocommand event quicker
+set updatetime=1000
+
+" Turn on the Wild menu
+set wildmenu
+
+" Better tab completion for wildmenu
+set wildmode=longest,list,full
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc,*/tmp/*,*.zip
+
+" Always show current position
+set ruler
+
+" When searching try to be smart about cases
+set ignorecase
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Find words as typing out search
+set incsearch
+
+if has('nvim')
+    " Show the results of a substitution while you type (but not in a split window
+    set inccommand=nosplit
+endif
+
+" Break at reasonable character (see 'breakat') for wrapped lines
+set linebreak
+" Indent wrapped lines accordingly
+set breakindent
+" Set characters to designate the continued lines
+set showbreak=\ \ \\\  " this comment only exists so this value's trailing space doesn't get deleted by an autocmd below
+
+" Start scrolling before cursor hits top/bottom
+set scrolloff=3
+
+" Number of lines to jump when scrolling off screen
+" -# = percentage
+set scrolljump=-30
+
+" When splitting windows, keep what you're working on in the main position
+set splitbelow
+set splitright
+
+" Use ripgrep if ya got it!
+if executable("rg")
+    set grepprg=rg\ --vimgrep
+    set grepformat^=%f:%l:%c:%m
+    " Recursively search for word under cursor
+    nnoremap <leader>f :silent grep <C-R><C-W><CR>:cw<CR>
+    " Recursively search for visually selected phrase
+    vnoremap <leader>f y:silent grep '<C-R>"'<CR>:cw<CR>
+endif
+
+set pastetoggle=<F11>
+
+" Quick funtion that will highlight over 80 columns on cpp files
+autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
+
+" Set keywordprg according to filetype
+autocmd FileType vim :setlocal keywordprg=:help
+" autocmd FileType yaml :setlocal keywordprg=:DevDocs
+
+" Disable expensive and broken markdown code block highlighting
+autocmd syntax markdown syntax clear markdownCodeBlock
+
+" Set textwidth to 80 for markdown
+autocmd FileType markdown :setlocal textwidth=80
+
+" autocmd VimLeave * set guicursor=a:hor1-blinkon0
+
+" Use Unix as the standard file type
+set ffs=unix,mac,dos
+
+" setup tags
+set tags=./.tags;/
+
+" Turn backup off, since most stuff is in SVN, git etc.
+set nobackup
+set nowb
+set noswapfile
+
+" Use spaces instead of tabs
+set expandtab
+
+" Do not expand tab for Makefiles
+autocmd FileType make set noexpandtab
+
+" Be smart when using tabs
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
+" Auto indent and wrap lines
+set autoindent
+set wrap
+
+" Create folds based on indentation
+set foldmethod=indent
+" Only fold up to a max of two times
+set foldnestmax=2
+" Start with all folds open
+set foldlevel=99
+
+" 'Add/substract' letters with ctrl-a / ctrl-x
+set nrformats+=alpha
+
+" Set the backspace to work as expected
+set backspace=2
+
+" Set persistent undo and undodir
+set undodir=~/.config/nvim
+set undofile
+
+" Set 24-bit colors
+" set termguicolors
+
+set rtp+=/usr/local/opt/fzf
+
+" Do not auto-comment when using o or O
+autocmd FileType * setlocal formatoptions-=o
+" Do not auto-indent (crazily) when commenting out a line
+autocmd FileType yaml,python setlocal indentkeys-=0#
+
+" Auto remove trailing whitespace on write
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Split help window on longer axis
+function! Fit_help(...)
+    if winwidth('%') > winheight('%')
+        execute "vert help " . join(a:000, ' ')
+    else
+        execute "help " . join(a:000, ' ')
+    endif
+endfunction
+command! -nargs=* -complete=help H call Fit_help(<f-args>)
+
+" Split file(s) across larger current dimension
+function! s:auto_split(...)
+    if winwidth(0) > winheight(0) * 2.5
+        execute "vert split " . join(a:000, ' ')
+    else
+        execute "split " . join(a:000, ' ')
+    endif
+endfunction
+command! -nargs=* -complete=file Asp call s:auto_split(<f-args>)
+nnoremap <leader>asp :Asp<space>
+
+" Operator maps to get inside () '' // and "
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap in) :<c-u>normal! F)vi)<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap in} :<c-u>normal! F}vi}<cr>
+onoremap in[ :<c-u>normal! f[vi[<cr>
+onoremap in] :<c-u>normal! F]vi]<cr>
+onoremap in' :<c-u>normal! f'vi'<cr>
+onoremap il' :<c-u>normal! F'vi'<cr>
+onoremap in" :<c-u>normal! f"vi"<cr>
+onoremap il" :<c-u>normal! F"vi"<cr>
+onoremap il" :<c-u>normal! F"vi"<cr>
+onoremap i/ :<c-u>normal! T/vt/<cr>
+onoremap <space> t_
+onoremap i<space> :<c-u>normal! T_vt_<cr>
+onoremap a<space> :<c-u>normal! F_vf_<cr>
+
+" Indent conveniences with Tab
+vnoremap > >gv
+vnoremap < <gv
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" Set the paste toggle
+map <F10> :set paste<cr>
+map <F11> :set nopaste<cr>
+imap <F10> <C-O>:set paste<CR>
+imap <F11> <nop>
+
+" Move to next or previous buffer
+nnoremap <leader>[ :bp<cr>
+nnoremap <leader>] :bn<cr>
+nnoremap <leader>b <C-^>
+
+" Increase and Decrease the width of a vertically split window
+nnoremap <leader>< :vertical resize -10<cr>
+nnoremap <leader>> :vertical resize +10<cr>
+
+" Rotate panes
+nnoremap <leader>wvh <C-w>t<C-w>K
+nnoremap <leader>whv <C-w>t<C-w>H
+
+" Like gf but split window
+nnoremap gs :wincmd f<cr>
+nnoremap gS :vertical wincmd f<cr>
+
+" Source and Edit nvim/init
+nnoremap <leader>src :source ~/.config/nvim/init.vim<cr>
+nnoremap <leader>erc :Asp ~/.config/nvim/init.vim<cr>
+
+" Sudo save a file
+nnoremap <leader>save :w !sudo dd of=%<cr>
+
+nnoremap <leader>PI :PlugInstall<cr>
+nnoremap <leader>PU :PlugUpdate<cr>
+nnoremap <leader>PC :PlugClean<cr>
+
+" Backspace alternates buffers
+nnoremap <BS> <C-^>
+
+" use ctrl-p as shortcut for :FZF
+nnoremap <C-p> :FZF<cr>
+
+" Use backtick over single quotes for jumping
+nnoremap ' `
+
+nnoremap <leader>mks :mksession!<cr>
+
+" Remove current highlighting
+nnoremap <silent> <leader>/ :noh<cr>
+
+" Search and replace
+nnoremap <leader>sar :%s/<C-R><C-W>//gc<left><left><left>
+vnoremap <leader>sar "sy:%s/\<<C-R>s\>//gc<left><left><left>
+
+" Resize pane to its height
+nnoremap <leader>ww :execute "resize " . line('$')<cr>gg
+
+nnoremap <leader>pass :let @p = system('openssl rand -base64 16 \| head -c 20')<cr>:echo @p<cr>
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+" base64 decoding and encoding
+vnoremap <leader>64d c<c-r>=system('base64 --decode', @")<cr><esc>
+vnoremap <leader>64e c<c-r>=system('base64', @")<cr><esc>
+
+" Make <ESC> exit terminal insert mode
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
+
+" Load completion for go
+" call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+nnoremap <leader>hi :call SynGroup()<CR>

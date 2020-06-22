@@ -1,5 +1,23 @@
 ---
 
+- name: install fzf
+  package:
+    name: fzf
+    state: present
+  become: yes
+
+- name: install neovim
+  package:
+    name: neovim
+    state: present
+  become: yes
+
+- name: install npm
+  package:
+    name: npm
+    state: present
+  become: yes
+
 - name: create {{ git_base_dir }} for github projects
   file:
     path: "{{ git_base_dir }}"
@@ -12,25 +30,51 @@
   loop:
     - completions
     - functions
+    - runcommands
 
-- name: clone oh-my-zsh (for useful plugins)
-  git:
-    repo: https://github.com/robbyrussell/oh-my-zsh
-    dest: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh"
-
-- name: link to oh-my-zsh nvm plugins from ~/.config/zsh
+- name: create ~/.config/nvim and directories under it
   file:
-    path: "{{ ansible_user_dir }}/.config/zsh/completions/_nvm"
-    src: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh/plugins/nvm/_nvm"
+    path: "{{ ansible_user_dir }}/.config/nvim/{{ item }}"
+    state: directory
+  loop:
+    - autoload
+    - colors
+
+- name: softlink wal.vim colors from ~/.config/nvim/colors/wal.vim
+  file:
+    src: "{{ inventory_dir }}/roles/bootstrap/files/wal.vim"
+    dest: "{{ ansible_user_dir }}/.config/nvim/colors/wal.vim"
     state: link
 
-- name: link to oh-my-zsh
+- name: softlink plug.vim from ~/.config/nvim/autoload/plug.vim
   file:
-    path: "{{ ansible_user_dir }}/.config/zsh/functions/nvm.plugin.zsh"
-    src: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh/plugins/nvm/nvm.plugin.zsh"
+    src: "{{ inventory_dir }}/roles/bootstrap/files/plug.vim"
+    dest: "{{ ansible_user_dir }}/.config/nvim/autoload/plug.vim"
     state: link
 
-- name: install fzf
-  package:
-    name: fzf
-    state: present
+- name: softlink vimrc from ~/.config/nvim/init.vim and ~/.vimrc
+  file:
+    src: "{{ inventory_dir }}/roles/bootstrap/files/vimrc"
+    dest: "{{ item }}"
+    state: link
+  loop:
+    - "{{ ansible_user_dir }}/.vimrc"
+    - "{{ ansible_user_dir }}/.config/nvim/init.vim"
+
+
+# - name: clone oh-my-zsh (for useful plugins)
+#   git:
+#     repo: https://github.com/robbyrussell/oh-my-zsh
+#     dest: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh"
+#
+# - name: link to oh-my-zsh nvm plugins from ~/.config/zsh
+#   file:
+#     path: "{{ ansible_user_dir }}/.config/zsh/completions/_nvm"
+#     src: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh/plugins/nvm/_nvm"
+#     state: link
+#
+# - name: link to oh-my-zsh
+#   file:
+#     path: "{{ ansible_user_dir }}/.config/zsh/functions/nvm.plugin.zsh"
+#     src: "{{ git_base_dir }}/github.com/robbyrussell/oh-my-zsh/plugins/nvm/nvm.plugin.zsh"
+#     state: link
