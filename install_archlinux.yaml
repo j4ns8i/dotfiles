@@ -1,0 +1,83 @@
+---
+
+# This playbook installs archlinux on a new partition following the LVM on LUKS
+# strategy here:
+#
+#   https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS.
+#
+# This requires both a LUKS partition and an EFI system partition to exist
+# beforehand (since handling all possible scenarios would take a ton of
+# coordination). Instructions are in the README.md.
+
+- hosts: localhost
+  tasks:
+    - name: ensure that an EFI system partition is defined
+      assert:
+        that:
+          - dotfiles_install_esp is not none
+        fail_msg: "An ESP must be defined, for example /dev/sda1"
+
+    - name: ensure that an installation partition is defined
+      assert:
+        that:
+          - dotfiles_install_partition is not none
+        fail_msg: "An installation partition must be defined, for example /dev/sda2"
+
+    - name: ensure a FAT32 filesystem exists on the ESP
+      community.general.filesystem:
+        device: "{{ dotfiles_install_esp }}"
+        type: vfat
+        opts: -F 32
+
+    - name: create a LUKS container on {{ dotfiles_install_partition }}
+      community.crypto.luks_device:
+        device: "{{ dotfiles_install_partition }}"
+        name: cryptedlvm
+        type: luks2
+        passphrase: changeme
+        state: opened
+
+    - name: create volume group on /dev/mapper/cryptlvm
+      community.general.lvg:
+        pvs: /dev/mapper/cryptlvm
+        vg: vogr
+        pvresize: yes
+
+    - name: create logical volume for main data
+      community.general.lvol:
+        vg: vogr
+        lv: main
+        size: 90%FREE # leave 10% for snapshots
+
+    - name: create ext4 filesystem on main partition
+      community.general.filesystem:
+        device: /dev/mapper/vogr-main
+        type: ext4
+
+    - name: mount /dev/mapper/vogr-main to /mnt
+      ansible.posix.mount:
+        src: /dev/mapper/vogr-main
+        path: /mnt
+        fstype: ext4
+        state: mounted
+
+    - name: mount ESP to /mnt/boot
+      ansible.posix.mount:
+        src: "{{ dotfiles_install_esp }}"
+        path: /mnt/boot
+        fstype: vfat
+        state: mounted
+
+    - name: sync time
+      command: timedatectl set-ntp true
+      changed_when: false
+
+    - name: pacstrap dat boi
+      command: pacstrap /mnt base linux linux-firmware lvm2 man-db man-pages texinfo zsh ansible neovim git fzf
+
+    - name: generate system fstab
+      command: genfstab -U /mnt >> /mnt/etc/fstab
+
+    - debug:
+        msg: Initial installation done - be sure to run the arch-chroot into /mnt and run the bootstrap playbook
+

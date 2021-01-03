@@ -1,19 +1,16 @@
 ---
 
-- include_tasks: "{{ ansible_os_family | lower }}_install.yaml"
-  when: dotfiles_install_device is not none
-
 - name: install packages for {{ ansible_os_family }}
   package:
     name: "{{ item }}"
     state: present
-  loop: "{{ dotfiles_packages[ansible_os_family|lower] }}"
+  loop: "{{ bootstrap_packages[ansible_os_family|lower] }}"
   become: "{{ ansible_os_family|lower != 'darwin' }}"
   tags: packages
 
-- name: create {{ dotfiles_git_base_dir }} for github projects
+- name: create {{ bootstrap_git_base_dir }} for github projects
   file:
-    path: "{{ dotfiles_git_base_dir }}"
+    path: "{{ bootstrap_git_base_dir }}"
     state: directory
 
 - name: create ~/.config/zsh and directories under it
