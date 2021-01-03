@@ -1,5 +1,5 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/justin.vim
+" Filename: autoload/lightline/colorscheme/wal.vim
 " Author: atweiden,jsmalkowski
 " License: MIT License
 " Last Change: 2015/11/02 08:23:27.
@@ -49,4 +49,4 @@ let s:p.tabline.right = copy(s:p.normal.right)
 let s:p.normal.error = [ [ s:red, s:black ] ]
 let s:p.normal.warning = [ [ s:yellow, s:red ] ]
 
-let g:lightline#colorscheme#justin#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#wal#palette = lightline#colorscheme#flatten(s:p)

@@ -1,2 +1,0 @@
-- pipenv shell spawns subshell in virtualenv
-- install brew, gulp, node, etc.

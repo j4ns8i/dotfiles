@@ -135,7 +135,7 @@ Plug 'tmhedberg/matchit'
 Plug 'itchyny/lightline.vim'
 
 let g:lightline = {
-    \ 'colorscheme': 'justin',
+    \ 'colorscheme': 'wal',
     \ 'active': {
     \   'right': [ [ 'lineinfo' ],
     \               [ 'percent'  ],
@@ -584,3 +584,7 @@ function! SynStack()
 endfunc
 
 nnoremap <leader>hi :call SynGroup()<CR>
+
+" Mark position before going to top or bottom of file for easy returns
+nnoremap gg mjgg
+nnoremap G mkG

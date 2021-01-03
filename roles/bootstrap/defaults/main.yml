@@ -1,3 +1,25 @@
 ---
 
-git_base_dir: "{{ ansible_user_dir }}/code/src"
+dotfiles_git_base_dir: "{{ ansible_user_dir }}/code/src"
+
+dotfiles_packages:
+  darwin:
+    - zsh
+    - fzf
+    - neovim
+    - npm
+    - ripgrep
+    - htop
+    - jq
+    - tree
+    - coreutils
+    - docker
+    - ctags
+    - grip
+    - adoptopenjdk8
+    - sbt
+    - scala@2.12
+    - lastpass-cli
+    - awscli
+    - kubernetes-cli
+    - python@3.8
