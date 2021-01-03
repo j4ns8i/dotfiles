@@ -14,24 +14,24 @@
     - name: ensure that an EFI system partition is defined
       assert:
         that:
-          - dotfiles_install_esp is not none
+          - install_esp is defined
         fail_msg: "An ESP must be defined, for example /dev/sda1"
 
     - name: ensure that an installation partition is defined
       assert:
         that:
-          - dotfiles_install_partition is not none
+          - install_partition is defined
         fail_msg: "An installation partition must be defined, for example /dev/sda2"
 
     - name: ensure a FAT32 filesystem exists on the ESP
       community.general.filesystem:
-        device: "{{ dotfiles_install_esp }}"
+        device: "{{ install_esp }}"
         type: vfat
         opts: -F 32
 
-    - name: create a LUKS container on {{ dotfiles_install_partition }}
+    - name: create a LUKS container on {{ install_partition }}
       community.crypto.luks_device:
-        device: "{{ dotfiles_install_partition }}"
+        device: "{{ install_partition }}"
         name: cryptedlvm
         type: luks2
         passphrase: changeme
@@ -63,7 +63,7 @@
 
     - name: mount ESP to /mnt/boot
       ansible.posix.mount:
-        src: "{{ dotfiles_install_esp }}"
+        src: "{{ install_esp }}"
         path: /mnt/boot
         fstype: vfat
         state: mounted
