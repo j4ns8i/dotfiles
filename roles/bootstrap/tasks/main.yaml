@@ -1,5 +1,8 @@
 ---
 
+- include_tasks: "{{ ansible_os_family | lower }}_install.yaml"
+  when: dotfiles_install_device is not none
+
 - name: install packages for {{ ansible_os_family }}
   package:
     name: "{{ item }}"

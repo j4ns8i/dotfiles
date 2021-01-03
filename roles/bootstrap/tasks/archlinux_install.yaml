@@ -1,0 +1,15 @@
+---
+
+# This set of tasks installs archlinux on a new device. If partitions already
+# exist on that device, this will fail unless dotfiles_force_install is
+# enabled.
+
+- name: ensure that no partitions exist on {{ dotfiles_install_device }}
+  assert:
+    that:
+      - ansible_devices[dotfiles_install_device].partitions | length == 0
+    fail_msg: Found {{ ansible_devices[dotfiles_install_device].partitions | length }} existing partitions on device {{ dotfiles_install_device }}
+
+- name: sync time
+  command: timedatectl set-ntp true
+  changed_when: false

@@ -2,6 +2,12 @@
 
 dotfiles_git_base_dir: "{{ ansible_user_dir }}/code/src"
 
+# If specified and a full OS installation has been defined with
+# OS_install.yaml, then this variable will be used as the name of the device on
+# which the OS will be installed. This is not the device path; to install on
+# /dev/sda, use "sda" as the name here.
+dotfiles_install_device:
+
 dotfiles_packages:
   darwin:
     - zsh

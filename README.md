@@ -11,7 +11,7 @@ $ pip install -r requirements.txt
 # Usage
 
 ```bash
-$ ansible-playbook bootstrap.yml
+$ ansible-playbook bootstrap.yaml
 ```
 
 # Notes
