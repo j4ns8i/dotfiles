@@ -1,7 +1,7 @@
 ---
 
 - name: include tasks for {{ ansible_os_family | lower }} if defined
-  include_tasks: "{{ item }}.yaml"
+  include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
 - name: install packages for {{ ansible_os_family }}
