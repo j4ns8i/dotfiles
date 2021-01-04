@@ -33,7 +33,7 @@ If the LUKS container needs to be recreated, follow these steps:
 
 ```bash
 $ cryptsetup close <crypt-name>
-$ cryptsetup erase <crypt-name>
+$ cryptsetup erase <part-path>
 $ wipefs -a <part-path>
 ```
 

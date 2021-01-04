@@ -76,7 +76,7 @@
       command: pacstrap /mnt base linux linux-firmware lvm2 man-db man-pages texinfo zsh ansible neovim git fzf
 
     - name: generate system fstab
-      command: genfstab -U /mnt >> /mnt/etc/fstab
+      shell: genfstab -U /mnt >> /mnt/etc/fstab
 
     - debug:
         msg: Initial installation done - be sure to run the arch-chroot into /mnt and run the bootstrap playbook
