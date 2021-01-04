@@ -1,0 +1,66 @@
+---
+
+- name: link proper time zone to /etc/localtime
+  file:
+    src: /usr/share/zoneinfo/America/Los_Angeles
+    dest: /etc/localtime
+    state: link
+
+- name: run hwclock to sync time
+  command: hwclock --systohc
+
+- name: enable en_US.UTF-8 in /etc/locale.gen
+  lineinfile:
+    path: /etc/locale.gen
+    regexp: '^(# )?en_US.UTF-8 UTF-8'
+    line: 'en_US.UTF-8 UTF-8'
+    state: present
+
+- name: run locale-gen
+  command: locale-gen
+
+- name: create /etc/locale.conf with LANG variable
+  lineinfile:
+    path: /etc/locale.conf
+    line: 'LANG=en_US.UTF-8'
+    create: true
+    state: present
+
+- name: create /etc/hostname
+  lineinfile:
+    path: /etc/hostname
+    line: archie
+    create: true
+    state: present
+
+- name: populate /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item }}"
+    create: true
+    state: present
+  with_items:
+    - '127.0.0.1		localhost'
+    - '::1	localhost'
+    - '127.0.1.1		archie.localdomain archie'
+
+- name: add lvm2 and sd-encrypt related mkinitcpio hooks
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    line: "HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt sd-lvm2 filesystems fsck)"
+    regexp: "^HOOKS=\(.*\)$"
+    state: present
+  register: bootstrap_mkinitcpio
+
+- name: install ramdisk with mkinitcpio
+  command: mkinitcpio -P
+  when: bootstrap_mkinitcpio.changed
+
+- name: run refind-install
+  command: refind-install
+
+- name: set root login
+  user:
+    name: root
+    password: "{{ 'changeme' | password_hash('sha512') }}"
+    shell: /bin/zsh

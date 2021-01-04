@@ -73,11 +73,15 @@
       changed_when: false
 
     - name: pacstrap dat boi
-      command: pacstrap /mnt base linux linux-firmware lvm2 man-db man-pages texinfo zsh ansible neovim git fzf
+      command: pacstrap /mnt base linux linux-firmware lvm2 man-db man-pages texinfo zsh ansible neovim git fzf refind
 
     - name: generate system fstab
       shell: genfstab -U /mnt >> /mnt/etc/fstab
 
+    - name: clone dotfiles into /mnt/tmp/dotfiles
+      git:
+        repo: https://github.com/j4ns8i/dotfiles
+        dest: /mnt/tmp/dotfiles
+
     - debug:
         msg: Initial installation done - be sure to run the arch-chroot into /mnt and run the bootstrap playbook
-
