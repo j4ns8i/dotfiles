@@ -21,6 +21,8 @@ attempted with LVM on LUKS. These partitions must be created in advance, which
 can be done like so:
 
 ```bash
+# create an empty partition table
+$ sfdisk /dev/sda <<< 'label: gpt'
 # for an ESP - type=U corresponds to UEFI system partition
 $ sfdisk --label gpt /dev/sda -N <part-num> <<< 'start=1MiB, size=512MiB, type=U'
 # for a system partition - type=L is the common Linux partition type

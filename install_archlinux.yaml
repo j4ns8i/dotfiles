@@ -32,7 +32,7 @@
     - name: create a LUKS container on {{ install_partition }}
       community.crypto.luks_device:
         device: "{{ install_partition }}"
-        name: cryptedlvm
+        name: cryptlvm
         type: luks2
         passphrase: changeme
         state: opened
