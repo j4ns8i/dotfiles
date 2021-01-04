@@ -40,15 +40,15 @@
     create: true
     state: present
   with_items:
-    - '127.0.0.1		localhost'
-    - '::1	localhost'
-    - '127.0.1.1		archie.localdomain archie'
+    - '127.0.0.1	localhost'
+    - '::1		localhost'
+    - '127.0.1.1	archie.localdomain archie'
 
 - name: add lvm2 and sd-encrypt related mkinitcpio hooks
   lineinfile:
     path: /etc/mkinitcpio.conf
     line: "HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt sd-lvm2 filesystems fsck)"
-    regexp: "^HOOKS=\(.*\)$"
+    regexp: "^HOOKS=\\(.*\\)$"
     state: present
   register: bootstrap_mkinitcpio
 
@@ -62,5 +62,5 @@
 - name: set root login
   user:
     name: root
-    password: "{{ 'changeme' | password_hash('sha512') }}"
+    password: "{{ 'changeme' | password_hash('sha512', 'salt') }}"
     shell: /bin/zsh
