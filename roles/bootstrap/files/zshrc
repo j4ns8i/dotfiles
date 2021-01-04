@@ -27,10 +27,6 @@ export ZSH_CONFIG_DIR=~/.config/zsh
 
 fpath=(${ZSH_CONFIG_DIR}/functions ${ZSH_CONFIG_DIR}/completions $fpath)
 
-# from coreutils brew formula
-eval $(gdircolors)
-
-autoload -U colors && colors
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate

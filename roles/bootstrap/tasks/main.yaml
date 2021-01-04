@@ -39,6 +39,12 @@
     - autoload
     - colors
 
+- name: symlink local.zsh from ~/.config/zsh/runcommands
+  file:
+    src: "{{ inventory_dir }}/roles/bootstrap/files/local.zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh/runcommands"
+    state: link
+
 - name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
   file:
     src: "{{ inventory_dir }}/roles/bootstrap/files/wal.vim"
