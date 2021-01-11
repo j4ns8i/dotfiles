@@ -19,7 +19,7 @@
 
 - name: create ~/.config/zsh and directories under it
   file:
-    path: "{{ ansible_user_dir }}/.config/zsh/{{ item }}"
+    path: "{{ bootstrap_home_dir }}/.config/zsh/{{ item }}"
     state: directory
   loop:
     - completions
@@ -29,11 +29,11 @@
 - name: copy zshrc to home directory
   copy:
     src: files/zshrc
-    dest: "{{ ansible_user_dir }}/.zshrc"
+    dest: "{{ bootstrap_home_dir }}/.zshrc"
 
 - name: create ~/.config/nvim and directories under it
   file:
-    path: "{{ ansible_user_dir }}/.config/nvim/{{ item }}"
+    path: "{{ bootstrap_home_dir }}/.config/nvim/{{ item }}"
     state: directory
   loop:
     - autoload
@@ -41,37 +41,37 @@
 
 - name: symlink local.zsh from ~/.config/zsh/runcommands
   file:
-    src: "{{ inventory_dir }}/roles/bootstrap/files/local.zsh"
-    dest: "{{ ansible_user_dir }}/.config/zsh/runcommands"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/local.zsh"
+    dest: "{{ bootstrap_home_dir }}/.config/zsh/runcommands"
     state: link
 
 - name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
   file:
-    src: "{{ inventory_dir }}/roles/bootstrap/files/wal.vim"
-    dest: "{{ ansible_user_dir }}/.config/nvim/colors/wal.vim"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/wal.vim"
+    dest: "{{ bootstrap_home_dir }}/.config/nvim/colors/wal.vim"
     state: link
 
 - name: symlink plug.vim from ~/.config/nvim/autoload/plug.vim
   file:
-    src: "{{ inventory_dir }}/roles/bootstrap/files/plug.vim"
-    dest: "{{ ansible_user_dir }}/.config/nvim/autoload/plug.vim"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/plug.vim"
+    dest: "{{ bootstrap_home_dir }}/.config/nvim/autoload/plug.vim"
     state: link
 
 - name: symlink vimrc from ~/.config/nvim/init.vim and ~/.vimrc
   file:
-    src: "{{ inventory_dir }}/roles/bootstrap/files/vimrc"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/vimrc"
     dest: "{{ item }}"
     state: link
   loop:
-    - "{{ ansible_user_dir }}/.vimrc"
-    - "{{ ansible_user_dir }}/.config/nvim/init.vim"
+    - "{{ bootstrap_home_dir }}/.vimrc"
+    - "{{ bootstrap_home_dir }}/.config/nvim/init.vim"
 
 - name: install vim plugins
-  command: nvim -es -u {{ ansible_user_dir }}/.vimrc -i NONE -c "PlugInstall" -c "qa"
+  command: nvim -es -u {{ bootstrap_home_dir }}/.vimrc -i NONE -c "PlugInstall" -c "qa"
   changed_when: false
 
 - name: symlink wal.lightline.vim from ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim
   file:
-    src: "{{ inventory_dir }}/roles/bootstrap/files/wal.lightline.vim"
-    dest: "{{ ansible_user_dir }}/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/wal.lightline.vim"
+    dest: "{{ bootstrap_home_dir }}/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
     state: link

@@ -1,13 +1,29 @@
 ---
 
-bootstrap_git_base_dir: "{{ ansible_user_dir }}/code/src"
+# only used when running as root on archlinux
+bootstrap_user: j4ns8i
+
+# used for running user's password, as well as root password and LUKS password
+# if installing arch
+bootstrap_password: changeme
+
+# just a random salt for setting up passwords consistently
+bootstrap_salt: 1qb3w1NZajAh7YBw
+
+# where config things will get linked to
+bootstrap_home_dir: "{{ ansible_user_dir }}"
+
+# base of git-based code and whatnot
+bootstrap_git_base_dir: "{{ bootstrap_home_dir }}/code/src"
+
+# path to where this repo should be cloned
+bootstrap_dotfiles_path: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/dotfiles"
 
 bootstrap_packages:
   darwin:
     - zsh
     - fzf
     - neovim
-    - npm
     - ripgrep
     - htop
     - jq
@@ -23,3 +39,18 @@ bootstrap_packages:
     - awscli
     - kubernetes-cli
     - python@3.8
+  archlinux:
+    - refind
+    - zsh
+    - man-db
+    - man-pages
+    - texinfo
+    - sudo
+    - git
+    - neovim
+    - tree
+    - fzf
+    - ripgrep
+    - htop
+    - jq
+    - ansible

@@ -8,8 +8,13 @@
 # This requires both a LUKS partition and an EFI system partition to exist
 # beforehand (since handling all possible scenarios would take a ton of
 # coordination). Instructions are in the README.md.
+#
+# More notes and post-installation steps, especially regarding LUKS and using
+# keyfiles, are in the README.
 
 - hosts: localhost
+  vars_files:
+    - roles/bootstrap/default/main.yaml
   tasks:
     - name: ensure that an EFI system partition is defined
       assert:
@@ -73,7 +78,7 @@
       changed_when: false
 
     - name: pacstrap dat boi
-      command: pacstrap /mnt base linux linux-firmware lvm2 man-db man-pages texinfo zsh ansible neovim git fzf refind
+      command: pacstrap /mnt base linux linux-firmware lvm2 {{ bootstrap_packages.archlinux | join(" ") }}
 
     - name: generate system fstab
       shell: genfstab -U /mnt >> /mnt/etc/fstab
