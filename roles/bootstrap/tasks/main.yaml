@@ -42,7 +42,7 @@
 - name: symlink local.zsh from ~/.config/zsh/runcommands
   file:
     src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/local.zsh"
-    dest: "{{ bootstrap_home_dir }}/.config/zsh/runcommands"
+    dest: "{{ bootstrap_home_dir }}/.config/zsh/runcommands/local.zsh"
     state: link
 
 - name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
