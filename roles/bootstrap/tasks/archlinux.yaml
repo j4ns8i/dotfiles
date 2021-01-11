@@ -47,7 +47,7 @@
 - name: add lvm2 and sd-encrypt related mkinitcpio hooks
   lineinfile:
     path: /etc/mkinitcpio.conf
-    line: "HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt sd-lvm2 filesystems fsck)"
+    line: "HOOKS=(base systemd autodetect keyboard modconf block sd-encrypt sd-lvm2 filesystems fsck)"
     regexp: "^HOOKS=\\(.*\\)$"
     state: present
   register: bootstrap_mkinitcpio
