@@ -1,6 +1,0 @@
-ipython-genutils
-ipython
-ipywidgets
-neovim
-requests
-virtualenv
