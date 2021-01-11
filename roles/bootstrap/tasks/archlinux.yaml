@@ -77,7 +77,7 @@
 - name: set bootstrap_home_dir if running as root
   set_fact:
     bootstrap_home_dir: /home/{{ bootstrap_user }}
-  when: ansible_user == "root"
+  when: ansible_user_id == "root"
 
 - name: make sure repo is cloned under {{ bootstrap_home_dir }}
   git:
