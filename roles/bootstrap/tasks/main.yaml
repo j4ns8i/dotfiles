@@ -66,6 +66,10 @@
     - "{{ bootstrap_home_dir }}/.vimrc"
     - "{{ bootstrap_home_dir }}/.config/nvim/init.vim"
 
+- name: create vim-plug directory
+  file:
+    src:
+
 - name: install vim plugins
   command: nvim -es -u {{ bootstrap_home_dir }}/.vimrc -i NONE -c "PlugInstall" -c "qa"
   changed_when: false
