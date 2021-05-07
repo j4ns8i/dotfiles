@@ -1,0 +1,31 @@
+[push]
+    default = simple
+[alias]
+    pi = pull --rebase=interactive
+    bl = branch -ra
+    la = "!git config -l | grep alias | cut -c 7-"
+    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(cyan)\\ [%cn]\\ %Creset%s%Cred%d" --decorate --date=relative
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%C(cyan)\\ [%cn]" --decorate --numstat
+    co = checkout
+    ci = commit
+    br = branch
+    st = status
+    diffc = diff --cached
+    hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    sub = submodule
+    sb = status -sb
+    open = !open $(git remote get-url origin | sed -E 's/.*@([[:alnum:]\\.-]*):([[:alnum:]-]*)\\/([[:alnum:]-]*)(\\.git)?/https:\\/\\/\\1\\/\\2\\/\\3/')
+    fp = fetch --all --prune
+    mc = merge --no-commit --no-ff
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+[merge]
+    tool = nvimdiff
+    conflictstyle = diff3
+[mergetool]
+    prompt = false
+[mergetool.nvimdiff]
+    cmd = nvim -d $MERGED $BASE $LOCAL $REMOTE -c 'wincmd J'
+    trustExitCode = true
