@@ -66,10 +66,6 @@
     - "{{ bootstrap_home_dir }}/.vimrc"
     - "{{ bootstrap_home_dir }}/.config/nvim/init.vim"
 
-- name: create vim-plug directory
-  file:
-    src:
-
 - name: install vim plugins
   command: nvim -es -u {{ bootstrap_home_dir }}/.vimrc -i NONE -c "PlugInstall" -c "qa"
   changed_when: false
@@ -78,4 +74,15 @@
   file:
     src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/wal.lightline.vim"
     dest: "{{ bootstrap_home_dir }}/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
+    state: link
+
+- name: create ~/.config/git
+  file:
+    path: "{{ bootstrap_home_dir }}/.config/git"
+    state: directory
+
+- name: install git config
+  file:
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/gitconfig"
+    dest: "{{ bootstrap_home_dir }}/.config/git/config"
     state: link

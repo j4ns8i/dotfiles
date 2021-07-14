@@ -78,7 +78,7 @@ let g:NERDCustomDelimiters = { 'pug': { 'left': '//' } }
 Plug 'tpope/vim-fugitive'
 
 " vim-fugitive
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gb :Git blame<cr>
 
 " =================================
 " gitgutter
@@ -99,7 +99,7 @@ Plug 'majutsushi/tagbar'
 
 " Move to the TagBar if already opened or open and focus
 " close the TagBar after selection
-nnoremap <leader>tag :TagbarOpen fj<cr>
+nnoremap <leader>tag :TagbarOpen fjc<cr>
 
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
@@ -152,12 +152,12 @@ Plug 'felixhummel/setcolors.vim'
 " =================================
 " deoplete
 " =================================
-" if has('nvim')
-"     " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python']}
-"     Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*'}
-" endif
+if has('nvim')
+    " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python']}
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+endif
 
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 " On Command
 
@@ -256,7 +256,7 @@ Plug 'hdima/python-syntax', {'for': ['python']}
 " deoplete-jedi
 " python source for deoplete
 " =================================
-" Plug 'deoplete-plugins/deoplete-jedi', {'for': ['python']}
+Plug 'deoplete-plugins/deoplete-jedi', {'for': ['python']}
 
 " =================================
 " SQLUtilities
@@ -301,6 +301,12 @@ Plug 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 " don't conceal markdown formatting
 let g:markdown_syntax_conceal = 0
+
+" =================================
+" vim-jsonnet
+" jsonnet ftplugin for better controls
+" =================================
+Plug 'google/vim-jsonnet', {'for': ['jsonnet']}
 
 call plug#end()
 
@@ -387,6 +393,9 @@ autocmd FileType markdown :setlocal textwidth=80
 " Set textwidth to 100 for python
 autocmd FileType python :setlocal textwidth=100
 
+let g:python_host_prog = '/Users/justin.smalkowski/.local/share/python/2.7.18/neovim/bin/python'
+let g:python3_host_prog = '/Users/justin.smalkowski/.local/share/python/3.7.10/neovim/bin/python'
+
 " autocmd VimLeave * set guicursor=a:hor1-blinkon0
 
 " Use Unix as the standard file type
@@ -428,11 +437,11 @@ set foldlevel=99
 " 'Add/substract' letters with ctrl-a / ctrl-x
 set nrformats+=alpha
 
-" Set the backspace to work as expected
-set backspace=2
+" Allow backspacing over autoindent, line breaks, and start of insert
+set backspace=indent,eol,start
 
 " Set persistent undo and undodir
-set undodir=~/.config/nvim
+set undodir=~/.local/share/nvim/undo
 set undofile
 
 " Set 24-bit colors

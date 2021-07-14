@@ -14,6 +14,16 @@ $ pip install -r requirements.txt
 $ ansible-playbook bootstrap.yaml
 ```
 
+## Installing pure prompt
+
+Clone https://github.com/j4ns8i/pure, then create the following links somewhere in the
+`$fpath`, like so:
+
+```bash
+$ ln -sf $(pwd)/pure.zsh ~/.config/zsh/functions/prompt_pure_setup
+$ ln -sf $(pwd)/async.zsh ~/.config/zsh/functions/async
+```
+
 # New Installs
 
 Use the install_archlinux.yaml playbook with an existing `install_esp` and

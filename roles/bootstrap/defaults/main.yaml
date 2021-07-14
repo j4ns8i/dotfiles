@@ -29,16 +29,8 @@ bootstrap_packages:
     - jq
     - tree
     - coreutils
-    - docker
     - ctags
     - grip
-    - adoptopenjdk8
-    - sbt
-    - scala@2.12
-    - lastpass-cli
-    - awscli
-    - kubernetes-cli
-    - python@3.8
   archlinux:
     - refind
     - zsh

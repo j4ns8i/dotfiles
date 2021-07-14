@@ -1,5 +1,9 @@
+[core]
+    excludesfile = ~/.config/git/ignore
 [push]
     default = simple
+[pull]
+    ff = only
 [alias]
     pi = pull --rebase=interactive
     bl = branch -ra
@@ -17,6 +21,10 @@
     open = !open $(git remote get-url origin | sed -E 's/.*@([[:alnum:]\\.-]*):([[:alnum:]-]*)\\/([[:alnum:]-]*)(\\.git)?/https:\\/\\/\\1\\/\\2\\/\\3/')
     fp = fetch --all --prune
     mc = merge --no-commit --no-ff
+    bd = !git diff $(git merge-base origin/master HEAD) HEAD
+    mb = merge-base origin/master HEAD
+    rpsh = rev-parse --short HEAD
+    psuo = !git push -u origin $(git branch --show-current)
 [filter "lfs"]
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f

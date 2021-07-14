@@ -5,17 +5,16 @@ export BASE=~/code
 export EDITOR=nvim
 export GOPATH=${BASE}
 export GIT_PAGER='less -FRX'
-# export NNN_RESTRICT_NAV_OPEN=1
-# export LESS=-cFRX
+export LESS=-RX
 export SRC=${BASE}/src
 export TRACKS_DIR=${HOME}/scratch/tracks
 # export PURE_PREPROMPT='%F{blue}%2~%f'
 export WORDCHARS=${WORDCHARS/\/}
+export PYENV_ROOT=~/.pyenv
+export PYENV_VERSION=3.7.10
 
 # Make ctrl-R full screen with fzf
-# export FZF_TMUX_HEIGHT=100%
 export FZF_DEFAULT_OPTS='--height=100% --exact'
-# export FZF_CTRL_T_OPTS="--layout=reverse"
 
 # Add new paths to $PATH if they dont already exist
 function add_to_path() {
@@ -24,17 +23,17 @@ function add_to_path() {
 
 add_to_path "/usr/local/bin"
 add_to_path "/usr/local/sbin"
-add_to_path "$HOME/.cargo/bin"
 add_to_path "$HOME/bin"
 add_to_path "$GOPATH/bin"
-add_to_path "/usr/local/opt/scala@2.12/bin"
+add_to_path "${PYENV_ROOT}/bin"
+add_to_path "${PYENV_ROOT}/shims"
+
+command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 
 # macOS-specific aliases
 if [[ "$(uname -s)" == "Darwin" ]]; then
     alias ls='gls --color' # coreutils homebrew package
     alias updatedb="sudo /usr/libexec/locate.updatedb"
-    alias vscode="open -a 'Visual Studio Code'"
-    export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 
     # from coreutils brew formula
     eval $(gdircolors)
@@ -43,14 +42,11 @@ fi
 alias l='ls --color -AF'
 alias ll='ls --color -AlhF'
 alias llt='ls --color -thrAlF'
-alias v2="source ${BASE}/venv2/bin/activate"
-alias v3="source ${BASE}/venv3/bin/activate"
-alias vim="nvim --startuptime /tmp/nvim-startuptime.log"
+alias vim="nvim"
 alias vimdiff="nvim -d"
 alias view="nvim -R"
 alias evrc="vim ~/.vimrc"
 alias elocal="vim ~/.config/zsh/runcommands/local.zsh; source ~/.config/zsh/runcommands/local.zsh"
-alias sshmux="noglob sshmux"
 alias k=kubectl
 alias -g L="| less"
 
@@ -106,6 +102,12 @@ function track {
 
 function alnum {
     cat /dev/urandom | gtr -dc 'a-z0-9' | head -c ${1:-8}
+}
+
+function alerton {
+    eval ${(q@)@}
+    local comm="${@}"
+    osascript -e 'display alert "Done" message "'"${comm}"' has finished"' 1>/dev/null
 }
 
 function clone {
@@ -203,6 +205,7 @@ setopt HIST_VERIFY
 # Incrementally append to HISTFILE and import HISTFILE on each prompt
 setopt SHARE_HISTORY
 
-autoload -U colors && colors
+# Stop ambiguous completions (or similar events) from beeping, i.e. triggering a bell character event
+unsetopt BEEP
 
-command -v pyenv &>/dev/null && eval "$(pyenv init -)"
+autoload -U colors && colors
