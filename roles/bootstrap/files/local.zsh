@@ -4,8 +4,8 @@ bindkey -e
 export BASE=~/code
 export EDITOR=nvim
 export GOPATH=${BASE}
-export GIT_PAGER='less -FRX'
-export LESS=-RX
+export GIT_PAGER='LESS= less -FRX'
+export LESS=-R
 export SRC=${BASE}/src
 export TRACKS_DIR=${HOME}/scratch/tracks
 # export PURE_PREPROMPT='%F{blue}%2~%f'
@@ -86,6 +86,7 @@ function show_colors {
     echo ""
 }
 
+compdef "_files -W ${TRACKS_DIR}" track
 function track {
     if [[ "${1}" == "" ]]; then
         echo "ERROR: File name required" >&2

@@ -99,7 +99,8 @@ Plug 'majutsushi/tagbar'
 
 " Move to the TagBar if already opened or open and focus
 " close the TagBar after selection
-nnoremap <leader>tag :TagbarOpen fjc<cr>
+nnoremap <leader>tbo :TagbarOpen fj<cr>
+nnoremap <leader>tbc :TagbarClose<cr>
 
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
@@ -208,6 +209,17 @@ Plug 'kien/rainbow_parentheses.vim'
 " =================================
 Plug 'fatih/vim-go', {'for': ['go'], 'do': ':GoInstallBinaries', 'tag': '*'}
 let g:go_metalinter_deadline = "1s"
+let g:go_doc_popup_window = 1
+nnoremap <leader>goc :GoCallers<cr>
+nnoremap <leader>goi :GoImplements<cr>
+nnoremap <leader>gom :GoRename 
+nnoremap <leader>gon :GoInfo<cr>
+nnoremap <leader>gor mR:GoReferrers<cr>:ll<cr>
+
+" not necessarily vim-go related, but helpful for these commands
+" moves through the location list entries
+nnoremap <leader>} :lne<cr>
+nnoremap <leader>{ :lp<cr>
 
 " =================================
 " vim-jinja
@@ -357,6 +369,9 @@ set showbreak=\ \ \\\  " this comment only exists so this value's trailing space
 " Start scrolling before cursor hits top/bottom
 set scrolloff=3
 
+" Show line numbers
+set number
+
 " Number of lines to jump when scrolling off screen
 " -# = percentage
 " set scrolljump=-30
@@ -450,7 +465,7 @@ set undofile
 set rtp+=/usr/local/opt/fzf
 
 " Do not auto-comment when using o or O
-autocmd FileType * setlocal formatoptions-=o
+autocmd FileType go setlocal formatoptions+=ac
 " Do not auto-indent (crazily) when commenting out a line
 autocmd FileType yaml,python setlocal indentkeys-=0#
 
