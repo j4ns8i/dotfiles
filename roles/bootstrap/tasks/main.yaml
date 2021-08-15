@@ -68,6 +68,7 @@
 
 - name: install vim plugins
   command: nvim -es -u {{ bootstrap_home_dir }}/.vimrc -i NONE -c "PlugInstall" -c "qa"
+  when: ansible_user_id != "root"
   changed_when: false
 
 - name: symlink wal.lightline.vim from ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim
@@ -75,6 +76,7 @@
     src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/wal.lightline.vim"
     dest: "{{ bootstrap_home_dir }}/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
     state: link
+  when: ansible_user_id != "root"
 
 - name: create ~/.config/git
   file:

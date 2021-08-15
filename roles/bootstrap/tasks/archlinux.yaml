@@ -42,7 +42,7 @@
   with_items:
     - "127.0.0.1	localhost"
     - "::1		localhost"
-    - "127.0.1.1	archie.localdomain archie"
+    - "127.0.1.1	{{ bootstrap_host }}.localdomain {{ bootstrap_host }}"
 
 - name: add lvm2 and sd-encrypt related mkinitcpio hooks
   lineinfile:
@@ -85,4 +85,4 @@
     repo: https://github.com/j4ns8i/dotfiles
     dest: "{{ bootstrap_dotfiles_path }}"
   become: true
-  become_user: "{{ become_user }}"
+  become_user: "{{ bootstrap_user }}"

@@ -14,7 +14,7 @@
 
 - hosts: localhost
   vars_files:
-    - roles/bootstrap/default/main.yaml
+    - roles/bootstrap/defaults/main.yaml
   tasks:
     - name: ensure that an EFI system partition is defined
       assert:

@@ -3,6 +3,9 @@
 # only used when running as root on archlinux
 bootstrap_user: j4ns8i
 
+# set in /etc/hosts when bootstrapping arch
+bootstrap_host: reptar
+
 # used for running user's password, as well as root password and LUKS password
 # if installing arch
 bootstrap_password: changeme
