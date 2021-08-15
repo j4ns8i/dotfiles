@@ -5,9 +5,11 @@
     src: /usr/share/zoneinfo/America/Los_Angeles
     dest: /etc/localtime
     state: link
+  become: true
 
 - name: run hwclock to sync time
   command: hwclock --systohc
+  become: true
 
 - name: enable en_US.UTF-8 in /etc/locale.gen
   lineinfile:
@@ -15,9 +17,11 @@
     regexp: "^(# )?en_US.UTF-8 UTF-8"
     line: "en_US.UTF-8 UTF-8"
     state: present
+  become: true
 
 - name: run locale-gen
   command: locale-gen
+  become: true
 
 - name: create /etc/locale.conf with LANG variable
   lineinfile:
@@ -25,13 +29,15 @@
     line: "LANG=en_US.UTF-8"
     create: true
     state: present
+  become: true
 
 - name: create /etc/hostname
   lineinfile:
     path: /etc/hostname
-    line: archie
+    line: "{{ bootstrap_host }}"
     create: true
     state: present
+  become: true
 
 - name: populate /etc/hosts
   lineinfile:
@@ -43,27 +49,60 @@
     - "127.0.0.1	localhost"
     - "::1		localhost"
     - "127.0.1.1	{{ bootstrap_host }}.localdomain {{ bootstrap_host }}"
+  become: true
 
 - name: add lvm2 and sd-encrypt related mkinitcpio hooks
   lineinfile:
     path: /etc/mkinitcpio.conf
-    line: "HOOKS=(base systemd autodetect keyboard modconf block sd-encrypt sd-lvm2 filesystems fsck)"
+    line: "HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt lvm2 filesystems fsck)"
     regexp: "^HOOKS=\\(.*\\)$"
     state: present
   register: bootstrap_mkinitcpio
+  become: true
 
 - name: install ramdisk with mkinitcpio
   command: mkinitcpio -P
   when: bootstrap_mkinitcpio.changed
+  become: true
 
 - name: run refind-install
   command: refind-install
+  become: true
+
+- name: set refind options
+  template:
+    src: refind_linux.conf.j2
+    dest: /boot/refind_linux.conf
+  become: true
+
+- name: ensure arch kernel names are supported by refind
+  lineinfile:
+    path: /boot/EFI/refind/refind.conf
+    line: "extra_kernel_version_strings linux-hardened,linux-zen,linux-lts,linux"
+    regexp: "^#?extra_kernel_version_strings "
+    state: present
+  become: true
 
 - name: set root login
   user:
     name: root
     password: "{{ 'changeme' | password_hash('sha512', bootstrap_salt) }}"
     shell: /bin/zsh
+  become: true
+
+- name: add systemd.network file to enable DHCP on any interface
+  copy:
+    src: 80-dhcp.network
+    dest: /etc/systemd/network/80-dhcp.network
+    mode: 0644
+  become: true
+
+- name: enable, reload, and start systemd-networkd
+  systemd:
+    name: systemd-networkd
+    state: reloaded
+    enabled: true
+  become: true
 
 - name: add {{ bootstrap_user }}
   user:
@@ -73,7 +112,7 @@
     group: users
     groups:
       - wheel
-  when: ansible_user_id == "root"
+  become: true
 
 - name: set bootstrap_home_dir if running as root
   set_fact:
@@ -86,3 +125,10 @@
     dest: "{{ bootstrap_dotfiles_path }}"
   become: true
   become_user: "{{ bootstrap_user }}"
+
+- name: add sudoers file
+  copy:
+    src: sudoers
+    dest: "/etc/sudoers.d/{{ bootstrap_host }}"
+    mode: 0440
+  become: true

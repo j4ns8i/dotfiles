@@ -8,7 +8,7 @@ bootstrap_host: reptar
 
 # used for running user's password, as well as root password and LUKS password
 # if installing arch
-bootstrap_password: changeme
+bootstrap_password: "{{ lookup('env', 'BOOTSTRAP_PASSWORD') | default('changeme', True) }}"
 
 # just a random salt for setting up passwords consistently
 bootstrap_salt: 1qb3w1NZajAh7YBw
@@ -41,6 +41,7 @@ bootstrap_packages:
     - man-pages
     - texinfo
     - sudo
+    - iwd
     - git
     - neovim
     - tree

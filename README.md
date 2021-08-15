@@ -14,6 +14,10 @@ $ pip install -r requirements.txt
 $ ansible-playbook bootstrap.yaml
 ```
 
+If running on Arch Linux (with LUKS), an install partition will need to be
+specified via `-e install_partition=...` to identify the device UUID to decrypt
+during boot and configure refind.
+
 ## Installing pure prompt
 
 Clone https://github.com/j4ns8i/pure, then create the following links somewhere in the
@@ -39,11 +43,27 @@ $ sfdisk --label gpt /dev/sda -N <part-num> <<< 'start=1MiB, size=512MiB, type=U
 $ sfdisk --label gpt /dev/sda -N <part-num> <<< 'start=513MiB, size=200GiB, type=L'
 ```
 
+The LUKS container is generally referred to as cryptlvm in this setup.
+
+## Install
+
+```bash
+$ ansible-playbook install_archlinux.yaml -e 'install_esp=/dev/sda1 install_partition=/dev/sda2'
+```
+
+## Maintenance
+
+Opening the LUKS container can be done like so:
+
+```bash
+$ cryptsetup open <part-path> cryptlvm
+```
+
 If the LUKS container needs to be recreated, follow these steps to wipe it
 first:
 
 ```bash
-$ cryptsetup close <crypt-name>
+$ cryptsetup close cryptlvm
 $ cryptsetup erase <part-path>
 $ wipefs -a <part-path>
 ```
