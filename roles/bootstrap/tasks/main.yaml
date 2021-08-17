@@ -45,6 +45,25 @@
     dest: "{{ bootstrap_home_dir }}/.config/zsh/runcommands/local.zsh"
     state: link
 
+- name: clone https://github.com/j4ns8i/pure
+  git:
+    repo: https://github.com/j4ns8i/pure
+    dest: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure"
+  become: true
+  become_user: "{{ bootstrap_user }}"
+
+- name: symlink ../pure/pure.zsh to ~/.config/zsh/functions/prompt_pure_setup
+  file:
+    src: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure/pure.zsh"
+    dest: "{{ bootstrap_home_dir }}/.config/zsh/functions/prompt_pure_setup"
+    state: link
+
+- name: symlink ../pure/async.zsh to ~/.config/zsh/functions/async
+  file:
+    src: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure/async.zsh"
+    dest: "{{ bootstrap_home_dir }}/.config/zsh/functions/async"
+    state: link
+
 - name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
   file:
     src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/wal.vim"
