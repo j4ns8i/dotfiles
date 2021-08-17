@@ -104,6 +104,13 @@
     enabled: true
   become: true
 
+- name: enable and start systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: started
+    enabled: true
+  become: true
+
 - name: add {{ bootstrap_user }}
   user:
     name: "{{ bootstrap_user }}"
