@@ -34,17 +34,9 @@
         type: vfat
         opts: -F 32
 
-    - name: create a LUKS container on {{ install_partition }}
-      community.crypto.luks_device:
-        device: "{{ install_partition }}"
-        name: cryptlvm
-        type: luks2
-        passphrase: changeme
-        state: opened
-
-    - name: create volume group on /dev/mapper/cryptlvm
+    - name: create volume group on {{ install_partition }}
       community.general.lvg:
-        pvs: /dev/mapper/cryptlvm
+        pvs: "{{ install_partition }}"
         vg: vogr
         pvresize: yes
 

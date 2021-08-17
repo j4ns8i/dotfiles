@@ -51,10 +51,10 @@
     - "127.0.1.1	{{ bootstrap_host }}.localdomain {{ bootstrap_host }}"
   become: true
 
-- name: add lvm2 and sd-encrypt related mkinitcpio hooks
+- name: add lvm2 related mkinitcpio hooks
   lineinfile:
     path: /etc/mkinitcpio.conf
-    line: "HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt lvm2 filesystems fsck)"
+    line: "HOOKS=(base systemd autodetect modconf block lvm2 filesystems fsck)"
     regexp: "^HOOKS=\\(.*\\)$"
     state: present
   register: bootstrap_mkinitcpio
