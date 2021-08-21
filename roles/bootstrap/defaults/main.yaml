@@ -35,6 +35,7 @@ bootstrap_packages:
     - ctags
     - grip
   archlinux:
+    - amd-ucode
     - refind
     - zsh
     - man-db
@@ -42,6 +43,7 @@ bootstrap_packages:
     - texinfo
     - sudo
     - iwd
+    - wpa_supplicant
     - git
     - neovim
     - tree

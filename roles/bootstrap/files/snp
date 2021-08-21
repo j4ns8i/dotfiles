@@ -1,0 +1,56 @@
+#!/bin/zsh
+
+usage() {
+    echo "Usage: snp [-lr]" 1>&2
+}
+
+remove=
+list=
+while getopts lr name
+do
+    case $name in
+    l)    list=1;;
+    r)    remove=1;;
+    ?)    usage
+          exit 127;;
+    esac
+done
+
+report() {
+    sudo lvs -o lv_name,vg_name,size,data_percent,origin,time vogr/snap 2>/dev/null
+}
+
+if [[ ! -z "$remove"  ]] && [[ ! -z "$list" ]]; then
+    usage
+    exit 127
+elif [[ ! -z "$remove" ]]; then
+    r="$(report)"
+    if [[ -z "$r" ]]; then
+        echo "no snapshot exists" 1>&2
+        exit 127
+    fi
+    echo $r
+    sudo lvremove vogr/snap
+    exit 0
+elif [[ ! -z "$list" ]]; then
+    sudo lvs -o lv_name,vg_name,size,data_percent,origin,time vogr/snap 2>/dev/null || echo "no shapshot exists" 1>&2
+    exit 0
+fi
+
+shift $(($OPTIND - 1))
+if [[ ! -z "$1" ]]; then
+    usage
+    exit 127
+fi
+
+r="$(report)"
+if [[ ! -z "$r" ]]; then
+    echo "snapshot already exists" 1>&2
+    echo $r 1>&2
+    exit 1
+fi
+
+sudo lvcreate --name snap --snapshot --extents 100%FREE vogr/main
+
+# printf "Remaining arguments are: %s\n$*"
+#

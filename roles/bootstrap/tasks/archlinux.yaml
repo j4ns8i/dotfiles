@@ -89,6 +89,7 @@
     password: "{{ 'changeme' | password_hash('sha512', bootstrap_salt) }}"
     shell: /bin/zsh
   become: true
+  tags: initial
 
 - name: add systemd.network file to enable DHCP on any interface
   copy:
@@ -120,6 +121,7 @@
     groups:
       - wheel
   become: true
+  tags: initial
 
 - name: set bootstrap_home_dir if running as root
   set_fact:
@@ -132,6 +134,7 @@
     dest: "{{ bootstrap_dotfiles_path }}"
   become: true
   become_user: "{{ bootstrap_user }}"
+  tags: initial
 
 - name: add sudoers file
   copy:
