@@ -24,6 +24,7 @@ function add_to_path() {
 add_to_path "/usr/local/bin"
 add_to_path "/usr/local/sbin"
 add_to_path "$HOME/bin"
+add_to_path "$HOME/.cargo/bin"
 add_to_path "$GOPATH/bin"
 add_to_path "${PYENV_ROOT}/bin"
 add_to_path "${PYENV_ROOT}/shims"
@@ -37,6 +38,9 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
     # from coreutils brew formula
     eval $(gdircolors)
+else
+    alias ls="ls --color"
+    eval $(dircolors)
 fi
 
 alias l='ls --color -AF'

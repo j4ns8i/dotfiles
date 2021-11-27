@@ -107,3 +107,9 @@
     src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/gitconfig"
     dest: "{{ bootstrap_home_dir }}/.config/git/config"
     state: link
+
+- name: install tmux config
+  file:
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/tmux.conf"
+    dest: "{{ bootstrap_home_dir }}/.tmux.conf"
+    state: link

@@ -112,18 +112,6 @@ let g:tagbar_type_markdown = {
 \ }
 
 " =================================
-" vim-multiple-cursors
-" pretty self explanatory
-" =================================
-" Plug 'terryma/vim-multiple-cursors'
-
-" =================================
-" devdocs
-" DevDocs integration for api lookups
-" =================================
-Plug 'rhysd/devdocs.vim'
-
-" =================================
 " matchit
 " %-matching with more than just characters
 " =================================
@@ -187,15 +175,6 @@ if exists(":Tabularize")
     nnoremap <leader>a: :Tabularize /:\zs<CR>
     vnoremap <leader>a: :Tabularize /:\zs<CR>
 endif
-
-" =================================
-" NERDTree
-" NERDTree file browser of course
-" =================================
-" Plug 'scrooloose/nerdtree'
-
-" Toggle NERDTree
-" nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " =================================
 " rainbow parens
@@ -283,12 +262,7 @@ Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
 " =================================
 " rust.vim
 " =================================
-Plug 'rust-lang/rust.vim', {'for': ['rust']}
-
-" =================================
-" vim-less
-" =================================
-" Plug 'groenewege/vim-less', {'for': ['less']}
+" Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
 " =================================
 " vim-indent-guides
@@ -300,7 +274,7 @@ Plug 'Yggdroot/indentLine'
 " vim-json
 " json ftplugin for better controls
 " =================================
-Plug 'elzr/vim-json'
+Plug 'elzr/vim-json', {'for': ['json']}
 " don't conceal json quotes, etc.
 let g:vim_json_syntax_conceal=0
 
@@ -308,7 +282,7 @@ let g:vim_json_syntax_conceal=0
 " vim-markdown
 " markdown ftplugin for better controls
 " =================================
-Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown', {'for': ['markdown']}
 " specific syntax highlighting within code blocks
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 " don't conceal markdown formatting
@@ -319,6 +293,26 @@ let g:markdown_syntax_conceal = 0
 " jsonnet ftplugin for better controls
 " =================================
 Plug 'google/vim-jsonnet', {'for': ['jsonnet']}
+
+" =================================
+" coc.nvim
+" for rust completion, hopefully
+" =================================
+Plug 'neoclide/coc.nvim', {
+    \ 'branch': 'release',
+    \ 'do': ':CocInstall coc-rust-analyzer',
+    \ 'for': ['rust']
+\ }
+autocmd FileType rust nnoremap <silent> K :call <SID>show_documentation()<cr>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 call plug#end()
 
@@ -369,8 +363,8 @@ set showbreak=\ \ \\\  " this comment only exists so this value's trailing space
 " Start scrolling before cursor hits top/bottom
 set scrolloff=3
 
-" Show line numbers
-set number
+" Show relative line numbers
+set relativenumber
 
 " Number of lines to jump when scrolling off screen
 " -# = percentage
@@ -456,16 +450,7 @@ set nrformats+=alpha
 set backspace=indent,eol,start
 
 " Set persistent undo and undodir
-set undodir=~/.local/share/nvim/undo
-set undofile
-
-" Set 24-bit colors
-" set termguicolors
-
-set rtp+=/usr/local/opt/fzf
-
-" Set persistent undo and undodir
-set undodir=~/.config/nvim
+set undodir=~/.config/nvim/undodir
 set undofile
 
 " Set 24-bit colors
@@ -474,7 +459,7 @@ set undofile
 set rtp+=/usr/local/opt/fzf
 
 " Do not auto-comment when using o or O
-autocmd FileType go setlocal formatoptions+=ac
+autocmd FileType go setlocal formatoptions+=c
 " Do not auto-indent (crazily) when commenting out a line
 autocmd FileType yaml,python setlocal indentkeys-=0#
 

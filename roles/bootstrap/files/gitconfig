@@ -1,5 +1,8 @@
 [core]
     excludesfile = ~/.config/git/ignore
+[user]
+    name = j4ns8i
+    email = jsmalkowski+github@gmail.com
 [push]
     default = simple
 [pull]
