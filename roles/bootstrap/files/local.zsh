@@ -14,7 +14,7 @@ export PYENV_ROOT=~/.pyenv
 export PYENV_VERSION=3.7.10
 
 # Make ctrl-R full screen with fzf
-export FZF_DEFAULT_OPTS='--height=100% --exact'
+export FZF_DEFAULT_OPTS='--height=100% --exact --layout=default'
 
 # Add new paths to $PATH if they dont already exist
 function add_to_path() {
@@ -25,6 +25,7 @@ add_to_path "/usr/local/bin"
 add_to_path "/usr/local/sbin"
 add_to_path "$HOME/bin"
 add_to_path "$HOME/.cargo/bin"
+add_to_path "$HOME/.local/bin"
 add_to_path "$GOPATH/bin"
 add_to_path "${PYENV_ROOT}/bin"
 add_to_path "${PYENV_ROOT}/shims"

@@ -193,7 +193,8 @@ nnoremap <leader>goc :GoCallers<cr>
 nnoremap <leader>goi :GoImplements<cr>
 nnoremap <leader>gom :GoRename
 nnoremap <leader>gon :GoInfo<cr>
-nnoremap <leader>gor mR:GoReferrers<cr>:ll<cr>
+nnoremap <leader>gor mR:GoReferrers<cr>:sleep 100m<cr>:ll<cr>
+nnoremap <leader>got :GoDefType<cr>
 
 " not necessarily vim-go related, but helpful for these commands
 " moves through the location list entries
@@ -551,7 +552,7 @@ nnoremap <leader>PC :PlugClean<cr>
 nnoremap <BS> <C-^>
 
 " use ctrl-p as shortcut for :FZF
-nnoremap <C-p> :FZF<cr>
+nnoremap <C-p> :FZF --layout=reverse<cr>
 
 " Execute @q easily
 nnoremap Q @q
