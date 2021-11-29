@@ -143,10 +143,10 @@ Plug 'felixhummel/setcolors.vim'
 " =================================
 if has('nvim')
     " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python']}
-    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " On Command
 
@@ -191,7 +191,7 @@ let g:go_metalinter_deadline = "1s"
 let g:go_doc_popup_window = 1
 nnoremap <leader>goc :GoCallers<cr>
 nnoremap <leader>goi :GoImplements<cr>
-nnoremap <leader>gom :GoRename 
+nnoremap <leader>gom :GoRename
 nnoremap <leader>gon :GoInfo<cr>
 nnoremap <leader>gor mR:GoReferrers<cr>:ll<cr>
 
@@ -247,7 +247,7 @@ Plug 'hdima/python-syntax', {'for': ['python']}
 " deoplete-jedi
 " python source for deoplete
 " =================================
-Plug 'deoplete-plugins/deoplete-jedi', {'for': ['python']}
+" Plug 'deoplete-plugins/deoplete-jedi', {'for': ['python']}
 
 " =================================
 " SQLUtilities
@@ -402,8 +402,8 @@ autocmd FileType markdown :setlocal textwidth=80
 " Set textwidth to 100 for python
 autocmd FileType python :setlocal textwidth=100
 
-let g:python_host_prog = '/Users/justin.smalkowski/.local/share/python/2.7.18/neovim/bin/python'
-let g:python3_host_prog = '/Users/justin.smalkowski/.local/share/python/3.7.10/neovim/bin/python'
+" let g:python_host_prog = '/Users/justin.smalkowski/.local/share/python/2.7.18/neovim/bin/python'
+" let g:python3_host_prog = '/Users/justin.smalkowski/.local/share/python/3.7.10/neovim/bin/python'
 
 " autocmd VimLeave * set guicursor=a:hor1-blinkon0
 

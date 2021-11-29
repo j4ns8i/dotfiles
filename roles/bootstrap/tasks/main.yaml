@@ -66,19 +66,19 @@
 
 - name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/wal.vim"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/wal.vim"
     dest: "{{ bootstrap_home_dir }}/.config/nvim/colors/wal.vim"
     state: link
 
 - name: symlink plug.vim from ~/.config/nvim/autoload/plug.vim
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/plug.vim"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/plug.vim"
     dest: "{{ bootstrap_home_dir }}/.config/nvim/autoload/plug.vim"
     state: link
 
 - name: symlink vimrc from ~/.config/nvim/init.vim and ~/.vimrc
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/vimrc"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/init.vim"
     dest: "{{ item }}"
     state: link
   loop:
@@ -92,7 +92,7 @@
 
 - name: symlink wal.lightline.vim from ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/wal.lightline.vim"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/wal.lightline.vim"
     dest: "{{ bootstrap_home_dir }}/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
     state: link
   when: ansible_user_id != "root"
@@ -104,7 +104,7 @@
 
 - name: install git config
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/gitconfig"
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/git/config"
     dest: "{{ bootstrap_home_dir }}/.config/git/config"
     state: link
 
