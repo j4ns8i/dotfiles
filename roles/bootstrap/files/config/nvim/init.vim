@@ -366,6 +366,8 @@ set scrolloff=3
 
 " Show relative line numbers
 set relativenumber
+" But still show current line number
+set number
 
 " Number of lines to jump when scrolling off screen
 " -# = percentage
