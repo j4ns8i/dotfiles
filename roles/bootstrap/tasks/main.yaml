@@ -50,7 +50,7 @@
     repo: https://github.com/j4ns8i/pure
     dest: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure"
   become: true
-  become_user: "{{ bootstrap_user }}"
+  become_user: "{{ ansible_user_id }}"
 
 - name: symlink ../pure/pure.zsh to ~/.config/zsh/functions/prompt_pure_setup
   file:
@@ -84,6 +84,17 @@
   loop:
     - "{{ bootstrap_home_dir }}/.vimrc"
     - "{{ bootstrap_home_dir }}/.config/nvim/init.vim"
+
+- name: create ~/.config/alacritty
+  file:
+    path: "{{ bootstrap_home_dir }}/.config/alacritty"
+    state: directory
+
+- name: symlink alacritty.yml from ~/.config/alacritty/alacritty.yml
+  file:
+    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/alacritty/alacritty.yml"
+    dest: "{{ bootstrap_home_dir }}/.config/alacritty/alacritty.yml"
+    state: link
 
 - name: install vim plugins
   command: nvim -es -u {{ bootstrap_home_dir }}/.vimrc -i NONE -c "PlugInstall" -c "qa"
