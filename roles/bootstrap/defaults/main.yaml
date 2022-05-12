@@ -34,6 +34,7 @@ bootstrap_packages:
     - refind
     - texinfo
     - alacritty
+    - tmux
     - make
     - make-doc
   darwin:
@@ -47,6 +48,8 @@ bootstrap_packages:
     - coreutils
     - ctags
     - grip
+    - alacritty
+    - tmux
   archlinux:
     - amd-ucode
     - refind
@@ -64,3 +67,5 @@ bootstrap_packages:
     - ripgrep
     - htop
     - jq
+    - alacritty
+    - tmux
