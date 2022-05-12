@@ -37,6 +37,7 @@ bootstrap_packages:
     - tmux
     - make
     - make-doc
+    - numlockx
   darwin:
     - zsh
     - fzf

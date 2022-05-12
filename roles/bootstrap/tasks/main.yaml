@@ -124,3 +124,7 @@
     src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/tmux.conf"
     dest: "{{ bootstrap_home_dir }}/.tmux.conf"
     state: link
+
+- name: include gnome tasks if using gnome
+  include_tasks: "gnome.yaml"
+  when: '"GNOME" in ansible_env["XDG_CURRENT_DESKTOP"] | default(omit)'
