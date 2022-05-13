@@ -67,6 +67,8 @@ function ggo {
     fi
 }
 
+# quick way of finding a git repo with any number of given path components:
+# $ find $SRC -type d -execdir test -d \{\}/.git \; -prune -path \*/<PATH> -print
 function ggr {
     # Go to a github repository
     MAX_DEPTH=3

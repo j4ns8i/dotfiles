@@ -108,8 +108,12 @@ window:
 # Font configuration
 font:
   normal:
-    family: jetbrains mono
-    style: medium
+    family: JetBrains Mono
+    style: Light
+  size: 14
+  offset:
+    x: 0
+    y: 0
 #font:
   # Normal (roman) font face
   #normal:
@@ -159,7 +163,6 @@ font:
 
   # Point size
   #size: 11.0
-  size: 10
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -188,6 +191,18 @@ colors:
   cursor:
     text: '#222222'
     cursor: '#bbbbbb'
+  # #4F5A6C #3A4251 #69879C #A1C6D5 #9BAAA2 #B0746C #2D333F #434C5E
+  normal:
+    black:   '#262A36'
+    red:     '#B0746C'
+    green:   '#9BAAA2'
+    yellow:  '#B69A81'
+    blue:    '#69879C'
+    magenta: '#81676C'
+    cyan:    '#A1C6D5'
+    white:   '#CDD9E4'
+  primary:
+    foreground: '#CDD9E4'
 # Colors (Tomorrow Night)
 #colors:
   # Default colors
@@ -448,7 +463,10 @@ shell:
 #working_directory: None
 
 # Send ESC (\x1b) before characters when alt is pressed.
-#alt_send_esc: true
+alt_send_esc: true
+
+mouse:
+  hide_when_typing: true
 
 #mouse:
   # Click settings
@@ -743,7 +761,11 @@ hints:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
+  - { key: B, mods: Alt, chars: "\x1bb" }
+  - { key: D, mods: Alt, chars: "\x1bd" }
+  - { key: F, mods: Alt, chars: "\x1bf" }
+  - { key: Period, mods: Alt, chars: "\x1b." }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
