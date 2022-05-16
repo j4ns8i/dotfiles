@@ -51,8 +51,8 @@ done
 
 # <up> and <down> searches history for something beginning with the current
 # line (up to the cursor)
-bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning-search-forward
+bindkey "${key[Up]}"   history-beginning-search-backward
+bindkey "${key[Down]}" history-beginning-search-forward
 
 # shift-tab reverses menu completion
 bindkey '^[[Z' reverse-menu-complete

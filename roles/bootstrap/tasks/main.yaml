@@ -101,6 +101,11 @@
   when: ansible_user_id != "root"
   changed_when: false
 
+- name: install .fzf.zsh
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
+    dest: "{{ bootstrap_home_dir }}/.fzf.zsh"
+
 - name: symlink wal.lightline.vim from ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim
   file:
     src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/wal.lightline.vim"
