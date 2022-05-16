@@ -7,6 +7,3 @@ verify_ssl = true
 
 [packages]
 ansible = "*"
-
-[requires]
-python_version = "3.8"

@@ -1,0 +1,4 @@
+- name: remove pyenv installer
+  ansible.builtin.file:
+    path: "{{ python_tmp_pyenv_installer.path }}"
+    state: absent

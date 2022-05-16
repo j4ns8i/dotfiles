@@ -127,4 +127,4 @@
 
 - name: include gnome tasks if using gnome
   include_tasks: "gnome.yaml"
-  when: '"GNOME" in ansible_env["XDG_CURRENT_DESKTOP"] | default(omit)'
+  when: (ansible_env["XDG_CURRENT_DESKTOP"] | default(omit)).find('GNOME') != -1

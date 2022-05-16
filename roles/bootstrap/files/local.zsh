@@ -11,7 +11,6 @@ export TRACKS_DIR=${HOME}/scratch/tracks
 # export PURE_PREPROMPT='%F{blue}%2~%f'
 export WORDCHARS=${WORDCHARS/\/}
 export PYENV_ROOT=~/.pyenv
-export PYENV_VERSION=3.7.10
 
 # Make ctrl-R full screen with fzf
 export FZF_DEFAULT_OPTS='--height=100% --exact --layout=default'
