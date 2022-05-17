@@ -6,3 +6,4 @@
     - role: python
     - role: rust
     - role: go
+    # - role: neovim # TODO

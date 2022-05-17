@@ -15,17 +15,6 @@ Plug 'tpope/vim-surround'
 " <visual>S<mapping> to surround visually selected area
 
 " =================================
-" ctrl-p
-" sublime-style ctrl-p fuzzy file opening
-" =================================
-" Plug 'ctrlpvim/ctrlp.vim'
-" let g:ctrlp_user_command = ['.git', 'git -C %s ls-files -co --exclude-standard']
-" let g:ctrlp_extensions = ['mixed']
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_cmd = 'CtrlPMRU'
-" let g:ctrlp_max_files = 5000
-
-" =================================
 " vim-colorschemes
 " extra colorschemes
 " =================================
@@ -141,7 +130,7 @@ Plug 'felixhummel/setcolors.vim'
 " deoplete
 " =================================
 if has('nvim')
-    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python', 'rust']}
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python', 'rust', 'go'] }
 endif
 
 let g:deoplete#enable_at_startup = 1
@@ -202,12 +191,12 @@ nnoremap <leader>{ :lp<cr>
 " =================================
 " vim-jinja
 " =================================
-Plug 'mitsuhiko/vim-jinja', {'for': ['jinja']}
+Plug 'mitsuhiko/vim-jinja', { 'for': ['jinja'] }
 
 " =================================
 " vim-javascript
 " =================================
-Plug 'pangloss/vim-javascript', {'for': ['javascript']}
+Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 
 " =================================
 " deoplete-ternjs
@@ -220,27 +209,27 @@ Plug 'pangloss/vim-javascript', {'for': ['javascript']}
 " =================================
 " vim-jsx
 " =================================
-Plug 'amadeus/vim-jsx', {'for': ['jsx']}
+Plug 'amadeus/vim-jsx', { 'for': ['jsx'] }
 
 " =================================
 " vim-yaml
 " =================================
-Plug 'stephpy/vim-yaml', {'for': ['yaml']}
+Plug 'stephpy/vim-yaml', { 'for': ['yaml'] }
 
 " =================================
 " emmet-vim
 " =================================
-Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
 
 " =================================
 " vim-scala
 " =================================
-Plug 'derekwyatt/vim-scala', {'for': ['scala']}
+Plug 'derekwyatt/vim-scala', { 'for': ['scala'] }
 
 " =================================
 " python-syntax
 " =================================
-Plug 'hdima/python-syntax', {'for': ['python']}
+" Plug 'hdima/python-syntax', { 'for': ['python'] }
 
 " =================================
 " deoplete-jedi
@@ -251,34 +240,31 @@ Plug 'hdima/python-syntax', {'for': ['python']}
 " =================================
 " SQLUtilities
 " =================================
-Plug 'vim-scripts/SQLUtilities', {'for': ['sql']}
+Plug 'vim-scripts/SQLUtilities', { 'for': ['sql'] }
 
 " =================================
 " terraform
 " =================================
-Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
+Plug 'hashivim/vim-hashicorp-tools', { 'for': ['terraform'] }
 
 " =================================
 " rust.vim
+" file detection, syntax highlighting, formatting, syntastic integration (if
+" installed), tagbar integration, other minor things...
 " =================================
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 
 " =================================
 " ale
 " asynchronous lint engine
+" deoplete uses this for completion
 " =================================
-" let g:ale_completion_enabled = 1
-let g:ale_linters = {
-            \ 'python': ['flake8', 'mypy', 'pylint', 'pyright', 'pylsp'],
-            \ 'rust': ['cargo', 'rls', 'analyzer', 'rustfmt'],
-            \ }
-let g:ale_fixers = {
-            \ 'rust': ['rustfmt'],
-            \ }
-let g:ale_python_auto_pipenv = 1
-let g:ale_python_pylsp_auto_pipenv = 1
-let g:ale_python_mypy_auto_pipenv = 1
 Plug 'dense-analysis/ale'
+
+let g:ale_set_quickfix = 1
+
+" recover jump forwards motion after mapping Tab (which == <C-i>)
+nnoremap <C-h> <C-i>
 
 " =================================
 " vim-indent-guides
@@ -290,7 +276,7 @@ Plug 'Yggdroot/indentLine'
 " vim-json
 " json ftplugin for better controls
 " =================================
-Plug 'elzr/vim-json', {'for': ['json']}
+Plug 'elzr/vim-json', { 'for': ['json'] }
 " don't conceal json quotes, etc.
 let g:vim_json_syntax_conceal=0
 
@@ -298,7 +284,7 @@ let g:vim_json_syntax_conceal=0
 " vim-markdown
 " markdown ftplugin for better controls
 " =================================
-Plug 'tpope/vim-markdown', {'for': ['markdown']}
+Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 " specific syntax highlighting within code blocks
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 " don't conceal markdown formatting
@@ -308,27 +294,13 @@ let g:markdown_syntax_conceal = 0
 " vim-jsonnet
 " jsonnet ftplugin for better controls
 " =================================
-Plug 'google/vim-jsonnet', {'for': ['jsonnet']}
+Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
 
 " =================================
-" coc.nvim
-" for rust completion, hopefully
+" fzf
+" ctrl-p for searching files, etc.
 " =================================
-Plug 'neoclide/coc.nvim', {
-    \ 'branch': 'release',
-    \ 'do': ':CocInstall coc-rust-analyzer',
-    \ 'for': ['rust']
-\ }
-autocmd FileType rust nnoremap <silent> K :call <SID>show_documentation()<cr>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+Plug 'junegunn/fzf'
 
 call plug#end()
 filetype plugin indent on
