@@ -4,3 +4,5 @@
   roles:
     - role: bootstrap
     - role: python
+    - role: rust
+    - role: go

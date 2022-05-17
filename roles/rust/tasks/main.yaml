@@ -1,0 +1,50 @@
+---
+
+- name: check if rustup is installed
+  ansible.builtin.command: which rustup
+  changed_when: false
+  failed_when: false
+  register: rust_rustup_install_check
+
+- name: install rustup
+  block:
+    - name: create temporary file to hold rustup installer script
+      ansible.builtin.tempfile:
+        state: file
+        suffix: _rustup_installer.tmp
+      register: rust_rustup_tmp_installer
+      notify: remove rustup installer
+
+    - name: grab rustup installer content
+      ansible.builtin.uri:
+        url: https://sh.rustup.rs
+        return_content: true
+        status_code:
+          - 304
+          - 200
+      register: rust_rustup_tmp_installer_response
+
+    - name: copy installer content to temporary file
+      ansible.builtin.copy:
+        content: "{{ rust_rustup_tmp_installer_response.content }}"
+        dest: "{{ rust_rustup_tmp_installer.path }}"
+
+    - name: run rustup installer script
+      ansible.builtin.script: "{{ rust_rustup_tmp_installer.path }} -y"
+  when: rust_rustup_install_check.rc != 0
+
+- name: check if rust-analyzer is installed
+  ansible.builtin.command: which rust-analyzer
+  changed_when: false
+  failed_when: false
+  register: rust_rust_analyzer_install_check
+
+- name: install rust-analyzer
+  block:
+    # This is an unfortunate hack since ansible lacks gzip support for decompressing
+    - name: install rust-analyzer
+      ansible.builtin.shell: curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-{{ ansible_architecture }}-unknown-{{ ansible_system|lower }}-gnu.gz | gunzip -c - > {{ bootstrap_home_dir }}/.cargo/bin/rust-analyzer && chmod u+x {{ bootstrap_home_dir }}/.cargo/bin/rust-analyzer
+  when: rust_rust_analyzer_install_check.rc != 0
+
+- name: add rust language server requisites
+  ansible.builtin.command: rustup component add rls rust-analysis rust-src

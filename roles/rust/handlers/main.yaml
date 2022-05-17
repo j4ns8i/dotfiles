@@ -1,0 +1,4 @@
+- name: remove rustup installer
+  ansible.builtin.file:
+    path: "{{ rust_rustup_tmp_installer.path }}"
+    state: absent

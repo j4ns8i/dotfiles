@@ -44,4 +44,14 @@
       ansible.builtin.pip:
         name: pipenv
         extra_args: --user
+
+    - name: install dependencies for neovim tools
+      ansible.builtin.pip:
+        name: "{{ item }}"
+        extra_args: --user
+      loop:
+        - mypy
+        - python-lsp-server
+        - flake8
+        - pynvim
   when: python_pyenv_install_check.rc != 0

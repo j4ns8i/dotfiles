@@ -1,4 +1,3 @@
-filetype plugin indent on
 let mapleader = ","
 
 " ================================+
@@ -142,11 +141,10 @@ Plug 'felixhummel/setcolors.vim'
 " deoplete
 " =================================
 if has('nvim')
-    " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python']}
-    " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python', 'rust']}
 endif
 
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 " On Command
 
@@ -263,7 +261,24 @@ Plug 'hashivim/vim-hashicorp-tools', {'for': ['terraform']}
 " =================================
 " rust.vim
 " =================================
-" Plug 'rust-lang/rust.vim', {'for': ['rust']}
+Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
+
+" =================================
+" ale
+" asynchronous lint engine
+" =================================
+" let g:ale_completion_enabled = 1
+let g:ale_linters = {
+            \ 'python': ['flake8', 'mypy', 'pylint', 'pyright', 'pylsp'],
+            \ 'rust': ['cargo', 'rls', 'analyzer', 'rustfmt'],
+            \ }
+let g:ale_fixers = {
+            \ 'rust': ['rustfmt'],
+            \ }
+let g:ale_python_auto_pipenv = 1
+let g:ale_python_pylsp_auto_pipenv = 1
+let g:ale_python_mypy_auto_pipenv = 1
+Plug 'dense-analysis/ale'
 
 " =================================
 " vim-indent-guides
@@ -316,6 +331,8 @@ function! s:show_documentation()
 endfunction
 
 call plug#end()
+filetype plugin indent on
+syntax enable
 
 " =================================
 " Options and variables
