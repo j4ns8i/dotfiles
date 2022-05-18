@@ -123,12 +123,12 @@
   become: true
   tags: initial
 
-- name: set bootstrap_home_dir if running as root
+- name: set dotfiles_home_dir if running as root
   set_fact:
-    bootstrap_home_dir: /home/{{ bootstrap_user }}
+    dotfiles_home_dir: /home/{{ bootstrap_user }}
   when: ansible_user_id == "root"
 
-- name: make sure repo is cloned under {{ bootstrap_home_dir }}
+- name: make sure repo is cloned under {{ dotfiles_home_dir }}
   git:
     repo: https://github.com/j4ns8i/dotfiles
     dest: "{{ bootstrap_dotfiles_path }}"

@@ -1,0 +1,11 @@
+---
+
+- hosts: localhost
+  vars_files:
+    - ../../roles/alacritty/defaults/main.yaml
+    - ../../roles/bootstrap/defaults/main.yaml
+  tasks:
+    - name: render alacritty template
+      ansible.builtin.template:
+        src: "../../roles/alacritty/templates/alacritty.yml"
+        dest: "{{ dotfiles_home_dir }}/.config/alacritty/alacritty.yml"

@@ -1,0 +1,3 @@
+---
+
+dotfiles_home_dir: "{{ ansible_user_dir }}"

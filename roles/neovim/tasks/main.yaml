@@ -1,0 +1,59 @@
+---
+
+- name: install neovim package
+  package:
+    name: neovim
+    state: present
+  become: "{{ ansible_os_family|lower != 'darwin' }}"
+
+- name: create ~/.config/nvim and directories under it
+  file:
+    path: "{{ neovim_config_dir }}/{{ item }}"
+    state: directory
+  loop:
+    - autoload
+    - colors
+    - ftplugin
+
+- name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
+  file:
+    src: "{{ neovim_link_base }}/files/nvim/colors/wal.vim"
+    dest: "{{ neovim_config_dir }}/colors/wal.vim"
+    state: link
+
+- name: symlink plug.vim from ~/.config/nvim/autoload/plug.vim
+  file:
+    src: "{{ neovim_link_base }}/files/nvim/plug.vim"
+    dest: "{{ neovim_config_dir }}/autoload/plug.vim"
+    state: link
+
+- name: symlink vimrc from ~/.config/nvim/init.vim and ~/.vimrc
+  file:
+    src: "{{ neovim_link_base }}/files/nvim/init.vim"
+    dest: "{{ item }}"
+    state: link
+  loop:
+    - "{{ ansible_user_dir }}/.vimrc"
+    - "{{ neovim_config_dir }}/init.vim"
+
+- name: symlink ftplugins
+  file:
+    src: "{{ neovim_link_base }}/files/nvim/ftplugin/{{ item }}"
+    dest: "{{ neovim_config_dir }}/ftplugin/{{ item }}"
+    state: link
+  loop:
+    - go_ale.vim
+    - python_ale.vim
+    - rust_ale.vim
+
+- name: install vim plugins
+  command: nvim -es -u {{ neovim_config_dir }}/init.vim -i NONE -c "PlugInstall" -c "qa"
+  when: ansible_user_id != "root"
+  changed_when: false
+
+- name: symlink wal.lightline.vim from ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim
+  file:
+    src: "{{ neovim_link_base }}/files/nvim/colors/wal.lightline.vim"
+    dest: "{{ neovim_config_dir }}/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
+    state: link
+  when: ansible_user_id != "root"

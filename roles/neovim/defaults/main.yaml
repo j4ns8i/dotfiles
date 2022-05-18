@@ -1,0 +1,9 @@
+---
+
+dotfiles_path: ""
+
+dotfiles_home_dir: "{{ ansible_user_dir }}"
+
+neovim_link_base: "{{ dotfiles_path }}/roles/neovim"
+
+neovim_config_dir: "{{ dotfiles_home_dir }}/.config/nvim"

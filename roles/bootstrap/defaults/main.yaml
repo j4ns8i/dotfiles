@@ -1,5 +1,12 @@
 ---
 
+# path to where this repo should be cloned
+# bootstrap_dotfiles_path: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/dotfiles"
+dotfiles_path: ""
+
+# where config things will get linked to
+dotfiles_home_dir: "{{ ansible_user_dir }}"
+
 # only used when running as root on archlinux
 bootstrap_user: j4ns8i
 
@@ -13,27 +20,19 @@ bootstrap_password: "{{ lookup('env', 'BOOTSTRAP_PASSWORD') | default('changeme'
 # just a random salt for setting up passwords consistently
 bootstrap_salt: 1qb3w1NZajAh7YBw
 
-# where config things will get linked to
-bootstrap_home_dir: "{{ ansible_user_dir }}"
-
 # base of git-based code and whatnot
-bootstrap_git_base_dir: "{{ bootstrap_home_dir }}/code/src"
-
-# path to where this repo should be cloned
-bootstrap_dotfiles_path: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/dotfiles"
+bootstrap_git_base_dir: "{{ dotfiles_home_dir }}/code/src"
 
 bootstrap_packages:
   debian:
     - zsh
     - fzf
-    - neovim
     - ripgrep
     - htop
     - jq
     - tree
     - refind
     - texinfo
-    - alacritty
     - tmux
     - make
     - make-doc
@@ -42,7 +41,6 @@ bootstrap_packages:
   darwin:
     - zsh
     - fzf
-    - neovim
     - ripgrep
     - htop
     - jq
@@ -50,7 +48,6 @@ bootstrap_packages:
     - coreutils
     - ctags
     - grip
-    - alacritty
     - tmux
   archlinux:
     - amd-ucode
@@ -63,11 +60,9 @@ bootstrap_packages:
     - iwd
     - wpa_supplicant
     - git
-    - neovim
     - tree
     - fzf
     - ripgrep
     - htop
     - jq
-    - alacritty
     - tmux

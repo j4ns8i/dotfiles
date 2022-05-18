@@ -1,0 +1,14 @@
+---
+
+dotfiles_path: ""
+
+dotfiles_home_dir: "{{ ansible_user_dir }}"
+
+alacritty_config_dir: "{{ dotfiles_home_dir }}/.config/alacritty"
+
+alacritty_font_size: "{{ alacritty_font_sizes[ansible_os_family|lower] | default(12) }}"
+
+alacritty_font_sizes:
+  debian: 10
+  darwin: 14
+  archlinux: 10

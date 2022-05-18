@@ -19,7 +19,7 @@
 
 - name: create ~/.config/zsh and directories under it
   file:
-    path: "{{ bootstrap_home_dir }}/.config/zsh/{{ item }}"
+    path: "{{ dotfiles_home_dir }}/.config/zsh/{{ item }}"
     state: directory
   loop:
     - completions
@@ -29,20 +29,12 @@
 - name: copy zshrc to home directory
   copy:
     src: files/zshrc
-    dest: "{{ bootstrap_home_dir }}/.zshrc"
-
-- name: create ~/.config/nvim and directories under it
-  file:
-    path: "{{ bootstrap_home_dir }}/.config/nvim/{{ item }}"
-    state: directory
-  loop:
-    - autoload
-    - colors
+    dest: "{{ dotfiles_home_dir }}/.zshrc"
 
 - name: symlink local.zsh from ~/.config/zsh/runcommands
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/local.zsh"
-    dest: "{{ bootstrap_home_dir }}/.config/zsh/runcommands/local.zsh"
+    src: "{{ dotfiles_path }}/roles/bootstrap/files/local.zsh"
+    dest: "{{ dotfiles_home_dir }}/.config/zsh/runcommands/local.zsh"
     state: link
 
 - name: clone https://github.com/j4ns8i/pure
@@ -55,79 +47,35 @@
 - name: symlink ../pure/pure.zsh to ~/.config/zsh/functions/prompt_pure_setup
   file:
     src: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure/pure.zsh"
-    dest: "{{ bootstrap_home_dir }}/.config/zsh/functions/prompt_pure_setup"
+    dest: "{{ dotfiles_home_dir }}/.config/zsh/functions/prompt_pure_setup"
     state: link
 
 - name: symlink ../pure/async.zsh to ~/.config/zsh/functions/async
   file:
     src: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure/async.zsh"
-    dest: "{{ bootstrap_home_dir }}/.config/zsh/functions/async"
+    dest: "{{ dotfiles_home_dir }}/.config/zsh/functions/async"
     state: link
-
-- name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
-  file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/wal.vim"
-    dest: "{{ bootstrap_home_dir }}/.config/nvim/colors/wal.vim"
-    state: link
-
-- name: symlink plug.vim from ~/.config/nvim/autoload/plug.vim
-  file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/plug.vim"
-    dest: "{{ bootstrap_home_dir }}/.config/nvim/autoload/plug.vim"
-    state: link
-
-- name: symlink vimrc from ~/.config/nvim/init.vim and ~/.vimrc
-  file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/init.vim"
-    dest: "{{ item }}"
-    state: link
-  loop:
-    - "{{ bootstrap_home_dir }}/.vimrc"
-    - "{{ bootstrap_home_dir }}/.config/nvim/init.vim"
-
-- name: create ~/.config/alacritty
-  file:
-    path: "{{ bootstrap_home_dir }}/.config/alacritty"
-    state: directory
-
-- name: symlink alacritty.yml from ~/.config/alacritty/alacritty.yml
-  file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/alacritty/alacritty.yml"
-    dest: "{{ bootstrap_home_dir }}/.config/alacritty/alacritty.yml"
-    state: link
-
-- name: install vim plugins
-  command: nvim -es -u {{ bootstrap_home_dir }}/.vimrc -i NONE -c "PlugInstall" -c "qa"
-  when: ansible_user_id != "root"
-  changed_when: false
 
 - name: install .fzf.zsh
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
-    dest: "{{ bootstrap_home_dir }}/.fzf.zsh"
-
-- name: symlink wal.lightline.vim from ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim
-  file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/nvim/wal.lightline.vim"
-    dest: "{{ bootstrap_home_dir }}/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
-    state: link
-  when: ansible_user_id != "root"
+    dest: "{{ dotfiles_home_dir }}/.fzf.zsh"
 
 - name: create ~/.config/git
   file:
-    path: "{{ bootstrap_home_dir }}/.config/git"
+    path: "{{ dotfiles_home_dir }}/.config/git"
     state: directory
 
 - name: install git config
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/config/git/config"
-    dest: "{{ bootstrap_home_dir }}/.config/git/config"
+    src: "{{ dotfiles_path }}/roles/bootstrap/files/config/git/config"
+    dest: "{{ dotfiles_home_dir }}/.config/git/config"
     state: link
 
 - name: install tmux config
   file:
-    src: "{{ bootstrap_dotfiles_path }}/roles/bootstrap/files/tmux.conf"
-    dest: "{{ bootstrap_home_dir }}/.tmux.conf"
+    src: "{{ dotfiles_path }}/roles/bootstrap/files/tmux.conf"
+    dest: "{{ dotfiles_home_dir }}/.tmux.conf"
     state: link
 
 - name: include gnome tasks if using gnome

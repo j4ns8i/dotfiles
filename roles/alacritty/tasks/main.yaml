@@ -1,0 +1,17 @@
+---
+
+- name: install alacritty package
+  package:
+    name: alacritty
+    state: present
+  become: "{{ ansible_os_family|lower != 'darwin' }}"
+
+- name: "create dir: {{ alacritty_config_dir }}"
+  file:
+    path: "{{ alacritty_config_dir }}"
+    state: directory
+
+- name: render alacritty.yml template
+  ansible.builtin.template:
+    src: "templates/alacritty/alacritty.yml"
+    dest: "{{ alacritty_config_dir }}/alacritty.yml"
