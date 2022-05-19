@@ -49,16 +49,6 @@ for rc in ${ZSH_CONFIG_DIR}/runcommands/*; do
     source $rc
 done
 
-# <up> and <down> searches history for something beginning with the current
-# line (up to the cursor)
-bindkey "${key[Up]}"   history-beginning-search-backward
-bindkey "${key[Down]}" history-beginning-search-forward
-
-# shift-tab reverses menu completion
-bindkey '^[[Z' reverse-menu-complete
-
-bindkey -s '^o' 'lfcd\n'
-
 # for rc in ${ZSH_CONFIG_DIR}/functions/*; do
 #     source $rc
 # done
