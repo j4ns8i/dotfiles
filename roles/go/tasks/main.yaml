@@ -4,4 +4,4 @@
   package:
     name: "{{ go_package_name[ansible_os_family|lower] }}"
     state: present
-  become: true
+  become: "{{ ansible_os_family|lower != 'darwin' }}"

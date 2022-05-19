@@ -43,7 +43,7 @@
   block:
     # This is an unfortunate hack since ansible lacks gzip support for decompressing
     - name: install rust-analyzer
-      ansible.builtin.shell: curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-{{ ansible_architecture }}-unknown-{{ ansible_system|lower }}-gnu.gz | gunzip -c - > {{ dotfiles_home_dir }}/.cargo/bin/rust-analyzer && chmod u+x {{ dotfiles_home_dir }}/.cargo/bin/rust-analyzer
+      ansible.builtin.shell: curl -L {{ rust_rust_analyzer_download[ansible_os_family|lower] }} | gunzip -c - > {{ dotfiles_home_dir }}/.cargo/bin/rust-analyzer && chmod u+x {{ dotfiles_home_dir }}/.cargo/bin/rust-analyzer
   when: rust_rust_analyzer_install_check.rc != 0
 
 - name: add rust language server requisites

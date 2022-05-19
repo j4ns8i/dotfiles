@@ -1,3 +1,8 @@
 ---
 
 dotfiles_home_dir: "{{ ansible_user_dir }}"
+
+rust_rust_analyzer_download:
+  archlinux: https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-{{ ansible_architecture }}-unknown-linux-gnu.gz
+  debian: https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-{{ ansible_architecture }}-unknown-linux-gnu.gz
+  darwin: https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-{{ ansible_architecture }}-apple-darwin.gz
