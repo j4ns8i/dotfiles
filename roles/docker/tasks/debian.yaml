@@ -1,0 +1,33 @@
+---
+
+- name: include debian vars
+  include_vars: debian.yaml
+
+- name: install prerequisites
+  package:
+    name: "{{ item }}"
+    state: present
+  become: true
+  loop:
+    - ca-certificates
+    - curl
+    - gnupg
+    - lsb-release
+
+- name: add apt key
+  ansible.builtin.apt_key:
+    url: "{{ docker_apt_key_url }}"
+    state: present
+  become: true
+
+- name: add apt repo
+  ansible.builtin.apt_repository:
+    repo: "{{ docker_apt_repo_url }}"
+    state: present
+  become: true
+
+- name: install docker package
+  package:
+    name: "{{ docker_package_name }}"
+    state: present
+  become: true

@@ -1,0 +1,5 @@
+---
+
+docker_package_name: docker-ce
+docker_apt_key_url: https://download.docker.com/linux/debian/gpg
+docker_apt_repo_url: "deb https://download.docker.com/{{ ansible_system|lower }}/ubuntu focal stable"

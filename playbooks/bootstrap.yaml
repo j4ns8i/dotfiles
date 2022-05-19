@@ -7,3 +7,4 @@
     - role: rust
     - role: go
     - role: neovim
+    - role: docker
