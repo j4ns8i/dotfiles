@@ -42,7 +42,7 @@
     dest: "{{ neovim_config_dir }}/ftplugin/{{ item }}"
     state: link
   loop:
-    - go_ale.vim
+    - go.vim
     - python_ale.vim
     - rust_ale.vim
 

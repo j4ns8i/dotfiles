@@ -130,7 +130,7 @@ Plug 'felixhummel/setcolors.vim'
 " deoplete
 " =================================
 if has('nvim')
-    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' , 'for': ['python', 'rust', 'go'] }
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
 let g:deoplete#enable_at_startup = 1
@@ -155,14 +155,6 @@ function! s:align()
     endif
 endfunction
 
-" Tabular stuff - see http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
-if exists(":Tabularize")
-    nnoremap <leader>a= :Tabularize /=<CR>
-    vnoremap <leader>a= :Tabularize /=<CR>
-    nnoremap <leader>a: :Tabularize /:\zs<CR>
-    vnoremap <leader>a: :Tabularize /:\zs<CR>
-endif
-
 " =================================
 " rainbow parens
 " =================================
@@ -173,20 +165,15 @@ Plug 'kien/rainbow_parentheses.vim'
 " =================================
 " vim-go
 " =================================
-Plug 'fatih/vim-go', {'for': ['go'], 'do': ':GoInstallBinaries', 'tag': '*'}
-let g:go_metalinter_deadline = "1s"
-let g:go_doc_popup_window = 1
-nnoremap <leader>goc :GoCallers<cr>
-nnoremap <leader>goi :GoImplements<cr>
-nnoremap <leader>gom :GoRename
-nnoremap <leader>gon :GoInfo<cr>
-nnoremap <leader>gor mR:GoReferrers<cr>:sleep 100m<cr>:ll<cr>
-nnoremap <leader>got :GoDefType<cr>
-
-" not necessarily vim-go related, but helpful for these commands
-" moves through the location list entries
-nnoremap <leader>} :lne<cr>
-nnoremap <leader>{ :lp<cr>
+" Plug 'fatih/vim-go', {'for': ['go'], 'do': ':GoInstallBinaries', 'tag': '*'}
+" let g:go_metalinter_deadline = "1s"
+" let g:go_doc_popup_window = 1
+" nnoremap <leader>goc :GoCallers<cr>
+" nnoremap <leader>goi :GoImplements<cr>
+" nnoremap <leader>gom :GoRename
+" nnoremap <leader>gon :GoInfo<cr>
+" nnoremap <leader>gor mR:GoReferrers<cr>:sleep 100m<cr>:ll<cr>
+" nnoremap <leader>got :GoDefType<cr>
 
 " =================================
 " vim-jinja
@@ -259,9 +246,17 @@ Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 " asynchronous lint engine
 " deoplete uses this for completion
 " =================================
+let g:ale_hover_cursor = 0
+let g:ale_hover_to_preview = 1
 Plug 'dense-analysis/ale'
 
-let g:ale_set_quickfix = 1
+nnoremap <leader>an :ALERename<cr>
+nnoremap <leader>ar :ALEFindReferences -quickfix<cr>
+nnoremap <leader>ad :ALEGoToDefinition<cr>
+nnoremap <leader>ai :ALEGoToImplementation<cr>
+nnoremap <leader>at :ALEGoToTypeDefinition<cr>
+nnoremap <leader>af :ALEFix<cr>
+nnoremap <leader>ah :ALEHover<cr>
 
 " recover jump forwards motion after mapping Tab (which == <C-i>)
 nnoremap <C-h> <C-i>
@@ -450,11 +445,6 @@ set undofile
 
 set rtp+=/usr/local/opt/fzf
 
-" Do not auto-comment when using o or O
-autocmd FileType go setlocal formatoptions+=c
-" Do not auto-indent (crazily) when commenting out a line
-autocmd FileType yaml,python setlocal indentkeys-=0#
-
 " Auto remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -520,10 +510,6 @@ nnoremap <leader>b <C-^>
 nnoremap <leader>< :vertical resize -10<cr>
 nnoremap <leader>> :vertical resize +10<cr>
 
-" Rotate panes
-nnoremap <leader>wvh <C-w>t<C-w>K
-nnoremap <leader>whv <C-w>t<C-w>H
-
 " Like gf but split window
 nnoremap gs :wincmd f<cr>
 nnoremap gS :vertical wincmd f<cr>
@@ -577,9 +563,6 @@ vnoremap <leader>64e c<c-r>=system('base64', @")<cr><esc>
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
-
-" Load completion for go
-" call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 function! SynGroup()
     let l:s = synID(line('.'), col('.'), 1)
