@@ -11,8 +11,8 @@
     pi = pull --rebase=interactive
     bl = branch -ra
     la = "!git config -l | grep alias | cut -c 7-"
-    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(cyan)\\ [%cn]\\ %Creset%s%Cred%d" --decorate --date=relative
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%C(cyan)\\ [%cn]" --decorate --numstat
+    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(cyan)\\ [%an]\\ %Creset%s%Cred%d" --decorate --date=relative
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%C(cyan)\\ [%an]" --decorate --numstat
     sl = ls -10
     co = checkout
     ci = commit
@@ -47,4 +47,4 @@
     trustExitCode = true
 
 [includeIf "gitdir:work/"]
-    path = config.work
+    path = ~/.config/git/config.work
