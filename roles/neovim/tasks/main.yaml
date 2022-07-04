@@ -36,16 +36,6 @@
     - "{{ ansible_user_dir }}/.vimrc"
     - "{{ neovim_config_dir }}/init.vim"
 
-- name: symlink ftplugins
-  file:
-    src: "{{ neovim_link_base }}/files/nvim/ftplugin/{{ item }}"
-    dest: "{{ neovim_config_dir }}/ftplugin/{{ item }}"
-    state: link
-  loop:
-    - go.vim
-    - python_ale.vim
-    - rust_ale.vim
-
 - name: install vim plugins
   command: nvim -es -u {{ neovim_config_dir }}/init.vim -i NONE -c "PlugInstall" -c "qa"
   when: ansible_user_id != "root"

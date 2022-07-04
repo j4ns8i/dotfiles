@@ -9,16 +9,10 @@ call plug#begin('~/.config/nvim/plugged')
 " =================================
 " vim-surround
 " add/change/delete surrounding characters
+" > Use ys<motion><mapping> to surround with things like quotes, parens, etc.
+" > Use <visual>S<mapping> to surround visually selected area
 " =================================
 Plug 'tpope/vim-surround'
-" ys<motion><mapping> to surround with things like quotes, parens, etc.
-" <visual>S<mapping> to surround visually selected area
-
-" =================================
-" vim-colorschemes
-" extra colorschemes
-" =================================
-" Plug 'flazz/vim-colorschemes'
 
 " =================================
 " vim-rooter
@@ -27,36 +21,13 @@ Plug 'tpope/vim-surround'
 Plug 'airblade/vim-rooter'
 
 " =================================
-" neomake
-" =================================
-" Plug 'benekastah/neomake'
-" let g:neomake_python_enabled_makers = ['flake8']
-" let g:neomake_python_flake8_maker = {
-"     \ 'args': ['--ignore=E501']
-"     \ }
-" " let g:neomake_python_flake8_maker = {
-" "     \ 'args': ['--ignore=E501,E402,E303,E302,E251,E221']
-" "     \ }
-" let g:neomake_error_sign = {
-"     \ 'text': '✗',
-"     \ }
-" let g:neomake_warning_sign = {
-"     \ 'text': '!',
-"     \ }
-" let g:neomake_info_sign = {
-"     \ 'text': '>',
-"     \ }
-" let g:neomake_logfile='/tmp/neomake_err.log'
-" autocmd! BufReadPost * Neomake
-" autocmd! BufWritePost * Neomake
-
-" =================================
 " nerdcommenter
 " commenting shortcuts
 " =================================
 Plug 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1             " add spaces after comment marker
 let g:NERDDefaultAlign = 'left'       " align comment markers flush against the left border
+let g:NERDCreateDefaultMappings = 0
 let g:NERDCustomDelimiters = { 'pug': { 'left': '//' } }
 
 " =================================
@@ -73,11 +44,14 @@ nnoremap <leader>gb :Git blame<cr>
 " =================================
 Plug 'airblade/vim-gitgutter'
 
-" GitGutter
+let g:gitgutter_map_keys = 0
 nnoremap <leader>ggu :GitGutterUndoHunk<cr>
 nnoremap <leader>ggp :GitGutterPreviewHunk<cr>
 nnoremap <leader>ggs :GitGutterStageHunk<cr>
 nnoremap <leader>ggc :pclose<cr>
+nnoremap <leader>ggq <silent> :GitGutterQuickFixCurrentFile<cr>:cw<cr>
+nnoremap <space>j <Plug>(GitGutterNextHunk)
+nnoremap <space>k <Plug>(GitGutterPrevHunk)
 
 " =================================
 " tagbar
@@ -127,17 +101,6 @@ let g:lightline = {
 Plug 'felixhummel/setcolors.vim'
 
 " =================================
-" deoplete
-" =================================
-if has('nvim')
-    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
-
-let g:deoplete#enable_at_startup = 1
-
-" On Command
-
-" =================================
 " tabularize
 " lining up things in margins
 " =================================
@@ -160,21 +123,6 @@ endfunction
 " =================================
 Plug 'kien/rainbow_parentheses.vim'
 
-" On File Type
-
-" =================================
-" vim-go
-" =================================
-" Plug 'fatih/vim-go', {'for': ['go'], 'do': ':GoInstallBinaries', 'tag': '*'}
-" let g:go_metalinter_deadline = "1s"
-" let g:go_doc_popup_window = 1
-" nnoremap <leader>goc :GoCallers<cr>
-" nnoremap <leader>goi :GoImplements<cr>
-" nnoremap <leader>gom :GoRename
-" nnoremap <leader>gon :GoInfo<cr>
-" nnoremap <leader>gor mR:GoReferrers<cr>:sleep 100m<cr>:ll<cr>
-" nnoremap <leader>got :GoDefType<cr>
-
 " =================================
 " vim-jinja
 " =================================
@@ -184,14 +132,6 @@ Plug 'mitsuhiko/vim-jinja', { 'for': ['jinja'] }
 " vim-javascript
 " =================================
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-
-" =================================
-" deoplete-ternjs
-" javascript source for deoplete
-" =================================
-" Plug 'carlitux/deoplete-ternjs', {'for': ['javascript.jsx'], 'do': 'npm install -g tern'}
-" " let g:deoplete#sources#ternjs#docs = 1
-" " let g:deoplete#sources#ternjs#types = 1
 
 " =================================
 " vim-jsx
@@ -214,17 +154,6 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
 Plug 'derekwyatt/vim-scala', { 'for': ['scala'] }
 
 " =================================
-" python-syntax
-" =================================
-" Plug 'hdima/python-syntax', { 'for': ['python'] }
-
-" =================================
-" deoplete-jedi
-" python source for deoplete
-" =================================
-" Plug 'deoplete-plugins/deoplete-jedi', {'for': ['python']}
-
-" =================================
 " SQLUtilities
 " =================================
 Plug 'vim-scripts/SQLUtilities', { 'for': ['sql'] }
@@ -240,23 +169,6 @@ Plug 'hashivim/vim-hashicorp-tools', { 'for': ['terraform'] }
 " installed), tagbar integration, other minor things...
 " =================================
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
-
-" =================================
-" ale
-" asynchronous lint engine
-" deoplete uses this for completion
-" =================================
-let g:ale_hover_cursor = 0
-let g:ale_hover_to_preview = 1
-Plug 'dense-analysis/ale'
-
-nnoremap <leader>an :ALERename<cr>
-nnoremap <leader>ar :ALEFindReferences -quickfix<cr>
-nnoremap <leader>ad :ALEGoToDefinition<cr>
-nnoremap <leader>ai :ALEGoToImplementation<cr>
-nnoremap <leader>at :ALEGoToTypeDefinition<cr>
-nnoremap <leader>af :ALEFix<cr>
-nnoremap <leader>ah :ALEHover<cr>
 
 " recover jump forwards motion after mapping Tab (which == <C-i>)
 nnoremap <C-h> <C-i>
@@ -297,7 +209,130 @@ Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
 " =================================
 Plug 'junegunn/fzf'
 
+" =================================
+" nvim-lspconfig
+" LSP client config
+" =================================
+Plug 'neovim/nvim-lspconfig'
+
+" =================================
+" nvim-cmp
+" Lua-based autocompletion
+" =================================
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
 call plug#end()
+
+set completeopt=menu,menuone,noselect
+
+lua << EOF
+    -- Mappings.
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    local opts = { noremap=true, silent=true }
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', '<c-k>', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', '<c-j>', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+    -- Set "<" prefix before diagnostic virtual text
+    vim.diagnostic.config({
+      virtual_text = {prefix = '<'},
+    })
+
+    -- Use an on_attach function to only map the following keys
+    -- after the language server attaches to the current buffer
+    local on_attach = function(client, bufnr)
+      -- Enable completion triggered by <c-x><c-o>
+      vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+      -- Mappings.
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      local bufopts = { noremap=true, silent=true, buffer=bufnr }
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+      vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+      vim.keymap.set('n', 'gc', vim.lsp.buf.incoming_calls, bufopts)
+      vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
+      vim.keymap.set('n', '<space>d', vim.lsp.buf.type_definition, bufopts)
+	  vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, bufopts)
+      vim.keymap.set('i', '<c-k>', vim.lsp.buf.signature_help, bufopts)
+      vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+      vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+    end
+
+    local lsp_flags = {
+      -- This is the default in Nvim 0.7+
+      debounce_text_changes = 150,
+    }
+
+    -- nvim-cmp configuration
+    local cmp = require'cmp'
+
+    cmp.setup({
+      snippet = {
+        -- REQUIRED - you must specify a snippet engine
+        expand = function(args)
+          vim.fn["vsnip#anonymous"](args.body)
+        end,
+      },
+      window = {},
+      mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      }),
+      sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' },
+      }, {
+        { name = 'buffer' },
+      })
+    })
+
+    -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline('/', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' }
+      }
+    })
+
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' }
+      }, {
+        { name = 'cmdline' }
+      })
+    })
+
+    -- Setup lspconfig.
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    require('lspconfig')['gopls'].setup {
+        on_attach = on_attach,
+        flags = lsp_flags,
+        capabilities = capabilities
+    }
+
+    require('lspconfig')['rust_analyzer'].setup {
+        on_attach = on_attach,
+        flags = lsp_flags,
+        capabilities = capabilities
+    }
+EOF
+
 filetype plugin indent on
 syntax enable
 
@@ -309,7 +344,10 @@ set background=dark
 colo wal
 
 " Update gitgutter or anything using CursorHold autocommand event quicker
-set updatetime=1000
+set updatetime=100
+
+" Always show 2 columns for signs (gitgutter & lsp)
+set signcolumn=yes:2
 
 " Turn on the Wild menu
 set wildmenu
@@ -389,11 +427,6 @@ autocmd FileType markdown :setlocal textwidth=80
 " Set textwidth to 100 for python
 autocmd FileType python :setlocal textwidth=100
 
-" let g:python_host_prog = '/Users/justin.smalkowski/.local/share/python/2.7.18/neovim/bin/python'
-" let g:python3_host_prog = '/Users/justin.smalkowski/.local/share/python/3.7.10/neovim/bin/python'
-
-" autocmd VimLeave * set guicursor=a:hor1-blinkon0
-
 " Use Unix as the standard file type
 set ffs=unix,mac,dos
 
@@ -430,6 +463,8 @@ set foldnestmax=2
 " Start with all folds open
 set foldlevel=99
 
+set previewheight=999
+
 " 'Add/substract' letters with ctrl-a / ctrl-x
 set nrformats+=alpha
 
@@ -440,13 +475,12 @@ set backspace=indent,eol,start
 set undodir=~/.config/nvim/undodir
 set undofile
 
-" Set 24-bit colors
-" set termguicolors
-
 set rtp+=/usr/local/opt/fzf
 
 " Auto remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
+
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync()
 
 " Split help window on longer axis
 function! Fit_help(...)
@@ -559,6 +593,9 @@ inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 vnoremap <leader>64d c<c-r>=system('base64 --decode', @")<cr><esc>
 vnoremap <leader>64e c<c-r>=system('base64', @")<cr><esc>
 
+nnoremap <leader>c<space> <Plug>NERDCommenterToggle
+vnoremap <leader>c<space> <Plug>NERDCommenterToggle
+
 " Make <ESC> exit terminal insert mode
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
@@ -581,3 +618,7 @@ nnoremap <leader>hi :call SynGroup()<CR>
 " Mark position before going to top or bottom of file for easy returns
 nnoremap gg mjgg
 nnoremap G mkG
+
+" Use <Up> and <Down> for location list, <C-j> and <C-k> for quickfix list
+nnoremap <Up> :cp<cr>
+nnoremap <Down> :cn<cr>

@@ -184,6 +184,11 @@ hi ALEWarningSign ctermbg=NONE ctermfg=3 cterm=NONE
 hi ALEError ctermbg=NONE ctermfg=1 cterm=NONE
 hi ALEWarning ctermbg=NONE ctermfg=3 cterm=NONE
 
+hi SignColumn ctermbg=8
+hi GitGutterAdd ctermfg=2 ctermbg=8
+hi GitGutterChange ctermfg=3 ctermbg=8
+hi DiagnosticSignError ctermfg=1 ctermbg=8
+
 hi link NeomakeError SpellBad
 hi link NeomakeErrorSign SpellBad
 hi link NeomakeWarning SpellCap
