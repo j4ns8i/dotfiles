@@ -289,7 +289,7 @@ lua << EOF
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -320,13 +320,15 @@ lua << EOF
     -- Setup lspconfig.
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-    require('lspconfig')['gopls'].setup {
+    local lspconfig = require('lspconfig')
+
+    lspconfig['gopls'].setup {
         on_attach = on_attach,
         flags = lsp_flags,
         capabilities = capabilities
     }
 
-    require('lspconfig')['rust_analyzer'].setup {
+    lspconfig['rust_analyzer'].setup {
         on_attach = on_attach,
         flags = lsp_flags,
         capabilities = capabilities
@@ -411,6 +413,11 @@ endif
 
 set pastetoggle=<F11>
 
+augroup vimrc_go
+    autocmd!
+    autocmd FileType go :setlocal noexpandtab
+augroup END
+
 " Quick funtion that will highlight over 80 columns on cpp files
 autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
 
@@ -442,7 +449,7 @@ set noswapfile
 set expandtab
 
 " Do not expand tab for Makefiles
-autocmd FileType make set noexpandtab
+autocmd FileType make setlocal noexpandtab
 
 " Be smart when using tabs
 set smarttab
