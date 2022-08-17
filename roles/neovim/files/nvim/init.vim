@@ -1,8 +1,8 @@
 let mapleader = ","
 
-" ================================+
+" =================================
 " PLUGINS
-" ================================-
+" =================================
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -231,6 +231,10 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect
 
+" =================================
+" LUA
+" =================================
+
 lua << EOF
     -- Mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -413,27 +417,6 @@ endif
 
 set pastetoggle=<F11>
 
-augroup vimrc_go
-    autocmd!
-    autocmd FileType go :setlocal noexpandtab
-augroup END
-
-" Quick funtion that will highlight over 80 columns on cpp files
-autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
-
-" Set keywordprg according to filetype
-autocmd FileType vim :setlocal keywordprg=:help
-autocmd FileType yaml :setlocal keywordprg=:DevDocs
-
-" Disable expensive and broken markdown code block highlighting
-autocmd syntax markdown syntax clear markdownCodeBlock
-
-" Set textwidth to 80 for markdown
-autocmd FileType markdown :setlocal textwidth=80
-
-" Set textwidth to 100 for python
-autocmd FileType python :setlocal textwidth=100
-
 " Use Unix as the standard file type
 set ffs=unix,mac,dos
 
@@ -484,10 +467,35 @@ set undofile
 
 set rtp+=/usr/local/opt/fzf
 
+" =================================
+" AUTOCOMMANDS
+" =================================
+
+augroup vimrc_go
+    autocmd!
+    autocmd FileType go :setlocal noexpandtab
+augroup END
+
 " Auto remove trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync()
+
+" Quick funtion that will highlight over 80 columns on cpp files
+autocmd FileType cpp :autocmd! BufWritePre * :match ErrorMsg '\%>80v.\+'
+
+" Set keywordprg according to filetype
+autocmd FileType vim :setlocal keywordprg=:help
+autocmd FileType yaml :setlocal keywordprg=:DevDocs
+
+" Disable expensive and broken markdown code block highlighting
+autocmd syntax markdown syntax clear markdownCodeBlock
+
+" Set textwidth to 80 for markdown
+autocmd FileType markdown :setlocal textwidth=80
+
+" Set textwidth to 100 for python
+autocmd FileType python :setlocal textwidth=100
 
 " Split help window on longer axis
 function! Fit_help(...)
