@@ -12,7 +12,7 @@
     bl = branch -ra
     la = "!git config -l | grep alias | cut -c 7-"
     ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(cyan)\\ [%an]\\ %Creset%s%Cred%d" --decorate --date=relative
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%C(cyan)\\ [%an]" --decorate --numstat
+    ll = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(red)%d\\ %C(reset)%s%C(cyan)\\ [%an]" --decorate --stat --date=relative
     sl = ls -10
     co = checkout
     ci = commit
@@ -38,6 +38,8 @@
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
     required = true
+[init]
+    defaultBranch = main
 [merge]
     tool = nvimdiff
     conflictstyle = diff3
