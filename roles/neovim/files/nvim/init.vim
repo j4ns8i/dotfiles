@@ -236,6 +236,23 @@ set completeopt=menu,menuone,noselect
 " =================================
 
 lua << EOF
+    vim.lsp.handlers["textDocument/hover"] =
+        vim.lsp.with(
+            vim.lsp.handlers.hover,
+            {
+                border = "single"
+            }
+        )
+
+    vim.lsp.handlers["textDocument/signatureHelp"] =
+        vim.lsp.with(
+            vim.lsp.handlers.signature_help,
+            {
+                border = "single"
+            }
+        )
+
+
     -- Mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local opts = { noremap=true, silent=true }
@@ -322,7 +339,7 @@ lua << EOF
     })
 
     -- Setup lspconfig.
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     local lspconfig = require('lspconfig')
 
@@ -474,6 +491,19 @@ set rtp+=/usr/local/opt/fzf
 augroup vimrc_go
     autocmd!
     autocmd FileType go :setlocal noexpandtab
+    autocmd FileType go :setlocal textwidth=80
+    autocmd FileType go :setlocal formatoptions=cqjor
+augroup END
+
+augroup vimrc_jsonnet
+    autocmd!
+    autocmd FileType jsonnet :setlocal sw=2
+augroup END
+
+augroup vimrc_python
+    autocmd!
+    autocmd FileType python :setlocal textwidth=100
+    autocmd FileType python :setlocal formatoptions=cqjor
 augroup END
 
 " Auto remove trailing whitespace on write
@@ -493,9 +523,6 @@ autocmd syntax markdown syntax clear markdownCodeBlock
 
 " Set textwidth to 80 for markdown
 autocmd FileType markdown :setlocal textwidth=80
-
-" Set textwidth to 100 for python
-autocmd FileType python :setlocal textwidth=100
 
 " Split help window on longer axis
 function! Fit_help(...)
