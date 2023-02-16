@@ -11,6 +11,10 @@ bindkey "${key[Down]}" history-beginning-search-forward
 # shift-tab reverses menu completion
 bindkey '^[[Z' reverse-menu-complete
 
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+
 export LANG=en_US.UTF-8
 export BASE=~/code
 export EDITOR=nvim
