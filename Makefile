@@ -1,4 +1,5 @@
-PIPENV := $(or $(shell which pipenv),$(shell python3 -m site --user-base)/bin/pipenv)
+PIPENV           := $(or $(shell which pipenv),$(shell python3 -m site --user-base)/bin/pipenv)
+ANSIBLE_PLAYBOOK := ansible-playbook $(ANSIBLE_PLAYBOOK_ARGS)
 
 .PHONY: help
 help: ## Show this help text
@@ -9,7 +10,7 @@ deps: $(PIPENV) ## Install dependencies for using this repository
 
 .PHONY: diff-alacritty
 diff-alacritty:
-	ANSIBLE_BECOME_ASK_PASS=false $(PIPENV) run ansible-playbook \
+	ANSIBLE_BECOME_ASK_PASS=false $(ANSIBLE_PLAYBOOK) \
 		-e "dotfiles_home_dir=$(HOME)" \
 		--check \
 		--diff \
@@ -17,7 +18,7 @@ diff-alacritty:
 
 .PHONY: bootstrap
 bootstrap: $(PIPENV) ## Run the main bootstrap playbook to install and configure applications
-	$(PIPENV) run ansible-playbook \
+	$(ANSIBLE_PLAYBOOK) \
 		-e "dotfiles_path=$(PWD)" \
 		-e "dotfiles_home_dir=$(HOME)" \
 		playbooks/bootstrap.yaml
