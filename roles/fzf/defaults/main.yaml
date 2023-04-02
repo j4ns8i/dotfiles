@@ -1,0 +1,4 @@
+---
+
+fzf_version: 0.38.0
+fzf_download_name: fzf-0.38.0-{{ ansible_system|lower }}_amd64.tar.gz

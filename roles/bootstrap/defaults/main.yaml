@@ -26,7 +26,6 @@ bootstrap_git_base_dir: "{{ dotfiles_home_dir }}/code/src"
 bootstrap_packages:
   debian:
     - zsh
-    - fzf
     - ripgrep
     - htop
     - jq

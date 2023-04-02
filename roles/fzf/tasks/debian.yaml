@@ -1,0 +1,14 @@
+---
+
+- name: install .fzf.zsh
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/junegunn/fzf/{{ fzf_version }}/shell/key-bindings.zsh"
+    dest: "{{ ansible_user_dir }}/.fzf.zsh"
+
+- name: install fzf
+  ansible.builtin.unarchive:
+    src: "https://github.com/junegunn/fzf/releases/download/{{ fzf_version }}/fzf-{{ fzf_version }}-{{ ansible_system|lower }}_amd64.tar.gz"
+    dest: /usr/bin
+    include: [fzf]
+    remote_src: true
+  become: true
