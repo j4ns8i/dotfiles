@@ -193,16 +193,17 @@ colors:
     cursor: '#bbbbbb'
   # #4F5A6C #3A4251 #69879C #A1C6D5 #9BAAA2 #B0746C #2D333F #434C5E
   normal:
-    black:   '#262A36'
-    red:     '#B0746C'
-    green:   '#9BAAA2'
-    yellow:  '#B69A81'
-    blue:    '#69879C'
-    magenta: '#81676C'
-    cyan:    '#A1C6D5'
-    white:   '#CDD9E4'
+    black:   '#211F1F'
+    red:     '#ff6a6a'
+    green:   '#A5DDB3'
+    yellow:  '#FAD879'
+    blue:    '#9396DA'
+    magenta: '#9684BF'
+    cyan:    '#B3F0D5'
+    white:   '#F2EBFA'
   primary:
-    foreground: '#CDD9E4'
+    foreground: '#F2EBFA'
+    background: '#211F1F'
 # Colors (Tomorrow Night)
 #colors:
   # Default colors

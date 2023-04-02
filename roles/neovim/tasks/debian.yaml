@@ -1,0 +1,6 @@
+---
+
+- name: install neovim package
+  ansible.builtin.apt:
+    deb: https://github.com/neovim/neovim/releases/download/{{ neovim_version }}/nvim-linux64.deb
+  become: true

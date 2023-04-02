@@ -11,12 +11,16 @@ bindkey "${key[Down]}" history-beginning-search-forward
 # shift-tab reverses menu completion
 bindkey '^[[Z' reverse-menu-complete
 
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+
 export LANG=en_US.UTF-8
 export BASE=~/code
 export EDITOR=nvim
 export GOPATH=${BASE}
-export GIT_PAGER='LESS= less -FRX'
-export LESS=-R
+export GIT_PAGER="less -FRX"
+export LESS="-R -j 10"
 export SRC=${BASE}/src
 export TRACKS_DIR=${HOME}/scratch/tracks
 # export PURE_PREPROMPT='%F{blue}%2~%f'

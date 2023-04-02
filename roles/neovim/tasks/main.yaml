@@ -1,10 +1,8 @@
 ---
 
-- name: install neovim package
-  package:
-    name: neovim
-    state: present
-  become: "{{ ansible_os_family|lower != 'darwin' }}"
+- name: include tasks for {{ ansible_os_family }} if defined
+  include_tasks: "{{ item }}"
+  with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
 - name: create ~/.config/nvim and directories under it
   file:
@@ -35,16 +33,6 @@
   loop:
     - "{{ ansible_user_dir }}/.vimrc"
     - "{{ neovim_config_dir }}/init.vim"
-
-- name: symlink ftplugins
-  file:
-    src: "{{ neovim_link_base }}/files/nvim/ftplugin/{{ item }}"
-    dest: "{{ neovim_config_dir }}/ftplugin/{{ item }}"
-    state: link
-  loop:
-    - go.vim
-    - python_ale.vim
-    - rust_ale.vim
 
 - name: install vim plugins
   command: nvim -es -u {{ neovim_config_dir }}/init.vim -i NONE -c "PlugInstall" -c "qa"

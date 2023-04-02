@@ -1,5 +1,7 @@
 ---
 
+neovim_version: v0.8.3
+
 dotfiles_path: ""
 
 dotfiles_home_dir: "{{ ansible_user_dir }}"

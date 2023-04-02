@@ -15,9 +15,9 @@
     - lsb-release
 
 - name: add apt key
-  ansible.builtin.apt_key:
-    url: "{{ docker_apt_key_url }}"
-    state: present
+  ansible.builtin.shell:
+    cmd: "curl -fsSL {{ docker_apt_key_url }} | gpg -o {{ docker_apt_key_dest }} --dearmor"
+    creates: "{{ docker_apt_key_dest }}" # delete this file if a refresh is needed
   become: true
 
 - name: add apt repo
@@ -26,8 +26,15 @@
     state: present
   become: true
 
-- name: install docker package
+- name: install docker packages
   package:
-    name: "{{ docker_package_name }}"
+    name: "{{ docker_packages }}"
     state: present
+  become: true
+
+- name: add {{ ansible_user }} to docker group
+  ansible.builtin.user:
+    user: "{{ ansible_user_id }}"
+    groups: docker
+    append: true
   become: true

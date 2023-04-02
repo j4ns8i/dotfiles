@@ -56,11 +56,6 @@
     dest: "{{ dotfiles_home_dir }}/.config/zsh/functions/async"
     state: link
 
-- name: install .fzf.zsh
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
-    dest: "{{ dotfiles_home_dir }}/.fzf.zsh"
-
 - name: create ~/.config/git
   file:
     path: "{{ dotfiles_home_dir }}/.config/git"
