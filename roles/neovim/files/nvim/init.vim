@@ -239,12 +239,12 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect
 
-filetype plugin indent on
-syntax enable
-
 " =================================
 " Options and variables
 " =================================
+
+filetype plugin indent on
+syntax enable
 
 set background=dark
 colo wal
@@ -538,7 +538,8 @@ function! SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-nnoremap <leader>hi :call SynGroup()<CR>
+nnoremap <silent> <leader>hi :call SynGroup()<CR>
+nnoremap <silent> <leader>in :Inspect<CR>
 
 " Mark position before going to top or bottom of file for easy returns
 nnoremap gg mjgg
