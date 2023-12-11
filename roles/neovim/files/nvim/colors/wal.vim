@@ -16,17 +16,18 @@ let g:colors_name = 'wal'
 " highlight groups {{{
 
 " set t_Co=16
-hi Normal ctermbg=NONE ctermfg=7 cterm=NONE cterm=bold
+hi Normal ctermbg=NONE ctermfg=7 cterm=NONE
 hi NormalFloat ctermbg=0
 hi NonText ctermbg=NONE ctermfg=6 cterm=NONE
 hi Comment ctermbg=NONE ctermfg=8 cterm=NONE
 hi Constant ctermbg=NONE ctermfg=3 cterm=NONE
 hi Error ctermbg=1 ctermfg=8 cterm=NONE
-hi Identifier ctermbg=NONE ctermfg=1 cterm=NONE
+hi! link Identifier Normal
 hi Ignore ctermbg=8 ctermfg=0 cterm=NONE
 hi PreProc ctermbg=NONE ctermfg=3 cterm=NONE
 hi Special ctermbg=NONE ctermfg=6 cterm=NONE
-hi Statement ctermbg=NONE ctermfg=1 cterm=NONE
+hi Statement ctermbg=NONE ctermfg=1 cterm=bold
+hi Keyword ctermbg=NONE ctermfg=9 cterm=NONE
 hi String ctermbg=NONE ctermfg=2 cterm=NONE
 hi Number ctermbg=NONE ctermfg=3 cterm=NONE
 hi Todo ctermbg=2 ctermfg=0 cterm=NONE
@@ -85,7 +86,6 @@ hi Define ctermbg=NONE ctermfg=5 cterm=NONE
 hi Delimiter ctermbg=NONE ctermfg=5 cterm=NONE
 hi Float ctermbg=NONE ctermfg=5 cterm=NONE
 hi Include ctermbg=Black ctermfg=4 cterm=NONE
-hi Keyword ctermbg=NONE ctermfg=5 cterm=NONE
 hi Label ctermbg=NONE ctermfg=3 cterm=NONE
 hi Operator ctermbg=NONE ctermfg=7 cterm=NONE
 hi Repeat ctermbg=NONE ctermfg=3 cterm=NONE
@@ -184,6 +184,7 @@ hi ALEErrorSign ctermbg=NONE ctermfg=1 cterm=NONE
 hi ALEWarningSign ctermbg=NONE ctermfg=3 cterm=NONE
 hi ALEError ctermbg=NONE ctermfg=1 cterm=NONE
 hi ALEWarning ctermbg=NONE ctermfg=3 cterm=NONE
+hi yamlKey ctermfg=Blue
 
 hi SignColumn ctermbg=8
 hi GitGutterAdd ctermfg=2 ctermbg=8

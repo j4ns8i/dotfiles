@@ -105,7 +105,7 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -116,7 +116,7 @@ cmp.setup({
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({'/', '?'}, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
         { name = 'buffer' }
@@ -144,18 +144,18 @@ vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { ctermfg = 'DarkGray', striketh
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bold = true })
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpItemAbbrMatch' })
 
-vim.api.nvim_set_hl(0, 'CmpItemKindField', { ctermfg = 'Yellow' })
+vim.api.nvim_set_hl(0, 'CmpItemKindField', { link = 'Type' })
 vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindField' })
 vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { link = 'CmpItemKindField' })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { link = 'CmpItemKindField' })
 
 vim.api.nvim_set_hl(0, 'CmpItemKindText', { ctermfg = 'White' })
 
-vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { ctermfg = 'Red' })
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { link = 'Keyword' })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { link = 'CmpItemKindKeyword' })
 vim.api.nvim_set_hl(0, 'CmpItemKindReference', { link = 'CmpItemKindKeyword' })
 
-vim.api.nvim_set_hl(0, 'CmpItemKindValue', { ctermfg = 2 }) -- for some reason, "Green" doesn't match this color
+vim.api.nvim_set_hl(0, 'CmpItemKindValue', { ctermfg = 'DarkGreen' })
 
 vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { ctermfg = 'DarkMagenta' })
 vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link = 'CmpItemKindFunction' })
@@ -164,7 +164,7 @@ vim.api.nvim_set_hl(0, 'CmpItemKindClass', { link = 'CmpItemKindFunction' })
 vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { link = 'CmpItemKindFunction' })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { link = 'CmpItemKindFunction' })
 
-vim.api.nvim_set_hl(0, 'CmpItemKindModule', { ctermfg = 2 }) -- for some reason, "Green" doesn't match this color
+vim.api.nvim_set_hl(0, 'CmpItemKindModule', { ctermfg = 'DarkGreen' }) -- for some reason, "Green" doesn't match this color
 
 vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { ctermfg = 'Blue' })
 vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { link = 'CmpItemKindVariable' })
@@ -189,10 +189,14 @@ lspconfig['gopls'].setup {
     capabilities = capabilities,
     settings = {
         gopls = {
-            buildFlags = {'-tags', 'functional,integration'}
+            buildFlags = {'-tags', 'functional,integration'},
+            semanticTokens = true,
+            usePlaceholders = true
         }
     }
 }
+vim.api.nvim_set_hl(0, '@lsp.type.function.go', { italic = true })
+vim.api.nvim_set_hl(0, '@lsp.mod.readonly.go', { ctermfg = 'DarkRed' })
 
 lspconfig['rust_analyzer'].setup {
     on_attach = on_attach,
