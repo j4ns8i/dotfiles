@@ -297,6 +297,9 @@ set relativenumber
 " But still show current line number
 set number
 
+" Re-read open file to detech any changes when switching to it
+set autoread
+
 " Number of lines to jump when scrolling off screen
 " -# = percentage
 " set scrolljump=-30
