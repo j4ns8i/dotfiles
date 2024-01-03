@@ -4,44 +4,19 @@
   include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
-- name: create ~/.config/nvim and directories under it
+- name: link neovim config dir
   file:
-    path: "{{ neovim_config_dir }}/{{ item }}"
-    state: directory
-  loop:
-    - autoload
-    - colors
-    - ftplugin
-
-- name: symlink wal.vim colors from ~/.config/nvim/colors/wal.vim
-  file:
-    src: "{{ neovim_link_base }}/files/nvim/colors/wal.vim"
-    dest: "{{ neovim_config_dir }}/colors/wal.vim"
+    path: "{{ neovim_link_base }}/files/config/nvim"
+    dest: "{{ neovim_config_dir }}"
     state: link
 
-- name: symlink plug.vim from ~/.config/nvim/autoload/plug.vim
+- name: link .vimrc to init.lua
   file:
-    src: "{{ neovim_link_base }}/files/nvim/plug.vim"
-    dest: "{{ neovim_config_dir }}/autoload/plug.vim"
+    path: "{{ neovim_link_base }}/config/nvim/init.lua"
+    dest: "{{ dotfiles_home_dir }}/.vimrc"
     state: link
-
-- name: symlink vimrc from ~/.config/nvim/init.vim and ~/.vimrc
-  file:
-    src: "{{ neovim_link_base }}/files/nvim/init.vim"
-    dest: "{{ item }}"
-    state: link
-  loop:
-    - "{{ ansible_user_dir }}/.vimrc"
-    - "{{ neovim_config_dir }}/init.vim"
 
 - name: install vim plugins
-  command: nvim -es -u {{ neovim_config_dir }}/init.vim -i NONE -c "PlugInstall" -c "qa"
+  command: nvim -es -u {{ neovim_config_dir }}/init.lua -i NONE -c "PackerSync" -c "qa"
   when: ansible_user_id != "root"
   changed_when: false
-
-- name: symlink wal.lightline.vim from ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim
-  file:
-    src: "{{ neovim_link_base }}/files/nvim/colors/wal.lightline.vim"
-    dest: "{{ neovim_config_dir }}/plugged/lightline.vim/autoload/lightline/colorscheme/wal.vim"
-    state: link
-  when: ansible_user_id != "root"
