@@ -7,20 +7,20 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
-	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+    -- or                            , branch = '0.1.x',
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   use({
-	  'nvim-treesitter/nvim-treesitter',
-	  -- packer fails to install on the first try by default; we have to
-	  -- specify a run function that imports the install scripts then runs
-	  -- the update
-	  run = function()
-		  local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-		  ts_update()
-	  end
+    'nvim-treesitter/nvim-treesitter',
+    -- packer fails to install on the first try by default; we have to
+    -- specify a run function that imports the install scripts then runs
+    -- the update
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end
   })
 
   -- Provides :TSPlaygroundToggle to debug treesitter attributes
@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
   use({ 'onsails/lspkind.nvim' })
   use({
     'williamboman/mason.nvim',
-    requires = {{ 'williamboman/mason-lspconfig.nvim' }}
+    requires = { { 'williamboman/mason-lspconfig.nvim' } }
   })
 
   use {
@@ -46,7 +46,13 @@ return require('packer').startup(function(use)
   use({ 'tpope/vim-surround' })
 
   -- Easy commenting
-  use({ 'preservim/nerdcommenter' })
+  use({
+    'preservim/nerdcommenter',
+    config = function()
+      -- Must be run early
+      vim.g.NERDCreateDefaultMappings = 0
+    end
+  })
 
   -- Git commands (primarily for git blame)
   use({ 'tpope/vim-fugitive' })
@@ -74,4 +80,8 @@ return require('packer').startup(function(use)
   })
 
   use({ 'preservim/nerdtree' })
+
+  use({ 'lukas-reineke/indent-blankline.nvim' })
+
+  use({ 'airblade/vim-rooter' })
 end)

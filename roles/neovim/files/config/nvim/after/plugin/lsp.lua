@@ -1,4 +1,3 @@
-vim.cmd [[setlocal scl<]]
 vim.lsp.handlers['textDocument/hover'] =
     vim.lsp.with(
       vim.lsp.handlers.hover,
@@ -25,6 +24,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 vim.diagnostic.config({
   virtual_text = { prefix = '<' },
   float = { border = 'rounded' },
+  signs = false, -- disable signs in sign column
 })
 
 -- Use an on_attach function to only map the following keys
@@ -59,7 +59,6 @@ cmp.setup({
       vim.fn['vsnip#anonymous'](args.body)
     end,
   },
-  -- window = {},
   -- from https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-get-types-on-the-left-and-offset-the-menu
   window = {
     completion = {
@@ -97,7 +96,7 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -108,7 +107,7 @@ cmp.setup({
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
@@ -125,43 +124,59 @@ cmp.setup.cmdline(':', {
   })
 })
 
+-- TODO get good: my previous attempts at translating these to lua using vim.keymap.set did not bear fruit
+vim.cmd([[
+  imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)'  : '<Tab>'
+  smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)'  : '<Tab>'
+  imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
+  smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
+]])
+
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lspconfig = require('lspconfig')
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-
 lspconfig['gopls'].setup {
   on_attach = on_attach,
-  flags = lsp_flags,
   capabilities = capabilities,
   settings = {
     gopls = {
-      buildFlags = { '-tags', 'functional,integration' }
+      buildFlags = { '-tags', 'functional,integration' },
+      semanticTokens = true,
+      usePlaceholders = true,
     }
   }
 }
 
+lspconfig['dockerls'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 lspconfig['rust_analyzer'].setup {
   on_attach = on_attach,
-  flags = lsp_flags,
   capabilities = capabilities
 }
 
 lspconfig['pyright'].setup {
   on_attach = on_attach,
-  flags = lsp_flags,
   capabilities = capabilities,
   cmd = { 'poetry', 'run', 'pyright-langserver', '--stdio' },
 }
 
 lspconfig['volar'].setup({
   on_attach = on_attach,
-  flags = lsp_flags,
+  capabilities = capabilities,
+})
+
+lspconfig['terraformls'].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig['jsonnet_ls'].setup({
+  on_attach = on_attach,
   capabilities = capabilities,
 })
 

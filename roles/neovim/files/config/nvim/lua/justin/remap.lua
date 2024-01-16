@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-vim.keymap.set('n', '<leader>pv', vim.cmd.Texplore)
+vim.keymap.set('n', '<leader>pv', vim.cmd.NERDTreeFocus)
 
 vim.keymap.set('o', 'i<space>', ':<c-u>normal! T_vt_<cr>')
 vim.keymap.set('o', 'a<space>', ':<c-u>normal! F_vf_<cr>')
@@ -31,12 +31,25 @@ vim.keymap.set('v', '<leader>sar', '"sy:%s/\\<<c-r>s\\>//gc<left><left><left>')
 vim.keymap.set('v', '<leader>64d', 'c<c-r>=system(\'base64 --decode\', @")<cr><esc>')
 vim.keymap.set('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>')
 
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
+
 vim.keymap.set('n', 'gg', 'mjgg')
 vim.keymap.set('n', 'G', 'mkG')
 
-vim.keymap.set('n', '<up>', ':cp<cr>')
-vim.keymap.set('n', '<down>', ':cn<cr>')
+vim.keymap.set('n', '<up>', ':cp<cr>zz')
+vim.keymap.set('n', '<down>', ':cn<cr>zz')
 
-vim.keymap.set('n', '<leader>in', ':Inspect<cr>')
+vim.keymap.set('n', '<leader>in', vim.cmd.Inspect)
 
---vim.keymap.set("o", "in("
+vim.keymap.set('n', '<leader>cl', vim.cmd.cclose)
+
+vim.keymap.set('n', '<leader>vc', function()
+  -- Open vim config directory with NERDTree. This relies on NERDTree being
+  -- installed. Sadly, NERDTree doesn't seem to make it easy to do this
+  -- explicitly because it seems to override certain interactions with windows
+  -- (i.e. ":tab NERDTree ~/.config/nvim" doesn't work)
+  local config_dir = '~/.config/nvim'
+  vim.cmd.tabnew(config_dir)
+  vim.cmd.tcd(config_dir)
+end)

@@ -7,42 +7,44 @@ local wal = function()
     blue         = 4,
     magenta      = 5,
     cyan         = 6,
-    white        = 7,
-    gray         = 8,
-    darkgray     = '#333333',
-    lightgray    = '#555555',
+    lightgray    = 7,
+    darkgray     = 8,
+    -- gray         = 8,
+    white        = 15,
+    -- darkgray     = '#333333',
+    -- lightgray    = '#555555',
     inactivegray = '#777777',
   }
   return {
     normal = {
-      a = {bg = colors.blue, fg = colors.black, gui = 'bold'},
-      b = {bg = colors.lightgray, fg = colors.white},
-      c = {bg = colors.darkgray, fg = colors.gray}
+      a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
+      b = { bg = colors.lightgray, fg = colors.white },
+      c = { bg = colors.darkgray, fg = colors.lightgray }
     },
     insert = {
-      a = {bg = colors.green, fg = colors.black, gui = 'bold'},
-      b = {bg = colors.lightgray, fg = colors.white},
-      c = {bg = colors.darkgray, fg = colors.gray}
+      a = { bg = colors.green, fg = colors.black, gui = 'bold' },
+      b = { bg = colors.lightgray, fg = colors.white },
+      c = { bg = colors.darkgray, fg = colors.lightgray }
     },
     visual = {
-      a = {bg = colors.yellow, fg = colors.black, gui = 'bold'},
-      b = {bg = colors.lightgray, fg = colors.white},
-      c = {bg = colors.darkgray, fg = colors.gray}
+      a = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
+      b = { bg = colors.lightgray, fg = colors.white },
+      c = { bg = colors.darkgray, fg = colors.lightgray }
     },
     replace = {
-      a = {bg = colors.red, fg = colors.black, gui = 'bold'},
-      b = {bg = colors.lightgray, fg = colors.white},
-      c = {bg = colors.darkgray, fg = colors.gray}
+      a = { bg = colors.red, fg = colors.black, gui = 'bold' },
+      b = { bg = colors.lightgray, fg = colors.white },
+      c = { bg = colors.darkgray, fg = colors.lightgray }
     },
     command = {
-      a = {bg = colors.magenta, fg = colors.black, gui = 'bold'},
-      b = {bg = colors.lightgray, fg = colors.white},
-      c = {bg = colors.darkgray, fg = colors.gray}
+      a = { bg = colors.magenta, fg = colors.black, gui = 'bold' },
+      b = { bg = colors.lightgray, fg = colors.white },
+      c = { bg = colors.darkgray, fg = colors.lightgray }
     },
     inactive = {
-      a = {bg = colors.darkgray, fg = colors.gray, gui = 'bold'},
-      b = {bg = colors.lightgray, fg = colors.white},
-      c = {bg = colors.darkgray, fg = colors.gray}
+      a = { bg = colors.darkgray, fg = colors.gray, gui = 'bold' },
+      b = { bg = colors.lightgray, fg = colors.white },
+      c = { bg = colors.darkgray, fg = colors.lightgray }
     }
   }
 end

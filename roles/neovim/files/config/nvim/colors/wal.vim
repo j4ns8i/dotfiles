@@ -17,20 +17,21 @@ let g:colors_name = 'wal'
 
 " set t_Co=16
 hi Normal ctermbg=NONE ctermfg=White cterm=NONE
+hi! link Identifier Normal
 hi NormalFloat ctermbg=Black
 hi NonText ctermbg=NONE ctermfg=DarkCyan cterm=NONE
 hi Comment ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi Function cterm=italic
 hi Constant ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Error ctermbg=Black ctermfg=Red cterm=NONE
 hi! link DiagnosticError Error
-hi Identifier ctermbg=Black ctermfg=DarkCyan cterm=NONE
 hi Ignore ctermbg=DarkGray ctermfg=Black cterm=NONE
 hi PreProc ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Special ctermbg=NONE ctermfg=DarkCyan cterm=NONE
 hi Statement ctermbg=NONE ctermfg=Red cterm=bold
 hi String ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi Number ctermbg=NONE ctermfg=DarkYellow cterm=NONE
-hi Todo ctermbg=DarkGreen ctermfg=Black cterm=NONE
+hi Todo cterm=italic,bold
 hi Type ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Underlined ctermbg=NONE ctermfg=Red cterm=underline
 hi StatusLine ctermbg=White ctermfg=Black cterm=NONE
@@ -62,7 +63,7 @@ hi Directory ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi MatchParen ctermbg=DarkGray ctermfg=Black cterm=NONE
 hi ColorColumn ctermbg=DarkBlue ctermfg=Black cterm=NONE
 hi signColumn ctermbg=NONE ctermfg=DarkBlue cterm=NONE
-hi ErrorMsg ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi ErrorMsg ctermbg=Black ctermfg=DarkRed cterm=NONE
 hi ModeMsg ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi MoreMsg ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi Question ctermbg=NONE ctermfg=DarkBlue cterm=NONE
@@ -86,7 +87,7 @@ hi Define ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Delimiter ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Float ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Include ctermbg=Black ctermfg=DarkBlue cterm=NONE
-hi Keyword ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
+hi Keyword ctermbg=NONE ctermfg=DarkRed cterm=NONE
 hi Label ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Operator ctermbg=NONE ctermfg=White cterm=NONE
 hi Repeat ctermbg=NONE ctermfg=DarkYellow cterm=NONE
@@ -185,10 +186,11 @@ hi ALEErrorSign ctermbg=NONE ctermfg=Red cterm=NONE
 hi ALEWarningSign ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi ALEError ctermbg=NONE ctermfg=Red cterm=NONE
 hi ALEWarning ctermbg=NONE ctermfg=DarkYellow cterm=NONE
-hi SignColumn ctermbg=DarkGray
-hi GitGutterAdd ctermfg=DarkGreen ctermbg=DarkGray
-hi GitGutterChange ctermfg=DarkYellow ctermbg=DarkGray
-hi DiagnosticSignError ctermfg=Red ctermbg=DarkGray cterm=bold
+hi SignColumn ctermbg=NONE
+hi GitGutterAdd ctermfg=DarkGreen ctermbg=NONE
+hi GitGutterChange ctermfg=DarkYellow ctermbg=NONE
+hi GitGutterDelete ctermfg=DarkRed ctermbg=NONE
+hi DiagnosticSignError ctermfg=Red ctermbg=NONE cterm=bold
 hi link EndOfBuffer Normal
 
 hi Pmenu ctermfg=White ctermbg=Black
@@ -226,6 +228,15 @@ hi CmpItemKindInterface ctermfg=DarkCyan
 
 hi link @lsp.type.lifetime.rust Statement
 hi link @lsp.type.keyword.rust Statement
+
+hi @lsp.mod.readonly ctermbg=NONE ctermfg=DarkRed
+
+hi link @function.make Normal
+hi link @function.call.bash Normal
+
+hi @text.reference ctermbg=NONE ctermfg=DarkCyan
+
+hi link TelescopeBorder FloatBorder
 
 " }}}
 
