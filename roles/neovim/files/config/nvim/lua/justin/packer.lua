@@ -84,4 +84,6 @@ return require('packer').startup(function(use)
   use({ 'lukas-reineke/indent-blankline.nvim' })
 
   use({ 'airblade/vim-rooter' })
+
+  use({ 'RRethy/vim-illuminate' })
 end)

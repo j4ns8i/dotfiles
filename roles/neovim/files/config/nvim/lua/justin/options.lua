@@ -38,8 +38,12 @@ vim.o.foldlevel = 99        -- Start with all folds expanded
 
 vim.opt.nrformats:append { 'alpha' } -- Add or subtract letters with ctrl-a / ctrl-x
 
+vim.opt.formatoptions:append { 'a', 'r' }
+
 vim.o.undofile = true -- Persist undo information
 
 vim.o.hlsearch = false -- Don't highlight searches after execution
 -- vim.o.ffs?
 -- vim.o.tags?
+
+vim.o.cursorline = true

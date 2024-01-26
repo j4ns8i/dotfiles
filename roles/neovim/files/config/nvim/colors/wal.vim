@@ -20,12 +20,12 @@ hi Normal ctermbg=NONE ctermfg=White cterm=NONE
 hi! link Identifier Normal
 hi NormalFloat ctermbg=Black
 hi NonText ctermbg=NONE ctermfg=DarkCyan cterm=NONE
-hi Comment ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi Comment ctermbg=NONE ctermfg=7 cterm=NONE
 hi Function cterm=italic
 hi Constant ctermbg=NONE ctermfg=DarkYellow cterm=NONE
-hi Error ctermbg=Black ctermfg=Red cterm=NONE
+hi Error ctermbg=NONE ctermfg=Red cterm=NONE
 hi! link DiagnosticError Error
-hi Ignore ctermbg=DarkGray ctermfg=Black cterm=NONE
+hi Ignore ctermbg=7 ctermfg=Black cterm=NONE
 hi PreProc ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Special ctermbg=NONE ctermfg=DarkCyan cterm=NONE
 hi Statement ctermbg=NONE ctermfg=Red cterm=bold
@@ -36,41 +36,43 @@ hi Type ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Underlined ctermbg=NONE ctermfg=Red cterm=underline
 hi StatusLine ctermbg=White ctermfg=Black cterm=NONE
 hi StatusLineNC ctermbg=NONE ctermfg=NONE cterm=NONE
-hi TabLine ctermbg=NONE ctermfg=DarkGray cterm=NONE
-hi TabLineFill ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi TabLine ctermbg=NONE ctermfg=7 cterm=NONE
+hi TabLineFill ctermbg=NONE ctermfg=7 cterm=NONE
 hi TabLineSel ctermbg=DarkBlue ctermfg=Black cterm=NONE
 hi TermCursorNC ctermbg=DarkYellow ctermfg=Black cterm=NONE
 hi VertSplit ctermbg=NONE ctermfg=NONE cterm=NONE
 hi Title ctermbg=NONE ctermfg=DarkBlue cterm=NONE
-hi CursorLine ctermbg=DarkGray ctermfg=Black cterm=NONE
-hi LineNr ctermbg=NONE ctermfg=DarkGray cterm=NONE
-hi CursorLineNr ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi LineNr ctermbg=NONE ctermfg=7 cterm=NONE
+hi CursorLine ctermbg=8 cterm=NONE
+hi CursorLineNr ctermbg=NONE ctermfg=7 cterm=NONE
 hi helpLeadBlank ctermbg=NONE ctermfg=White cterm=NONE
 hi helpNormal ctermbg=NONE ctermfg=White cterm=NONE
-hi Visual ctermbg=DarkGray ctermfg=Black cterm=NONE
+hi Visual ctermbg=7 ctermfg=White cterm=NONE
 hi VisualNOS ctermbg=NONE ctermfg=Red cterm=NONE
 hi FoldColumn ctermbg=NONE ctermfg=White cterm=NONE
-hi Folded ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi Folded ctermbg=NONE ctermfg=7 cterm=NONE
 hi WildMenu ctermbg=DarkGreen ctermfg=Black cterm=NONE
-hi SpecialKey ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi SpecialKey ctermbg=NONE ctermfg=7 cterm=NONE
 hi DiffAdd ctermbg=NONE ctermfg=DarkGreen cterm=NONE
-hi DiffChange ctermbg=NONE ctermfg=DarkGray cterm=NONE
-hi DiffDelete ctermbg=NONE ctermfg=Red cterm=NONE
+    hi link @diff.plus.diff DiffAdd
+hi DiffChange ctermbg=NONE ctermfg=7 cterm=NONE
+hi DiffDelete ctermbg=NONE ctermfg=DarkRed cterm=NONE
+    hi link @diff.minus.diff DiffDelete
 hi DiffText ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi IncSearch ctermbg=DarkCyan ctermfg=Black cterm=NONE
 hi Search ctermbg=DarkGreen ctermfg=Black cterm=NONE
 hi Directory ctermbg=NONE ctermfg=DarkBlue cterm=NONE
-hi MatchParen ctermbg=DarkGray ctermfg=Black cterm=NONE
+hi MatchParen ctermbg=7 ctermfg=Black cterm=NONE
 hi ColorColumn ctermbg=DarkBlue ctermfg=Black cterm=NONE
 hi signColumn ctermbg=NONE ctermfg=DarkBlue cterm=NONE
-hi ErrorMsg ctermbg=Black ctermfg=DarkRed cterm=NONE
+hi ErrorMsg ctermbg=NONE ctermfg=DarkRed cterm=NONE
 hi ModeMsg ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi MoreMsg ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi Question ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi WarningMsg ctermbg=Red ctermfg=Black cterm=NONE
-hi Cursor ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi Cursor ctermbg=NONE ctermfg=7 cterm=NONE
 hi Structure ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
-hi CursorColumn ctermbg=DarkGray ctermfg=White cterm=NONE
+hi CursorColumn ctermbg=7 ctermfg=White cterm=NONE
 hi ModeMsg ctermbg=NONE ctermfg=White cterm=NONE
 hi SpellBad ctermbg=Red ctermfg=Black cterm=NONE
     hi link NeomakeError SpellBad
@@ -104,7 +106,7 @@ hi vimUserCommand ctermbg=NONE ctermfg=Red cterm=BOLD
 hi vimNotation ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi vimMapModKey ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi vimBracket ctermbg=NONE ctermfg=White cterm=NONE
-hi vimCommentString ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi vimCommentString ctermbg=NONE ctermfg=7 cterm=NONE
 hi htmlLink ctermbg=NONE ctermfg=Red cterm=underline
 hi htmlBold ctermbg=NONE ctermfg=DarkYellow cterm=NONE cterm=BOLD
 hi htmlItalic ctermbg=NONE ctermfg=DarkMagenta cterm=ITALIC
@@ -126,7 +128,7 @@ hi cssValueLength ctermbg=NONE ctermfg=White cterm=NONE
 hi cssUnitDecorators ctermbg=NONE ctermfg=White cterm=NONE
 hi cssValueNumber ctermbg=NONE ctermfg=White cterm=NONE
     hi link cssValueLength cssValueNumber
-hi cssNoise ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi cssNoise ctermbg=NONE ctermfg=7 cterm=NONE
 hi cssTagName ctermbg=NONE ctermfg=Red cterm=NONE
 hi cssFunctionName ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi scssSelectorChar ctermbg=NONE ctermfg=White cterm=NONE
@@ -164,7 +166,7 @@ hi rubyInterpolation ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi rubyInterpolationDelimiter ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi rubyRegexp ctermbg=NONE ctermfg=DarkCyan cterm=NONE
 hi rubySymbol ctermbg=NONE ctermfg=DarkGreen cterm=NONE
-hi rubyTodo ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi rubyTodo ctermbg=NONE ctermfg=7 cterm=NONE
 hi rubyRegexpAnchor ctermbg=NONE ctermfg=White cterm=NONE
     hi link rubyRegexpQuantifier rubyRegexpAnchor
 hi pythonOperator ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
@@ -194,13 +196,13 @@ hi DiagnosticSignError ctermfg=Red ctermbg=NONE cterm=bold
 hi link EndOfBuffer Normal
 
 hi Pmenu ctermfg=White ctermbg=Black
-hi PmenuSel ctermfg=White ctermbg=DarkGray
+hi PmenuSel ctermfg=White ctermbg=7
 hi PmenuSbar ctermbg=Yellow ctermfg=White
-hi PmenuThumb ctermbg=DarkGray ctermfg=White
+hi PmenuThumb ctermbg=7 ctermfg=White
 
-hi FloatBorder ctermfg=DarkGray
+hi FloatBorder ctermfg=7
 
-hi CmpItemAbbrDeprecated ctermfg=DarkGray
+hi CmpItemAbbrDeprecated ctermfg=7
 hi CmpItemAbbrMatch cterm=bold
     hi link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
 hi CmpItemKindField ctermfg=Yellow
@@ -237,6 +239,8 @@ hi link @function.call.bash Normal
 hi @text.reference ctermbg=NONE ctermfg=DarkCyan
 
 hi link TelescopeBorder FloatBorder
+
+hi IlluminatedWordText ctermbg=LightGray
 
 " }}}
 

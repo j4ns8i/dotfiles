@@ -1,3 +1,9 @@
+-- Use rounded window for previews
+local opts = vim.g.gitgutter_floating_window_options
+opts.border = 'rounded'
+vim.g.gitgutter_floating_window_options = opts
+
+-- Don't set mappings by default
 vim.g.gitgutter_map_keys = 0
 
 vim.keymap.set('n', '<leader>ggs', vim.cmd.GitGutterStageHunk)
