@@ -1,0 +1,19 @@
+---
+
+- name: install tmux
+  package:
+    name: tmux
+    state: present
+  become: "{{ ansible_os_family|lower != 'darwin' }}"
+
+- name: ln -sf tmux.conf ~/.tmux.conf
+  ansible.builtin.file:
+    src: "{{ tmux_link_base }}/files/tmux.conf"
+    dest: "{{ dotfiles_home_dir }}/.tmux.conf"
+    state: link
+
+- name: ln -sf {{ ansible_os_family }}.conf {{ tmux_config_dir }}/os.conf
+  ansible.builtin.file:
+    src: "{{ tmux_link_base }}/files/{{ ansible_os_family }}.conf"
+    dest: "{{ tmux_config_dir }}/os.conf"
+    state: link

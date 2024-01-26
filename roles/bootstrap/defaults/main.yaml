@@ -32,7 +32,6 @@ bootstrap_packages:
     - tree
     - refind
     - texinfo
-    - tmux
     - make
     - make-doc
     - numlockx
@@ -47,7 +46,6 @@ bootstrap_packages:
     - coreutils
     - ctags
     - grip
-    - tmux
   archlinux:
     - amd-ucode
     - refind
@@ -64,4 +62,3 @@ bootstrap_packages:
     - ripgrep
     - htop
     - jq
-    - tmux
