@@ -1,0 +1,101 @@
+import = [
+    "~/.config/alacritty/os.toml",
+]
+
+[colors.primary]
+background = "#071733"
+foreground = "#d5c4e1"
+
+[colors.cursor]
+text   = "#d5c4e1"
+cursor = "#585e7a"
+
+[colors.vi_mode_cursor]
+text   = '#071733'
+cursor = '#bdc5b2'
+
+[colors.selection]
+text       = '#d5c4e1'
+background = '#3e456a'
+
+[colors.normal]
+black   = "#071733"
+red     = "#ef5c83"
+green   = "#b7d9b8"
+yellow  = "#ffcda4"
+blue    = "#8d81ff"
+magenta = "#bf9ef0"
+cyan    = "#92b8ee"
+white   = "#35425B"
+
+[colors.bright]
+black   = "#1C2A42"
+red     = "#86306d"
+green   = "#567163"
+yellow  = "#d6ae86"
+blue    = "#625dc6"
+magenta = "#9776d3"
+cyan    = "#4d60a1"
+white   = "#d5c4e1"
+
+# [colors.hints]
+# start = { foreground = '#908caa', background = '#2a273f' }
+# end =   { foreground = '#6e6a86', background = '#2a273f' }
+
+[font]
+size = 14
+
+[font.bold]
+style = "Bold"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+[font.italic]
+style = "ExtraLight Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font Mono"
+style = "ExtraLight"
+
+[font.offset]
+x = 0
+y = 0
+
+[[hints.enabled]]
+command = "open"
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.mouse]
+enabled = true
+
+[[keyboard.bindings]]
+chars = "\u001Bb"
+key = "B"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bd"
+key = "D"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bf"
+key = "F"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B."
+key = "Period"
+mods = "Alt"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+option_as_alt = "Both"
+
+[window.padding]
+x = 4
+y = 4

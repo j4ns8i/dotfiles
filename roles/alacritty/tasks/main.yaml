@@ -11,7 +11,14 @@
     path: "{{ alacritty_config_dir }}"
     state: directory
 
-- name: render alacritty.yml template
-  ansible.builtin.template:
-    src: "templates/alacritty.yml"
+- name: ln -sf alacritty.toml ~/.config/alacritty/alacritty.toml
+  ansible.builtin.file:
+    state: link
+    src: "files/alacritty.toml"
     dest: "{{ alacritty_config_dir }}/alacritty.yml"
+
+- name: ln -sf {{ ansible_os_family }}.toml ~/.config/alacritty/os.toml
+  ansible.builtin.file:
+    state: link
+    src: "files/{{ ansible_os_family }}.toml"
+    dest: "{{ alacritty_config_dir }}/os.toml"

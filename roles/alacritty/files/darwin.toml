@@ -1,0 +1,6 @@
+[shell]
+args = ["-l"]
+program = "/usr/local/bin/tmux"
+
+[window]
+decorations = "Buttonless"
