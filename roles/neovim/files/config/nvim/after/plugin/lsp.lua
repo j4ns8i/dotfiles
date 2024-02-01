@@ -131,9 +131,14 @@ vim.cmd([[
   imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
   smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
 ]])
+vim.keymap.set('i', '<S-Tab>', '<c-d>', { remap = true })
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+-- :LspInfo window configuration
+require('lspconfig.ui.windows').default_options.border = 'rounded'
+vim.api.nvim_set_hl(0, 'LspInfoBorder', { link = 'FloatBorder' })
 
 local lspconfig = require('lspconfig')
 

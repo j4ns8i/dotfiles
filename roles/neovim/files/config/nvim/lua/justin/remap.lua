@@ -8,7 +8,7 @@ vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('n', '<Tab>', '>>')
 vim.keymap.set('n', '<S-Tab>', '<<')
-vim.keymap.set('i', '<S-Tab>', '<c-d>')
+-- imap <S-Tab> moved to after/plugin/lsp.lua because of conflict
 vim.keymap.set('v', '<Tab>', '>', { remap = true })
 vim.keymap.set('v', '<S-Tab>', '<', { remap = true })
 

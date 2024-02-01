@@ -30,6 +30,7 @@ hi PreProc ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Special ctermbg=NONE ctermfg=DarkCyan cterm=NONE
 hi Statement ctermbg=NONE ctermfg=Red cterm=bold
 hi String ctermbg=NONE ctermfg=DarkGreen cterm=NONE
+    hi link @lsp.type.string String
 hi Number ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Todo cterm=italic,bold
 hi Type ctermbg=NONE ctermfg=DarkYellow cterm=NONE
