@@ -12,8 +12,13 @@
     dest: "{{ dotfiles_home_dir }}/.tmux.conf"
     state: link
 
-- name: ln -sf {{ ansible_os_family }}.conf {{ tmux_config_dir }}/os.conf
+- name: mkdir {{ tmux_config_dir }}
   ansible.builtin.file:
-    src: "{{ tmux_link_base }}/files/{{ ansible_os_family }}.conf"
+    path: "{{ tmux_config_dir }}"
+    state: directory
+
+- name: ln -sf {{ ansible_os_family|lower }}.conf {{ tmux_config_dir }}/os.conf
+  ansible.builtin.file:
+    src: "{{ tmux_link_base }}/files/{{ ansible_os_family|lower }}.conf"
     dest: "{{ tmux_config_dir }}/os.conf"
     state: link
