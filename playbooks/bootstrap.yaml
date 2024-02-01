@@ -3,10 +3,25 @@
 - hosts: localhost
   roles:
     - role: bootstrap
+      tags: bootstrap
+
     - role: alacritty
+      tags: alacritty
+
     - role: fzf
+      tags: fzf
+
     - role: python
+      tags: python
+
     - role: rust
+      tags: rust
+
     - role: go
+      tags: go
+
     - role: neovim
-    - role: docker
+      tags: neovim
+
+    - role: tmux
+      tags: tmux
