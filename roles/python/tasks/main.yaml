@@ -54,4 +54,4 @@
         - python-lsp-server
         - flake8
         - pynvim
-  when: python_pyenv_install_check.rc != 0
+  when: python_pipenv_install_check.rc != 0
