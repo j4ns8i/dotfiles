@@ -93,9 +93,6 @@ mods = "Alt"
 [mouse]
 hide_when_typing = true
 
-[window]
-option_as_alt = "Both"
-
 [window.padding]
 x = 4
 y = 4

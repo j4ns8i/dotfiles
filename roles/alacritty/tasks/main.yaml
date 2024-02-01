@@ -14,11 +14,11 @@
 - name: ln -sf alacritty.toml ~/.config/alacritty/alacritty.toml
   ansible.builtin.file:
     state: link
-    src: "files/alacritty.toml"
-    dest: "{{ alacritty_config_dir }}/alacritty.yml"
+    src: "{{ alacritty_link_base }}/files/alacritty.toml"
+    dest: "{{ alacritty_config_dir }}/alacritty.toml"
 
-- name: ln -sf {{ ansible_os_family }}.toml ~/.config/alacritty/os.toml
+- name: ln -sf {{ ansible_os_family|lower }}.toml ~/.config/alacritty/os.toml
   ansible.builtin.file:
     state: link
-    src: "files/{{ ansible_os_family }}.toml"
+    src: "{{ alacritty_link_base }}/files/{{ ansible_os_family|lower }}.toml"
     dest: "{{ alacritty_config_dir }}/os.toml"
