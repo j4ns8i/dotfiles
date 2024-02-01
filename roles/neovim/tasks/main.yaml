@@ -4,16 +4,10 @@
   include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
-- name: link neovim config dir
+- name: ln -sf files/config/nvim {{ neovim_config_dir }}
   file:
-    path: "{{ neovim_link_base }}/files/config/nvim"
+    src: "{{ neovim_link_base }}/files/config/nvim"
     dest: "{{ neovim_config_dir }}"
-    state: link
-
-- name: link .vimrc to init.lua
-  file:
-    path: "{{ neovim_link_base }}/config/nvim/init.lua"
-    dest: "{{ dotfiles_home_dir }}/.vimrc"
     state: link
 
 - name: install vim plugins
