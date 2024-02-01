@@ -31,9 +31,9 @@
     src: files/zshrc
     dest: "{{ dotfiles_home_dir }}/.zshrc"
 
-- name: symlink local.zsh from ~/.config/zsh/runcommands
+- name: ln -sf local.zsh ~/.config/zsh/runcommands/local.zsh
   file:
-    src: "{{ dotfiles_path }}/roles/bootstrap/files/local.zsh"
+    src: "{{ dotfiles_path }}/roles/bootstrap/links/local.zsh" # TODO change files/ to links/ whenever whole directories are linked
     dest: "{{ dotfiles_home_dir }}/.config/zsh/runcommands/local.zsh"
     state: link
 

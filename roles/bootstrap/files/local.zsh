@@ -43,6 +43,7 @@ add_to_path "$HOME/.local/bin"
 add_to_path "$GOPATH/bin"
 add_to_path "${PYENV_ROOT}/bin"
 add_to_path "${PYENV_ROOT}/shims"
+add_to_path "$HOME/.nvm"
 
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 
@@ -231,3 +232,16 @@ setopt SHARE_HISTORY
 unsetopt BEEP
 
 autoload -U colors && colors
+
+# TODO split up brew (darwin/debian) into separate os source
+# from `brew shellenv`
+export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
