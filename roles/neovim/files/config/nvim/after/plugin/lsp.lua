@@ -185,6 +185,21 @@ lspconfig['jsonnet_ls'].setup({
   capabilities = capabilities,
 })
 
+lspconfig['cssls'].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig['emmet_language_server'].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig['tailwindcss'].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
 lspconfig['lua_ls'].setup({
   on_attach = on_attach,
   on_init = (function(client)
