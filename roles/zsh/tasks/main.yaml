@@ -25,10 +25,11 @@
 
 - name: ln -sf links/{{ ansible_os_family|lower }}.zsh {{ zsh_config_dir }}/os.zsh
   ansible.builtin.file:
-    src: "{{ zsh_link_base }}/links/{{ item }}"
+    src: "{{ item }}"
     dest: "{{ zsh_config_dir }}/os.zsh"
+    state: link
   with_fileglob:
-    - "{{ zsh_link_base }}/links/{{ ansible_os_family }}.zsh"
+    - "{{ zsh_link_base }}/links/{{ ansible_os_family|lower }}.zsh"
 
 - name: mkdir {{ zsh_config_dir }}/functions
   file:
