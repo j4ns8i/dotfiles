@@ -1,3 +1,37 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # color completions according to LS_COLORS
+# zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' menu select # highlight selected menu items
+zstyle ':completion:*' substitute 1
+zstyle :compinstall filename '/Users/jsmalkowski/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+autoload -U zmv
+autoload -U promptinit; promptinit
+zstyle :prompt:pure:prompt:success color 2
+zstyle :prompt:pure:prompt:error   color 1
+zstyle :prompt:pure:virtualenv     color 8
+zstyle :prompt:pure:git:branch     color 8
+zstyle :prompt:pure:git:action     color 8
+zstyle :prompt:pure:git:dirty      color 13
+zstyle :prompt:pure:git:arrow      color 6
+prompt pure
+
+# load fzf configuration
+if [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+fi
+
 # Set command line editing mode to emacs
 bindkey -e
 
@@ -37,7 +71,6 @@ function add_to_path() {
 
 add_to_path "/usr/local/bin"
 add_to_path "/usr/local/sbin"
-add_to_path "$HOME/bin"
 add_to_path "$HOME/.cargo/bin"
 add_to_path "$HOME/.local/bin"
 add_to_path "$GOPATH/bin"
@@ -232,16 +265,3 @@ setopt SHARE_HISTORY
 unsetopt BEEP
 
 autoload -U colors && colors
-
-# TODO split up brew (darwin/debian) into separate os source
-# from `brew shellenv`
-export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
-export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
-export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion

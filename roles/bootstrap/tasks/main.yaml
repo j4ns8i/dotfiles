@@ -17,45 +17,6 @@
     path: "{{ bootstrap_git_base_dir }}"
     state: directory
 
-- name: create ~/.config/zsh and directories under it
-  file:
-    path: "{{ dotfiles_home_dir }}/.config/zsh/{{ item }}"
-    state: directory
-  loop:
-    - completions
-    - functions
-    - runcommands
-
-- name: copy zshrc to home directory
-  copy:
-    src: files/zshrc
-    dest: "{{ dotfiles_home_dir }}/.zshrc"
-
-- name: ln -sf local.zsh ~/.config/zsh/runcommands/local.zsh
-  file:
-    src: "{{ dotfiles_path }}/roles/bootstrap/links/local.zsh" # TODO change files/ to links/ whenever whole directories are linked
-    dest: "{{ dotfiles_home_dir }}/.config/zsh/runcommands/local.zsh"
-    state: link
-
-- name: clone https://github.com/j4ns8i/pure
-  git:
-    repo: https://github.com/j4ns8i/pure
-    dest: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure"
-  become: true
-  become_user: "{{ ansible_user_id }}"
-
-- name: symlink ../pure/pure.zsh to ~/.config/zsh/functions/prompt_pure_setup
-  file:
-    src: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure/pure.zsh"
-    dest: "{{ dotfiles_home_dir }}/.config/zsh/functions/prompt_pure_setup"
-    state: link
-
-- name: symlink ../pure/async.zsh to ~/.config/zsh/functions/async
-  file:
-    src: "{{ bootstrap_git_base_dir }}/github.com/j4ns8i/pure/async.zsh"
-    dest: "{{ dotfiles_home_dir }}/.config/zsh/functions/async"
-    state: link
-
 - name: create ~/.config/git
   file:
     path: "{{ dotfiles_home_dir }}/.config/git"

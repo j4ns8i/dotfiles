@@ -5,6 +5,9 @@
     - role: bootstrap
       tags: bootstrap
 
+    - role: zsh
+      tags: zsh
+
     - role: alacritty
       tags: alacritty
 

@@ -1,0 +1,31 @@
+# File structure:
+# ❯ tree ~/.config/zsh
+# ~/.config/zsh
+# ├── completions
+# │   ├── _ggo
+# │   ├── _ggr
+# │   ├── _nvm -> ~/code/src/github.com/robbyrussell/oh-my-zsh/plugins/nvm/_nvm
+# │   ├── _pip
+# │   ├── _status
+# │   └── _track
+# ├── functions
+# │   ├── async
+# │   ├── colored-man-pages.plugin.zsh
+# │   ├── nvm.plugin.zsh -> ~/code/src/github.com/robbyrussell/oh-my-zsh/plugins/nvm/nvm.plugin.zsh
+# │   ├── pip.plugin.zsh
+# │   └── prompt_pure_setup
+# └── runcommands
+#     ├── atg.zsh -> ~/code/src/git.viasat.com/ATG/stdlib/bash/atg.sh
+#     ├── lfcd.sh -> ~/code/src/github.com/gokcehan/lf/etc/lfcd.sh
+#     ├── local.zsh
+#     ├── viasat.zsh
+#     └── zsh-history-substring-search.zsh -> ~/code/src/github.com/zsh-users/zsh-history-substring-search/zsh-history-substring-search.zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+export ZSH_CONFIG_DIR=~/.config/zsh
+
+fpath=(${ZSH_CONFIG_DIR}/functions ${ZSH_CONFIG_DIR}/share/functions ${ZSH_CONFIG_DIR}/share/completions $fpath)
+
+for rc in ${ZSH_CONFIG_DIR}/*.zsh; do source $rc; done
+for rc in ${ZSH_CONFIG_DIR}/share/runcommands/*.zsh; do source $rc; done
