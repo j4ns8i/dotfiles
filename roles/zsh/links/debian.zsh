@@ -1,3 +1,6 @@
+alias ls="ls --color"
+eval $(dircolors)
+
 # from `brew shellenv`
 export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
 export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";

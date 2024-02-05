@@ -62,18 +62,6 @@ add_to_path "$HOME/.nvm"
 
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 
-# macOS-specific aliases
-if [[ "$(uname -s)" == "Darwin" ]]; then
-    alias ls='gls --color' # coreutils homebrew package
-    alias updatedb="sudo /usr/libexec/locate.updatedb"
-
-    # from coreutils brew formula
-    eval $(gdircolors)
-else
-    alias ls="ls --color"
-    eval $(dircolors)
-fi
-
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
