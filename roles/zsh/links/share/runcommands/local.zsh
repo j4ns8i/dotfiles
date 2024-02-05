@@ -1,21 +1,3 @@
-# The following lines were added by compinstall
-
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-zstyle ':completion:*' completions 1
-zstyle ':completion:*' expand prefix suffix
-zstyle ':completion:*' glob 1
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # color completions according to LS_COLORS
-# zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-suffixes true
-zstyle ':completion:*' menu select # highlight selected menu items
-zstyle ':completion:*' substitute 1
-zstyle :compinstall filename '/Users/jsmalkowski/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
 autoload -U zmv
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:prompt:success color 2
@@ -91,6 +73,24 @@ else
     alias ls="ls --color"
     eval $(dircolors)
 fi
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # color completions according to LS_COLORS
+# zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' menu select # highlight selected menu items
+zstyle ':completion:*' substitute 1
+zstyle :compinstall filename '/Users/jsmalkowski/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 
 alias l='ls --color -AF'
 alias ll='ls --color -AlhF'
