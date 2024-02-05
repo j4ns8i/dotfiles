@@ -36,19 +36,7 @@
     path: "{{ zsh_config_dir }}/functions"
     state: directory
 
-- name: clone https://github.com/j4ns8i/pure
+- name: clone https://github.com/sindresorhus/pure
   git:
-    repo: https://github.com/j4ns8i/pure
+    repo: https://github.com/sindresorhus/pure
     dest: "{{ zsh_config_dir }}/pure"
-
-- name: ln -sf {{ zsh_config_dir }}/{ pure/pure.zsh => functions/prompt_pure_setup }
-  file:
-    src: "{{ zsh_config_dir }}/pure/pure.zsh"
-    dest: "{{ zsh_config_dir }}/functions/prompt_pure_setup"
-    state: link
-
-- name: ln -sf {{ zsh_config_dir }}/{ pure/async.zsh => functions/async }
-  file:
-    src: "{{ zsh_config_dir }}/pure/async.zsh"
-    dest: "{{ zsh_config_dir }}/functions/async"
-    state: link
