@@ -1,6 +1,6 @@
 ---
 
 - name: brew install alacritty
-  community.general.homebrew:
+  community.general.homebrew_cask:
     name: alacritty
     state: present
