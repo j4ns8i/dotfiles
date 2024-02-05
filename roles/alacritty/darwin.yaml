@@ -1,0 +1,6 @@
+---
+
+- name: brew install alacritty
+  community.general.homebrew:
+    name: alacritty
+    state: present

@@ -4,6 +4,8 @@ dotfiles_path: ""
 
 dotfiles_home_dir: "{{ ansible_user_dir }}"
 
+alacritty_version_git: "HEAD"
+
 alacritty_link_base: "{{ dotfiles_path }}/roles/alacritty"
 
 alacritty_config_dir: "{{ dotfiles_home_dir }}/.config/alacritty"

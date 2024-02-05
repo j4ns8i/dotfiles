@@ -1,10 +1,8 @@
 ---
 
-- name: install alacritty package
-  package:
-    name: alacritty
-    state: present
-  become: "{{ ansible_os_family|lower != 'darwin' }}"
+- name: include tasks for {{ ansible_os_family | lower }} if defined
+  include_tasks: "{{ item }}"
+  with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
 - name: "create dir: {{ alacritty_config_dir }}"
   file:

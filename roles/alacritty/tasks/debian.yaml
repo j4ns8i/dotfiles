@@ -1,0 +1,32 @@
+---
+
+- name: git clone https://github.com/alacritty/alacritty
+  ansible.builtin.git:
+    repo: https://github.com/alacritty/alacritty
+    dest: "{{ bootstrap_git_base_dir }}/github.com/alacritty/alacritty"
+    version: "{{ alacritty_version_git }}"
+
+- name: install dependencies
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  become: true
+  loop:
+    - cmake
+    - pkg-config
+    - libfreetype6-dev
+    - libfontconfig1-dev
+    - libxcb-xfixes0-dev
+    - libxkbcommon-dev
+    - python3
+
+- ansible.builtin.command: cargo build --release
+  args:
+    chdir: "{{ bootstrap_git_base_dir }}/github.com/alacritty/alacritty"
+
+- name: cp target/release/alacritty /usr/local/bin/alacritty
+  ansible.builtin.copy:
+    src: "{{ bootstrap_git_base_dir }}/github.com/alacritty/alacritty/target/release/alacritty"
+    dest: /usr/local/bin/alacritty
+    mode: "0755"
+  become: true
