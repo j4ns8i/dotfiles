@@ -24,7 +24,7 @@
 
 - name: install git config
   file:
-    src: "{{ dotfiles_path }}/roles/bootstrap/files/config/git/config"
+    src: "{{ dotfiles_path }}/roles/bootstrap/links/gitconfig"
     dest: "{{ dotfiles_home_dir }}/.config/git/config"
     state: link
 
