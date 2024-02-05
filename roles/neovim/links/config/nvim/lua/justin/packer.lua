@@ -88,4 +88,9 @@ return require('packer').startup(function(use)
   use({ 'airblade/vim-rooter' })
 
   use({ 'RRethy/vim-illuminate' })
+
+  use({
+    'folke/trouble.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  })
 end)

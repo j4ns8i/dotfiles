@@ -168,6 +168,16 @@ lspconfig['pyright'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = { 'poetry', 'run', 'pyright-langserver', '--stdio' },
+  settings = {
+    python = {
+      analysis = {
+        diagnosticSeverityOverrides = {
+          reportGeneralTypeIssues = "warning",
+          reportCallIssue = "warning",
+        },
+      },
+    },
+  },
 }
 
 lspconfig['volar'].setup({

@@ -42,7 +42,7 @@ hi TabLineFill ctermbg=NONE ctermfg=7 cterm=NONE
 hi TabLineSel ctermbg=DarkBlue ctermfg=Black cterm=NONE
 hi TermCursorNC ctermbg=DarkYellow ctermfg=Black cterm=NONE
 hi VertSplit ctermbg=NONE ctermfg=NONE cterm=NONE
-hi Title ctermbg=NONE ctermfg=DarkBlue cterm=NONE
+hi Title ctermbg=NONE ctermfg=DarkCyan cterm=underline
 hi LineNr ctermbg=NONE ctermfg=7 cterm=NONE
 hi CursorLine ctermbg=8 cterm=NONE
 hi CursorLineNr ctermbg=NONE ctermfg=7 cterm=NONE
@@ -70,7 +70,8 @@ hi ErrorMsg ctermbg=NONE ctermfg=DarkRed cterm=NONE
 hi ModeMsg ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi MoreMsg ctermbg=NONE ctermfg=DarkGreen cterm=NONE
 hi Question ctermbg=NONE ctermfg=DarkBlue cterm=NONE
-hi WarningMsg ctermbg=Red ctermfg=Black cterm=NONE
+hi WarningMsg ctermfg=Yellow cterm=italic
+hi! link DiagnosticWarn WarningMsg
 hi Cursor ctermbg=NONE ctermfg=7 cterm=NONE
 hi Structure ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi CursorColumn ctermbg=7 ctermfg=White cterm=NONE
@@ -194,7 +195,7 @@ hi GitGutterAdd ctermfg=DarkGreen ctermbg=NONE
 hi GitGutterChange ctermfg=DarkYellow ctermbg=NONE
 hi GitGutterDelete ctermfg=DarkRed ctermbg=NONE
 hi DiagnosticSignError ctermfg=Red ctermbg=NONE cterm=bold
-hi link EndOfBuffer Normal
+hi link EndOfBuffer LineNr
 
 hi Pmenu ctermfg=White ctermbg=Black
 hi PmenuSel ctermfg=White ctermbg=7
@@ -242,6 +243,12 @@ hi @text.reference ctermbg=NONE ctermfg=DarkCyan
 hi link TelescopeBorder FloatBorder
 
 hi IlluminatedWordText ctermbg=LightGray
+hi link IlluminatedWordRead  IlluminatedWordText
+hi link IlluminatedWordWrite IlluminatedWordText
+
+" Markdown (via treesitter)
+hi link @markup.list Delimiter
+hi link @markup.heading Title
 
 " }}}
 

@@ -12,7 +12,7 @@ vim.o.updatetime = 100       -- Update every 100ms (default is 4s)
 
 vim.o.relativenumber = true   -- Show relative line numbers
 vim.o.number = true           -- But still show current line number
-vim.go.signcolumn = 'yes:1'   -- Always show 1 (pair of) columns for signs (gitgutter)
+vim.o.signcolumn = 'yes:1'   -- Always show 1 (pair of) columns for signs (gitgutter)
 
 vim.o.ignorecase = true -- Ignore cases in search
 vim.o.smartcase = true  -- unless different cases are used
