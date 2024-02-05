@@ -25,7 +25,15 @@
 
 export ZSH_CONFIG_DIR=~/.config/zsh
 
-fpath=(${ZSH_CONFIG_DIR}/pure ${ZSH_CONFIG_DIR}/functions ${ZSH_CONFIG_DIR}/share/functions ${ZSH_CONFIG_DIR}/share/completions $fpath)
+fpath=(
+    ${ZSH_CONFIG_DIR}/pure
+    ${ZSH_CONFIG_DIR}/functions
+    ${ZSH_CONFIG_DIR}/completions
+    ${ZSH_CONFIG_DIR}/share/functions
+    ${ZSH_CONFIG_DIR}/share/completions
+    $fpath
+)
 
 for rc in ${ZSH_CONFIG_DIR}/*.zsh; do source $rc; done
 for rc in ${ZSH_CONFIG_DIR}/share/runcommands/*.zsh; do source $rc; done
+for rc in ${ZSH_CONFIG_DIR}/after/*.zsh; do source $rc; done
