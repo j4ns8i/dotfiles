@@ -1,4 +1,6 @@
 require('illuminate').configure({
+  min_count_to_highlight = 2,
+  filetypes_denylist = {},
   filetypes_allowlist = {
     'lua',
     'javascript',
@@ -9,7 +11,5 @@ require('illuminate').configure({
     'rust',
     'python',
     'make',
-    'sh',
-    'zsh',
   },
 })
