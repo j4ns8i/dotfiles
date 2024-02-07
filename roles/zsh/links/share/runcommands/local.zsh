@@ -14,6 +14,17 @@ if [[ -f ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
 fi
 
+# Make ctrl-R full screen with fzf
+export FZF_DEFAULT_OPTS='--height=~20 --exact --cycle --border --info=inline
+--color=bg+:7,fg+:15,gutter:0
+--color=hl:4,hl+:4
+--color=info:7,border:7
+--color=prompt:2,pointer:6,marker:14:bold
+--color=spinner:5
+'
+export FZF_COMPLETION_TRIGGER='~~'
+# TODO: make git+fzf aliases
+
 # Set command line editing mode to emacs
 bindkey -e
 
@@ -31,6 +42,10 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
 
+# auto escape URL characters that are special in shell
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
 export LANG=en_US.UTF-8
 export BASE=~/code
 export EDITOR=nvim
@@ -42,9 +57,6 @@ export TRACKS_DIR=${HOME}/scratch/tracks
 # export PURE_PREPROMPT='%F{blue}%2~%f'
 export WORDCHARS=${WORDCHARS/\/}
 export PYENV_ROOT=~/.pyenv
-
-# Make ctrl-R full screen with fzf
-export FZF_DEFAULT_OPTS='--height=100% --exact --layout=default'
 
 # Add new paths to $PATH if they dont already exist
 function add_to_path() {
