@@ -30,6 +30,8 @@ return require('packer').startup(function(use)
   -- use({ 'theprimeagen/harpoon' })
   use({ 'mbbill/undotree' })
 
+  use({ 'nvim-tree/nvim-web-devicons' })
+
   use({ 'neovim/nvim-lspconfig' })
   use({ 'onsails/lspkind.nvim' })
   use({
