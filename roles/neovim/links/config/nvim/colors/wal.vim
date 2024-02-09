@@ -246,6 +246,26 @@ hi IlluminatedWordText ctermbg=LightGray
 hi link IlluminatedWordRead  IlluminatedWordText
 hi link IlluminatedWordWrite IlluminatedWordText
 
+hi link LspInfoBorder FloatBorder
+
+" mason
+hi MasonHeader ctermbg=DarkMagenta ctermfg=White cterm=bold
+hi MasonHeaderSecondary ctermbg=DarkRed ctermfg=White
+
+hi MasonHighlight ctermfg=DarkCyan
+hi MasonHighlightBlock ctermbg=DarkCyan ctermfg=Black
+hi MasonHighlightBlockBold ctermbg=DarkCyan ctermfg=Black cterm=bold
+
+hi MasonHighlightSecondary ctermfg=DarkYellow
+hi MasonHighlightSecondaryBlock ctermbg=DarkYellow ctermfg=Black
+hi MasonHighlightSecondaryBlockBold ctermbg=DarkYellow ctermfg=Black cterm=bold
+
+" indent-blankline
+" :h ibl.highlights
+hi IblIndent ctermfg=7 ctermbg=NONE
+    hi link IblWhitespace      IblIndent
+    hi link @ibl.indent.char.1 IblIndent
+
 " Markdown (via treesitter)
 hi link @markup.list Delimiter
 hi link @markup.heading Title
