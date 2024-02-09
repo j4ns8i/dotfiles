@@ -5,7 +5,7 @@ return {
       ui = {
         border = 'rounded',
       },
-    }
+    },
   },
   {
     'williamboman/mason-lspconfig.nvim',
@@ -19,7 +19,8 @@ return {
         'terraformls',
         'docker_compose_language_service',
         'dockerls',
-      }
-    }
+        'tailwindcss',
+      },
+    },
   },
 }

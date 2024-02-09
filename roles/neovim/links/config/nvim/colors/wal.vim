@@ -28,7 +28,10 @@ hi! link DiagnosticError Error
 hi Ignore ctermbg=7 ctermfg=Black cterm=NONE
 hi PreProc ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Special ctermbg=NONE ctermfg=DarkCyan cterm=NONE
-hi Statement ctermbg=NONE ctermfg=Red cterm=bold
+    hi! link Conceal Special
+hi Statement ctermbg=NONE ctermfg=DarkCyan cterm=bold
+hi Keyword ctermbg=NONE ctermfg=DarkCyan cterm=NONE
+    hi! link Conditional Keyword
 hi String ctermbg=NONE ctermfg=DarkGreen cterm=NONE
     hi link @lsp.type.string String
 hi Number ctermbg=NONE ctermfg=DarkYellow cterm=NONE
@@ -48,6 +51,8 @@ hi CursorLine ctermbg=8 cterm=NONE
 hi CursorLineNr ctermbg=NONE ctermfg=7 cterm=NONE
 hi helpLeadBlank ctermbg=NONE ctermfg=White cterm=NONE
 hi helpNormal ctermbg=NONE ctermfg=White cterm=NONE
+hi helpCommand ctermfg=Blue
+hi helpExample ctermfg=Green
 hi Visual ctermbg=7 ctermfg=White cterm=NONE
 hi VisualNOS ctermbg=NONE ctermfg=Red cterm=NONE
 hi FoldColumn ctermbg=NONE ctermfg=White cterm=NONE
@@ -86,19 +91,17 @@ hi SpellLocal ctermbg=NONE ctermfg=DarkMagenta cterm=underline
 hi SpellRare ctermbg=NONE ctermfg=DarkCyan cterm=underline
 hi Boolean ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Character ctermbg=NONE ctermfg=Red cterm=NONE
-hi Conditional ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Define ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Delimiter ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Float ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Include ctermbg=Black ctermfg=DarkBlue cterm=NONE
-hi Keyword ctermbg=NONE ctermfg=DarkRed cterm=NONE
 hi Label ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Operator ctermbg=NONE ctermfg=White cterm=NONE
 hi Repeat ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi SpecialChar ctermbg=NONE ctermfg=DarkMagenta cterm=NONE
 hi Tag ctermbg=NONE ctermfg=DarkYellow cterm=NONE
 hi Typedef ctermbg=NONE ctermfg=DarkYellow cterm=NONE
-hi vimUserCommand ctermbg=NONE ctermfg=Red cterm=BOLD
+hi vimUserCommand ctermbg=NONE ctermfg=Green cterm=bold
     hi link vimMap vimUserCommand
     hi link vimLet vimUserCommand
     hi link vimCommand vimUserCommand
@@ -109,6 +112,7 @@ hi vimNotation ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi vimMapModKey ctermbg=NONE ctermfg=DarkBlue cterm=NONE
 hi vimBracket ctermbg=NONE ctermfg=White cterm=NONE
 hi vimCommentString ctermbg=NONE ctermfg=7 cterm=NONE
+hi link vimHyperTextJump vimHyperTextEntry
 hi htmlLink ctermbg=NONE ctermfg=Red cterm=underline
 hi htmlBold ctermbg=NONE ctermfg=DarkYellow cterm=NONE cterm=BOLD
 hi htmlItalic ctermbg=NONE ctermfg=DarkMagenta cterm=ITALIC
@@ -239,6 +243,7 @@ hi link @function.make Normal
 hi link @function.call.bash Normal
 
 hi @text.reference ctermbg=NONE ctermfg=DarkCyan
+hi @text.literal ctermfg=Green
 
 hi link TelescopeBorder FloatBorder
 

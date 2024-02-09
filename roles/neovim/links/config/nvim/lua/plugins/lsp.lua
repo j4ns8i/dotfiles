@@ -3,10 +3,6 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-vsnip',
     },
     config = function()
       vim.lsp.handlers['textDocument/hover'] =
@@ -162,8 +158,25 @@ return {
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
-      'onsails/lspkind.nvim',
+      { 'onsails/lspkind.nvim' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-cmdline' },
+      { 'hrsh7th/cmp-vsnip' },
+      {
+        'hrsh7th/vim-vsnip',
+        config = function()
+          vim.cmd([[
+            imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)'  : '<Tab>'
+            smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)'  : '<Tab>'
+            imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
+            smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
+          ]])
+          vim.keymap.set('i', '<S-Tab>', '<c-d>', { remap = true })
+        end
+      },
     },
+    event = { 'InsertEnter', 'CmdlineEnter' },
     config = function()
       local cmp = require('cmp')
       cmp.setup({
@@ -237,18 +250,6 @@ return {
           { name = 'cmdline' }
         })
       })
-    end
-  },
-  {
-    'hrsh7th/vim-vsnip',
-    config = function()
-      vim.cmd([[
-        imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)'  : '<Tab>'
-        smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)'  : '<Tab>'
-        imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
-        smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)'  : '<S-Tab>'
-      ]])
-      vim.keymap.set('i', '<S-Tab>', '<c-d>', { remap = true })
     end
   },
 }

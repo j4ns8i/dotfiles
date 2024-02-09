@@ -4,7 +4,14 @@ return {
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    { 'nvim-tree/nvim-web-devicons' },
     { 'folke/trouble.nvim' },
+  },
+  keys = {
+    { '<leader>pf', function() require('telescope.builtin').find_files() end },
+    { '<leader>ph', function() require('telescope.builtin').highlights() end },
+    { '<C-p>',      function() require('telescope.builtin').git_files()  end },
+    { '<leader>ps', function() require('telescope.builtin').live_grep()  end },
   },
   opts = function()
     local trouble = require('trouble.providers.telescope')
@@ -29,13 +36,5 @@ return {
     local plugin = require('telescope')
     plugin.setup(opts)
     plugin.load_extension('fzf')
-
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-    vim.keymap.set('n', '<leader>ph', builtin.highlights, {})
-    vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-    vim.keymap.set('n', '<leader>ps', function()
-      builtin.grep_string({ search = vim.fn.input("Find in files: ") })
-    end)
   end
 }

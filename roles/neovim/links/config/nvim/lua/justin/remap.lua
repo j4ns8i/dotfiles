@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 
+vim.keymap.set('n', '<leader>z', ':Lazy<cr>')
+
 vim.keymap.set('o', 'i<space>', ':<c-u>normal! T_vt_<cr>')
 vim.keymap.set('o', 'a<space>', ':<c-u>normal! F_vf_<cr>')
 
@@ -43,10 +45,6 @@ vim.keymap.set('n', '<leader>in', vim.cmd.Inspect)
 vim.keymap.set('n', '<leader>cl', vim.cmd.cclose)
 
 vim.keymap.set('n', '<leader>vc', function()
-  -- Open vim config directory with NERDTree. This relies on NERDTree being
-  -- installed. Sadly, NERDTree doesn't seem to make it easy to do this
-  -- explicitly because it seems to override certain interactions with windows
-  -- (i.e. ":tab NERDTree ~/.config/nvim" doesn't work)
   local config_dir = '~/.config/nvim'
   vim.cmd.tabnew(config_dir)
   vim.cmd.tcd(config_dir)

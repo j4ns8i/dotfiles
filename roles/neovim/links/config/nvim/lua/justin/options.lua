@@ -38,9 +38,15 @@ vim.o.foldlevel = 99        -- Start with all folds expanded
 
 vim.opt.nrformats:append { 'alpha' } -- Add or subtract letters with ctrl-a / ctrl-x
 
-vim.opt.formatoptions:append { 'a', 'r' }
+vim.o.textwidth = 80 -- 80 is just a good width, ok?
+
+vim.opt.formatoptions:append { 'a', 'r', }
 
 vim.o.undofile = true -- Persist undo information
+
+-- Sometimes I like to wipe out ~/.local/state/nvim for testing installations
+-- and whatnot. I don't want to lose my undo history just because of that.
+vim.o.undodir = vim.fs.normalize('~/.nvim-undo')
 
 vim.o.hlsearch = false -- Don't highlight searches after execution
 -- vim.o.ffs?
