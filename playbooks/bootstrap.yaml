@@ -5,6 +5,9 @@
     - role: bootstrap
       tags: bootstrap
 
+    - role: fonts
+      tags: fonts
+
     - role: zsh
       tags: zsh
 
