@@ -1,4 +1,3 @@
-
 ---
 
 - name: include tasks for {{ ansible_os_family }} if defined

@@ -68,8 +68,6 @@ add_to_path "/usr/local/sbin"
 add_to_path "$HOME/.cargo/bin"
 add_to_path "$HOME/.local/bin"
 add_to_path "$GOPATH/bin"
-add_to_path "${PYENV_ROOT}/bin"
-add_to_path "${PYENV_ROOT}/shims"
 
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 

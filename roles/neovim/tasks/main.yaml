@@ -4,9 +4,9 @@
   include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
-- name: ln -sf files/config/nvim {{ neovim_config_dir }}
+- name: ln -sf links/config/nvim {{ neovim_config_dir }}
   file:
-    src: "{{ neovim_link_base }}/files/config/nvim"
+    src: "{{ neovim_link_base }}/links/config/nvim"
     dest: "{{ neovim_config_dir }}"
     state: link
 
@@ -14,3 +14,5 @@
   ansible.builtin.command: nvim --headless "+Lazy! sync" +qa
   when: ansible_user_id != "root"
   changed_when: false
+  environment:
+    PATH: "{{ ansible_env.PATH }}"

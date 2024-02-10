@@ -5,6 +5,8 @@
   changed_when: false
   failed_when: false
   register: rust_rustup_install_check
+  environment:
+    PATH: "{{ ansible_user_dir }}/.cargo/bin:{{ ansible_env.PATH }}"
 
 - name: install rustup
   block:
@@ -33,18 +35,7 @@
       ansible.builtin.script: "{{ rust_rustup_tmp_installer.path }} -y"
   when: rust_rustup_install_check.rc != 0
 
-- name: check if rust-analyzer is installed
-  ansible.builtin.command: which rust-analyzer
-  changed_when: false
-  failed_when: false
-  register: rust_rust_analyzer_install_check
-
-- name: install rust-analyzer
-  block:
-    # This is an unfortunate hack since ansible lacks gzip support for decompressing
-    - name: install rust-analyzer
-      ansible.builtin.shell: curl -L {{ rust_rust_analyzer_download[ansible_os_family|lower] }} | gunzip -c - > {{ dotfiles_home_dir }}/.cargo/bin/rust-analyzer && chmod u+x {{ dotfiles_home_dir }}/.cargo/bin/rust-analyzer
-  when: rust_rust_analyzer_install_check.rc != 0
-
 - name: add rust language server requisites
-  ansible.builtin.command: rustup component add rls rust-analysis rust-src
+  ansible.builtin.command: rustup component add rls rust-analysis rust-analyzer rust-src
+  environment:
+    PATH: "{{ ansible_user_dir }}/.cargo/bin:{{ ansible_env.PATH }}"
