@@ -70,7 +70,6 @@ add_to_path "$HOME/.local/bin"
 add_to_path "$GOPATH/bin"
 add_to_path "${PYENV_ROOT}/bin"
 add_to_path "${PYENV_ROOT}/shims"
-add_to_path "$HOME/.nvm"
 
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 
@@ -102,6 +101,10 @@ alias elocal="vim ~/.config/zsh/share/runcommands/local.zsh; source ~/.config/zs
 alias k=kubectl
 alias -g L="| less"
 alias -g R="2>&1"
+
+export NVM_DIR="$HOME/.nvm"
+[[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && . "$NVM_DIR/bash_completion"
 
 function ggo {
     # Go to a github organization

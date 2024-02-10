@@ -23,6 +23,9 @@
     - role: go
       tags: go
 
+    - role: nvm
+      tags: nvm
+
     - role: neovim
       tags: neovim
 

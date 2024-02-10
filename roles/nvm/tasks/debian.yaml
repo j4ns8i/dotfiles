@@ -1,0 +1,7 @@
+---
+
+- name: install nvm
+  ansible.builtin.shell: >
+    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | bash'
+  args:
+    creates: "{{ dotfiles_home_dir }}/.nvm/nvm.sh"
