@@ -20,7 +20,8 @@
     - libxkbcommon-dev
     - python3
 
-- ansible.builtin.command: cargo build --release
+- name: cargo build --release
+  ansible.builtin.command: cargo build --release
   args:
     chdir: "{{ bootstrap_git_base_dir }}/github.com/alacritty/alacritty"
 
