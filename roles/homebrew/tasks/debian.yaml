@@ -1,0 +1,22 @@
+---
+
+# TODO: this requires sudo to be run recently enough that no prompt is needed.
+#       instead, it may be possible to create a temporary sudoers file that grants
+#       access to a temporary script, which all gets cleaned up afterwards.
+- name: run homebrew installer
+  ansible.builtin.shell: >
+    NONINTERACTIVE=1 bash -c "$(curl -o- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  args:
+    creates: "/home/linuxbrew/.linuxbrew/"
+
+- block:
+  - ansible.utils.update_fact:
+      updates:
+        - path: ansible_env.PATH
+          value: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
+    register: updated_path
+
+    - ansible.builtin.set_fact:
+        ansible_env: "{{ updated_path.ansible_env }}"
+        cacheable: true
+  when: "'/home/linuxbrew/.linuxbrew/bin' not in ansible_env.PATH"

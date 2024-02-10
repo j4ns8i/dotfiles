@@ -11,6 +11,9 @@
     - role: zsh
       tags: zsh
 
+    - role: homebrew
+      tags: homebrew
+
     - role: alacritty
       tags: alacritty
 
