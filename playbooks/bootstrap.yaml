@@ -11,14 +11,17 @@
     - role: zsh
       tags: zsh
 
+    - role: tmux
+      tags: tmux
+
+    - role: kitty
+      tags: kitty
+
     - role: homebrew
       tags: homebrew
 
     - role: rust
       tags: rust
-
-    - role: alacritty
-      tags: alacritty
 
     - role: fzf
       tags: fzf
@@ -34,6 +37,3 @@
 
     - role: neovim
       tags: neovim
-
-    - role: tmux
-      tags: tmux

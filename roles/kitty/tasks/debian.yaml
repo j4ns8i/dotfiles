@@ -1,0 +1,27 @@
+---
+
+- name: install kitty packages
+  ansible.builtin.package:
+    name: "{{ package }}"
+    state: latest
+  loop: ["kitty", "kitty-doc", "kitty-terminfo"]
+  loop_control:
+    loop_var: package
+  become: yes
+
+- name: mkdir {{ kitty_config_dir }}
+  ansible.builtin.file:
+    path: "{{ kitty_config_dir }}"
+    state: directory
+
+- name: ln -s kitty.conf {{ kitty_config_dir }}/kitty.conf
+  ansible.builtin.file:
+    src: "{{ kitty_link_base }}/links/kitty.conf"
+    dest: "{{ kitty_config_dir }}/kitty.conf"
+    state: link
+
+- name: ln -s {{ ansible_os_family|lower }}.conf {{ kitty_config_dir }}/os.conf
+  ansible.builtin.file:
+    src: "{{ kitty_link_base }}/links/{{ ansible_os_family|lower }}.conf"
+    dest: "{{ kitty_config_dir }}/os.conf"
+    state: link
