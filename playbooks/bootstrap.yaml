@@ -2,6 +2,9 @@
 
 - hosts: localhost
   roles:
+    - role: homebrew
+      tags: homebrew
+
     - role: bootstrap
       tags: bootstrap
 
@@ -16,9 +19,6 @@
 
     - role: kitty
       tags: kitty
-
-    - role: homebrew
-      tags: homebrew
 
     - role: zoxide
       tags: zoxide

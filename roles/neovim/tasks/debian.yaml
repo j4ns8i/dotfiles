@@ -3,6 +3,6 @@
 - name: brew install neovim
   community.general.homebrew:
     name: neovim
-    state: present
+    state: latest
   environment:
     PATH: "{{ ansible_env.PATH }}"
