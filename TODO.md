@@ -1,3 +1,2 @@
-* add alacritty config
-* add sway config
-* add and enable chronyd.service
+- [ ] ansible dependencies
+- [ ] fzf + git integration

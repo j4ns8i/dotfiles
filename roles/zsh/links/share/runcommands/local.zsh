@@ -70,6 +70,7 @@ add_to_path "$HOME/.local/bin"
 add_to_path "$GOPATH/bin"
 
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
 # The following lines were added by compinstall
 

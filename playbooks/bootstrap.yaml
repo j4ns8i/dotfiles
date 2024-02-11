@@ -20,6 +20,9 @@
     - role: homebrew
       tags: homebrew
 
+    - role: zoxide
+      tags: zoxide
+
     - role: rust
       tags: rust
 

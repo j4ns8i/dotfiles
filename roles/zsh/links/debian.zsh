@@ -1,6 +1,11 @@
 alias ls="ls --color"
 eval $(dircolors)
 
+fpath=(
+    /home/linuxbrew/.linuxbrew/share/zsh/site-functions
+    $fpath
+)
+
 # from `brew shellenv`
 export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
 export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
