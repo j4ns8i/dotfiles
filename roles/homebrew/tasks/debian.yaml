@@ -10,11 +10,11 @@
     creates: "/home/linuxbrew/.linuxbrew/"
 
 - block:
-  - ansible.utils.update_fact:
-      updates:
-        - path: ansible_env.PATH
-          value: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
-    register: updated_path
+    - ansible.utils.update_fact:
+        updates:
+          - path: ansible_env.PATH
+            value: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
+      register: updated_path
 
     - ansible.builtin.set_fact:
         ansible_env: "{{ updated_path.ansible_env }}"
