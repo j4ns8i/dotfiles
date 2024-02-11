@@ -1,9 +1,0 @@
-[submodule "resources/zsh-completions"]
-	path = resources/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
-[submodule "resources/fonts"]
-	path = resources/fonts
-	url = https://github.com/powerline/fonts
-[submodule "resources/pure"]
-	path = resources/pure
-	url = git@github.com:j4ns8i/pure
