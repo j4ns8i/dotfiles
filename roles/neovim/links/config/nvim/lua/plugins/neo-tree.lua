@@ -13,7 +13,19 @@ return {
     },
     opts = {
       filesystem = {
-        hijack_netrw_behavior = 'open_current',
+        hijack_netrw_behavior = 'open_default',
+        window = {
+          mappings = {
+            ["gs"] = function()
+              vim.cmd [[ Neotree float git_status ]]
+            end,
+          },
+        },
+      },
+      popup_border_style = "rounded",
+      window = {
+        position = "left",
+        width = 40,
       },
     }
   },
