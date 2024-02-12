@@ -3,40 +3,36 @@ import = [
 ]
 
 [colors.primary]
-background = "#071733"
-foreground = "#d5c4e1"
+background = "#15171d"
+foreground = "#c7d0e0"
 
 [colors.cursor]
-text   = "#d5c4e1"
-cursor = "#585e7a"
-
-[colors.vi_mode_cursor]
-text   = '#071733'
-cursor = '#bdc5b2'
+text   = "#c7d0e0"
+cursor = "#424449"
 
 [colors.selection]
-text       = '#d5c4e1'
-background = '#3e456a'
+text       = '#c7d0e0'
+background = '#303238'
 
 [colors.normal]
-black   = "#071733"
-red     = "#ef5c83"
-green   = "#b7d9b8"
+black   = "#15171d"
+red     = "#d4737f"
+green   = "#90b782"
 yellow  = "#ffcda4"
-blue    = "#8d81ff"
-magenta = "#bf9ef0"
-cyan    = "#92b8ee"
-white   = "#35425B"
+blue    = "#86a5be"
+magenta = "#8f729a"
+cyan    = "#76af9d"
+white   = "#424449"
 
 [colors.bright]
-black   = "#1C2A42"
-red     = "#86306d"
-green   = "#567163"
+black   = "#303238"
+red     = "#c45361"
+green   = "#607f55"
 yellow  = "#d6ae86"
-blue    = "#625dc6"
-magenta = "#9776d3"
-cyan    = "#4d60a1"
-white   = "#d5c4e1"
+blue    = "#4b799e"
+magenta = "#9b68b3"
+cyan    = "#487e6d"
+white   = "#c7d0e0"
 
 # [colors.hints]
 # start = { foreground = '#908caa', background = '#2a273f' }
