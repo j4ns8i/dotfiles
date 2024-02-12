@@ -1,0 +1,41 @@
+---
+
+- name: check if /Applications/kitty.app exists
+  ansible.builtin.stat:
+    path: /Applications/kitty.app
+  register: kitty_stat
+
+- block:
+  - name: create tempfile for .dmg
+    ansible.builtin.tempfile:
+      prefix: kitty-{{ kitty_version }}.dmg.
+    register: kitty_dmg_download_tempfile
+    notify:
+      - clean up kitty download
+
+  - name: fetch .dmg for version {{ kitty_version }}
+    ansible.builtin.get_url:
+      url: "https://github.com/kovidgoyal/kitty/releases/download/{{ kitty_version }}/kitty-{{ kitty_version | regex_replace('^v(\\d)', '\\1') }}.dmg"
+      dest: "{{ kitty_dmg_download_tempfile.path }}"
+      force: true
+
+  - name: create tempdir for mounted disk image
+    ansible.builtin.tempfile:
+      state: directory
+      prefix: kitty-{{ kitty_version }}.d.
+    register: kitty_dmg_tempdir
+    notify:
+      - clean up kitty mount dir
+
+  - name: mount disk image
+    ansible.builtin.command: hdiutil attach {{ kitty_dmg_download_tempfile.path }} -nobrowse -mountpoint {{ kitty_dmg_tempdir.path }}
+
+  - name: copy mounted disk image contents to /Applications
+    ansible.builtin.shell: cp -aR {{ kitty_dmg_tempdir.path }}/*.app /Applications/ 
+
+  - name: unmount disk image
+    ansible.builtin.command: hdiutil detach {{ kitty_dmg_tempdir.path }}
+  when: not kitty_stat.stat.exists
+
+- name: import kitty config tasks
+  ansible.builtin.import_tasks: config.yaml

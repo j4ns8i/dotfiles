@@ -1,0 +1,11 @@
+---
+
+- name: clean up kitty download
+  ansible.builtin.file:
+    path: "{{ kitty_dmg_download_tempfile.path }}"
+    state: absent
+
+- name: clean up kitty mount dir
+  ansible.builtin.file:
+    path: "{{ kitty_dmg_tempdir.path }}"
+    state: absent
