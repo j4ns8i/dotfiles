@@ -100,7 +100,7 @@ alias elocal="vim ~/.config/zsh/share/runcommands/local.zsh; source ~/.config/zs
 alias k=kubectl
 alias -g L="| less"
 alias -g R="2>&1"
-alias vc="nvim ~/.config/nvim"
+alias vc="nvim ~/.config/nvim -c 'cd ~/.config/nvim'"
 
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
