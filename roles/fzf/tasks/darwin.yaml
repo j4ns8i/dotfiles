@@ -1,0 +1,6 @@
+---
+
+- name: brew install fzf
+  community.general.homebrew:
+    name: fzf
+    state: latest
