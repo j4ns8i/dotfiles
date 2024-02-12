@@ -26,9 +26,15 @@ return {
       },
       defaults = {
         mappings = {
-          i = { ["<c-q>"] = trouble.open_with_trouble },
-          n = { ["<c-q>"] = trouble.open_with_trouble },
-        }
+          i = {
+            ["<c-q>"] = trouble.open_with_trouble,
+          },
+          n = {
+            ["<c-q>"] = trouble.open_with_trouble,
+          },
+        },
+        layout_strategy = 'vertical',
+        layout_config = { height = 0.95, preview_height = 0.60 },
       },
     }
   end,
