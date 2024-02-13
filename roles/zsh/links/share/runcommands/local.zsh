@@ -15,7 +15,7 @@ if [[ -f ~/.fzf.zsh ]]; then
 fi
 
 # Make ctrl-R full screen with fzf
-export FZF_DEFAULT_OPTS='--height=~20 --exact --cycle --border --info=inline
+export FZF_DEFAULT_OPTS='--cycle --exact --border --info=inline
 --color=bg+:7,fg+:15,gutter:0
 --color=hl:4,hl+:4
 --color=info:7,border:7
@@ -23,6 +23,9 @@ export FZF_DEFAULT_OPTS='--height=~20 --exact --cycle --border --info=inline
 --color=spinner:5
 '
 export FZF_COMPLETION_TRIGGER='~~'
+export FZF_COMPLETION_OPTS='--height=~20'
+export FZF_CTRL_T_OPTS='--height=~20'
+export FZF_CTRL_R_OPTS='--height=~20'
 # TODO: make git+fzf aliases
 
 # Set command line editing mode to emacs
