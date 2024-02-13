@@ -8,6 +8,7 @@ local filetypes = {
   'rust',
   'python',
   'make',
+  'jsonnet'
 }
 
 return {

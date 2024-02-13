@@ -6,7 +6,7 @@ return {
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
     },
-    lazy = false,
+    lazy = false, -- because it needs to be loaded in order to check if we're opening a directory
     keys = {
       { '<leader>ntf', '<cmd>Neotree<cr>' },
       { '<leader>ntt', '<cmd>Neotree toggle<cr>' },

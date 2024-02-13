@@ -6,6 +6,10 @@ return {
         border = 'rounded',
       },
     },
+    lazy = false,
+    keys = {
+      { '<leader>wm', '<cmd>Mason<cr>' },
+    },
   },
   {
     'williamboman/mason-lspconfig.nvim',

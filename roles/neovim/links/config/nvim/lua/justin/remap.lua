@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-vim.keymap.set('n', '<leader>z', '<cmd>Lazy<cr>')
+vim.keymap.set('n', '<leader>wz', '<cmd>Lazy<cr>')
 
 vim.keymap.set('o', 'i<space>', ':<c-u>normal! T_vt_<cr>')
 vim.keymap.set('o', 'a<space>', ':<c-u>normal! F_vf_<cr>')
