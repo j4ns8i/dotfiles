@@ -9,6 +9,7 @@ return {
     opts = {
       ensure_installed = {
         "typescript",
+        "tsx",
         "javascript",
         "go",
         "gomod",
