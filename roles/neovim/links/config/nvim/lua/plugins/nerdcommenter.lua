@@ -1,7 +1,7 @@
 return {
   'preservim/nerdcommenter',
   keys = {
-    { '<leader>c<space>', "<Plug>NERDCommenterToggle", { 'n', 'v' } }
+    { '<leader>c<space>', "<Plug>NERDCommenterToggle", mode = { 'n', 'v' } },
   },
   config = function()
     vim.g.NERDSpaceDelims = 1
