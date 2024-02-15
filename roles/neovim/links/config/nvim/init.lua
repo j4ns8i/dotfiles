@@ -24,6 +24,9 @@ require('lazy').setup('plugins', {
   change_detection = {
     notify = false,
   },
+  install = {
+    colorscheme = { 'wal' },
+  },
 })
 
 require('justin')
