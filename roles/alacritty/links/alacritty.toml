@@ -8,11 +8,11 @@ foreground = "#c7d0e0"
 
 [colors.cursor]
 text   = "#c7d0e0"
-cursor = "#424449"
+cursor = "#686a71"
 
 [colors.selection]
 text       = '#c7d0e0'
-background = '#303238'
+background = '#3b3e46'
 
 [colors.normal]
 black   = "#15171d"
@@ -22,10 +22,10 @@ yellow  = "#ffcda4"
 blue    = "#86a5be"
 magenta = "#8f729a"
 cyan    = "#76af9d"
-white   = "#424449"
+white   = "#5d6068"
 
 [colors.bright]
-black   = "#303238"
+black   = "#3b3e46"
 red     = "#c45361"
 green   = "#607f55"
 yellow  = "#d6ae86"
@@ -33,10 +33,6 @@ blue    = "#4b799e"
 magenta = "#9b68b3"
 cyan    = "#487e6d"
 white   = "#c7d0e0"
-
-# [colors.hints]
-# start = { foreground = '#908caa', background = '#2a273f' }
-# end =   { foreground = '#6e6a86', background = '#2a273f' }
 
 [font]
 size = 14
