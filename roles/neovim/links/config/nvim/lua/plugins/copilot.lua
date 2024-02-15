@@ -14,6 +14,9 @@ return {
           prev = '<a-p>',
         },
       },
+      filetypes = {
+        yaml = true,
+      },
     },
   }
 }

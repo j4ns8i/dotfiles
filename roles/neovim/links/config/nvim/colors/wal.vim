@@ -46,7 +46,7 @@ hi TabLineSel ctermbg=DarkBlue ctermfg=Black cterm=NONE
 hi TermCursorNC ctermbg=DarkYellow ctermfg=Black cterm=NONE
 hi VertSplit ctermbg=NONE ctermfg=NONE cterm=NONE
 hi Title ctermbg=NONE ctermfg=DarkCyan cterm=underline
-hi LineNr ctermbg=NONE ctermfg=7 cterm=NONE
+hi LineNr ctermbg=NONE ctermfg=8 cterm=NONE
 hi CursorLine ctermbg=8 cterm=NONE
 hi CursorLineNr ctermbg=NONE ctermfg=7 cterm=NONE
 hi helpLeadBlank ctermbg=NONE ctermfg=White cterm=NONE
