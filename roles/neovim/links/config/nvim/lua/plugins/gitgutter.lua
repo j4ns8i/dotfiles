@@ -1,10 +1,25 @@
+local function set_rounded_window()
+  -- Overriding vim dictionaries from lua is a whole song and dance
+  local opts = vim.g.gitgutter_floating_window_options
+  opts.border = 'rounded'
+  vim.g.gitgutter_floating_window_options = opts
+end
+
+local function set_highlights()
+  local c = require('justin.colors')
+  c.hi('GitGutterAdd', { ctermfg = c.darkgreen })
+  c.hi('GitGutterChange', { ctermfg = c.darkyellow })
+  c.hi('GitGutterDelete', { ctermfg = c.darkred })
+end
+
 return {
   'airblade/vim-gitgutter',
+  dependencies = { 'justin' },
   config = function()
     -- Use rounded window for previews
-    local opts = vim.g.gitgutter_floating_window_options
-    opts.border = 'rounded'
-    vim.g.gitgutter_floating_window_options = opts
+    set_rounded_window()
+
+    set_highlights()
 
     -- Don't set mappings by default
     vim.g.gitgutter_map_keys = 0

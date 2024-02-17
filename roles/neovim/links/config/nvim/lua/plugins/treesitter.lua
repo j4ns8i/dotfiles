@@ -1,3 +1,18 @@
+local function set_highlights()
+  local c = require('justin.colors')
+  c.hi('@diff.plus.diff',     { link = 'DiffAdd' })
+  c.hi('@diff.minus.diff',    { link = 'DiffDelete' })
+  c.hi('@lsp.type.lifetime',  { link = 'Statement' })
+  c.hi('@lsp.type.keyword',   { link = 'Keyword' })
+  c.hi('@lsp.mod.readonly',   { ctermfg = c.darkred })
+  c.hi('@function.make',      { link = 'Normal' })
+  c.hi('@function.call.bash', { link = 'Normal' })
+  c.hi('@text.reference',     { ctermfg = c.darkcyan })
+  c.hi('@text.literal',       { ctermfg = c.green })
+  c.hi('@markup.list',        { link = 'Delimiter' })
+  c.hi('@markup.heading',     { link = 'Title' })
+end
+
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -5,7 +20,6 @@ return {
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
     end,
-    main = 'nvim-treesitter.configs',
     opts = {
       ensure_installed = {
         "typescript",
@@ -73,6 +87,11 @@ return {
         additional_vim_regex_highlighting = false,
       },
     },
+    dependencies = { 'justin' },
+    config = function(_, opts)
+      require('nvim-treesitter.configs').setup(opts)
+      set_highlights()
+    end
   },
   {
     'nvim-treesitter/playground',

@@ -42,5 +42,8 @@ return {
     local plugin = require('telescope')
     plugin.setup(opts)
     plugin.load_extension('fzf')
+
+    local c = require('justin.colors')
+    c.hi('TelescopeBorder', { ctermfg = c.darkgray })
   end
 }

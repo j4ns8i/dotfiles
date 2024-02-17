@@ -29,4 +29,4 @@ require('lazy').setup('plugins', {
   },
 })
 
-require('justin')
+-- require('justin')

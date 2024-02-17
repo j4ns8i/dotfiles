@@ -49,7 +49,7 @@ hi Title ctermbg=NONE ctermfg=DarkCyan cterm=underline
 hi LineNr ctermbg=NONE ctermfg=8 cterm=NONE
 hi CursorLine ctermbg=8 cterm=NONE
 hi CursorLineNr ctermbg=NONE ctermfg=7 cterm=NONE
-hi helpLeadBlank ctermbg=NONE ctermfg=White cterm=NONE
+hi helpLeadBlank ctermbg=NONE ctermfg=White cterm=NONE " TODO?
 hi helpNormal ctermbg=NONE ctermfg=White cterm=NONE
 hi helpCommand ctermfg=Blue
 hi helpExample ctermfg=Green
@@ -267,9 +267,9 @@ hi MasonHighlightSecondaryBlockBold ctermbg=DarkYellow ctermfg=Black cterm=bold
 
 " indent-blankline
 " :h ibl.highlights
-hi IblIndent ctermfg=7 ctermbg=NONE
-    hi link IblWhitespace      IblIndent
-    hi link @ibl.indent.char.1 IblIndent
+" hi IblIndent ctermfg=7 ctermbg=NONE
+"     hi link IblWhitespace      IblIndent
+"     hi link @ibl.indent.char.1 IblIndent
 
 " Markdown (via treesitter)
 hi link @markup.list Delimiter

@@ -1,5 +1,3 @@
-vim.cmd.colorscheme 'wal'
-
 -- vim.g.netrw_browse_split = 3 -- Open up NetRW selections as new tabs
 -- vim.g.netrw_winsize = 30     -- Set listing window size to 30% when splitting
 -- vim.g.netrw_preview = 1      -- Split preview vertically
@@ -21,7 +19,7 @@ vim.o.linebreak = true    -- Break at reasonable characters (see 'breakat')
 vim.o.breakindent = true  -- Indent broken lines accordingly
 vim.o.showbreak = '  \\ ' -- Format line breaks
 
-vim.o.scrolloff=8 -- Start scrolling before cursor hits top/bottom
+vim.o.scrolloff=3 -- Start scrolling before cursor hits top/bottom
 
 -- When splitting windows, keep what you're working on in the "main" position
 vim.o.splitbelow = true
