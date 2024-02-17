@@ -1,6 +1,5 @@
 local function set_highlights()
   local c = require('justin.colors')
-  c.hi('CmpItemAbbr',              { ctermfg = c.white })
   c.hi('CmpItemAbbrDeprecated',    { ctermfg = c.lightgray, strikethrough = true })
   c.hi('CmpItemAbbrMatch',         { bold = true })
   c.hi('CmpItemAbbrMatchFuzzy',    { link = 'CmpItemAbbrMatch' })
@@ -68,9 +67,11 @@ return {
             col_offset = -4, -- align completion with cursor, assuming the completion menu contains icon prefixes
             side_padding = 0,
             border = 'rounded',
+            winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
           },
           documentation = {
             border = 'rounded',
+            winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
           },
         },
         formatting = {

@@ -52,7 +52,7 @@ end
 M.hi = hi
 
 hi('Normal',             { ctermfg = white })
-hi('Pmenu',              { ctermfg = white }) -- TODO: winhighlight argument causes errors in cmp options but that seems like the proper way to define a custom window highlight group
+hi('Pmenu',              { ctermfg = white })
 hi('PmenuSel',           { ctermfg = black, ctermbg = darkblue })
 hi('PmenuThumb',         { ctermbg = darkblue })
 hi('WinSeparator',       { ctermfg = darkgray })
