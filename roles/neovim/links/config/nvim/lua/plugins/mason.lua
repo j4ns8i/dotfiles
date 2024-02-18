@@ -45,6 +45,7 @@ return {
         'cssls',
         'tsserver',
         'jsonls',
+        'html',
       },
     },
   },

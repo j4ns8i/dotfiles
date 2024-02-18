@@ -14,6 +14,15 @@ vim.keymap.set('n', '<S-Tab>', '<<')
 vim.keymap.set('v', '<Tab>', '>', { remap = true })
 vim.keymap.set('v', '<S-Tab>', '<', { remap = true })
 
+-- Move lines with <Shift-Alt-j/k>
+vim.keymap.set('n', '<S-M-k>', ":m .-2<CR>==")
+vim.keymap.set('n', '<S-M-j>', ":m .+1<CR>==")
+vim.keymap.set('v', '<S-M-k>', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', '<S-M-j>', ":m '>+1<CR>gv=gv")
+
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+y')
+
 -- Restore jump forward after mapping <Tab> (which == <C-i>)
 vim.keymap.set('n', '<C-h>', '<C-i>')
 
@@ -43,6 +52,8 @@ vim.keymap.set('n', '<down>', ':cn<cr>zz')
 vim.keymap.set('n', '<leader>in', vim.cmd.Inspect)
 
 vim.keymap.set('n', '<leader>cl', vim.cmd.cclose)
+
+vim.keymap.set('n', '<leader>tc', vim.cmd.Tabclose)
 
 vim.keymap.set('n', '<leader>vc', function()
   local config_dir = '~/.config/nvim'

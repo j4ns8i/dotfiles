@@ -135,7 +135,4 @@ hi('htmlTagName',        { ctermfg = darkblue })
 hi('htmlTag',            { ctermfg = lightgray })
 hi('htmlEndTag',         { link = 'htmlTag' })
 
-hi('IblIndent',          { ctermfg = darkgray })
-hi('@ibl.indent.char.1', { link = 'IblIndent' })
-
 return M
