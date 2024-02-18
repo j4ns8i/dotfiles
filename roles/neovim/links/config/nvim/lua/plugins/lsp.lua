@@ -3,8 +3,11 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
+      'justin',
     },
     config = function()
+      local c = require('justin.colors')
+      c.hi('LspInfoBorder', { link = 'FloatBorder' })
       vim.lsp.handlers['textDocument/hover'] =
           vim.lsp.with(
             vim.lsp.handlers.hover,
