@@ -4,3 +4,11 @@
   community.general.homebrew:
     name: fzf
     state: latest
+
+- name: check `brew --prefix fzf`
+  ansible.builtin.command: brew --prefix fzf
+  register: fzf_opt_dir
+
+- name: set fzf_opt_dir
+  ansible.builtin.set_fact:
+    fzf_opt_dir: "{{ fzf_opt_dir.stdout }}"
