@@ -22,3 +22,9 @@
     src: "{{ tmux_link_base }}/links/{{ ansible_os_family|lower }}.conf"
     dest: "{{ tmux_config_dir }}/os.conf"
     state: link
+
+- name: ln -sf vim-tmux-navigator.conf {{ tmux_config_dir }}/vim-tmux-navigator.conf
+  ansible.builtin.file:
+    src: "{{ tmux_link_base }}/links/vim-tmux-navigator.conf"
+    dest: "{{ tmux_config_dir }}/vim-tmux-navigator.conf"
+    state: link
