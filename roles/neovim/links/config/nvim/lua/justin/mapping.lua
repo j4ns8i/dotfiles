@@ -53,7 +53,7 @@ vim.keymap.set('n', '<leader>in', vim.cmd.Inspect)
 
 vim.keymap.set('n', '<leader>cl', vim.cmd.cclose)
 
-vim.keymap.set('n', '<leader>tc', vim.cmd.Tabclose)
+vim.keymap.set('n', '<leader>tc', vim.cmd.tabclose)
 
 vim.keymap.set('n', '<leader>vc', function()
   local config_dir = '~/.config/nvim'
