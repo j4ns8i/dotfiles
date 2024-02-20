@@ -45,6 +45,16 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
 
+# Rebind these to avoid conflict with vim-tmux-navigator
+bindkey -r '\C-h'
+bindkey -r '\C-j'
+bindkey -r '\C-k'
+bindkey -r '\C-l'
+bindkey '^[h' backward-delete-char
+bindkey '^[j' accept-line
+bindkey '^[k' kill-line
+bindkey '^[l' clear-screen
+
 # auto escape URL characters that are special in shell
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
