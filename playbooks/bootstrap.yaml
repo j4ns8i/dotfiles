@@ -29,6 +29,9 @@
     - role: fzf
       tags: fzf
 
+    - role: direnv
+      tags: direnv
+
     - role: python
       tags: python
 
