@@ -30,9 +30,12 @@ return {
         hijack_netrw_behavior = 'open_default',
         window = {
           mappings = {
-            ["gs"] = function()
-              vim.cmd('Neotree float git_status')
-            end,
+            ["gs"] = {
+              function()
+                vim.cmd('Neotree float git_status')
+              end,
+              desc = "git status"
+            },
           },
         },
       },
