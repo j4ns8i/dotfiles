@@ -1,0 +1,5 @@
+---
+
+direnv_config_dir: "{{ dotfiles_home_dir }}/.config/direnv"
+
+direnv_link_base: "{{ dotfiles_path }}/roles/direnv"

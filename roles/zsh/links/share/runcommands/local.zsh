@@ -84,6 +84,7 @@ add_to_path "$GOPATH/bin"
 
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
 # The following lines were added by compinstall
 
