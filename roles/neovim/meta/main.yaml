@@ -2,3 +2,4 @@
 
 dependencies:
   - role: homebrew
+  - role: python

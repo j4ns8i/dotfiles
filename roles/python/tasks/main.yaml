@@ -3,3 +3,6 @@
 - name: include tasks for {{ ansible_os_family }} if defined
   include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
+
+- name: pyenv install 3.11.7
+  ansible.builtin.command: pyenv install --skip-existing 3.11.7

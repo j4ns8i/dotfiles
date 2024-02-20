@@ -91,7 +91,6 @@ return {
       lspconfig['pyright'].setup {
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { 'poetry', 'run', 'pyright-langserver', '--stdio' },
       }
 
       lspconfig['volar'].setup({

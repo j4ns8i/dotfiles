@@ -1,11 +1,12 @@
 ---
 
-- name: brew install pyenv
+- name: brew install python packages
   community.general.homebrew:
     name: "{{ package }}"
     state: present
   loop:
     - pyenv
     - pipenv
+    - poetry
   loop_control:
     loop_var: package
