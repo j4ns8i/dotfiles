@@ -5,6 +5,10 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'justin',
     },
+    lazy = false,
+    keys = {
+      { '<leader>wl', vim.cmd.LspInfo },
+    },
     config = function()
       local c = require('justin.colors')
       c.hi('LspInfoBorder', { link = 'FloatBorder' })
