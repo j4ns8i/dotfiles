@@ -10,5 +10,6 @@ return {
     {'<leader>xq', function () require('trouble').open('quickfix') end },
     {'<leader>xl', function () require('trouble').open('loclist') end },
     {'gR',         function () require('trouble').open('lsp_references') end },
+    {'<leader>xi', function () require('trouble').open('lsp_implementations') end },
   },
 }

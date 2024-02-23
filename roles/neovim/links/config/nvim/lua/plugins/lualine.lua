@@ -1,54 +1,50 @@
+local function set_highlights(c)
+  c.hi('LuaLineDiffAdd',         { ctermfg = c.darkgreen, ctermbg = c.lightgray })
+  c.hi('LuaLineDiffChange',      { ctermfg = c.darkblue, ctermbg = c.lightgray })
+  c.hi('LuaLineDiffDelete',      { ctermfg = c.darkred, ctermbg = c.lightgray })
+  c.hi('LuaLineDiagnosticError', { ctermfg = c.darkred, ctermbg = c.lightgray })
+  c.hi('LuaLineDiagnosticWarn',  { ctermfg = c.darkyellow, ctermbg = c.lightgray })
+  c.hi('LuaLineDiagnosticInfo',  { ctermfg = c.white, ctermbg = c.lightgray })
+  c.hi('LuaLineDiagnosticHint',  { ctermfg = c.darkblue, ctermbg = c.lightgray })
+end
+
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = function()
+    local c = require('justin.colors')
+    set_highlights(c)
     local wal = function()
-      local colors = {
-        black        = 0,
-        red          = 1,
-        green        = 2,
-        yellow       = 3,
-        blue         = 4,
-        magenta      = 5,
-        cyan         = 6,
-        lightgray    = 7,
-        darkgray     = 8,
-        -- gray         = 8,
-        white        = 15,
-        -- darkgray     = '#333333',
-        -- lightgray    = '#555555',
-        inactivegray = '#777777',
-      }
       return {
         normal = {
-          a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
-          b = { bg = colors.lightgray, fg = colors.white },
-          c = { bg = colors.darkgray, fg = colors.lightgray }
+          a = { bg = c.darkblue, fg = c.black, gui = 'bold' },
+          b = { bg = c.lightgray, fg = c.white },
+          c = { bg = c.darkgray, fg = c.lightgray }
         },
         insert = {
-          a = { bg = colors.green, fg = colors.black, gui = 'bold' },
-          b = { bg = colors.lightgray, fg = colors.white },
-          c = { bg = colors.darkgray, fg = colors.lightgray }
+          a = { bg = c.darkgreen, fg = c.black, gui = 'bold' },
+          b = { bg = c.lightgray, fg = c.white },
+          c = { bg = c.darkgray, fg = c.lightgray }
         },
         visual = {
-          a = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
-          b = { bg = colors.lightgray, fg = colors.white },
-          c = { bg = colors.darkgray, fg = colors.lightgray }
+          a = { bg = c.darkyellow, fg = c.black, gui = 'bold' },
+          b = { bg = c.lightgray, fg = c.white },
+          c = { bg = c.darkgray, fg = c.lightgray }
         },
         replace = {
-          a = { bg = colors.red, fg = colors.black, gui = 'bold' },
-          b = { bg = colors.lightgray, fg = colors.white },
-          c = { bg = colors.darkgray, fg = colors.lightgray }
+          a = { bg = c.darkred, fg = c.black, gui = 'bold' },
+          b = { bg = c.lightgray, fg = c.white },
+          c = { bg = c.darkgray, fg = c.lightgray }
         },
         command = {
-          a = { bg = colors.magenta, fg = colors.black, gui = 'bold' },
-          b = { bg = colors.lightgray, fg = colors.white },
-          c = { bg = colors.darkgray, fg = colors.lightgray }
+          a = { bg = c.darkmagenta, fg = c.black, gui = 'bold' },
+          b = { bg = c.lightgray, fg = c.white },
+          c = { bg = c.darkgray, fg = c.lightgray }
         },
         inactive = {
-          a = { bg = colors.darkgray, fg = colors.gray, gui = 'bold' },
-          b = { bg = colors.lightgray, fg = colors.white },
-          c = { bg = colors.darkgray, fg = colors.lightgray }
+          a = { bg = c.darkgray, fg = '#777777', gui = 'bold' },
+          b = { bg = c.lightgray, fg = c.white },
+          c = { bg = c.darkgray, fg = c.lightgray }
         }
       }
     end
@@ -58,25 +54,47 @@ return {
         component_separators = '|',
         section_separators = '',
         theme = wal,
-        -- Note: relative paths in filename component seems to be broken...
-        -- sections = {
-        --   lualine_a = {'mode'},
-        --   lualine_b = {'branch', 'diff', 'diagnostics'},
-        --   lualine_c = {{'filename', path = 1}},
-        --   lualine_x = {'encoding', 'fileformat', 'filetype'},
-        --   lualine_y = {'progress'},
-        --   lualine_z = {'location'}
-        -- },
-        -- inactive_sections = {
-        --   lualine_a = {},
-        --   lualine_b = {},
-        --   lualine_c = {{'filename', path = 2}},
-        --   lualine_x = {'location'},
-        --   lualine_y = {},
-        --   lualine_z = {}
-        -- },
-        -- section_sep
-      }
+      },
+      sections = {
+        lualine_b = {
+          { 'branch' },
+          {
+            'diff',
+            diff_color = {
+              added    = 'LuaLineDiffAdd',
+              modified = 'LuaLineDiffChange',
+              removed  = 'LuaLineDiffDelete',
+            },
+          },
+          {
+            'diagnostics',
+            diagnostics_color = {
+              error = 'LuaLineDiagnosticError',
+              warn  = 'LuaLineDiagnosticWarn',
+              info  = 'LuaLineDiagnosticInfo',
+              hint  = 'LuaLineDiagnosticHint',
+            },
+          },
+        },
+      },
+      -- Note: relative paths in filename component seems to be broken...
+      -- sections = {
+      --   lualine_a = {'mode'},
+      --   lualine_b = {'branch', 'diff', 'diagnostics'},
+      --   lualine_c = {{'filename', path = 1}},
+      --   lualine_x = {'encoding', 'fileformat', 'filetype'},
+      --   lualine_y = {'progress'},
+      --   lualine_z = {'location'}
+      -- },
+      -- inactive_sections = {
+      --   lualine_a = {},
+      --   lualine_b = {},
+      --   lualine_c = {{'filename', path = 2}},
+      --   lualine_x = {'location'},
+      --   lualine_y = {},
+      --   lualine_z = {}
+      -- },
+      -- section_sep
     }
   end
 }

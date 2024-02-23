@@ -9,7 +9,6 @@ vim.o.relativenumber = true    -- Show relative line numbers
 vim.o.number         = true    -- But still show current line number
 vim.o.signcolumn     = 'yes:1' -- Always show 1 (pair of) columns for signs (gitgutter)
 
-vim.o.wrap      = false
 vim.o.listchars = 'tab:  ,trail:·,extends:»,nbsp:␣'
 vim.o.list      = true
 
@@ -42,6 +41,7 @@ vim.opt.nrformats:append { 'alpha' } -- Add or subtract letters with ctrl-a / ct
 vim.o.textwidth = 80 -- 80 is just a good width, ok?
 
 vim.opt.formatoptions:append { 'a', 'r', }
+vim.opt.formatoptions:remove { 't', }
 
 vim.o.undofile = true -- Persist undo information
 

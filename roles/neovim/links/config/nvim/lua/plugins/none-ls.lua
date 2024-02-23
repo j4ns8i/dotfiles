@@ -8,6 +8,7 @@ return {
           null_ls.builtins.diagnostics.shellcheck.with({
             filetypes = { 'sh', 'bash', 'zsh' },
           }),
+          null_ls.builtins.formatting.black,
         },
       }
     end,

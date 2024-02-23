@@ -103,7 +103,7 @@ hi('TabLine',            { ctermfg = lightgray })
 hi('TabLineFill',        { ctermfg = lightgray })
 hi('TabLineSel',         { ctermfg = darkblue })
 
-hi('Title',              { ctermfg = darkcyan, underline = true })
+hi('Title',              { ctermfg = darkcyan, bold = true })
 
 hi('Visual',             { ctermfg = white, ctermbg = darkgray })
 hi('IncSearch',          { ctermbg = darkcyan })
