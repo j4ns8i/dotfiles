@@ -32,3 +32,8 @@ bootstrap: $(PIPENV) ## Run the main bootstrap playbook to install and configure
 $(PIPENV):
 	@echo "Performing user-local installation of pipenv..."
 	python3 -m pip install --user pipenv
+
+.PHONY: update
+update-deps: $(PIPENV) ## Update dependencies for Ansible playbooks
+	$(PIPENV) update
+	$(PIPENV) requirements > requirements.txt
