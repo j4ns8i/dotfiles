@@ -112,6 +112,11 @@ return {
         capabilities = capabilities,
       })
 
+      lspconfig['bashls'].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
       lspconfig['jsonnet_ls'].setup({
         on_attach = on_attach,
         capabilities = capabilities,

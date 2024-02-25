@@ -39,6 +39,7 @@ return {
         'rust_analyzer',
         'terraformls',
         'tflint',
+        'bashls',
         'docker_compose_language_service',
         'dockerls',
         'tailwindcss',
