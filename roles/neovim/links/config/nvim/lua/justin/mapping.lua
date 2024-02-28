@@ -24,7 +24,7 @@ vim.keymap.set('n', '<leader>y', '"+y')
 vim.keymap.set('v', '<leader>y', '"+y')
 
 -- Restore jump forward after mapping <Tab> (which == <C-i>)
-vim.keymap.set('n', '<C-m>', '<C-i>')
+vim.keymap.set('n', '<C-p>', '<C-i>')
 
 vim.keymap.set('n', '<leader>[', ':bp<cr>')
 vim.keymap.set('n', '<leader>]', ':bn<cr>')

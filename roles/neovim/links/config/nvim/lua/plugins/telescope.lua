@@ -10,8 +10,8 @@ return {
   keys = {
     { '<leader>pf', function() require('telescope.builtin').find_files() end },
     { '<leader>ph', function() require('telescope.builtin').highlights() end },
-    { '<C-p>',      function() require('telescope.builtin').git_files()  end },
-    { '<leader>ps', function() require('telescope.builtin').live_grep()  end },
+    { '<leader>pg', function() require('telescope.builtin').git_files() end },
+    { '<leader>ps', function() require('telescope.builtin').live_grep() end },
   },
   opts = function()
     local trouble = require('trouble.providers.telescope')
