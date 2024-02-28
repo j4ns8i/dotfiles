@@ -7,7 +7,7 @@ return {
       'MunifTanjim/nui.nvim',
     },
     keys = {
-      { '<leader>ntf', '<cmd>Neotree<cr>' },
+      { '<leader>ntf', '<cmd>Neotree reveal_file=%s<cr>' },
       { '<leader>ntt', '<cmd>Neotree toggle<cr>' },
     },
     cmd = 'Neotree',
