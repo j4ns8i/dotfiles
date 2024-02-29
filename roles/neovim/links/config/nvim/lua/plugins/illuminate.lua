@@ -3,6 +3,7 @@ local filetypes = {
   'javascript',
   'jsx',
   'typescript',
+  'typescriptreact',
   'css',
   'go',
   'rust',
@@ -13,13 +14,17 @@ local filetypes = {
 
 return {
   'RRethy/vim-illuminate',
-  opts = {
-    filetypes_allowlist = filetypes,
-    filetypes_denylist = {},
-    min_count_to_highlight = 2,
-  },
   ft = filetypes,
-  config = function(_, opts)
+  config = function()
+    local c = require('justin.colors')
+    c.hi('IlluminatedWordText', { ctermbg = c.lightgray })
+    c.hi('IlluminatedWordRead', { link = 'IlluminatedWordText' })
+    c.hi('IlluminatedWordWrite', { link = 'IlluminatedWordText' })
+    local opts = {
+      filetypes_allowlist = filetypes,
+      filetypes_denylist = {},
+      min_count_to_highlight = 2,
+    }
     require('illuminate').configure(opts)
   end
 }
