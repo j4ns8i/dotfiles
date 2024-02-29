@@ -1,2 +1,2 @@
-- [ ] ansible dependencies
 - [ ] fzf + git integration
+- [ ] dependabot configuration for Pipfile + requirements.txt

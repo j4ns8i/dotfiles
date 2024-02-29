@@ -17,6 +17,11 @@ local function set_highlights()
   c.hi('@markup.heading.2.vimdoc', { link = '@markup.heading.1.vimdoc' })
   c.hi('@markup.heading.3.vimdoc', { link = '@markup.heading.1.vimdoc' })
   c.hi('@markup.heading.4.vimdoc', { link = '@markup.heading.1.vimdoc' })
+  c.hi('@tag.html',                { ctermfg = c.darkred, bold = true })
+  c.hi('@tag.tsx',                 { link = '@tag.html' })
+  c.hi('@tag.builtin.tsx',         { link = '@tag.html' })
+  c.hi('@tag.attribute.html',      { ctermfg = c.darkblue })
+  c.hi('@tag.attribute.html',      { ctermfg = c.darkblue })
 end
 
 return {
