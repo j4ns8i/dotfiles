@@ -1,10 +1,9 @@
+KERNEL := $(shell uname -s | tr '[:upper:]' '[:lower:]')
+
+SYNC_PLAYBOOK := $(or $(wildcard playbooks/$(KERNEL).yaml),playbooks/sync.yaml)
+
 PIPENV           := $(or $(shell which pipenv),$(shell python3 -m site --user-base)/bin/pipenv)
 ANSIBLE_PLAYBOOK := ansible-playbook $(ANSIBLE_PLAYBOOK_ARGS)
-
-ANSIBLE_TAGS :=
-ifneq ($(TAGS),)
-ANSIBLE_TAGS := --tags $(TAGS)
-endif
 
 .PHONY: help
 help: ## Show this help text
@@ -21,13 +20,13 @@ diff-alacritty:
 		--diff \
 		playbooks/utilities/diff-alacritty.yaml
 
-.PHONY: bootstrap
-bootstrap: $(PIPENV) ## Run the main bootstrap playbook to install and configure applications
+.PHONY: sync
+sync: $(PIPENV) ## Run the main sync playbook to install and configure applications
 	$(ANSIBLE_PLAYBOOK) \
 		-e "dotfiles_path=$(PWD)" \
 		-e "dotfiles_home_dir=$(HOME)" \
 		$(ANSIBLE_TAGS) \
-		playbooks/bootstrap.yaml
+		$(SYNC_PLAYBOOK)
 
 $(PIPENV):
 	@echo "Performing user-local installation of pipenv..."
