@@ -152,6 +152,11 @@ return {
         capabilities = capabilities,
       })
 
+      lspconfig['ansiblels'].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
       lspconfig['lua_ls'].setup({
         on_attach = on_attach,
         on_init = (function(client)
