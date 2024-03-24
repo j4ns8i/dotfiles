@@ -49,6 +49,6 @@ vim.o.undofile = true -- Persist undo information
 -- and whatnot. I don't want to lose my undo history just because of that.
 vim.o.undodir = vim.fs.normalize('~/.nvim-undo')
 
-vim.o.hlsearch = false -- Don't highlight searches after execution
+vim.o.guicursor = '' -- Use block cursor
 
 vim.o.cursorline = true

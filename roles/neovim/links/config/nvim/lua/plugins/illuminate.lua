@@ -21,6 +21,7 @@ return {
     c.hi('IlluminatedWordRead', { link = 'IlluminatedWordText' })
     c.hi('IlluminatedWordWrite', { link = 'IlluminatedWordText' })
     local opts = {
+      delay = 750,
       filetypes_allowlist = filetypes,
       filetypes_denylist = {},
       min_count_to_highlight = 2,

@@ -43,6 +43,8 @@ vim.keymap.set('v', '<leader>64e', 'c<c-r>=system(\'base64\', @")<cr><esc>')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
+vim.keymap.set('n', '<leader>/<space>', vim.cmd.nohlsearch)
+
 vim.keymap.set('n', 'gg', 'mjgg')
 vim.keymap.set('n', 'G', 'mkG')
 
