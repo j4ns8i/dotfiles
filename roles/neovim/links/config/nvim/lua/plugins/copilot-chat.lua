@@ -13,8 +13,8 @@ return {
       },
     },
     keys = {
-      { '<leader>cpc', vim.cmd.CopilotChat },
-      { '<leader>cpe', vim.cmd.CopilotChatExplain },
+      { '<leader>cpc', vim.cmd.CopilotChat, mode = { 'n', 'v' }},
+      { '<leader>cpe', vim.cmd.CopilotChatExplain, mode = { 'v' } },
     },
     cmd = {
       'CopilotChat',
