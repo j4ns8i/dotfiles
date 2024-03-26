@@ -27,8 +27,8 @@
     mc = merge --no-commit --no-ff
     diffc = diff --cached
     # `diff origin..` will look at HEAD of origin which may have advanced, hence --merge-base below
-    bd = diff --merge-base origin HEAD
-    bdc = diff --cached --merge-base origin HEAD
+    bd = diff --merge-base origin
+    bdc = diff --cached --merge-base origin
     mb = merge-base origin HEAD
     rpsh = rev-parse --short HEAD
     psuo = !git push -u origin $(git branch --show-current)
