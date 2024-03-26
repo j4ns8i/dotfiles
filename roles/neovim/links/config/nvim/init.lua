@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup('plugins', {
   ui = {
     border = 'rounded',
+    backdrop = 100,
   },
   checker = {
     notify = false,
@@ -28,5 +29,3 @@ require('lazy').setup('plugins', {
     colorscheme = { 'wal' },
   },
 })
-
--- require('justin')
