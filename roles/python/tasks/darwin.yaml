@@ -6,7 +6,6 @@
     state: present
   loop:
     - pyenv
-    - pipenv
-    - poetry
+    - pipx
   loop_control:
     loop_var: package
