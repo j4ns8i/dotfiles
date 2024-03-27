@@ -3,6 +3,7 @@ KERNEL := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 SYNC_PLAYBOOK := $(or $(wildcard playbooks/$(KERNEL).yaml),playbooks/sync.yaml)
 
 PIPENV           := $(or $(shell which pipenv),$(shell python3 -m site --user-base)/bin/pipenv)
+ANSIBLE_TAGS     := $(if $(TAGS),--tags $(TAGS),)
 ANSIBLE_PLAYBOOK := ansible-playbook $(ANSIBLE_PLAYBOOK_ARGS)
 
 .PHONY: help
