@@ -1,0 +1,34 @@
+name: "Lock and sync python dependencies"
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - master
+    paths:
+      - 'Pipfile'
+      - 'Pipfile.lock'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pipenv'
+      - run: |
+          pipenv lock
+          pipenv requirements > requirements.txt
+          if [[ -n "$(git status --porcelain)" ]]; then exit 0; fi
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add Pipfile Pipfile.lock requirements.txt
+          git commit -m "Lock and sync python dependencies"
+          git push
