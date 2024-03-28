@@ -3,7 +3,7 @@ name: "Lock and sync python dependencies"
 on:
   pull_request:
     types:
-      - opened
+      - [opened, synchronize, reopened]
     branches:
       - master
     paths:
@@ -17,6 +17,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        fetch-depth: 0
       - name: Install pipenv
         run: pipx install pipenv
       - uses: actions/setup-python@v5
