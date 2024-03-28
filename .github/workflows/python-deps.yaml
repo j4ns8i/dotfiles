@@ -23,10 +23,19 @@ jobs:
         with:
           python-version: '3.x'
           cache: 'pipenv'
-      - run: |
+      - name: Lock and sync python dependencies
+        id: lock
+        run: |
           pipenv lock
           pipenv requirements > requirements.txt
-          if [[ -n "$(git status --porcelain)" ]]; then exit 0; fi
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "dirty=false" >> $GITHUB_OUTPUT
+          else
+            echo "dirty=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Commit and push changes
+        if: ${{ steps.lock.outputs.dirty == 'true' }}
+        run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add Pipfile Pipfile.lock requirements.txt
