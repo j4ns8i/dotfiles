@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ansible-based dotfiles and dev machine setup"
+version = "0.1.0"
+description = ""
+authors = ["j4ns8i <jsmalkowski+github@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ansible-core = ">=2.16,<3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
