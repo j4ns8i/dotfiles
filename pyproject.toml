@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "ansible-based dotfiles and dev machine setup"
+name = "dotfiles"
 version = "0.1.0"
-description = ""
+description = "ansible-based dotfiles and dev machine setup"
 authors = ["j4ns8i <jsmalkowski+github@gmail.com>"]
 readme = "README.md"
 package-mode = false
