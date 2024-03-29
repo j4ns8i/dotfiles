@@ -1,2 +1,2 @@
 - [ ] fzf + git integration
-- [ ] dependabot configuration for Pipfile + requirements.txt
+- [ ] dependabot configuration for poetry
