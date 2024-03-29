@@ -29,14 +29,6 @@ install-ansible-collections:
 	@echo "Installing Ansible collections..."
 	$(NEED_VENV) ansible-galaxy collection install -r requirements.yml
 
-.PHONY: diff-alacritty
-diff-alacritty:
-	ANSIBLE_BECOME_ASK_PASS=false $(ANSIBLE_PLAYBOOK) \
-		-e "dotfiles_home_dir=$(HOME)" \
-		--check \
-		--diff \
-		playbooks/utilities/diff-alacritty.yaml
-
 .PHONY: sync
 sync: $(POETRY) ## Run the main sync playbook to install and configure applications
 	$(ANSIBLE_PLAYBOOK) \
