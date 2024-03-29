@@ -3,3 +3,5 @@ packer_compiled.lua
 
 /.collections
 /.venv
+
+/node_modules

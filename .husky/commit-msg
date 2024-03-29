@@ -1,0 +1,2 @@
+set -x
+pnpm commitlint -e "$1"
