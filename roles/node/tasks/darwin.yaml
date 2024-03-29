@@ -1,0 +1,12 @@
+---
+
+- name: Install nvm
+  ansible.builtin.shell: >
+    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ node_nvm_version }}/install.sh | bash'
+  args:
+    creates: "{{ dotfiles_home_dir }}/.nvm/nvm.sh"
+
+- name: Install pnpm
+  community.general.homebrew:
+    name: pnpm
+    state: latest
