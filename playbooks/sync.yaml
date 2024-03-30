@@ -38,8 +38,8 @@
     - role: go
       tags: go
 
-    - role: nvm
-      tags: nvm
+    - role: node
+      tags: node
 
     - role: neovim
       tags: neovim
