@@ -1,6 +1,6 @@
 ---
 
-- name: brew install direnv
+- name: Brew install direnv
   community.general.homebrew:
     name: direnv
     state: latest

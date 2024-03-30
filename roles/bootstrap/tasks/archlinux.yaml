@@ -1,46 +1,46 @@
 ---
 
-- name: link proper time zone to /etc/localtime
-  file:
+- name: Link proper time zone to /etc/localtime
+  ansible.builtin.file:
     src: /usr/share/zoneinfo/America/Los_Angeles
     dest: /etc/localtime
     state: link
   become: true
 
-- name: run hwclock to sync time
-  command: hwclock --systohc
+- name: Run hwclock to sync time
+  ansible.builtin.command: hwclock --systohc
   become: true
 
-- name: enable en_US.UTF-8 in /etc/locale.gen
-  lineinfile:
+- name: Enable en_US.UTF-8 in /etc/locale.gen
+  ansible.builtin.lineinfile:
     path: /etc/locale.gen
     regexp: "^(# )?en_US.UTF-8 UTF-8"
     line: "en_US.UTF-8 UTF-8"
     state: present
   become: true
 
-- name: run locale-gen
-  command: locale-gen
+- name: Run locale-gen
+  ansible.builtin.command: locale-gen
   become: true
 
-- name: create /etc/locale.conf with LANG variable
-  lineinfile:
+- name: Create /etc/locale.conf with LANG variable
+  ansible.builtin.lineinfile:
     path: /etc/locale.conf
     line: "LANG=en_US.UTF-8"
     create: true
     state: present
   become: true
 
-- name: create /etc/hostname
-  lineinfile:
+- name: Create /etc/hostname
+  ansible.builtin.lineinfile:
     path: /etc/hostname
     line: "{{ bootstrap_host }}"
     create: true
     state: present
   become: true
 
-- name: populate /etc/hosts
-  lineinfile:
+- name: Populate /etc/hosts
+  ansible.builtin.lineinfile:
     path: /etc/hosts
     line: "{{ item }}"
     create: true
@@ -51,8 +51,8 @@
     - "127.0.1.1	{{ bootstrap_host }}.localdomain {{ bootstrap_host }}"
   become: true
 
-- name: add lvm2 related mkinitcpio hooks
-  lineinfile:
+- name: Add lvm2 related mkinitcpio hooks
+  ansible.builtin.lineinfile:
     path: /etc/mkinitcpio.conf
     line: "HOOKS=(base systemd autodetect modconf block lvm2 filesystems fsck)"
     regexp: "^HOOKS=\\(.*\\)$"
@@ -60,60 +60,60 @@
   register: bootstrap_mkinitcpio
   become: true
 
-- name: install ramdisk with mkinitcpio
-  command: mkinitcpio -P
+- name: Install ramdisk with mkinitcpio
+  ansible.builtin.command: mkinitcpio -P
   when: bootstrap_mkinitcpio.changed
   become: true
 
-- name: run refind-install
-  command: refind-install
+- name: Run refind-install
+  ansible.builtin.command: refind-install
   become: true
 
-- name: set refind options
-  template:
+- name: Set refind options
+  ansible.builtin.template:
     src: refind_linux.conf.j2
     dest: /boot/refind_linux.conf
   become: true
 
-- name: ensure arch kernel names are supported by refind
-  lineinfile:
+- name: Ensure arch kernel names are supported by refind
+  ansible.builtin.lineinfile:
     path: /boot/EFI/refind/refind.conf
     line: "extra_kernel_version_strings linux-hardened,linux-zen,linux-lts,linux"
     regexp: "^#?extra_kernel_version_strings "
     state: present
   become: true
 
-- name: set root login
-  user:
+- name: Set root login
+  ansible.builtin.user:
     name: root
     password: "{{ 'changeme' | password_hash('sha512', bootstrap_salt) }}"
     shell: /bin/zsh
   become: true
   tags: initial
 
-- name: add systemd.network file to enable DHCP on any interface
-  copy:
+- name: Add systemd.network file to enable DHCP on any interface
+  ansible.builtin.copy:
     src: 80-dhcp.network
     dest: /etc/systemd/network/80-dhcp.network
     mode: 0644
   become: true
 
-- name: enable, reload, and start systemd-networkd
-  systemd:
+- name: Enable, reload, and start systemd-networkd
+  ansible.builtin.systemd:
     name: systemd-networkd
     state: reloaded
     enabled: true
   become: true
 
-- name: enable and start systemd-resolved
-  systemd:
+- name: Enable and start systemd-resolved
+  ansible.builtin.systemd:
     name: systemd-resolved
     state: started
     enabled: true
   become: true
 
-- name: add {{ bootstrap_user }}
-  user:
+- name: Add user {{ bootstrap_user }}
+  ansible.builtin.user:
     name: "{{ bootstrap_user }}"
     password: "{{ bootstrap_password | password_hash('sha512', bootstrap_salt) }}"
     shell: /bin/zsh
@@ -123,21 +123,21 @@
   become: true
   tags: initial
 
-- name: set dotfiles_home_dir if running as root
-  set_fact:
+- name: Set dotfiles_home_dir if running as root
+  ansible.builtin.set_fact:
     dotfiles_home_dir: /home/{{ bootstrap_user }}
   when: ansible_user_id == "root"
 
-- name: make sure repo is cloned under {{ dotfiles_home_dir }}
-  git:
+- name: Make sure repo is cloned under {{ dotfiles_home_dir }}
+  ansible.builtin.git:
     repo: https://github.com/j4ns8i/dotfiles
     dest: "{{ bootstrap_dotfiles_path }}"
   become: true
   become_user: "{{ bootstrap_user }}"
   tags: initial
 
-- name: add sudoers file
-  copy:
+- name: Add sudoers file
+  ansible.builtin.copy:
     src: sudoers
     dest: "/etc/sudoers.d/{{ bootstrap_host }}"
     mode: 0440

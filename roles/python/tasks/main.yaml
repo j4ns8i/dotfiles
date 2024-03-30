@@ -1,26 +1,26 @@
 ---
 
-- name: include tasks for {{ ansible_os_family }} if defined
-  include_tasks: "{{ item }}"
+- name: Include tasks for {{ ansible_os_family }} if defined
+  ansible.builtin.include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
-- name: pyenv install 3.11.7
+- name: Run `pyenv install --skip-existing 3.11.7`
   ansible.builtin.command: pyenv install --skip-existing 3.11.7
 
   # pipx should be globally installed, and we'll have to tell the pipx module
   # where it is because ansible assumes it's in the current environment.
-- name: which pipx
+- name: Register pipx path
   ansible.builtin.command: which pipx
   changed_when: false
   register: python_pipx_path
 
-- name: pipx install poetry
+- name: Install poetry using pipx
   community.general.pipx:
     name: poetry
     state: present
     executable: "{{ python_pipx_path.stdout }}"
 
-- name: Inject poetry-plugin-export
+- name: Inject poetry-plugin-export using pipx
   community.general.pipx:
     name: poetry
     state: inject

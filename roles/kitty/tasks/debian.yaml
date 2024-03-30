@@ -1,13 +1,13 @@
 ---
 
-- name: install kitty packages
+- name: Install kitty packages
   ansible.builtin.package:
     name: "{{ package }}"
     state: latest
   loop: ["kitty", "kitty-doc", "kitty-terminfo"]
   loop_control:
     loop_var: package
-  become: yes
+  become: true
 
-- name: import kitty config tasks
+- name: Import kitty config tasks
   ansible.builtin.import_tasks: config.yaml

@@ -1,10 +1,10 @@
 - name: Set keyboard delay to 220
-  command: gsettings set org.gnome.desktop.peripherals.keyboard delay 220
+  ansible.builtin.command: gsettings set org.gnome.desktop.peripherals.keyboard delay 220
 
 - name: Set keyboard repeat-interval to 30
-  command: gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
+  ansible.builtin.command: gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
 
   # If this doesn't persist, this may need to be prefixed with:
   #   gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
 - name: Set numlock on
-  command: numlockx on
+  ansible.builtin.command: numlockx on

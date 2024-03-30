@@ -1,6 +1,6 @@
 ---
 
-- name: check if rustup is installed
+- name: Check if rustup is installed
   ansible.builtin.command: which rustup
   changed_when: false
   failed_when: false
@@ -8,16 +8,17 @@
   environment:
     PATH: "{{ ansible_user_dir }}/.cargo/bin:{{ ansible_env.PATH }}"
 
-- name: install rustup
+- name: Install rustup
+  when: rust_rustup_install_check.rc != 0
   block:
     - name: create temporary file to hold rustup installer script
       ansible.builtin.tempfile:
         state: file
         suffix: _rustup_installer.tmp
       register: rust_rustup_tmp_installer
-      notify: remove rustup installer
+      notify: Remove rustup installer
 
-    - name: grab rustup installer content
+    - name: Grab rustup installer content
       ansible.builtin.uri:
         url: https://sh.rustup.rs
         return_content: true
@@ -26,16 +27,16 @@
           - 200
       register: rust_rustup_tmp_installer_response
 
-    - name: copy installer content to temporary file
+    - name: Copy installer content to temporary file
       ansible.builtin.copy:
         content: "{{ rust_rustup_tmp_installer_response.content }}"
         dest: "{{ rust_rustup_tmp_installer.path }}"
+        mode: "0755"
 
-    - name: run rustup installer script
+    - name: Run rustup installer script
       ansible.builtin.script: "{{ rust_rustup_tmp_installer.path }} -y"
-  when: rust_rustup_install_check.rc != 0
 
-- name: add rust language server requisites
+- name: Add rust language server requisites
   ansible.builtin.command: rustup component add rls rust-analysis rust-analyzer rust-src
   environment:
     PATH: "{{ ansible_user_dir }}/.cargo/bin:{{ ansible_env.PATH }}"

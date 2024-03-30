@@ -1,29 +1,30 @@
 ---
 
-- name: install tmux
-  package:
+- name: Install tmux
+  ansible.builtin.package:
     name: tmux
     state: present
-  become: "{{ ansible_os_family|lower != 'darwin' }}"
+  become: "{{ ansible_os_family | lower != 'darwin' }}"
 
-- name: ln -sf tmux.conf ~/.tmux.conf
+- name: Symlink ./links/tmux.conf to ~/.tmux.conf
   ansible.builtin.file:
     src: "{{ tmux_link_base }}/links/tmux.conf"
     dest: "{{ dotfiles_home_dir }}/.tmux.conf"
     state: link
 
-- name: mkdir {{ tmux_config_dir }}
+- name: Create {{ tmux_config_dir }}
   ansible.builtin.file:
     path: "{{ tmux_config_dir }}"
     state: directory
+    mode: "0700"
 
-- name: ln -sf {{ ansible_os_family|lower }}.conf {{ tmux_config_dir }}/os.conf
+- name: Symlink {{ ansible_os_family | lower }}.conf to {{ tmux_config_dir }}/os.conf
   ansible.builtin.file:
-    src: "{{ tmux_link_base }}/links/{{ ansible_os_family|lower }}.conf"
+    src: "{{ tmux_link_base }}/links/{{ ansible_os_family | lower }}.conf"
     dest: "{{ tmux_config_dir }}/os.conf"
     state: link
 
-- name: ln -sf vim-tmux-navigator.conf {{ tmux_config_dir }}/vim-tmux-navigator.conf
+- name: Symlink ./links/vim-tmux-navigator.conf to {{ tmux_config_dir }}/vim-tmux-navigator.conf
   ansible.builtin.file:
     src: "{{ tmux_link_base }}/links/vim-tmux-navigator.conf"
     dest: "{{ tmux_config_dir }}/vim-tmux-navigator.conf"

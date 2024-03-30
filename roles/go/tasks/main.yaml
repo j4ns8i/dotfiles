@@ -1,7 +1,7 @@
 ---
 
-- name: install go
-  package:
-    name: "{{ go_package_name[ansible_os_family|lower] }}"
+- name: Install go
+  ansible.builtin.package:
+    name: "{{ go_package_name[ansible_os_family | lower] }}"
     state: present
-  become: "{{ ansible_os_family|lower != 'darwin' }}"
+  become: "{{ ansible_os_family | lower != 'darwin' }}"

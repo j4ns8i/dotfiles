@@ -1,6 +1,6 @@
 ---
 
-- name: brew install python packages
+- name: Brew install python packages
   community.general.homebrew:
     name: "{{ package }}"
     state: present

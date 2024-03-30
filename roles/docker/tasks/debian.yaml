@@ -1,10 +1,10 @@
 ---
 
-- name: include debian vars
-  include_vars: debian.yaml
+- name: Include debian vars
+  ansible.builtin.include_vars: debian.yaml
 
-- name: install prerequisites
-  package:
+- name: Install prerequisites
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   become: true
@@ -14,25 +14,25 @@
     - gnupg
     - lsb-release
 
-- name: add apt key
+- name: Add apt key
   ansible.builtin.shell:
     cmd: "curl -fsSL {{ docker_apt_key_url }} | gpg -o {{ docker_apt_key_dest }} --dearmor"
     creates: "{{ docker_apt_key_dest }}" # delete this file if a refresh is needed
   become: true
 
-- name: add apt repo
+- name: Add apt repo
   ansible.builtin.apt_repository:
     repo: "{{ docker_apt_repo_url }}"
     state: present
   become: true
 
-- name: install docker packages
-  package:
+- name: Install docker packages
+  ansible.builtin.package:
     name: "{{ docker_packages }}"
     state: present
   become: true
 
-- name: add {{ ansible_user }} to docker group
+- name: Add {{ ansible_user }} to docker group
   ansible.builtin.user:
     user: "{{ ansible_user_id }}"
     groups: docker

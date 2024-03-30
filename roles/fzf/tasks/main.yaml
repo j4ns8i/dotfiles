@@ -1,9 +1,9 @@
 ---
 
-- name: include tasks for {{ ansible_os_family | lower }} if defined
-  include_tasks: "{{ item }}"
+- name: Include tasks for {{ ansible_os_family | lower }} if defined
+  ansible.builtin.include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
-- name: install fzf completion and key-bindings
+- name: Install fzf completion and key-bindings
   ansible.builtin.command: "{{ fzf_opt_dir }}/install --completion --key-bindings --no-update-rc"
   when: fzf_opt_dir is defined and fzf_opt_dir != ""

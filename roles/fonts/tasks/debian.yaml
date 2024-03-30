@@ -1,6 +1,6 @@
 ---
 
-- name: download JetBrainsMono Nerd Font
+- name: Download JetBrainsMono Nerd Font
   ansible.builtin.unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ fonts_jetbrainsmono_version }}/JetBrainsMono.zip
     remote_src: true
@@ -8,5 +8,5 @@
     mode: "0644"
   become: true
 
-- name: fc-cache
+- name: Run fc-cache
   ansible.builtin.command: fc-cache

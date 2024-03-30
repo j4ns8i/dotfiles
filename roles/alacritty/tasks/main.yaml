@@ -1,22 +1,23 @@
 ---
 
-- name: include tasks for {{ ansible_os_family | lower }} if defined
-  include_tasks: "{{ item }}"
+- name: Include tasks for {{ ansible_os_family | lower }} if defined
+  ansible.builtin.include_tasks: "{{ item }}"
   with_fileglob: "{{ ansible_os_family | lower }}.yaml"
 
-- name: "create dir: {{ alacritty_config_dir }}"
-  file:
+- name: Create {{ alacritty_config_dir }}
+  ansible.builtin.file:
     path: "{{ alacritty_config_dir }}"
     state: directory
+    mode: "0700"
 
-- name: ln -sf alacritty.toml ~/.config/alacritty/alacritty.toml
+- name: Symlink alacritty.toml
   ansible.builtin.file:
     state: link
     src: "{{ alacritty_link_base }}/links/alacritty.toml"
     dest: "{{ alacritty_config_dir }}/alacritty.toml"
 
-- name: ln -sf {{ ansible_os_family|lower }}.toml ~/.config/alacritty/os.toml
+- name: Symlink {{ ansible_os_family | lower }}.toml to ~/.config/alacritty/os.toml
   ansible.builtin.file:
     state: link
-    src: "{{ alacritty_link_base }}/links/{{ ansible_os_family|lower }}.toml"
+    src: "{{ alacritty_link_base }}/links/{{ ansible_os_family | lower }}.toml"
     dest: "{{ alacritty_config_dir }}/os.toml"

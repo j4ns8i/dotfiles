@@ -1,6 +1,6 @@
 ---
 
-- name: brew install neovim
+- name: Brew install neovim
   community.general.homebrew:
     name: neovim
     state: latest

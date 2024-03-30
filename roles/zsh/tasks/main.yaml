@@ -1,42 +1,44 @@
 ---
 
-- name: install zsh
+- name: Install zsh
   ansible.builtin.package:
     name: zsh
     state: present
-  become: "{{ ansible_os_family|lower != 'darwin' }}"
+  become: "{{ ansible_os_family | lower != 'darwin' }}"
 
-- name: ln -sf links/zshrc {{ dotfiles_home_dir }}/.zshrc
-  file:
+- name: Symlink ./links/zshrc to {{ dotfiles_home_dir }}/.zshrc
+  ansible.builtin.file:
     src: "{{ zsh_link_base }}/links/zshrc"
     dest: "{{ dotfiles_home_dir }}/.zshrc"
     state: link
 
-- name: mkdir ~/.config/zsh
+- name: Create {{ zsh_config_dir }}
   ansible.builtin.file:
     path: "{{ zsh_config_dir }}"
     state: directory
+    mode: "0700"
 
-- name: ln -sf links/share {{ zsh_config_dir }}/share/
+- name: Symlink ./links/share to {{ zsh_config_dir }}/share
   ansible.builtin.file:
     src: "{{ zsh_link_base }}/links/share"
     dest: "{{ zsh_config_dir }}/share"
     state: link
 
-- name: ln -sf links/{{ ansible_os_family|lower }}.zsh {{ zsh_config_dir }}/os.zsh
+- name: Symlink ./links/{{ ansible_os_family | lower }}.zsh to {{ zsh_config_dir }}/os.zsh
   ansible.builtin.file:
     src: "{{ item }}"
     dest: "{{ zsh_config_dir }}/os.zsh"
     state: link
   with_fileglob:
-    - "{{ zsh_link_base }}/links/{{ ansible_os_family|lower }}.zsh"
+    - "{{ zsh_link_base }}/links/{{ ansible_os_family | lower }}.zsh"
 
-- name: mkdir {{ zsh_config_dir }}/functions
-  file:
+- name: Create {{ zsh_config_dir }}/functions
+  ansible.builtin.file:
     path: "{{ zsh_config_dir }}/functions"
     state: directory
+    mode: "0700"
 
-- name: clone https://github.com/sindresorhus/pure
-  git:
+- name: Clone https://github.com/sindresorhus/pure under {{ zsh_config_dir }}/pure
+  ansible.builtin.git:
     repo: https://github.com/sindresorhus/pure
     dest: "{{ zsh_config_dir }}/pure"
