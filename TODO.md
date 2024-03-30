@@ -1,2 +1,1 @@
 - [ ] fzf + git integration
-- [ ] dependabot configuration for poetry

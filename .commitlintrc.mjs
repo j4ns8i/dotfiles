@@ -6,7 +6,7 @@ const Configuration = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'type-enum': [2, 'always', ['docs', 'feat', 'fix', 'ops', 'refactor', 'revert']],
-    'scope-enum': [2, 'always', ['ansible', 'venv', ...roles]],
+    'scope-enum': [2, 'always', ['ansible', 'deps', ...roles]],
   },
 };
 
