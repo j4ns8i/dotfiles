@@ -11,6 +11,11 @@ SYNC_PLAYBOOK    := $(or $(wildcard playbooks/$(KERNEL).yaml),playbooks/sync.yam
 help: ## Show this help text
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "; printf "Usage:\n"}; {printf "  \033[36m%-20s\033[0m    %s\n", $$1, $$2}'
 
+.PHONY: lock
+lock:
+	$(POETRY) lock
+	$(POETRY) export -f requirements.txt > requirements.txt
+
 .PHONY: deps
 deps: $(POETRY) install-ansible-collections ## Install dependencies for using this repository
 
