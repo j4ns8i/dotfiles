@@ -11,13 +11,8 @@ SYNC_PLAYBOOK    := $(or $(wildcard playbooks/$(KERNEL).yaml),playbooks/sync.yam
 help: ## Show this help text
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "; printf "Usage:\n"}; {printf "  \033[36m%-20s\033[0m    %s\n", $$1, $$2}'
 
-.PHONY: lock
-lock:
-	$(POETRY) lock
-	$(POETRY) export -f requirements.txt > requirements.txt
-
 .PHONY: deps
-deps: $(POETRY) install-ansible-collections ## Install dependencies for using this repository
+deps: $(POETRY) install-poetry-project install-ansible-collections ## Install dependencies for using this repository
 
 # Poetry is expected to be installed system-wide via pipx, but for convenience
 # while bootstrapping, it will be installed in a virtualenv if needed.
@@ -28,6 +23,11 @@ $(POETRY): $(TMP_VENV)
 
 .venv:
 	python3 -m venv $@
+
+.PHONY: install-poetry-project
+install-poetry-project:
+	@echo "Installing Poetry project..."
+	$(POETRY) install
 
 .PHONY: install-ansible-collections
 install-ansible-collections:
@@ -41,6 +41,11 @@ sync: $(POETRY) ## Run the main sync playbook to install and configure applicati
 		-e "dotfiles_home_dir=$(HOME)" \
 		$(ANSIBLE_TAGS) \
 		$(SYNC_PLAYBOOK)
+
+.PHONY: lock
+lock:
+	$(POETRY) lock
+	$(POETRY) export -f requirements.txt > requirements.txt
 
 .PHONY: update-deps
 update-deps: $(POETRY) ## Update dependencies for Ansible playbooks
