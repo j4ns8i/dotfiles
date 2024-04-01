@@ -82,10 +82,6 @@ add_to_path "$HOME/.cargo/bin"
 add_to_path "$HOME/.local/bin"
 add_to_path "$GOPATH/bin"
 
-command -v pyenv &>/dev/null && eval "$(pyenv init -)"
-command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
-command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
-
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
@@ -103,6 +99,10 @@ zstyle :compinstall filename '/Users/jsmalkowski/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+command -v pyenv &>/dev/null && eval "$(pyenv init -)"
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
 alias l='ls --color -AF'
 alias ll='ls --color -AlhF'
