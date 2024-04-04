@@ -43,3 +43,6 @@
 
     - role: neovim
       tags: neovim
+
+    - role: gcloud
+      tags: gcloud

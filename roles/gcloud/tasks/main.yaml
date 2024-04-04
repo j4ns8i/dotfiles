@@ -1,0 +1,46 @@
+---
+
+- name: Check if gcloud is installed
+  ansible.builtin.command: which gcloud
+  changed_when: false
+  failed_when: false
+  register: gcloud_install_check
+
+  # Run gcloud init after this installation for a manual login process
+- name: Install gcloud
+  when: gcloud_install_check.rc != 0
+  block:
+    - name: Create temporary file to hold gcloud installer script
+      ansible.builtin.tempfile:
+        state: file
+        suffix: _gcloud_installer.tmp
+      register: gcloud_tmp_installer_file
+
+    - name: Grab gcloud installer content
+      ansible.builtin.uri:
+        url: https://sdk.cloud.google.com
+        return_content: true
+        status_code:
+          - 304
+          - 200
+      register: gcloud_tmp_installer_response
+
+    - name: Copy installer content to temporary file
+      ansible.builtin.copy:
+        content: "{{ gcloud_tmp_installer_response.content }}"
+        dest: "{{ gcloud_tmp_installer_file.path }}"
+        mode: "0755"
+
+    - name: Run gcloud installer script
+      ansible.builtin.script:
+        cmd: "{{ gcloud_tmp_installer_file.path }} --disable-prompts"
+        executable: bash
+
+    - name: Move ~/google-cloud-sdk to ~/.google-cloud-sdk
+      ansible.builtin.command: mv "{{ ansible_user_dir }}/google-cloud-sdk" "{{ ansible_user_dir }}/.google-cloud-sdk"
+
+    - name: Link zsh completion
+      ansible.builtin.file:
+        state: link
+        src: "{{ ansible_user_dir }}/.google-cloud-sdk/completion.zsh.inc"
+        dest: "{{ ansible_user_dir }}/.config/zsh/completions/completion.zsh.inc"
