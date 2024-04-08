@@ -52,3 +52,12 @@ vim.o.undodir = vim.fs.normalize('~/.nvim-undo')
 vim.o.guicursor = '' -- Use block cursor
 
 vim.o.cursorline = true
+
+-- By default, neovim only associates .tf viles with the terraform filetype if
+-- there are terraform contents, meaning new files aren't recognized. I don't
+-- care about other tf filetypes like TinyFugue: https://github.com/neovim/neovim/blob/v0.9.5/runtime/lua/vim/filetype/detect.lua#L1298
+vim.filetype.add({
+  extension = {
+    tf = 'terraform'
+  },
+})
