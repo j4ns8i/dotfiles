@@ -24,7 +24,7 @@ export FZF_DEFAULT_OPTS='--cycle --exact --border --info=inline
 '
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='--height=~20'
-export FZF_CTRL_T_OPTS='--height=~20'
+export FZF_CTRL_T_OPTS='--height=~20 --walker=file,follow'
 export FZF_CTRL_R_OPTS='--height=~20'
 # TODO: make git+fzf aliases
 
