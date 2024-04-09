@@ -18,6 +18,12 @@
     state: directory
     mode: "0700"
 
+- name: Create {{ zsh_config_dir }}/completions
+  ansible.builtin.file:
+    path: "{{ zsh_config_dir }}/completions"
+    state: directory
+    mode: "0700"
+
 - name: Symlink ./links/share to {{ zsh_config_dir }}/share
   ansible.builtin.file:
     src: "{{ zsh_link_base }}/links/share"
