@@ -60,25 +60,30 @@ autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
 export LANG=en_US.UTF-8
-export BASE=~/code
 export EDITOR=nvim
-export GOPATH=${BASE}
+export GOPATH="$HOME/code"
 export GIT_PAGER="less -FRX"
 export LESS="-R -j 10"
-export SRC=${BASE}/src
-export TRACKS_DIR=${HOME}/scratch/tracks
+export SRC="$GOPATH/src"
+export TRACKS_DIR=$HOME/scratch/tracks
 # export PURE_PREPROMPT='%F{blue}%2~%f'
 export WORDCHARS=${WORDCHARS/\/}
-export PYENV_ROOT=~/.pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 
 # Add new paths to $PATH if they dont already exist
 function add_to_path() {
-    [[ ${${(s.:.)PATH}[(i)${@}]} -gt ${#${(s.:.)PATH}} ]] && export PATH="${@}:${PATH}"
+    local path_to_add="${1}"
+    case ":$PATH:" in
+      *":${path_to_add}:"*) ;;
+      *) export PATH="${path_to_add}:$PATH" ;;
+    esac
 }
 
 add_to_path "/usr/local/bin"
 add_to_path "/usr/local/sbin"
 add_to_path "$GOPATH/bin"
+add_to_path "$PNPM_HOME"
 [[ -d "$HOME/.cargo/bin" ]] && add_to_path "$HOME/.cargo/bin"
 [[ -d "$HOME/.local/bin" ]] && add_to_path "$HOME/.local/bin"
 [[ -d "$HOME/.google-cloud-sdk/bin" ]] && add_to_path "$HOME/.google-cloud-sdk/bin"
