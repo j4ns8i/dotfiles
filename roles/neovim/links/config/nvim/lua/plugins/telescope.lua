@@ -9,7 +9,7 @@ return {
     { 'folke/trouble.nvim' },
   },
   keys = {
-    { '<leader>pf', function() require('telescope.builtin').find_files() end },
+    { '<leader>pf', function() require('telescope.builtin').find_files({ hidden = true }) end },
     { '<leader>ph', function() require('telescope.builtin').highlights() end },
     { '<leader>pg', function() require('telescope.builtin').git_files() end },
     { '<leader>ps', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
@@ -32,6 +32,7 @@ return {
               ['<c-k>'] = lga.quote_prompt(),
               ['<c-i>'] = lga.quote_prompt({ postfix = ' --iglob ' }),
               ['<c-f>'] = lga.quote_prompt({ postfix = ' -t ' }),
+              ['<c-h>'] = lga.quote_prompt({ postfix = ' --hidden ' }),
             },
           },
         },
