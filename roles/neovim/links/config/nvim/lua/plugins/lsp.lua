@@ -7,7 +7,7 @@ return {
     },
     lazy = false,
     keys = {
-      { '<leader>wl', vim.cmd.LspInfo },
+      { '<leader>wl', vim.cmd.LspInfo, desc = 'Open LspInfo window' },
     },
     config = function()
       local c = require('justin.colors')

@@ -13,15 +13,16 @@ return {
       },
     },
     keys = {
-      { '<leader>cpc', vim.cmd.CopilotChat,        mode = { 'n', 'v' } },
-      { '<leader>cpe', vim.cmd.CopilotChatExplain, mode = { 'v' } },
+      { '<leader>cpc', vim.cmd.CopilotChat,        mode = { 'n', 'v' }, desc = 'Copilot Chat' },
+      { '<leader>cpe', vim.cmd.CopilotChatExplain, mode = { 'v' }, desc = 'Copilot Explain' },
       {
         '<leader>cp%',
         function()
           vim.cmd('normal! ggVG');
           vim.cmd.CopilotChat();
         end,
-        mode = { 'n' }
+        mode = { 'n' },
+        desc = 'Copilot chat (with entire buffer)',
       },
     },
     cmd = {

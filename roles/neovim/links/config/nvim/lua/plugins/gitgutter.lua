@@ -15,6 +15,14 @@ end
 return {
   'airblade/vim-gitgutter',
   dependencies = { 'justin' },
+  keys = {
+    { '<leader>ggs', '<cmd>GitGutterStageHunk<cr>',   desc = 'Stage hunk' },
+    { '<leader>ggu', '<cmd>GitGutterUndoHunk<cr>',    desc = 'Undo hunk' },
+    { '<leader>ggp', '<cmd>GitGutterPreviewHunk<cr>', desc = 'Preview hunk' },
+    { '<leader>j',   '<cmd>GitGutterNextHunk<cr>',    desc = 'GitGutter Next hunk' },
+    { '<leader>k',   '<cmd>GitGutterPrevHunk<cr>',    desc = 'GitGutter Previous hunk' },
+  },
+  event = 'VeryLazy',
   config = function()
     -- Use rounded window for previews
     set_rounded_window()
@@ -23,11 +31,5 @@ return {
 
     -- Don't set mappings by default
     vim.g.gitgutter_map_keys = 0
-
-    vim.keymap.set('n', '<leader>ggs', vim.cmd.GitGutterStageHunk)
-    vim.keymap.set('n', '<leader>ggu', vim.cmd.GitGutterUndoHunk)
-    vim.keymap.set('n', '<leader>ggp', vim.cmd.GitGutterPreviewHunk)
-    vim.keymap.set('n', '<leader>j',   vim.cmd.GitGutterNextHunk)
-    vim.keymap.set('n', '<leader>k',   vim.cmd.GitGutterPrevHunk)
   end
 }

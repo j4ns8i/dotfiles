@@ -1,9 +1,9 @@
 return {
   'tpope/vim-fugitive',
   keys = {
-    { 'gb',  '<cmd>Git blame<cr>' },
-    { 'gcv', '<cmd>Gvdiffsplit!<cr>' }, -- (g)it (c)onflict resolve (v)ertical
-    { 'gch', '<cmd>Gdiffsplit!<cr>' },  -- (g)it (c)onflict resolve (h)orizontal
+    { '<leader>gb',  '<cmd>Git blame<cr>',    desc = "Git blame" },
+    { '<leader>gcv', '<cmd>Gvdiffsplit!<cr>', desc = "Git vertical diff split" }, -- (g)it (c)onflict resolve (v)ertical
+    { '<leader>gch', '<cmd>Gdiffsplit!<cr>',  desc = "Git horizontal diff split" }, -- (g)it (c)onflict resolve (h)orizontal
   },
   cmd = {
     'Git',

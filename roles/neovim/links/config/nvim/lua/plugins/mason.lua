@@ -20,7 +20,7 @@ return {
     },
     lazy = false,
     keys = {
-      { '<leader>wm', '<cmd>Mason<cr>' },
+      { '<leader>wm', '<cmd>Mason<cr>', desc = 'Open Mason window'},
     },
     dependencies = { 'justin' },
     config = function(_, opts)

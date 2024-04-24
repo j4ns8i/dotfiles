@@ -5,10 +5,11 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
+      'folke/which-key.nvim',
     },
     keys = {
-      { '<leader>ntf', '<cmd>Neotree reveal_file=%s<cr>' },
-      { '<leader>ntt', '<cmd>Neotree toggle<cr>' },
+      { '<leader>n<leader>', '<cmd>Neotree reveal_file=%s<cr>', desc = "Reveal file" },
+      { '<leader>nt',        '<cmd>Neotree toggle<cr>',         desc = "Toggle" },
     },
     cmd = 'Neotree',
     init = function()
@@ -24,6 +25,11 @@ return {
           end
         end
       })
+
+      local wk = require('which-key')
+      wk.register({
+        ["<leader>n"] = "Neotree",
+      })
     end,
     opts = {
       filesystem = {
@@ -36,6 +42,7 @@ return {
               end,
               desc = "git status"
             },
+            [","] = 'toggle_node'
           },
         },
       },
