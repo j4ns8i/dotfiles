@@ -1,12 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
-    commit-message: "ops(deps): update python packages"
+    commit-message: "chore(deps): update python packages"
     directory: "/"
     schedule:
       interval: "daily"
   - package-ecosystem: "npm"
-    commit-message: "ops(deps): update npm packages"
+    commit-message: "chore(deps): update npm packages"
     directory: "/"
     schedule:
       interval: "daily"
