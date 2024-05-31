@@ -42,6 +42,10 @@ return {
               end,
               desc = "git status"
             },
+            ["ga"] = {
+              "git_add_file",
+              desc = "git add file"
+            },
             [","] = 'toggle_node'
           },
         },

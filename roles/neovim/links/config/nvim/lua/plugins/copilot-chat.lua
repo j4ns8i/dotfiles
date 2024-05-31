@@ -28,6 +28,12 @@ return {
     cmd = {
       'CopilotChat',
       'CopilotChatExplain',
+      'CopilotChatFix',
+      'CopilotChatFixDiagnostic',
+      'CopilotChatReview',
+      'CopilotChatTests',
+      'CopilotChatDocs',
+      'CopilotChatOptimize',
     }
   },
 }

@@ -8,6 +8,7 @@ vim.o.updatetime = 50        -- Update every 100ms (default is 4s)
 vim.o.relativenumber = true    -- Show relative line numbers
 vim.o.number         = true    -- But still show current line number
 vim.o.signcolumn     = 'yes:1' -- Always show 1 (pair of) columns for signs (gitgutter)
+vim.o.colorcolumn    = '+1'    -- Highlight the column at tw+1
 
 vim.o.listchars = 'tab:  ,trail:·,extends:»,nbsp:␣'
 vim.o.list      = true
@@ -55,7 +56,7 @@ vim.o.undofile = true -- Persist undo information
 
 -- Sometimes I like to wipe out ~/.local/state/nvim for testing installations
 -- and whatnot. I don't want to lose my undo history just because of that.
-vim.o.undodir = vim.fs.normalize('~/.nvim-undo')
+-- vim.o.undodir = vim.fs.normalize('~/.nvim-undo')
 
 vim.o.guicursor = '' -- Use block cursor
 

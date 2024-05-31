@@ -56,8 +56,6 @@ return {
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', 'gc', vim.lsp.buf.incoming_calls, bufopts)
         vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<leader>re', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<leader>d', vim.lsp.buf.type_definition, bufopts)

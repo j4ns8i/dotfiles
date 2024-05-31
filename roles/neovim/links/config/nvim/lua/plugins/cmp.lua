@@ -53,6 +53,7 @@ return {
     event = { 'InsertEnter', 'CmdlineEnter' },
     config = function()
       set_highlights()
+      vim.opt.completeopt = { 'menu', 'menuone', 'preview' }
       local cmp = require('cmp')
       cmp.setup({
         snippet = {
