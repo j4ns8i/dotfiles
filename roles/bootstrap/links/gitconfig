@@ -48,6 +48,8 @@
 [mergetool.nvimdiff]
     cmd = nvim -d $MERGED $BASE $LOCAL $REMOTE -c 'wincmd J'
     trustExitCode = true
+[rerere]
+    enabled = true
 
 [includeIf "gitdir:work/"]
     path = ~/.config/git/config.work
