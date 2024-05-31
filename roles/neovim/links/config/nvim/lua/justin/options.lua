@@ -40,8 +40,16 @@ vim.opt.nrformats:append { 'alpha' } -- Add or subtract letters with ctrl-a / ct
 
 vim.o.textwidth = 80 -- 80 is just a good width, ok?
 
-vim.opt.formatoptions:append { 'a', 'r', }
-vim.opt.formatoptions:remove { 't', }
+-- see fo-table for other options
+vim.opt.formatoptions = {
+  ['1'] = true, -- break just before one-letter words if possible
+  ['2'] = true, -- use indent of second line for rest of paragraph
+  ['c'] = true, -- auto-wrap comments using textwidth
+  ['q'] = true, -- allow formatting with gq
+  ['j'] = true, -- remove comment leader when joining lines
+  ['o'] = true, -- auto-insert comment leader with o or O
+  ['r'] = true, -- auto-insert comment leader with <cr> in insert mode
+}
 
 vim.o.undofile = true -- Persist undo information
 
