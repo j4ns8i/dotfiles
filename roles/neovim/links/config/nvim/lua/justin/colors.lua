@@ -7,6 +7,8 @@ end
 
 vim.g.colors_name = 'justin'
 
+local none = 'none';
+
 local black       = 0;
 local darkred     = 1;
 local darkgreen   = 2;
@@ -112,7 +114,7 @@ hi('Search',             { ctermfg = black, ctermbg = darkblue })
 hi('Directory',          { ctermfg = darkblue })
 hi('MatchParen',         { ctermfg = black, ctermbg = lightgray })
 hi('ColorColumn',        { ctermfg = black, ctermbg = darkgray })
-hi('SignColumn',         { ctermbg = black })
+hi('SignColumn',         { ctermbg = none })
 
 hi('Folded',             { ctermfg = darkmagenta })
 hi('FoldColumn',         { ctermfg = darkmagenta })
