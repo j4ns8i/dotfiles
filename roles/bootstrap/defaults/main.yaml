@@ -36,6 +36,8 @@ bootstrap_packages:
     - make-doc
     - numlockx
     - fonts-jetbrains-mono
+    - unzip
+    - fontconfig
   darwin:
     - zsh
     - fzf
