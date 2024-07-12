@@ -12,10 +12,11 @@ return {
     { '<leader>pf', function() require('telescope.builtin').find_files({ hidden = true }) end },
     { '<leader>ph', function() require('telescope.builtin').highlights() end },
     { '<leader>pg', function() require('telescope.builtin').git_files() end },
+    { '<leader>pe', function() require('telescope.builtin').help_tags() end },
     { '<leader>ps', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
   },
   config = function()
-    local trouble = require('trouble.providers.telescope')
+    local trouble = require('trouble.sources.telescope')
     local lga = require('telescope-live-grep-args.actions')
     local opts = {
       extensions = {
@@ -40,10 +41,10 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<c-q>"] = trouble.open_with_trouble,
+            ["<c-q>"] = trouble.open,
           },
           n = {
-            ["<c-q>"] = trouble.open_with_trouble,
+            ["<c-q>"] = trouble.open,
           },
         },
         layout_strategy = 'vertical',
