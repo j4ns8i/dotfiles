@@ -3,7 +3,7 @@ vim.o.updatetime = 50        -- Update every 100ms (default is 4s)
 
 -- TODO read truecolors from file rather than relying on cterm colors. This
 -- has the benefit of allowing more than just 16 colors
-vim.o.termguicolors = false
+vim.o.termguicolors = true
 
 vim.o.relativenumber = true    -- Show relative line numbers
 vim.o.number         = true    -- But still show current line number

@@ -7,7 +7,7 @@ end
 
 vim.g.colors_name = 'justin'
 
-local none = 'none';
+local none        = 'none';
 
 local black       = 0;
 local darkred     = 1;
@@ -27,24 +27,46 @@ local magenta     = 13;
 local cyan        = 14;
 local white       = 15;
 
-local M = {
-  black       = black,
-  darkred     = darkred,
-  darkgreen   = darkgreen,
-  darkyellow  = darkyellow,
-  darkblue    = darkblue,
-  darkmagenta = darkmagenta,
-  darkcyan    = darkcyan,
-  lightgray   = lightgray,
+local M           = {
+  black          = black,
+  darkred        = darkred,
+  darkgreen      = darkgreen,
+  darkyellow     = darkyellow,
+  darkblue       = darkblue,
+  darkmagenta    = darkmagenta,
+  darkcyan       = darkcyan,
+  lightgray      = lightgray,
 
-  darkgray    = darkgray,
-  red         = red,
-  green       = green,
-  yellow      = yellow,
-  blue        = blue,
-  magenta     = magenta,
-  cyan        = cyan,
-  white       = white,
+  darkgray       = darkgray,
+  red            = red,
+  green          = green,
+  yellow         = yellow,
+  blue           = blue,
+  magenta        = magenta,
+  cyan           = cyan,
+  white          = white,
+
+  guiblack       = '#15171d',
+  guired         = '#c45361',
+  guigreen       = '#607f55',
+  guiyellow      = '#d6ae86',
+  guiblue        = '#4b799e',
+  guimagenta     = '#9b68b3',
+  guicyan        = '#487e6d',
+  guilightgray   = '#5d6068',
+
+  guidarkgray    = '#3b3e46',
+  guidarkred     = '#d4737f',
+  guidarkgreen   = '#90b782',
+  guidarkyellow  = '#ffcda4',
+  guidarkblue    = '#86a5be',
+  guidarkmagenta = '#8f729a',
+  guidarkcyan    = '#76af9d',
+  guiwhite       = '#c7d0e0',
+
+  -- for more ui depth
+  guidarkgray2   = '#222329',
+  guidarkgray4   = '#191a20',
 }
 
 local function hi(name, opts)
@@ -53,90 +75,89 @@ end
 
 M.hi = hi
 
-hi('Normal',             { ctermfg = white })
-hi('Pmenu',              { ctermfg = white })
-hi('PmenuSel',           { ctermfg = black, ctermbg = darkblue })
-hi('PmenuThumb',         { ctermbg = darkblue })
-hi('WinSeparator',       { ctermfg = darkgray })
+hi('Normal',           { ctermfg = white, fg = M.guiwhite })
+hi('Pmenu',            { ctermfg = white, fg = M.guiwhite })
+hi('PmenuSel',         { ctermfg = black, ctermbg = darkblue, fg = M.guiblack, bg = M.guidarkblue })
+hi('PmenuThumb',       { ctermbg = darkblue, bg = M.guidarkblue })
+hi('WinSeparator',     { ctermfg = darkgray, fg = M.guidarkgray })
+hi('NormalFloat',      { ctermbg = black, bg = M.guiblack })
 
-hi('Identifier',         { link = 'Normal' })
-hi('Function',           { italic = true })
-hi('Constant',           { ctermfg = darkyellow })
-hi('Character',          { ctermfg = darkmagenta })
-hi('Statement',          { ctermfg = darkcyan, bold = true })
-hi('Keyword',            { ctermfg = darkcyan })
-hi('Conditional',        { link = 'Keyword' })
-hi('Boolean',            { link = 'Conditional' })
-hi('Operator',           { link = 'Conditional' })
-hi('Delimiter',          { ctermfg = darkmagenta })
-hi('String',             { ctermfg = darkgreen })
-hi('@lsp.type.string',   { link = 'String' })
-hi('Number',             { ctermfg = darkyellow })
-hi('Todo',               { italic = true, bold = true })
-hi('Type',               { ctermfg = darkyellow })
+hi('Identifier',       { link = 'Normal' })
+hi('Function',         { italic = true })
+hi('Constant',         { ctermfg = darkyellow, fg = M.guidarkyellow })
+hi('Character',        { ctermfg = darkmagenta, fg = M.guidarkmagenta })
+hi('Statement',        { ctermfg = darkcyan, bold = true, fg = M.guidarkcyan })
+hi('Keyword',          { ctermfg = darkcyan, fg = M.guidarkcyan })
+hi('Conditional',      { link = 'Keyword' })
+hi('Boolean',          { link = 'Conditional' })
+hi('Operator',         { link = 'Conditional' })
+hi('Delimiter',        { ctermfg = darkmagenta, fg = M.guidarkmagenta })
+hi('String',           { ctermfg = darkgreen, fg = M.guidarkgreen })
+hi('@lsp.type.string', { link = 'String' })
+hi('Number',           { ctermfg = darkyellow, fg = M.guidarkyellow })
+hi('Todo',             { italic = true, bold = true })
+hi('Type',             { ctermfg = darkyellow, fg = M.guidarkyellow })
 
-hi('DiagnosticError',    { ctermfg = red, italic = true }) -- for diagnostics obvs
-hi('DiagnosticWarn',     { ctermfg = yellow, italic = true })
-hi('DiagnosticInfo',     { ctermfg = blue, italic = true })
-hi('DiagnosticHint',     { ctermfg = lightgray, italic = true })
-hi('DiagnosticOk',       { ctermfg = green, italic = true })
-hi('ErrorMsg',           { ctermfg = red })  -- command line messages
-hi('WarningMsg',         { ctermfg = yellow })
-hi('Error',              { link = 'ErrorMsg' }) -- used infrequently (ex: luaParenError)
+hi('DiagnosticError',  { ctermfg = red, italic = true, fg = M.guired }) -- for diagnostics obvs
+hi('DiagnosticWarn',   { ctermfg = yellow, italic = true, fg = M.guiyellow })
+hi('DiagnosticInfo',   { ctermfg = blue, italic = true, fg = M.guiblue })
+hi('DiagnosticHint',   { ctermfg = lightgray, italic = true, fg = M.guilightgray })
+hi('DiagnosticOk',     { ctermfg = green, italic = true, fg = M.guigreen })
+hi('ErrorMsg',         { ctermfg = red, fg = M.guired }) -- command line messages
+hi('WarningMsg',       { ctermfg = yellow, fg = M.guiyellow })
+hi('Error',            { link = 'ErrorMsg' })               -- used infrequently (ex: luaParenError)
 
-hi('Comment',            { ctermfg = lightgray })
-hi('Ignore',             { link = 'Comment' })
+hi('Comment',          { ctermfg = lightgray, fg = M.guilightgray })
+hi('Ignore',           { link = 'Comment' })
 
-hi('LineNr',             { ctermfg = darkgray })
-hi('CursorLine',         { ctermbg = darkgray })
-hi('CursorLineNr',       { ctermfg = lightgray })
-hi('Cursor',             { ctermfg = lightgray })
-hi('CursorColumn',       { ctermfg = white, ctermbg = darkgray })
-hi('NonText',            { link = 'LineNr' })
+hi('LineNr',           { ctermfg = darkgray, fg = M.guidarkgray })
+hi('CursorLine',       { ctermbg = darkgray, bg = M.guidarkgray4 })
+hi('CursorLineNr',     { ctermfg = lightgray, fg = M.guilightgray })
+hi('Cursor',           { ctermfg = lightgray, fg = M.guilightgray })
+hi('CursorColumn',     { ctermfg = white, ctermbg = darkgray, fg = M.guiwhite, bg = M.guidarkgray })
+hi('NonText',          { link = 'LineNr' })
 
-hi('PreProc',            { ctermfg = yellow })
+hi('PreProc',          { ctermfg = yellow, fg = M.guiyellow })
 
-hi('Special',            { ctermfg = darkcyan })
-hi('SpecialKey',         { link = 'Special' })
-hi('Conceal',            { link = 'Special' })
+hi('Special',          { ctermfg = darkcyan, fg = M.guidarkcyan })
+hi('SpecialKey',       { link = 'Special' })
+hi('Conceal',          { link = 'Special' })
 
-hi('Underlined',         { underline = true })
-hi('TabLine',            { ctermfg = lightgray })
-hi('TabLineFill',        { ctermfg = lightgray })
-hi('TabLineSel',         { ctermfg = darkblue })
+hi('Underlined',       { underline = true })
+hi('TabLine',          { ctermfg = lightgray, fg = M.guilightgray })
+hi('TabLineFill',      { ctermfg = lightgray, fg = M.guilightgray })
+hi('TabLineSel',       { ctermfg = darkblue, fg = M.guidarkblue })
 
-hi('Title',              { ctermfg = darkcyan, bold = true })
+hi('Title',            { ctermfg = darkcyan, bold = true, fg = M.guidarkcyan })
+hi('Visual',           { ctermfg = white, ctermbg = darkgray, fg = M.guiwhite, bg = M.guidarkgray })
+hi('IncSearch',        { ctermfg = black, ctermbg = darkcyan, fg = M.guiblack, bg = M.guidarkcyan })
+hi('Search',           { ctermfg = black, ctermbg = darkblue, fg = M.guiblack, bg = M.guidarkblue })
 
-hi('Visual',             { ctermfg = white, ctermbg = darkgray })
-hi('IncSearch',          { ctermfg = black, ctermbg = darkcyan })
-hi('Search',             { ctermfg = black, ctermbg = darkblue })
+hi('Directory',        { ctermfg = darkblue, fg = M.guidarkblue })
+hi('MatchParen',       { ctermfg = black, ctermbg = lightgray, fg = M.guiblack, bg = M.guilightgray })
+hi('ColorColumn',      { ctermfg = black, ctermbg = darkgray, fg = M.guiblack, bg = M.guidarkgray4 })
+hi('SignColumn',       { ctermbg = none, bg = M.guinone })
 
-hi('Directory',          { ctermfg = darkblue })
-hi('MatchParen',         { ctermfg = black, ctermbg = lightgray })
-hi('ColorColumn',        { ctermfg = black, ctermbg = darkgray })
-hi('SignColumn',         { ctermbg = none })
+hi('Folded',           { ctermfg = darkmagenta, fg = M.guidarkmagenta })
+hi('FoldColumn',       { ctermfg = darkmagenta, fg = M.guidarkmagenta })
 
-hi('Folded',             { ctermfg = darkmagenta })
-hi('FoldColumn',         { ctermfg = darkmagenta })
+hi('WildMenu',         { ctermbg = green, ctermfg = black, bg = M.guigreen, fg = M.guiblack })
+hi('ModeMsg',          { ctermfg = darkgreen, fg = M.guidarkgreen })
+hi('Question',         { ctermfg = blue, fg = M.guiblue })
+hi('MoreMsg',          { link = 'Question' })
 
-hi('WildMenu',           { ctermbg = green, ctermfg = black })
-hi('ModeMsg',            { ctermfg = darkgreen })
+hi('Added',            { ctermfg = darkgreen, fg = M.guidarkgreen })
+hi('DiffAdd',          { ctermfg = darkgreen, fg = M.guidarkgreen })
+hi('DiffChange',       { ctermfg = lightgray, fg = M.guilightgray })
+hi('Removed',          { ctermfg = darkred, fg = M.guidarkred })
+hi('DiffDelete',       { ctermfg = darkred, fg = M.guidarkred })
+hi('DiffText',         { ctermfg = darkblue, fg = M.guidarkblue })
 
-hi('Question',           { ctermfg = blue })
-hi('MoreMsg',            { link = 'Question' })
-
-hi('Added',              { ctermfg = darkgreen })
-hi('DiffAdd',            { ctermfg = darkgreen })
-hi('DiffChange',         { ctermfg = lightgray })
-hi('Removed',            { ctermfg = darkred })
-hi('DiffDelete',         { ctermfg = darkred })
-hi('DiffText',           { ctermfg = darkblue })
-
-hi('htmlLink',           { ctermfg = darkred })
-hi('htmlBold',           { ctermfg = darkred, bold = true })
-hi('htmlItalic',         { ctermfg = darkred, italic = true })
-hi('htmlTagName',        { ctermfg = darkblue })
-hi('htmlTag',            { ctermfg = lightgray })
-hi('htmlEndTag',         { link = 'htmlTag' })
+hi('htmlLink',         { ctermfg = darkred, fg = M.guidarkred })
+hi('htmlBold',         { ctermfg = darkred, bold = true, fg = M.guidarkred })
+hi('htmlItalic',       { ctermfg = darkred, italic = true, fg = M.guidarkred })
+hi('htmlTagName',      { ctermfg = darkblue, fg = M.guidarkblue })
+hi('htmlTag',          { ctermfg = lightgray, fg = M.guilightgray })
+hi('htmlEndTag',       { link = 'htmlTag' })
 
 return M

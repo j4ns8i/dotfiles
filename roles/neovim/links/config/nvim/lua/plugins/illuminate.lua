@@ -17,11 +17,11 @@ return {
   ft = filetypes,
   config = function()
     local c = require('justin.colors')
-    c.hi('IlluminatedWordText', { ctermbg = c.darkgray })
+    c.hi('IlluminatedWordText', { ctermbg = c.darkgray, bg = c.darkgray1 })
     c.hi('IlluminatedWordRead', { link = 'IlluminatedWordText' })
     c.hi('IlluminatedWordWrite', { link = 'IlluminatedWordText' })
     local opts = {
-      delay = 750,
+      delay = 250,
       filetypes_allowlist = filetypes,
       filetypes_denylist = {},
       min_count_to_highlight = 2,

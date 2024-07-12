@@ -7,9 +7,9 @@ end
 
 local function set_highlights()
   local c = require('justin.colors')
-  c.hi('GitGutterAdd', { ctermfg = c.darkgreen })
-  c.hi('GitGutterChange', { ctermfg = c.darkyellow })
-  c.hi('GitGutterDelete', { ctermfg = c.darkred })
+  c.hi('GitGutterAdd', { ctermfg = c.darkgreen, fg = c.guidarkgreen })
+  c.hi('GitGutterChange', { ctermfg = c.darkyellow, fg = c.guidarkyellow })
+  c.hi('GitGutterDelete', { ctermfg = c.darkred, fg = c.guidarkred })
 end
 
 return {

@@ -1,11 +1,45 @@
 local function set_highlights(c)
-  c.hi('LuaLineDiffAdd',         { ctermfg = c.darkgreen, ctermbg = c.lightgray })
-  c.hi('LuaLineDiffChange',      { ctermfg = c.darkblue, ctermbg = c.lightgray })
-  c.hi('LuaLineDiffDelete',      { ctermfg = c.darkred, ctermbg = c.lightgray })
-  c.hi('LuaLineDiagnosticError', { ctermfg = c.darkred, ctermbg = c.lightgray })
-  c.hi('LuaLineDiagnosticWarn',  { ctermfg = c.darkyellow, ctermbg = c.lightgray })
-  c.hi('LuaLineDiagnosticInfo',  { ctermfg = c.white, ctermbg = c.lightgray })
-  c.hi('LuaLineDiagnosticHint',  { ctermfg = c.darkblue, ctermbg = c.lightgray })
+  c.hi('LuaLineDiffAdd',         { ctermfg = c.darkgreen, ctermbg = c.lightgray, fg = c.guidarkgreen, bg = c.guilightgray})
+  c.hi('LuaLineDiffChange',      { ctermfg = c.darkblue, ctermbg = c.lightgray, fg = c.guidarkblue, bg = c.guilightgray})
+  c.hi('LuaLineDiffDelete',      { ctermfg = c.darkred, ctermbg = c.lightgray, fg = c.guidarkred, bg = c.guilightgray})
+  c.hi('LuaLineDiagnosticError', { ctermfg = c.darkred, ctermbg = c.lightgray, fg = c.guidarkred, bg = c.guilightgray})
+  c.hi('LuaLineDiagnosticWarn',  { ctermfg = c.darkyellow, ctermbg = c.lightgray, fg = c.guidarkyellow, bg = c.guilightgray})
+  c.hi('LuaLineDiagnosticInfo',  { ctermfg = c.white, ctermbg = c.lightgray, fg = c.guiwhite, bg = c.guilightgray})
+  c.hi('LuaLineDiagnosticHint',  { ctermfg = c.darkblue, ctermbg = c.lightgray, fg = c.guidarkblue, bg = c.guilightgray })
+end
+
+-- component_colors uses c.<color> if 'termguicolors' is not set, otherwise it
+-- uses c.gui<color>.
+local function toggled_component_colors(c)
+  if vim.opt.termguicolors:get() then
+    return {
+      black       = c.guiblack,
+      darkgray    = c.guidarkgray,
+      lightgray   = c.guilightgray,
+      white       = c.guiwhite,
+      darkred     = c.guidarkred,
+      darkgreen   = c.guidarkgreen,
+      darkyellow  = c.guidarkyellow,
+      darkblue    = c.guidarkblue,
+      darkmagenta = c.guidarkmagenta,
+      darkcyan    = c.guidarkcyan,
+      darkwhite   = c.guidarkwhite,
+    }
+  else
+    return {
+      black       = c.black,
+      darkgray    = c.darkgray,
+      lightgray   = c.lightgray,
+      white       = c.white,
+      darkred     = c.darkred,
+      darkgreen   = c.darkgreen,
+      darkyellow  = c.darkyellow,
+      darkblue    = c.darkblue,
+      darkmagenta = c.darkmagenta,
+      darkcyan    = c.darkcyan,
+      darkwhite   = c.darkwhite,
+    }
+  end
 end
 
 return {
@@ -14,37 +48,38 @@ return {
   opts = function()
     local c = require('justin.colors')
     set_highlights(c)
+    local tc = toggled_component_colors(c) -- toggled colors dependent on 'termguicolors'
     local wal = function()
       return {
         normal = {
-          a = { bg = c.darkblue, fg = c.black, gui = 'bold' },
-          b = { bg = c.lightgray, fg = c.white },
-          c = { bg = c.darkgray, fg = c.lightgray }
+          a = { bg = tc.darkblue, fg = tc.black, gui = 'bold' },
+          b = { bg = tc.lightgray, fg = tc.white },
+          c = { bg = tc.darkgray, fg = tc.lightgray }
         },
         insert = {
-          a = { bg = c.darkgreen, fg = c.black, gui = 'bold' },
-          b = { bg = c.lightgray, fg = c.white },
-          c = { bg = c.darkgray, fg = c.lightgray }
+          a = { bg = tc.darkgreen, fg = tc.black, gui = 'bold' },
+          b = { bg = tc.lightgray, fg = tc.white },
+          c = { bg = tc.darkgray, fg = tc.lightgray }
         },
         visual = {
-          a = { bg = c.darkyellow, fg = c.black, gui = 'bold' },
-          b = { bg = c.lightgray, fg = c.white },
-          c = { bg = c.darkgray, fg = c.lightgray }
+          a = { bg = tc.darkyellow, fg = tc.black, gui = 'bold' },
+          b = { bg = tc.lightgray, fg = tc.white },
+          c = { bg = tc.darkgray, fg = tc.lightgray }
         },
         replace = {
-          a = { bg = c.darkred, fg = c.black, gui = 'bold' },
-          b = { bg = c.lightgray, fg = c.white },
-          c = { bg = c.darkgray, fg = c.lightgray }
+          a = { bg = tc.darkred, fg = tc.black, gui = 'bold' },
+          b = { bg = tc.lightgray, fg = tc.white },
+          c = { bg = tc.darkgray, fg = tc.lightgray }
         },
         command = {
-          a = { bg = c.darkmagenta, fg = c.black, gui = 'bold' },
-          b = { bg = c.lightgray, fg = c.white },
-          c = { bg = c.darkgray, fg = c.lightgray }
+          a = { bg = tc.darkmagenta, fg = tc.black, gui = 'bold' },
+          b = { bg = tc.lightgray, fg = tc.white },
+          c = { bg = tc.darkgray, fg = tc.lightgray }
         },
         inactive = {
-          a = { bg = c.darkgray, fg = '#777777', gui = 'bold' },
-          b = { bg = c.lightgray, fg = c.white },
-          c = { bg = c.darkgray, fg = c.lightgray }
+          a = { bg = tc.darkgray, fg = '#777777', gui = 'bold' },
+          b = { bg = tc.lightgray, fg = tc.white },
+          c = { bg = tc.darkgray, fg = tc.lightgray }
         }
       }
     end
