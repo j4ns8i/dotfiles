@@ -1,29 +1,3 @@
-local function set_highlights()
-  local c = require('justin.colors')
-  c.hi('@diff.plus.diff',          { link = 'DiffAdd' })
-  c.hi('@diff.minus.diff',         { link = 'DiffDelete' })
-  c.hi('@lsp.type.lifetime',       { link = 'Statement' })
-  c.hi('@lsp.type.keyword',        { link = 'Keyword' })
-  c.hi('@lsp.type.namespace',      { ctermfg = c.darkblue })
-  c.hi('@lsp.mod.readonly',        { ctermfg = c.darkred })
-  c.hi('@function.make',           { link = 'Normal' })
-  c.hi('@function.call.bash',      { link = 'Normal' })
-  c.hi('@text.reference',          { ctermfg = c.darkcyan })
-  c.hi('@text.literal',            { ctermfg = c.green })
-  c.hi('@markup.list',             { link = 'Delimiter' })
-  c.hi('@markup.link.vimdoc',      { ctermfg = c.darkcyan })
-  c.hi('@markup.heading',          { link = 'Title' })
-  c.hi('@markup.heading.1.vimdoc', { ctermfg = c.darkblue })
-  c.hi('@markup.heading.2.vimdoc', { link = '@markup.heading.1.vimdoc' })
-  c.hi('@markup.heading.3.vimdoc', { link = '@markup.heading.1.vimdoc' })
-  c.hi('@markup.heading.4.vimdoc', { link = '@markup.heading.1.vimdoc' })
-  c.hi('@tag.html',                { ctermfg = c.darkred, bold = true })
-  c.hi('@tag.tsx',                 { link = '@tag.html' })
-  c.hi('@tag.builtin.tsx',         { link = '@tag.html' })
-  c.hi('@tag.attribute.html',      { ctermfg = c.darkblue })
-  c.hi('@tag.attribute.html',      { ctermfg = c.darkblue })
-end
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -101,7 +75,6 @@ return {
     dependencies = { 'justin' },
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
-      set_highlights()
     end
   },
   {

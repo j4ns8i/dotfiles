@@ -125,8 +125,10 @@ hi('ModeMsg',            { ctermfg = darkgreen })
 hi('Question',           { ctermfg = blue })
 hi('MoreMsg',            { link = 'Question' })
 
+hi('Added',              { ctermfg = darkgreen })
 hi('DiffAdd',            { ctermfg = darkgreen })
 hi('DiffChange',         { ctermfg = lightgray })
+hi('Removed',            { ctermfg = darkred })
 hi('DiffDelete',         { ctermfg = darkred })
 hi('DiffText',           { ctermfg = darkblue })
 
