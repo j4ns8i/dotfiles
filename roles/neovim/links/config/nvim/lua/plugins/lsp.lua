@@ -161,6 +161,11 @@ return {
         capabilities = capabilities,
       })
 
+      lspconfig['templ'].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
       lspconfig['ansiblels'].setup({
         on_attach = on_attach,
         capabilities = capabilities,
