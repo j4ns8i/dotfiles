@@ -26,7 +26,7 @@ export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='--height=~20'
 export FZF_CTRL_T_OPTS='--height=~20 --reverse --walker=file,follow'
 export FZF_CTRL_R_OPTS='--height=~20 --reverse'
-# TODO: make git+fzf aliases
+export FZF_GIT_OPTS='--height=~20 --reverse'
 
 # Set command line editing mode to emacs
 bindkey -e
