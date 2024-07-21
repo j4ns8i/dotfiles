@@ -28,52 +28,102 @@ local cyan        = 14;
 local white       = 15;
 
 local M           = {
-  black          = black,
-  darkred        = darkred,
-  darkgreen      = darkgreen,
-  darkyellow     = darkyellow,
-  darkblue       = darkblue,
-  darkmagenta    = darkmagenta,
-  darkcyan       = darkcyan,
-  lightgray      = lightgray,
+  black               = black,
+  darkred             = darkred,
+  darkgreen           = darkgreen,
+  darkyellow          = darkyellow,
+  darkblue            = darkblue,
+  darkmagenta         = darkmagenta,
+  darkcyan            = darkcyan,
+  lightgray           = lightgray,
 
-  darkgray       = darkgray,
-  red            = red,
-  green          = green,
-  yellow         = yellow,
-  blue           = blue,
-  magenta        = magenta,
-  cyan           = cyan,
-  white          = white,
+  darkgray            = darkgray,
+  red                 = red,
+  green               = green,
+  yellow              = yellow,
+  blue                = blue,
+  magenta             = magenta,
+  cyan                = cyan,
+  white               = white,
 
-  guiblack       = '#15171d',
-  guired         = '#c45361',
-  guigreen       = '#607f55',
-  guiyellow      = '#d6ae86',
-  guiblue        = '#4b799e',
-  guimagenta     = '#9b68b3',
-  guicyan        = '#487e6d',
-  guilightgray   = '#5d6068',
+  guiblack            = '#15171d',
+  guired              = '#c45361',
+  guigreen            = '#607f55',
+  guiyellow           = '#d6ae86',
+  guiblue             = '#4b799e',
+  guimagenta          = '#9b68b3',
+  guicyan             = '#487e6d',
+  guilightgray        = '#5d6068',
 
-  guidarkgray    = '#3b3e46',
-  guidarkred     = '#d4737f',
-  guidarkgreen   = '#90b782',
-  guidarkyellow  = '#ffcda4',
-  guidarkblue    = '#86a5be',
-  guidarkmagenta = '#8f729a',
-  guidarkcyan    = '#76af9d',
-  guiwhite       = '#c7d0e0',
+  guidarkgray         = '#3b3e46',
+  guidarkred          = '#d4737f',
+  guidarkgreen        = '#90b782',
+  guidarkyellow       = '#ffcda4',
+  guidarkblue         = '#86a5be',
+  guidarkmagenta      = '#8f729a',
+  guidarkcyan         = '#76af9d',
+  guiwhite            = '#c7d0e0',
 
   -- for more ui depth
-  guidarkgray2   = '#222329',
-  guidarkgray4   = '#191a20',
+  guidarkdarkgray     = '#222329',
+  guidarkdarkdarkgray = '#191a20',
 }
+
+-- dynamic_colors offers a logical color table that changes values based on
+-- termguicolors.
+local function dynamic_colors()
+  if vim.opt.termguicolors:get() then
+    return {
+      black            = M.guiblack,
+      red              = M.guired,
+      green            = M.guigreen,
+      yellow           = M.guiyellow,
+      blue             = M.guiblue,
+      magenta          = M.guimagenta,
+      cyan             = M.guicyan,
+      lightgray        = M.guilightgray,
+
+      darkgray         = M.guidarkgray,
+      darkred          = M.guidarkred,
+      darkgreen        = M.guidarkgreen,
+      darkyellow       = M.guidarkyellow,
+      darkblue         = M.guidarkblue,
+      darkmagenta      = M.guidarkmagenta,
+      darkcyan         = M.guidarkcyan,
+      white            = M.guiwhite,
+
+      darkdarkgray     = M.guidarkdarkgray,
+      darkdarkdarkgray = M.guidarkdarkdarkgray,
+    }
+  else
+    return {
+      black            = M.black,
+      red              = M.red,
+      green            = M.green,
+      yellow           = M.yellow,
+      blue             = M.blue,
+      magenta          = M.magenta,
+      cyan             = M.cyan,
+      lightgray        = M.lightgray,
+
+      darkgray         = M.darkgray,
+      darkred          = M.darkred,
+      darkgreen        = M.darkgreen,
+      darkyellow       = M.darkyellow,
+      darkblue         = M.darkblue,
+      darkmagenta      = M.darkmagenta,
+      darkcyan         = M.darkcyan,
+      white            = M.white,
+
+      darkdarkgray     = M.darkgray,
+      darkdarkdarkgray = M.black,
+    }
+  end
+end
 
 local function hi(name, opts)
   vim.api.nvim_set_hl(0, name, opts)
 end
-
-M.hi = hi
 
 hi('Normal',           { ctermfg = white, fg = M.guiwhite })
 hi('Pmenu',            { ctermfg = white, fg = M.guiwhite })
@@ -160,4 +210,6 @@ hi('htmlTagName',      { ctermfg = darkblue, fg = M.guidarkblue })
 hi('htmlTag',          { ctermfg = lightgray, fg = M.guilightgray })
 hi('htmlEndTag',       { link = 'htmlTag' })
 
+M.dyn = dynamic_colors()
+M.hi = hi
 return M
