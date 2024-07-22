@@ -17,7 +17,7 @@ return {
   ft = filetypes,
   config = function()
     local c = require('justin.colors')
-    c.hi('IlluminatedWordText', { ctermbg = c.darkgray, bg = c.darkgray1 })
+    c.hi('IlluminatedWordText', { ctermbg = c.darkgray, bg = c.guidarkgray })
     c.hi('IlluminatedWordRead', { link = 'IlluminatedWordText' })
     c.hi('IlluminatedWordWrite', { link = 'IlluminatedWordText' })
     local opts = {
