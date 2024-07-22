@@ -65,8 +65,8 @@ local M           = {
   guiwhite            = '#c7d0e0',
 
   -- for more ui depth
-  guidarkdarkgray     = '#222329',
-  guidarkdarkdarkgray = '#191a20',
+  guidarkdarkgray     = '#2e3037',
+  guidarkdarkdarkgray = '#1d1e24',
 }
 
 -- dynamic_colors offers a logical color table that changes values based on
