@@ -75,7 +75,7 @@ local function config()
   vim.diagnostic.config({
     virtual_text = { prefix = '<' },
     float = { border = 'rounded' },
-    signs = false,     -- disable signs in sign column
+    signs = false, -- disable signs in sign column
   })
 
   local lspconfig = require('lspconfig')
@@ -84,13 +84,15 @@ local function config()
   local lsps = {
     {
       'gopls',
-      settings = {
-        gopls = {
-          buildFlags = { '-tags', 'functional,integration' },
-          semanticTokens = true,
-          usePlaceholders = true,
+      {
+        settings = {
+          gopls = {
+            buildFlags = { '-tags', 'functional,integration' },
+            semanticTokens = true,
+            usePlaceholders = true,
+          },
         }
-      }
+      },
     },
     { 'dockerls' },
     {
