@@ -1,19 +1,25 @@
 # Step 1: Define shell functions
-git-branches() {
+_git_branches() {
+    zle push-input
     local branch="$(git branch -a --format '%(refname:short)' | fzf ${=FZF_GIT_OPTS})"
-    LBUFFER="${LBUFFER}${branch}"
+    zle -U "$branch"
+    zle -U "$CUTBUFFER"
+    zle accept-line
 }
 
-git-ls() {
-    local branch="$(git ls --color | fzf --ansi ${=FZF_GIT_OPTS} | awk '{print $1}')"
-    LBUFFER="${LBUFFER}${branch}"
+_git_ls() {
+    zle push-input
+    local commit="$(git ls --color | fzf --ansi ${=FZF_GIT_OPTS} | awk '{print $1}')"
+    zle -U "$commit"
+    zle -U "$CUTBUFFER"
+    zle accept-line
 }
 
 # Step 2: Create a new ZLE command and bind it to your shell function
-zle -N git-branches
-zle -N git-ls
+zle -N _git_branches
+zle -N _git_ls
 
 # Step 3: Bind your new ZLE command to a key sequence
 bindkey -r "^g"
-bindkey "^[gb" git-branches
-bindkey "^[gc" git-ls
+bindkey "^[gb" _git_branches
+bindkey "^[gc" _git_ls
