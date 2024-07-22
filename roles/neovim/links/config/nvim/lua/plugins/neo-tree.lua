@@ -46,7 +46,18 @@ return {
               "git_add_file",
               desc = "git add file"
             },
-            [","] = 'toggle_node'
+            [","] = {
+              'toggle_node',
+              desc = 'toggle node',
+            },
+            ["<C-x>"] = {
+              'open_split',
+              desc = 'open split',
+            },
+            ["<C-v>"] = {
+              'open_vsplit',
+              desc = 'open vsplit',
+            },
           },
         },
       },
