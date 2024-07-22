@@ -14,4 +14,7 @@ return {
     { '<leader>xi', function() require('trouble').open('lsp_implementations') end },
     { '<leader>xs', function() require('trouble').open('lsp_document_symbols') end },
   },
+  opts = {
+    focus = true,
+  },
 }
