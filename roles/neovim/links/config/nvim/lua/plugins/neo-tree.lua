@@ -1,3 +1,14 @@
+local function set_highlights()
+  local c = require('justin.colors')
+  c.hi('NeoTreeDir',          { ctermfg = c.darkblue,    fg = c.guidarkblue, bold = true })
+  c.hi('NeoTreeFloatTitle',   { link = 'FloatTitle' })
+  c.hi('NeoTreeModified',     { link = 'DiffChange' })
+  c.hi('NeoTreeGitModified',  { link = 'DiffChange' })
+  c.hi('NeoTreeGitConflict',  { ctermfg = c.darkmagenta, fg = c.guidarkmagenta, bold = true, italic = true })
+  c.hi('NeoTreeGitUnstaged',  { link = 'DiffChange' })
+  c.hi('NeoTreeGitUntracked', { link = 'DiffChange' })
+end
+
 return {
   {
     'nvim-neo-tree/neo-tree.nvim',
@@ -31,41 +42,44 @@ return {
         { "<leader>n", desc = "Neotree" },
       })
     end,
-    opts = {
-      filesystem = {
-        hijack_netrw_behavior = 'open_default',
-        window = {
-          mappings = {
-            ["gs"] = {
-              function()
-                vim.cmd('Neotree float git_status')
-              end,
-              desc = "git status"
-            },
-            ["ga"] = {
-              "git_add_file",
-              desc = "git add file"
-            },
-            [","] = {
-              'toggle_node',
-              desc = 'toggle node',
-            },
-            ["<C-x>"] = {
-              'open_split',
-              desc = 'open split',
-            },
-            ["<C-v>"] = {
-              'open_vsplit',
-              desc = 'open vsplit',
+    opts = function()
+      set_highlights()
+      return {
+        filesystem = {
+          hijack_netrw_behavior = 'open_default',
+          window = {
+            mappings = {
+              ["gs"] = {
+                function()
+                  vim.cmd('Neotree float git_status')
+                end,
+                desc = "git status"
+              },
+              ["ga"] = {
+                "git_add_file",
+                desc = "git add file"
+              },
+              [","] = {
+                'toggle_node',
+                desc = 'toggle node',
+              },
+              ["<C-x>"] = {
+                'open_split',
+                desc = 'open split',
+              },
+              ["<C-v>"] = {
+                'open_vsplit',
+                desc = 'open vsplit',
+              },
             },
           },
         },
-      },
-      popup_border_style = "rounded",
-      window = {
-        position = "left",
-        width = 40,
-      },
-    }
+        popup_border_style = "rounded",
+        window = {
+          position = "left",
+          width = 40,
+        },
+      }
+    end
   },
 }

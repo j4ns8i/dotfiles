@@ -125,12 +125,13 @@ local function hi(name, opts)
   vim.api.nvim_set_hl(0, name, opts)
 end
 
-hi('Normal',       { ctermfg = white,    fg = M.guiwhite })
-hi('Pmenu',        { ctermfg = white,    fg = M.guiwhite })
-hi('PmenuSel',     { ctermfg = black,    ctermbg = darkblue, fg = M.guiblack, bg = M.guidarkblue })
-hi('PmenuThumb',   { ctermbg = darkblue, bg = M.guidarkblue })
-hi('WinSeparator', { ctermfg = darkgray, fg = M.guidarkgray })
-hi('NormalFloat',  { ctermbg = black,    bg = M.guiblack })
+hi('Normal',       { ctermfg = white,     fg = M.guiwhite })
+hi('Pmenu',        { ctermfg = white,     fg = M.guiwhite })
+hi('PmenuSel',     { ctermfg = black,     ctermbg = darkblue, fg = M.guiblack, bg = M.guidarkblue })
+hi('PmenuThumb',   { ctermbg = darkblue,  bg = M.guidarkblue })
+hi('WinSeparator', { ctermfg = darkgray,  fg = M.guidarkgray })
+hi('NormalFloat',  { ctermbg = black,     bg = M.guiblack })
+hi('FloatBorder',  { ctermfg = lightgray, fg = M.guilightgray })
 
 hi('Identifier',       { ctermfg = white,       fg = M.guiwhite })
 hi('Function',         { italic = true })
@@ -185,7 +186,7 @@ hi('IncSearch', { ctermfg = black,    ctermbg = darkblue, fg = M.guiblack, bg = 
 hi('Search',    { ctermfg = black,    ctermbg = blue, fg = M.guiblack, bg = M.guiblue })
 hi('CurSearch', { link = 'IncSearch' })
 
-hi('Directory',   { ctermfg = darkblue, fg = M.guidarkblue })
+hi('Directory',   { ctermfg = darkblue, fg = M.guidarkblue, bold = true })
 hi('MatchParen',  { reverse = true })
 hi('ColorColumn', { ctermbg = darkgray, bg = M.guidarkdarkdarkgray })
 hi('SignColumn',  { ctermbg = none,     bg = M.guinone })
