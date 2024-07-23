@@ -27,8 +27,8 @@ return {
       })
 
       local wk = require('which-key')
-      wk.register({
-        ["<leader>n"] = "Neotree",
+      wk.add({
+        { "<leader>n", desc = "Neotree" },
       })
     end,
     opts = {

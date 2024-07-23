@@ -8,7 +8,7 @@ return {
     end,
     config = true,
     opts = {
-      window = {
+      win = {
         border = 'rounded',
       }
     }
