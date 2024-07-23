@@ -10,5 +10,9 @@ return {
         },
       }
     end,
+    ft = {
+      'python',
+      'yaml',
+    },
   },
 }
