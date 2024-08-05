@@ -59,6 +59,14 @@ vim.keymap.set('n', '<leader>cl', vim.cmd.cclose)
 
 vim.keymap.set('n', '<leader>tc', vim.cmd.tabclose)
 
+vim.keymap.set('n', '<leader>wt',
+  function()
+    vim.o.wrap = not vim.o.wrap
+    vim.print('wrap: ' .. (vim.o.wrap and 'on' or 'off'))
+  end,
+  { desc = 'Wrap toggle' }
+)
+
 vim.keymap.set('n', '<leader>vc', function()
   local config_dir = '~/.config/nvim'
   vim.cmd.tabnew(config_dir)

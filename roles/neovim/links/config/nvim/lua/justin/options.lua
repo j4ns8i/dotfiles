@@ -10,7 +10,7 @@ vim.o.number         = true    -- But still show current line number
 vim.o.signcolumn     = 'yes:1' -- Always show 1 (pair of) columns for signs (gitgutter)
 vim.o.colorcolumn    = '+1'    -- Highlight the column at tw+1
 
-vim.o.listchars = 'tab:  ,trail:·,extends:»,nbsp:␣'
+vim.o.listchars = 'tab:  ,trail:·,extends:»,nbsp:␣,precedes:«'
 vim.o.list      = true
 
 vim.o.ignorecase = true -- Ignore cases in search
