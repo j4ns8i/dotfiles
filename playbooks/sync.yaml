@@ -44,5 +44,8 @@
     - role: neovim
       tags: neovim
 
+    - role: bat
+      tags: bat
+
     - role: gcloud
       tags: gcloud
