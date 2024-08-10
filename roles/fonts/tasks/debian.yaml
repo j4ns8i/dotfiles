@@ -8,5 +8,13 @@
     mode: "0644"
   become: true
 
+- name: Download MapleMono NF
+  ansible.builtin.unarchive:
+    src: https://github.com/subframe7536/maple-font/releases/download/{{ fonts_maplemono_version }}/MapleMono-ttf.zip
+    remote_src: true
+    dest: /usr/local/share/fonts/
+    mode: "0644"
+  become: true
+
 - name: Run fc-cache
   ansible.builtin.command: fc-cache
