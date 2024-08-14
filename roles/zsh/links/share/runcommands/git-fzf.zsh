@@ -2,7 +2,7 @@
 _git_branches() {
     local cursor=$CURSOR
     zle push-input
-    local output="$(git branch -a --format '%(refname:short)' | fzf ${=FZF_GIT_OPTS})"
+    local output=($(git branch -a --format '%(refname:short)' | fzf --multi ${=FZF_GIT_OPTS}))
     zle reset-prompt
     zle get-line
     zle -U "$output"
@@ -12,7 +12,7 @@ _git_branches() {
 _git_ls() {
     local cursor=$CURSOR
     zle push-input
-    local output="$(git ls --color | fzf --ansi ${=FZF_GIT_OPTS} | awk '{print $1}')"
+    local output=($(git ls --color | fzf --ansi --multi ${=FZF_GIT_OPTS} | awk '{print $1}'))
     zle reset-prompt
     zle get-line
     zle -U "$output"
