@@ -10,3 +10,9 @@
   community.general.homebrew:
     name: pnpm
     state: latest
+
+- name: Link nvm script for autoloading
+  ansible.builtin.file:
+    src: "{{ dotfiles_home_dir }}/.nvm/nvm.sh"
+    dest: "{{ zsh_config_dir }}/functions/nvm"
+    state: link

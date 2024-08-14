@@ -123,7 +123,7 @@ alias -g R="2>&1"
 alias vc="nvim ~/.config/nvim -c 'cd ~/.config/nvim'"
 
 export NVM_DIR="$HOME/.nvm"
-[[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
+autoload -k nvm
 [[ -s "$NVM_DIR/bash_completion" ]] && . "$NVM_DIR/bash_completion"
 
 function ggo {
