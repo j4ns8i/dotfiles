@@ -37,18 +37,20 @@ white   = "#c7d0e0"
 [font]
 size = 14
 
-[font.bold]
-style = "Bold"
-
-[font.bold_italic]
-style = "Bold Italic"
-
-[font.italic]
-style = "ExtraLight Italic"
-
 [font.normal]
-family = "JetBrainsMono Nerd Font Mono"
-style = "ExtraLight"
+family = "MapleMono Nerd Font"
+# style = "Regular"
+
+# If needed, the styles can be further customized below
+
+# [font.italic]
+# style = "Regular Italic"
+
+# [font.bold]
+# style = "Bold"
+
+# [font.bold_italic]
+# style = "Bold Italic"
 
 [font.offset]
 x = 0
