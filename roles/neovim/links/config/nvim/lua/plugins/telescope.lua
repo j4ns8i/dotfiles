@@ -47,6 +47,7 @@ return {
             ["<c-q>"] = trouble.open,
           },
         },
+        file_ignore_patterns = { '.git/' },
         layout_strategy = 'vertical',
         layout_config = { height = 0.95, preview_height = 0.60 },
       },
