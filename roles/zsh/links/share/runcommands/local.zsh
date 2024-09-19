@@ -122,10 +122,6 @@ alias -g L="| less"
 alias -g R="2>&1"
 alias vc="nvim ~/.config/nvim -c 'cd ~/.config/nvim'"
 
-export NVM_DIR="$HOME/.nvm"
-autoload -k nvm
-[[ -s "$NVM_DIR/bash_completion" ]] && . "$NVM_DIR/bash_completion"
-
 function ggo {
     # Go to a github organization
     MAX_DEPTH=2

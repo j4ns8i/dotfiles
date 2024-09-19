@@ -1,18 +1,11 @@
 ---
 
-- name: Install nvm
-  ansible.builtin.shell: >
-    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ node_nvm_version }}/install.sh | bash'
-  args:
-    creates: "{{ dotfiles_home_dir }}/.nvm/nvm.sh"
-
-- name: Install pnpm
+- name: Brew install node packages
   community.general.homebrew:
-    name: pnpm
+    name: "{{ package }}"
     state: latest
-
-- name: Link nvm script for autoloading
-  ansible.builtin.file:
-    src: "{{ dotfiles_home_dir }}/.nvm/nvm.sh"
-    dest: "{{ zsh_config_dir }}/functions/nvm"
-    state: link
+  loop:
+    - node
+    - pnpm
+  loop_control:
+    loop_var: package
