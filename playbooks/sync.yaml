@@ -20,6 +20,9 @@
     - role: kitty
       tags: kitty
 
+    - role: alacritty
+      tags: alacritty
+
     - role: zoxide
       tags: zoxide
 

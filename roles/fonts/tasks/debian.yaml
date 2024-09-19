@@ -2,7 +2,7 @@
 
 - name: Download JetBrainsMono Nerd Font
   ansible.builtin.unarchive:
-    src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ fonts_jetbrainsmono_version }}/JetBrainsMono.zip
+    src: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
     remote_src: true
     dest: /usr/local/share/fonts/
     mode: "0644"
@@ -10,7 +10,7 @@
 
 - name: Download MapleMono NF
   ansible.builtin.unarchive:
-    src: https://github.com/subframe7536/maple-font/releases/download/{{ fonts_maplemono_version }}/MapleMono-ttf.zip
+    src: https://github.com/subframe7536/maple-font/releases/latest/download/MapleMono-ttf.zip
     remote_src: true
     dest: /usr/local/share/fonts/
     mode: "0644"

@@ -3,6 +3,3 @@
 dotfiles_path: ""
 
 dotfiles_home_dir: "{{ ansible_user_dir }}"
-
-fonts_jetbrainsmono_version: v3.1.1
-fonts_maplemono_version: v6.4
