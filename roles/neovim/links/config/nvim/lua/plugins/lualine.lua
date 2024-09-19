@@ -51,7 +51,7 @@ return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = function()
-    local c = require('justin.colors')
+    local c = require('justin').colorscheme
     set_highlights(c)
     local tc = toggled_component_colors(c) -- toggled colors dependent on 'termguicolors'
     local wal = function()

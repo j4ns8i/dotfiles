@@ -16,7 +16,7 @@ return {
   'RRethy/vim-illuminate',
   ft = filetypes,
   config = function()
-    local c = require('justin.colors')
+    local c = require('justin').colorscheme
     c.hi('IlluminatedWordText', { ctermbg = c.darkgray, bg = c.guidarkgray })
     c.hi('IlluminatedWordRead', { link = 'IlluminatedWordText' })
     c.hi('IlluminatedWordWrite', { link = 'IlluminatedWordText' })

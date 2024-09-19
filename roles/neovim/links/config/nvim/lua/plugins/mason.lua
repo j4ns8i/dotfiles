@@ -1,5 +1,5 @@
 local function set_highlights()
-  local c = require('justin.colors')
+  local c = require('justin').colorscheme
   c.hi('MasonHeader',                      { ctermfg = c.white, ctermbg = c.darkmagenta, bold = true, fg = c.guiwhite, bg = c.guidarkmagenta })
   c.hi('MasonHeaderSecondary',             { ctermfg = c.white, ctermbg = c.darkred, fg = c.guiwhite, bg = c.guidarkred })
   c.hi('MasonHighlight',                   { ctermfg = c.darkcyan, fg = c.guidarkcyan })

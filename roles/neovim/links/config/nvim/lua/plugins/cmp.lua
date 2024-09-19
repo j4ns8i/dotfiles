@@ -1,5 +1,5 @@
 local function set_highlights()
-  local c = require('justin.colors')
+  local c = require('justin').colorscheme
   c.hi('CmpItemAbbrDeprecated',    { ctermfg = c.lightgray, strikethrough = true, fg = c.guilightgray })
   c.hi('CmpItemAbbrMatch',         { bold = true })
   c.hi('CmpItemAbbrMatchFuzzy',    { link = 'CmpItemAbbrMatch' })

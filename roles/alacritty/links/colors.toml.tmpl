@@ -1,0 +1,35 @@
+# Generated with
+#
+# gomplate -c .=palette.yaml -f roles/alacritty/links/colors.toml.tmpl -o roles/alacritty/links/colors.toml
+
+[colors.primary]
+background = "{{ .black1 }}"
+foreground = "{{ .white2 }}"
+
+[colors.cursor]
+text   = "{{ .white2 }}"
+cursor = "{{ .white1 }}"
+
+[colors.selection]
+text       = '{{ .white2 }}'
+background = '{{ .black2 }}'
+
+[colors.normal]
+black   = "{{ .black1 }}"
+red     = "{{ .red1 }}"
+green   = "{{ .green1 }}"
+yellow  = "{{ .yellow1 }}"
+blue    = "{{ .blue1 }}"
+magenta = "{{ .magenta1 }}"
+cyan    = "{{ .cyan1 }}"
+white   = "{{ .white1 }}"
+
+[colors.bright]
+black   = "{{ .black2 }}"
+red     = "{{ .red2 }}"
+green   = "{{ .green2 }}"
+yellow  = "{{ .yellow2 }}"
+blue    = "{{ .blue2 }}"
+magenta = "{{ .magenta2 }}"
+cyan    = "{{ .cyan2 }}"
+white   = "{{ .white2 }}"

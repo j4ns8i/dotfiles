@@ -58,7 +58,7 @@ return {
     plugin.load_extension('fzf')
     plugin.load_extension('live_grep_args')
 
-    local c = require('justin.colors')
+    local c = require('justin').colorscheme
     c.hi('TelescopeBorder', { ctermfg = c.darkgray, fg = c.guidarkgray })
   end
 }

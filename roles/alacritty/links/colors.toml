@@ -1,0 +1,35 @@
+# Generated with
+#
+# gomplate -c .=palette.yaml -f roles/alacritty/links/colors.toml.tmpl -o roles/alacritty/links/colors.toml
+
+[colors.primary]
+background = "#212227"
+foreground = "#bcbec5"
+
+[colors.cursor]
+text   = "#bcbec5"
+cursor = "#666872"
+
+[colors.selection]
+text       = '#bcbec5'
+background = '#46474f'
+
+[colors.normal]
+black   = "#212227"
+red     = "#c47177"
+green   = "#74ad8a"
+yellow  = "#f7d29f"
+blue    = "#9db5cf"
+magenta = "#e5a9da"
+cyan    = "#a0ccc6"
+white   = "#666872"
+
+[colors.bright]
+black   = "#46474f"
+red     = "#a2515f"
+green   = "#658c74"
+yellow  = "#c1a98a"
+blue    = "#7d90a5"
+magenta = "#bb8ab2"
+cyan    = "#8fa6a3"
+white   = "#bcbec5"

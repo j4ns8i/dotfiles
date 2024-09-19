@@ -6,7 +6,7 @@ local function set_rounded_window()
 end
 
 local function set_highlights()
-  local c = require('justin.colors')
+  local c = require('justin').colorscheme
   c.hi('GitGutterAdd',    { link = 'DiffAdd' })
   c.hi('GitGutterChange', { link = 'DiffChange' })
   c.hi('GitGutterDelete', { link = 'DiffDelete' })

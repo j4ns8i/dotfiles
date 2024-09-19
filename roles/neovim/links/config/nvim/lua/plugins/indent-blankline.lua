@@ -1,7 +1,7 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
-    local c = require('justin.colors')
+    local c = require('justin').colorscheme
     c.hi('IblIndent', { ctermfg = c.darkgray, fg = c.guidarkdarkgray })
     c.hi('@ibl.indent.char.1', { link = 'IblIndent' })
     require('ibl').setup({

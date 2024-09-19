@@ -1,5 +1,5 @@
 local function set_highlights()
-  local c = require('justin.colors')
+  local c = require('justin').colorscheme
   c.hi('NeoTreeDir',          { ctermfg = c.darkblue,    fg = c.guidarkblue, bold = true })
   c.hi('NeoTreeFloatTitle',   { link = 'FloatTitle' })
   c.hi('NeoTreeModified',     { link = 'DiffChange' })

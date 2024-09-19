@@ -27,6 +27,9 @@ local magenta     = 13;
 local cyan        = 14;
 local white       = 15;
 
+-- These are templated to be synchronized with other apps.
+local colors = require('justin.colorscheme.colors')
+
 local M           = {
   black               = black,
   darkred             = darkred,
@@ -46,27 +49,27 @@ local M           = {
   cyan                = cyan,
   white               = white,
 
-  guiblack            = '#15171d',
-  guired              = '#c45361',
-  guigreen            = '#607f55',
-  guiyellow           = '#d6ae86',
-  guiblue             = '#4b799e',
-  guimagenta          = '#9b68b3',
-  guicyan             = '#487e6d',
-  guilightgray        = '#5d6068',
+  guiblack            = colors.black1,
+  guired              = colors.red2,
+  guigreen            = colors.green2,
+  guiyellow           = colors.yellow2,
+  guiblue             = colors.blue2,
+  guimagenta          = colors.magenta2,
+  guicyan             = colors.cyan2,
+  guilightgray        = colors.white1,
 
-  guidarkgray         = '#3b3e46',
-  guidarkred          = '#d4737f',
-  guidarkgreen        = '#90b782',
-  guidarkyellow       = '#ffcda4',
-  guidarkblue         = '#86a5be',
-  guidarkmagenta      = '#8f729a',
-  guidarkcyan         = '#76af9d',
-  guiwhite            = '#c7d0e0',
+  guidarkgray         = colors.black2,
+  guidarkred          = colors.red1,
+  guidarkgreen        = colors.green1,
+  guidarkyellow       = colors.yellow1,
+  guidarkblue         = colors.blue1,
+  guidarkmagenta      = colors.magenta1,
+  guidarkcyan         = colors.cyan1,
+  guiwhite            = colors.white2,
 
   -- for more ui depth
-  guidarkdarkgray     = '#2e3037',
-  guidarkdarkdarkgray = '#1d1e24',
+  guidarkdarkgray     = colors.black3,
+  guidarkdarkdarkgray = colors.black4,
 }
 
 -- dynamic_colors offers a logical color table that changes values based on
@@ -134,19 +137,22 @@ hi('NormalFloat',  { ctermbg = black,     bg = M.guiblack })
 hi('FloatBorder',  { ctermfg = lightgray, fg = M.guilightgray })
 
 hi('Identifier',       { ctermfg = white,       fg = M.guiwhite })
+hi('@variable',       { link = 'Identifier' })
 hi('Function',         { italic = true })
-hi('Constant',         { ctermfg = darkyellow,  fg = M.guidarkyellow })
+hi('Constant',         { ctermfg = darkred,  fg = M.guidarkred })
+hi('@lsp.typemod.variable.readonly', { link = 'Constant' })
 hi('Character',        { ctermfg = darkmagenta, fg = M.guidarkmagenta })
 hi('Statement',        { ctermfg = darkcyan,    fg = M.guidarkcyan, bold = true })
-hi('Keyword',          { ctermfg = darkcyan,    fg = M.guidarkcyan, bold = true })
+hi('Keyword',          { ctermfg = red,    fg = M.guired, bold = true })
 hi('Conditional',      { link = 'Keyword' })
 hi('Boolean',          { link = 'Conditional' })
-hi('Operator',         { link = 'Conditional' })
-hi('Delimiter',        { ctermfg = darkmagenta, fg = M.guidarkmagenta })
+hi('Delimiter',        { ctermfg = darkmagenta, fg = M.guidarkcyan })
+hi('Operator',         { link = 'Delimiter' })
+hi('@punctuation.bracket', { link = 'Normal' })
 hi('String',           { ctermfg = darkgreen,   fg = M.guidarkgreen })
 hi('@lsp.type.string', { link = 'String' })
-hi('@variable',        { link = 'Identifier' })
-hi('Number',           { ctermfg = darkyellow,  fg = M.guidarkyellow })
+-- hi('@variable',        { link = 'Identifier' })
+hi('Number',           { link = 'Constant' })
 hi('Todo',             { italic = true,         bold = true })
 hi('Type',             { ctermfg = darkyellow,  fg = M.guidarkyellow })
 
@@ -171,7 +177,7 @@ hi('NonText',      { link = 'LineNr' })
 
 hi('PreProc', { ctermfg = yellow, fg = M.guiyellow })
 
-hi('Special',    { ctermfg = darkcyan, fg = M.guidarkcyan })
+hi('Special',    { ctermfg = cyan, fg = M.guicyan })
 hi('SpecialKey', { link = 'Special' })
 hi('Conceal',    { link = 'Special' })
 
@@ -187,7 +193,7 @@ hi('Search',    { ctermfg = black,    ctermbg = blue, fg = M.guiblack, bg = M.gu
 hi('CurSearch', { link = 'IncSearch' })
 
 hi('Directory',   { ctermfg = darkblue, fg = M.guidarkblue, bold = true })
-hi('MatchParen',  { reverse = true })
+hi('MatchParen',  { ctermfg = darkgray, ctermbg = lightgray, fg = M.guilightgray, bg = M.guidarkgray })
 hi('ColorColumn', { ctermbg = darkgray, bg = M.guidarkdarkdarkgray })
 hi('SignColumn',  { ctermbg = none,     bg = M.guinone })
 
