@@ -102,7 +102,7 @@ local function config()
     { 'tflint' },
     { 'bashls' },
     { 'jsonnet_ls' },
-    { 'tsserver' },
+    { 'ts_ls' },
     { 'cssls' },
     { 'emmet_language_server' },
     { 'pyright' },

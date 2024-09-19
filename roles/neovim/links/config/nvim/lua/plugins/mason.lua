@@ -45,7 +45,7 @@ return {
         'tailwindcss',
         'emmet_language_server',
         'cssls',
-        'tsserver',
+        'ts_ls',
         'jsonls',
         'html',
       },
