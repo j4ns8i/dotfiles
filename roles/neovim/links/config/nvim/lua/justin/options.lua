@@ -73,3 +73,4 @@ vim.filetype.add({
 })
 
 vim.g.python3_host_prog = vim.fn.expand '~/.pyenv/versions/3.11.7/bin/python3'
+vim.g.node_host_prog = vim.fn.expand '~/.local/share/pnpm/global/5/node_modules/neovim/bin/cli.js'

@@ -9,3 +9,8 @@
     - pnpm
   loop_control:
     loop_var: package
+
+- name: Pnpm install -g neovim
+  community.general.pnpm:
+    name: neovim
+    global: yes

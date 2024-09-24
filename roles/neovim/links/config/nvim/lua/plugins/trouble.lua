@@ -50,5 +50,15 @@ return {
   },
   opts = {
     focus = true,
+    modes = {
+      lsp_document_symbols = {
+        mode = "lsp_document_symbols",
+        win = { position = "right", size = 40 },
+        format = '{kind_icon} {symbol.name}',
+      },
+      lsp_incoming_calls = {
+        auto_jump = true,
+      }
+    }
   },
 }

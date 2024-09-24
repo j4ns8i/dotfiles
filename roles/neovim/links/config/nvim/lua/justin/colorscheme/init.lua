@@ -173,7 +173,7 @@ hi('CursorLine',   { ctermbg = darkgray,  bg = M.guidarkdarkdarkgray })
 hi('CursorLineNr', { ctermfg = lightgray, fg = M.guilightgray })
 hi('Cursor',       { ctermfg = lightgray, fg = M.guilightgray })
 hi('CursorColumn', { ctermfg = white,     ctermbg = darkgray, fg = M.guiwhite, bg = M.guidarkgray })
-hi('NonText',      { link = 'LineNr' })
+hi('NonText',      { ctermfg = darkgray, fg = M.guidarkdarkgray })
 
 hi('PreProc', { ctermfg = yellow, fg = M.guiyellow })
 
