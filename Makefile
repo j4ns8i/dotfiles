@@ -39,6 +39,7 @@ has-ansible-collections:
 
 .PHONY: sync
 sync: ## Run the main sync playbook to install and configure applications
+	sudo --validate
 	$(NEED_VENV) ansible-playbook \
 		-e "dotfiles_path=$(CURDIR)" \
 		-e "dotfiles_home_dir=$(HOME)" \
