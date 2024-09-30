@@ -1,0 +1,6 @@
+[shell]
+args = ["-l"]
+program = "/run/current-system/sw/bin/tmux"
+
+[window]
+decorations = "None"

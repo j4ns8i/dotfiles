@@ -1,7 +1,5 @@
 ---
 
-- name: Install go
-  ansible.builtin.package:
-    name: "{{ go_package_name[ansible_os_family | lower] }}"
-    state: present
-  become: "{{ ansible_os_family | lower != 'darwin' }}"
+- name: Include installation tasks for {{ ansible_os_family }} if defined
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_fileglob: "install.*{{ ansible_os_family | lower }}*.yaml"

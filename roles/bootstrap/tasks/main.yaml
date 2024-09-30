@@ -9,6 +9,7 @@
     name: "{{ item }}"
     state: present
   loop: "{{ bootstrap_packages[ansible_os_family | lower] }}"
+  when: ansible_os_family|lower in bootstrap_packages
   become: "{{ ansible_os_family | lower != 'darwin' }}"
   tags: packages
 

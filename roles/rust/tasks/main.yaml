@@ -36,6 +36,11 @@
     - name: Run rustup installer script
       ansible.builtin.script: "{{ rust_rustup_tmp_installer.path }} -y"
 
+- name: Set default rustup toolchain
+  ansible.builtin.command: rustup default nightly
+  environment:
+    PATH: "{{ ansible_user_dir }}/.cargo/bin:{{ ansible_env.PATH }}"
+
 - name: Add rust language server requisites
   ansible.builtin.command: rustup component add rls rust-analysis rust-analyzer rust-src
   environment:

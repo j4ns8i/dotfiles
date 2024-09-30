@@ -1,10 +1,8 @@
 ---
 
-- name: Install zsh
-  ansible.builtin.package:
-    name: zsh
-    state: present
-  become: "{{ ansible_os_family | lower != 'darwin' }}"
+- name: Include installation tasks for {{ ansible_os_family | lower }} if defined
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_fileglob: "install.*{{ ansible_os_family | lower }}*.yaml"
 
 - name: Symlink ./links/zshrc to {{ dotfiles_home_dir }}/.zshrc
   ansible.builtin.file:
@@ -32,11 +30,13 @@
 
 - name: Symlink ./links/{{ ansible_os_family | lower }}.zsh to {{ zsh_config_dir }}/os.zsh
   ansible.builtin.file:
-    src: "{{ item }}"
+    src: "{{ os_config_file }}"
     dest: "{{ zsh_config_dir }}/os.zsh"
     state: link
   with_fileglob:
     - "{{ zsh_link_base }}/links/{{ ansible_os_family | lower }}.zsh"
+  loop_control:
+    loop_var: os_config_file
 
 - name: Create {{ zsh_config_dir }}/functions
   ansible.builtin.file:

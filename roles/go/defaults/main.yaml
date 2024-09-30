@@ -8,3 +8,4 @@ go_package_name:
   debian: golang
   darwin: go
   archlinux: go
+  homebrew: go

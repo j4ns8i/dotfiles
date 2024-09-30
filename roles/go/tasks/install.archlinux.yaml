@@ -1,0 +1,7 @@
+---
+
+- name: Install go
+  ansible.builtin.package:
+    name: "{{ go_package_name[ansible_os_family | lower] }}"
+    state: present
+  become: yes

@@ -1,10 +1,8 @@
 ---
 
-- name: Install tmux
-  ansible.builtin.package:
-    name: tmux
-    state: present
-  become: "{{ ansible_os_family | lower != 'darwin' }}"
+- name: Include installation tasks for {{ ansible_os_family }} if defined
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_fileglob: "install.*{{ ansible_os_family | lower }}*.yaml"
 
 - name: Symlink ./links/tmux.conf to ~/.tmux.conf
   ansible.builtin.file:
@@ -20,9 +18,12 @@
 
 - name: Symlink {{ ansible_os_family | lower }}.conf to {{ tmux_config_dir }}/os.conf
   ansible.builtin.file:
-    src: "{{ tmux_link_base }}/links/{{ ansible_os_family | lower }}.conf"
+    src: "{{ os_config_file }}"
     dest: "{{ tmux_config_dir }}/os.conf"
     state: link
+  with_fileglob: "{{ tmux_link_base }}/links/{{ ansible_os_family | lower }}.conf"
+  loop_control:
+    loop_var: os_config_file
 
 - name: Symlink ./links/vim-tmux-navigator.conf to {{ tmux_config_dir }}/vim-tmux-navigator.conf
   ansible.builtin.file:

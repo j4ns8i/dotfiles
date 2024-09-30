@@ -1,0 +1,6 @@
+---
+
+- name: Install go
+  community.general.homebrew:
+    name: "{{ go_package_name['homebrew'] }}"
+    state: present

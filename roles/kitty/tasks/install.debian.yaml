@@ -8,6 +8,3 @@
   loop_control:
     loop_var: package
   become: true
-
-- name: Import kitty config tasks
-  ansible.builtin.import_tasks: config.yaml

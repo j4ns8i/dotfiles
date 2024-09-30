@@ -10,14 +10,22 @@
     state: directory
     mode: "0700"
 
-- name: Symlink alacritty.toml
+- name: Symlink Alacritty config files
   ansible.builtin.file:
     state: link
-    src: "{{ alacritty_link_base }}/links/alacritty.toml"
-    dest: "{{ alacritty_config_dir }}/alacritty.toml"
+    src: "{{ alacritty_link_base }}/links/{{ config_file }}"
+    dest: "{{ alacritty_config_dir }}/{{ config_file }}"
+  with_items:
+    - alacritty.toml
+    - colors.toml
+  loop_control:
+    loop_var: config_file
 
 - name: Symlink {{ ansible_os_family | lower }}.toml to ~/.config/alacritty/os.toml
   ansible.builtin.file:
     state: link
-    src: "{{ alacritty_link_base }}/links/{{ ansible_os_family | lower }}.toml"
+    src: "{{ os_config_file }}"
     dest: "{{ alacritty_config_dir }}/os.toml"
+  with_fileglob: "{{ alacritty_link_base }}/links/{{ ansible_os_family | lower }}.toml"
+  loop_control:
+    loop_var: os_config_file

@@ -38,6 +38,3 @@
 
     - name: Unmount disk image
       ansible.builtin.command: hdiutil detach {{ kitty_dmg_tempdir.path }}
-
-- name: Import kitty config tasks
-  ansible.builtin.import_tasks: config.yaml
