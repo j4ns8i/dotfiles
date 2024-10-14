@@ -121,6 +121,8 @@ alias k=kubectl
 alias -g L="| less"
 alias -g R="2>&1"
 alias vc="nvim ~/.config/nvim -c 'cd ~/.config/nvim'"
+alias kx="kubectx"
+alias kc="kubectl --context"
 
 function ggo {
     # Go to a github organization
