@@ -1,6 +1,7 @@
-- [ ] fzf + git integration
 - [ ] NixOS compatibility
     - [ ] set correct `g:node_host_prog` in neovim
     - [ ] fix fzf+zsh integration
     - [ ] install nerd fonts
     - [ ] fix python install management with pyenv
+- [ ] docker installation on macOS
+- [ ] font installation on macOS, including nerd font patcher
