@@ -12,7 +12,7 @@ _git_branches() {
 _git_ls() {
     local cursor=$CURSOR
     zle push-input
-    local output=($(git ls --color | fzf --ansi --multi ${=FZF_GIT_OPTS} | awk '{print $1}'))
+    local output=($(git ls --color | fzf --no-sort --ansi --multi ${=FZF_GIT_OPTS} | awk '{print $1}'))
     zle reset-prompt
     zle get-line
     zle -U "$output"
