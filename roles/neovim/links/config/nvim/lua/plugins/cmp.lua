@@ -99,7 +99,7 @@ return {
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item.
+          ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item.
         }),
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
