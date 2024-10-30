@@ -76,6 +76,18 @@ in {
     ".tmux.conf".source = symlink "${hmDirectory}/roles/tmux/links/tmux.conf";
     ".config/tmux/os.conf".source = symlink "${hmDirectory}/roles/tmux/links/nixos.conf";
     ".config/tmux/vim-tmux-navigator.conf".source = symlink "${hmDirectory}/roles/tmux/links/vim-tmux-navigator.conf";
+
+    # alacritty
+    ".config/alacritty/alacritty.toml".source = symlink "${hmDirectory}/roles/alacritty/links/alacritty.toml";
+    ".config/alacritty/colors.toml".source = symlink "${hmDirectory}/roles/alacritty/links/colors.toml";
+    ".config/alacritty/os.toml".text = ''
+      [shell]
+      args = ["-l"]
+      program = "${pkgs.tmux.out}/bin/tmux"
+
+      [window]
+      decorations = "None"
+    '';
   };
 
   # Home Manager can also manage your environment variables through
