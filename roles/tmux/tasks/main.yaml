@@ -6,7 +6,7 @@
 
 - name: Symlink ./links/tmux.conf to ~/.tmux.conf
   ansible.builtin.file:
-    src: "{{ tmux_link_base }}/links/tmux.conf"
+    src: "{{ tmux_link_base }}/links/share/tmux.conf"
     dest: "{{ dotfiles_home_dir }}/.tmux.conf"
     state: link
 
@@ -27,6 +27,6 @@
 
 - name: Symlink ./links/vim-tmux-navigator.conf to {{ tmux_config_dir }}/vim-tmux-navigator.conf
   ansible.builtin.file:
-    src: "{{ tmux_link_base }}/links/vim-tmux-navigator.conf"
+    src: "{{ tmux_link_base }}/links/share/vim-tmux-navigator.conf"
     dest: "{{ tmux_config_dir }}/vim-tmux-navigator.conf"
     state: link
