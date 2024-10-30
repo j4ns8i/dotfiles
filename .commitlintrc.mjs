@@ -5,7 +5,7 @@ const roles = await readdir('./roles')
 const Configuration = {
   extends: ['@commitlint/config-conventional'],
   rules: {
-    'type-enum': [2, 'always', ['ansible', 'chore', ...roles]],
+    'type-enum': [2, 'always', ['ansible', 'chore', 'nix', ...roles]],
   },
 };
 
