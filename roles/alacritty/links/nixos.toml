@@ -1,6 +1,9 @@
 [shell]
 args = ["-l"]
-program = "/run/current-system/sw/bin/tmux"
+program = "tmux"
 
 [window]
 decorations = "None"
+
+[font]
+size = 10

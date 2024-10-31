@@ -59,14 +59,13 @@ in {
     spotify
 
     # fonts
-    jetbrains-mono
     noto-fonts-emoji
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -90,14 +89,7 @@ in {
     # alacritty
     ".config/alacritty/alacritty.toml".source = symlink "${hmDirectory}/roles/alacritty/links/alacritty.toml";
     ".config/alacritty/colors.toml".source = symlink "${hmDirectory}/roles/alacritty/links/colors.toml";
-    ".config/alacritty/os.toml".text = ''
-      [shell]
-      args = ["-l"]
-      program = "${pkgs.tmux.out}/bin/tmux"
-
-      [window]
-      decorations = "None"
-    '';
+    ".config/alacritty/os.toml".source = symlink "${hmDirectory}/roles/alacritty/links/nixos.toml";
 
     # zsh
     ".config/zsh/pure".source = fetchGit {

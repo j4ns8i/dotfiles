@@ -3,23 +3,9 @@ import = [
     "~/.config/alacritty/colors.toml",
 ]
 
-[font]
-size = 14
-
 [font.normal]
-family = "JetBrainsMonoNL Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Regular"
-
-# If needed, the styles can be further customized below
-
-[font.italic]
-style = "Italic"
-
-[font.bold]
-style = "Bold"
-
-[font.bold_italic]
-style = "Bold Italic"
 
 [font.offset]
 x = 0
@@ -57,5 +43,5 @@ mods = "Alt"
 hide_when_typing = true
 
 [window.padding]
-x = 4
-y = 4
+x = 12
+y = 12
