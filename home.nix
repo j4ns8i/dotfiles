@@ -49,6 +49,7 @@ in {
     nodejs_22
     pnpm_9
     nodePackages.neovim
+    lua-language-server
 
     # graphical apps (that aren't configured explicitly below)
     kitty

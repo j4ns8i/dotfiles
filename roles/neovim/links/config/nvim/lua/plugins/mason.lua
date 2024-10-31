@@ -33,7 +33,6 @@ return {
     dependencies = { 'williamboman/mason.nvim' },
     opts = {
       ensure_installed = {
-        'lua_ls',
         'gopls',
         'pyright',
         'rust_analyzer',
