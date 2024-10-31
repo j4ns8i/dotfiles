@@ -40,6 +40,15 @@ in {
     tree
     unzip
     zoxide
+    xdg-utils
+    file
+
+    # programming languages
+    rustup
+    go
+    nodejs_22
+    pnpm_9
+    nodePackages.neovim
 
     # graphical apps (that aren't configured explicitly below)
     kitty
@@ -95,11 +104,14 @@ in {
       rev = "a02209d36c8509c0e62f44324127632999c9c0cf";
     };
     ".zshrc".source = symlink "${hmDirectory}/roles/zsh/links/zshrc";
-    ".config/zsh/share" = {
-      source = symlink "${hmDirectory}/roles/zsh/links/share";
-      recursive = true;
-    };
+    ".config/zsh/share".source = symlink "${hmDirectory}/roles/zsh/links/share";
     ".config/zsh/os.zsh".source = symlink "${hmDirectory}/roles/zsh/links/nixos.zsh";
+
+    # direnv
+    ".config/direnv/direnvrc".source = symlink "${hmDirectory}/roles/direnv/links/direnvrc";
+
+    # neovim
+    ".config/nvim".source = symlink "${hmDirectory}/roles/neovim/links/config/nvim";
   };
 
   # Home Manager can also manage your environment variables through
@@ -126,6 +138,11 @@ in {
   programs.home-manager.enable = true;
 
   # Customized configuration below
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   fonts.fontconfig = {
     enable = true;
