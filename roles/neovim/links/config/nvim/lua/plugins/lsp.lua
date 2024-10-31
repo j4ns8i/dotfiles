@@ -103,6 +103,7 @@ local function config()
     { 'bashls' },
     { 'jsonnet_ls' },
     { 'ts_ls' },
+    { 'nil_ls' },
     { 'cssls' },
     { 'emmet_language_server' },
     { 'pyright' },
