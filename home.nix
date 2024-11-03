@@ -152,7 +152,29 @@ in {
     enable = true;
     policies = {
       Preferences = {
-	"general.autoScroll" = true;
+        "general.autoScroll" = true;
+        "app.shield.optoutstudies.enabled" = false;
+        "browser.aboutConfig.showWarning" = false;
+        "browser.discovery.enabled" = false;
+        "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+        "browser.urlbar.showSearchSuggestionsFirst" = false;
+        "signon.rememberSignons" = false;
+      };
+      # See https://mozilla.github.io/policy-templates/#extensionsettings for format.
+      # TL;DR to get key, curl https://addons.mozilla.org/api/v5/addons/addon/<slug> | jq .guid
+      ExtensionSettings = {
+        "uBlock0@raymondhill.net" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+        };
+        "support@lastpass.com" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/lastpass-password-manager/latest.xpi";
+        };
+        "addon@darkreader.org" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+        };
       };
     };
   };
