@@ -90,6 +90,10 @@ in {
     ".config/alacritty/alacritty.toml".source = symlink "${hmDirectory}/roles/alacritty/links/alacritty.toml";
     ".config/alacritty/colors.toml".source = symlink "${hmDirectory}/roles/alacritty/links/colors.toml";
     ".config/alacritty/os.toml".source = symlink "${hmDirectory}/roles/alacritty/links/nixos.toml";
+    ".config/alacritty/themes".source = fetchGit {
+      url = "https://github.com/alacritty/alacritty-theme";
+      rev = "09c3fb391ff40fedb3f167b3256cbe9255af131e";
+    };
 
     # zsh
     ".config/zsh/pure".source = fetchGit {
