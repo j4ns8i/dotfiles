@@ -56,6 +56,8 @@ in {
     alacritty
     wezterm
     obsidian
+    discord
+    slack
     spotify
 
     # fonts
