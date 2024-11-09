@@ -12,22 +12,25 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-linux";
-      # pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations."j4ns8i" = home-manager.lib.homeManagerConfiguration {
-        # inherit pkgs;
+      commonModules = [
+        ./home.nix
+      ];
+      mkHome = name: cfg: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
+          system = cfg.system or "x86_64-linux";
+          config.allowUnfree = true;
         };
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        modules = commonModules ++ (cfg.modules or []);
       };
+      hosts = {
+        "j4ns8i@laptar-2" = {
+          config.laptar.asdfText = "hello world";
+          modules = [
+            ./laptar-2.nix
+          ];
+        };
+      };
+    in {
+      homeConfigurations = nixpkgs.lib.mapAttrs mkHome hosts;
     };
 }
