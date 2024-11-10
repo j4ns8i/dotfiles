@@ -170,16 +170,16 @@ in {
       # TL;DR to get key, curl https://addons.mozilla.org/api/v5/addons/addon/<slug> | jq .guid
       ExtensionSettings = {
         "uBlock0@raymondhill.net" = {
-          installation_mode = "force_installed";
+          installation_mode = "normal_installed";
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
         };
-        "support@lastpass.com" = {
-          installation_mode = "force_installed";
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/lastpass-password-manager/latest.xpi";
-        };
         "addon@darkreader.org" = {
-          installation_mode = "force_installed";
+          installation_mode = "normal_installed";
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+        };
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          installation_mode = "normal_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
         };
       };
     };
