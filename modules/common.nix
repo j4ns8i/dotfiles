@@ -12,7 +12,6 @@
       # utilities
       gnumake
       zlib
-      gcc
       bat
       fontconfig
       gomplate
