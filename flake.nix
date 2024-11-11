@@ -12,22 +12,16 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      commonModules = [
-        ./home.nix
-      ];
       mkHome = name: cfg: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = cfg.system or "x86_64-linux";
           config.allowUnfree = true;
         };
-        modules = commonModules ++ (cfg.modules or []);
+        modules = cfg.modules;
       };
       hosts = {
         "j4ns8i@laptar-2" = {
-          config.laptar.asdfText = "hello world";
-          modules = [
-            ./laptar-2.nix
-          ];
+          modules = [ ./machines/laptar.nix ];
         };
       };
     in {
