@@ -1,9 +1,0 @@
----
-
-dotfiles_path: ""
-
-dotfiles_home_dir: "{{ ansible_user_dir }}"
-
-node_nvm_version: v0.39.7
-
-node_link_base: "{{ dotfiles_path }}/roles/node"

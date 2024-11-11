@@ -1,6 +1,0 @@
----
-
-- name: Brew install zoxide
-  community.general.homebrew:
-    name: zoxide
-    state: latest
