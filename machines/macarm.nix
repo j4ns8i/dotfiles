@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   imports =
     with builtins;
     map
@@ -6,6 +6,8 @@
       (attrNames (readDir ../modules));
 
   j4ns8i = {
+    graphicalApps = false;
+
     alacritty.enable = true;
     direnv.enable = true;
     firefox.enable = false;

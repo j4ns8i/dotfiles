@@ -1,7 +1,11 @@
 { config, lib, pkgs, setupCfg, ... }: {
-  options.j4ns8i.hmDir = lib.mkOption {
-    type = lib.types.str;
-    default = "${config.home.homeDirectory}/.config/home-manager";
+  options.j4ns8i = {
+    hmDir = lib.mkOption {
+      type = lib.types.str;
+      default = "${config.home.homeDirectory}/.config/home-manager";
+    };
+
+    graphicalApps = lib.mkEnableOption "Install graphical apps";
   };
 
   config = {
@@ -9,6 +13,7 @@
     home.homeDirectory = setupCfg.homeDirectory or "/home/j4ns8i";
 
     home.packages = with pkgs; [
+
       # utilities
       gnumake
       zlib
@@ -32,13 +37,13 @@
       nodePackages.neovim
       lua-language-server
 
-      # graphical apps
-      kitty
-      wezterm
-      obsidian
+    ] ++ lib.optionals config.j4ns8i.graphicalApps [
       discord
+      kitty
+      obsidian
       slack
       spotify
+      wezterm
     ];
 
     # Let Home Manager install and manage itself.

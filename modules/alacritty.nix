@@ -6,10 +6,7 @@
   in {
     options.j4ns8i.alacritty.enable = lib.mkEnableOption "alacritty";
     config = lib.mkIf cfg.enable {
-      home.packages = lib.mkIf (!pkgs.stdenv.isDarwin) (
-        # Use homebrew on macOS
-        with pkgs; [ alacritty ]
-      );
+      home.packages = lib.optional (config.j4ns8i.graphicalApps) pkgs.alacritty;
       home.file = {
         ".config/alacritty/alacritty.toml".source = symlink "${config.j4ns8i.hmDir}/config/alacritty/alacritty.toml";
         ".config/alacritty/colors.toml".source = symlink "${config.j4ns8i.hmDir}/config/alacritty/colors.toml";

@@ -6,6 +6,8 @@
       (attrNames (readDir ../modules));
 
   j4ns8i = {
+    graphicalApps = true;
+
     alacritty.enable = true;
     direnv.enable = true;
     firefox.enable = true;
