@@ -1,5 +1,0 @@
----
-
-- name: Include installation tasks for {{ ansible_os_family | lower }} if defined
-  ansible.builtin.include_tasks: "{{ item }}"
-  with_fileglob: "install.*{{ ansible_os_family | lower }}*.yaml"

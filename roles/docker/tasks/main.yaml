@@ -1,4 +1,0 @@
----
-
-- name: Import installation steps for {{ ansible_os_family | lower }}
-  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yaml"

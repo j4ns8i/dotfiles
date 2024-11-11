@@ -1,9 +1,0 @@
----
-
-dotfiles_path: ""
-
-dotfiles_home_dir: "{{ ansible_user_dir }}"
-
-zsh_config_dir: "{{ dotfiles_home_dir }}/.config/zsh"
-
-zsh_link_base: "{{ dotfiles_path }}/roles/zsh"

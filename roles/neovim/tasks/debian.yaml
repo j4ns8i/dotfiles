@@ -1,8 +1,0 @@
----
-
-- name: Brew install neovim
-  community.general.homebrew:
-    name: neovim
-    state: latest
-  environment:
-    PATH: "{{ ansible_env.PATH }}"

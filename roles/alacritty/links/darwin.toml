@@ -1,7 +1,0 @@
-[shell]
-args = ["-l"]
-program = "/opt/homebrew/bin/tmux"
-
-[window]
-decorations = "Buttonless"
-option_as_alt = "Both"

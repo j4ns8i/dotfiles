@@ -1,0 +1,9 @@
+[shell]
+args = ["-l"]
+program = "tmux"
+
+[window]
+decorations = "None"
+
+[font]
+size = 10

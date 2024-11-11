@@ -1,5 +1,0 @@
----
-
-dotfiles_path: ""
-
-dotfiles_home_dir: "{{ ansible_user_dir }}"
