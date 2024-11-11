@@ -6,4 +6,4 @@ program = "tmux"
 decorations = "None"
 
 [font]
-size = 10
+size = 13
