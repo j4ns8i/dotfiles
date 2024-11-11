@@ -16,6 +16,4 @@
     tmux.enable = true;
     zsh.enable = true;
   };
-
-  home.packages = with pkgs; [ coreutils ];
 }
