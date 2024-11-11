@@ -6,6 +6,7 @@
       home.packages = with pkgs; [ zsh ];
       home.file = let
         symlink = config.lib.file.mkOutOfStoreSymlink;
+        osZsh = if pkgs.stdenv.isDarwin then "darwin.zsh" else "nixos.zsh";
       in {
         ".config/zsh/pure".source = fetchGit {
           url = "https://github.com/sindresorhus/pure";
@@ -13,7 +14,7 @@
         };
         ".zshrc".source = symlink "${config.j4ns8i.hmDir}/config/zsh/zshrc";
         ".config/zsh/share".source = symlink "${config.j4ns8i.hmDir}/config/zsh/share";
-        ".config/zsh/os.zsh".source = symlink "${config.j4ns8i.hmDir}/config/zsh/nixos.zsh";
+        ".config/zsh/os.zsh".source = symlink "${config.j4ns8i.hmDir}/config/zsh/${osZsh}";
       };
     };
 }
