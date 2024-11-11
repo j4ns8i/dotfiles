@@ -5,12 +5,11 @@
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [ tmux ];
       home.file = let
-        hmDirectory = "${config.home.homeDirectory}/.config/home-manager";
         symlink = config.lib.file.mkOutOfStoreSymlink;
       in {
-        ".tmux.conf".source = symlink "${hmDirectory}/config/tmux/tmux.conf";
-        ".config/tmux/os.conf".source = symlink "${hmDirectory}/config/tmux/nixos.conf";
-        ".config/tmux/vim-tmux-navigator.conf".source = symlink "${hmDirectory}/config/tmux/vim-tmux-navigator.conf";
+        ".tmux.conf".source = symlink "${config.j4ns8i.hmDir}/config/tmux/tmux.conf";
+        ".config/tmux/os.conf".source = symlink "${config.j4ns8i.hmDir}/config/tmux/nixos.conf";
+        ".config/tmux/vim-tmux-navigator.conf".source = symlink "${config.j4ns8i.hmDir}/config/tmux/vim-tmux-navigator.conf";
       };
     };
 }

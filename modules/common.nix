@@ -1,12 +1,12 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, setupCfg, ... }: {
   options.j4ns8i.hmDir = lib.mkOption {
     type = lib.types.str;
     default = "${config.home.homeDirectory}/.config/home-manager";
   };
 
   config = {
-    home.username = "j4ns8i";
-    home.homeDirectory = "/home/j4ns8i";
+    home.username = setupCfg.username or "j4ns8i";
+    home.homeDirectory = setupCfg.homeDirectory or "/home/j4ns8i";
 
     home.packages = with pkgs; [
       # utilities

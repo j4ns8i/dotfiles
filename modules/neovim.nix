@@ -5,10 +5,9 @@
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [ neovim ];
       home.file = let
-        hmDirectory = "${config.home.homeDirectory}/.config/home-manager";
         symlink = config.lib.file.mkOutOfStoreSymlink;
       in {
-        ".config/nvim".source = symlink "${hmDirectory}/config/neovim";
+        ".config/nvim".source = symlink "${config.j4ns8i.hmDir}/config/neovim";
       };
     };
 }

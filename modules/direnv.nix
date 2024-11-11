@@ -5,10 +5,9 @@
     lib.mkIf cfg.enable {
       programs.direnv.enable = true;
       home.file = let
-        hmDirectory = "${config.home.homeDirectory}/.config/home-manager";
         symlink = config.lib.file.mkOutOfStoreSymlink;
       in {
-        ".config/direnv/direnvrc".source = symlink "${hmDirectory}/config/direnv/direnvrc";
+        ".config/direnv/direnvrc".source = symlink "${config.j4ns8i.hmDir}/config/direnv/direnvrc";
       };
     };
 }

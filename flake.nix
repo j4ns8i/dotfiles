@@ -17,17 +17,26 @@
           system = cfg.system or "x86_64-linux";
           config.allowUnfree = true;
         };
-        modules = cfg.modules;
+        inherit (cfg) modules;
+        extraSpecialArgs.setupCfg = cfg.setupCfg or {};
       };
-      hosts = {
+      setups = {
         "j4ns8i@laptar-2" = {
           modules = [ ./machines/laptar.nix ];
         };
         "j4ns8i@proton-3" = {
           modules = [ ./machines/proton.nix ];
         };
+        "justin.smalkowski@YJ0VNX32G2.local" = {
+          modules = [ ./machines/macarm.nix ];
+          system = "aarch64-darwin";
+          setupCfg = {
+            username = "justin.smalkowski";
+            homeDirectory = "/Users/justin.smalkowski";
+          };
+        };
       };
     in {
-      homeConfigurations = nixpkgs.lib.mapAttrs mkHome hosts;
+      homeConfigurations = nixpkgs.lib.mapAttrs mkHome setups;
     };
 }
