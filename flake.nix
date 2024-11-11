@@ -23,6 +23,9 @@
         "j4ns8i@laptar-2" = {
           modules = [ ./machines/laptar.nix ];
         };
+        "j4ns8i@proton-3" = {
+          modules = [ ./machines/proton.nix ];
+        };
       };
     in {
       homeConfigurations = nixpkgs.lib.mapAttrs mkHome hosts;
