@@ -12,9 +12,9 @@
           url = "https://github.com/sindresorhus/pure";
           rev = "a02209d36c8509c0e62f44324127632999c9c0cf";
         };
-        ".zshrc".source = symlink "${hmDirectory}/roles/zsh/links/zshrc";
-        ".config/zsh/share".source = symlink "${hmDirectory}/roles/zsh/links/share";
-        ".config/zsh/os.zsh".source = symlink "${hmDirectory}/roles/zsh/links/nixos.zsh";
+        ".zshrc".source = symlink "${hmDirectory}/config/zsh/zshrc";
+        ".config/zsh/share".source = symlink "${hmDirectory}/config/zsh/share";
+        ".config/zsh/os.zsh".source = symlink "${hmDirectory}/config/zsh/nixos.zsh";
       };
     };
 }

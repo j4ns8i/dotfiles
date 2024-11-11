@@ -8,7 +8,7 @@
         hmDirectory = "${config.home.homeDirectory}/.config/home-manager";
         symlink = config.lib.file.mkOutOfStoreSymlink;
       in {
-        ".config/nvim".source = symlink "${hmDirectory}/roles/neovim/links/config/nvim";
+        ".config/nvim".source = symlink "${hmDirectory}/config/neovim";
       };
     };
 }

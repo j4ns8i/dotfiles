@@ -8,7 +8,7 @@
         hmDirectory = "${config.home.homeDirectory}/.config/home-manager";
         symlink = config.lib.file.mkOutOfStoreSymlink;
       in {
-        ".config/direnv/direnvrc".source = symlink "${hmDirectory}/roles/direnv/links/direnvrc";
+        ".config/direnv/direnvrc".source = symlink "${hmDirectory}/config/direnv/direnvrc";
       };
     };
 }

@@ -5,7 +5,7 @@
     in lib.mkIf cfg.enable {
       home.packages = with pkgs; [ git ];
       home.file = {
-        ".config/git/config".source = config.lib.file.mkOutOfStoreSymlink "${config.j4ns8i.hmDir}/roles/bootstrap/links/gitconfig";
+        ".config/git/config".source = config.lib.file.mkOutOfStoreSymlink "${config.j4ns8i.hmDir}/config/git/gitconfig";
       };
     };
 }
