@@ -1,9 +1,13 @@
+local function set_highlights()
+  local colors = require('base16-colorscheme').colors
+  vim.api.nvim_set_hl(0, 'IblIndent', { fg = colors.base01 })
+  vim.api.nvim_set_hl(0, '@ibl.indent.char.1', { link = 'IblIndent' })
+end
+
 return {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
-    local c = require('justin').colorscheme
-    c.hi('IblIndent', { ctermfg = c.darkgray, fg = c.guidarkdarkgray })
-    c.hi('@ibl.indent.char.1', { link = 'IblIndent' })
+    set_highlights()
     require('ibl').setup({
       indent = {
         char     = '│',

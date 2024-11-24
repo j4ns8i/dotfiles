@@ -1,30 +1,6 @@
 local function set_highlights()
-  local c = require('justin').colorscheme
-  c.hi('CmpItemAbbrDeprecated',    { ctermfg = c.lightgray, strikethrough = true, fg = c.guilightgray })
-  c.hi('CmpItemAbbrMatch',         { bold = true })
-  c.hi('CmpItemAbbrMatchFuzzy',    { link = 'CmpItemAbbrMatch' })
-  c.hi('CmpItemKindModule',        { ctermfg = c.darkblue, fg = c.guidarkblue })
-  c.hi('CmpItemKindField',         { ctermfg = c.darkblue, fg = c.guidarkblue })
-  c.hi('CmpItemKindProperty',      { link = 'CmpItemKindField' })
-  c.hi('CmpItemKindEvent',         { link = 'CmpItemKindField' })
-  c.hi('CmpItemKindEnumMember',    { link = 'CmpItemKindField' })
-  c.hi('CmpItemKindText',          { ctermfg = c.white, fg = c.guiwhite })
-  c.hi('CmpItemKindKeyword',       { link = 'Keyword' })
-  c.hi('CmpItemKindConstructor',   { link = 'Keyword' })
-  c.hi('CmpItemKindReference',     { link = 'Keyword' })
-  c.hi('CmpItemKindValue',         { ctermfg = c.darkgreen, fg = c.guidarkgreen })
-  c.hi('CmpItemKindFunction',      { link = 'Function' })
-  c.hi('CmpItemKindMethod',        { link = 'CmpItemKindFunction' })
-  c.hi('CmpItemKindStruct',        { link = 'Type' })
-  c.hi('CmpItemKindClass',         { link = 'CmpItemKindStruct' })
-  c.hi('CmpItemKindEnum',          { link = 'CmpItemKindStruct' })
-  c.hi('CmpItemKindInterface',     { link = 'CmpItemKindStruct' })
-  c.hi('CmpItemKindTypeParameter', { link = 'CmpItemKindStruct' })
-  c.hi('CmpItemKindOperator',      { link = 'Operator' })
-  c.hi('CmpItemKindVariable',      { ctermfg = c.darkcyan, fg = c.guidarkcyan })
-  c.hi('CmpItemKindConstant',      { link = 'CmpItemKindVariable' })
-  c.hi('CmpItemKindFile',          { link = 'CmpItemKindVariable' })
-  c.hi('CmpItemKindFolder',        { link = 'CmpItemKindModule' })
+  local colors = require('base16-colorscheme').colors
+  vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = colors.base06 })
 end
 
 return {

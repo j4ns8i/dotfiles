@@ -1,3 +1,14 @@
+local function set_highlights()
+  local colors = require('base16-colorscheme').colors
+  vim.api.nvim_set_hl(0, 'TelescopeNormal',       { link = 'Normal' })
+  vim.api.nvim_set_hl(0, 'TelescopeTitle',        { link = 'Title' })
+  vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { link = 'Title' })
+  vim.api.nvim_set_hl(0, 'TelescopeBorder',       { link = 'FloatBorder' })
+  vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { link = 'TelescopeBorder' })
+  vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { link = 'Normal' })
+  vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { bg = colors.base00, fg = colors.base08 })
+end
+
 return {
   'nvim-telescope/telescope.nvim',
   version = '0.1.5',
@@ -58,7 +69,6 @@ return {
     plugin.load_extension('fzf')
     plugin.load_extension('live_grep_args')
 
-    local c = require('justin').colorscheme
-    c.hi('TelescopeBorder', { ctermfg = c.darkgray, fg = c.guidarkgray })
+    set_highlights()
   end
 }

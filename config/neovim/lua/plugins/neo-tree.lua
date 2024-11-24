@@ -1,12 +1,12 @@
 local function set_highlights()
-  local c = require('justin').colorscheme
-  c.hi('NeoTreeDir',          { ctermfg = c.darkblue,    fg = c.guidarkblue, bold = true })
-  c.hi('NeoTreeFloatTitle',   { link = 'FloatTitle' })
-  c.hi('NeoTreeModified',     { link = 'DiffChange' })
-  c.hi('NeoTreeGitModified',  { link = 'DiffChange' })
-  c.hi('NeoTreeGitConflict',  { ctermfg = c.darkmagenta, fg = c.guidarkmagenta, bold = true, italic = true })
-  c.hi('NeoTreeGitUnstaged',  { link = 'DiffChange' })
-  c.hi('NeoTreeGitUntracked', { link = 'DiffChange' })
+  local colors = require('base16-colorscheme').colors
+  vim.api.nvim_set_hl(0, 'NeoTreeDirectoryName', { fg = colors.base0C, bold = true })
+  vim.api.nvim_set_hl(0, 'NeoTreeFloatTitle',    { link = 'FloatTitle' })
+  vim.api.nvim_set_hl(0, 'NeoTreeModified',      { link = 'DiffChange' })
+  vim.api.nvim_set_hl(0, 'NeoTreeGitModified',   { link = 'DiffChange' })
+  vim.api.nvim_set_hl(0, 'NeoTreeGitConflict',   { fg = colors.base14, bold = true, italic = true })
+  vim.api.nvim_set_hl(0, 'NeoTreeGitUnstaged',   { link = 'DiffChange' })
+  vim.api.nvim_set_hl(0, 'NeoTreeGitUntracked',  { link = 'DiffChange' })
 end
 
 return {

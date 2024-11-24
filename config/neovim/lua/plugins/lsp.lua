@@ -42,8 +42,7 @@ end
 
 -- config is the lazy config function
 local function config()
-  local c = require('justin').colorscheme
-  c.hi('LspInfoBorder', { link = 'FloatBorder' })
+  vim.api.nvim_set_hl(0, 'LspInfoBorder', { link = 'FloatBorder' })
   vim.lsp.handlers['textDocument/hover'] =
       vim.lsp.with(
         vim.lsp.handlers.hover,
