@@ -1,6 +1,7 @@
 import = [
     "~/.config/alacritty/os.toml",
     "~/.config/alacritty/colors.toml",
+    "~/.config/alacritty/base16-themes/colors/base16-nord.toml",
 ]
 
 [font.normal]

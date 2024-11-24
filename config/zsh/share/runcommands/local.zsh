@@ -16,7 +16,7 @@ fi
 
 # Make ctrl-R full screen with fzf
 export FZF_DEFAULT_OPTS='--cycle --exact --border --info=inline
---color=bg+:7,fg+:15,gutter:0
+--color=bg+:8,gutter:0
 --color=hl:4,hl+:4
 --color=info:7,border:7
 --color=prompt:2,pointer:6,marker:14:bold
