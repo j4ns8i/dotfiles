@@ -20,11 +20,11 @@ return {
     { 'folke/trouble.nvim' },
   },
   keys = {
-    { '<leader>pf', function() require('telescope.builtin').find_files({ hidden = true }) end },
-    { '<leader>ph', function() require('telescope.builtin').highlights() end },
-    { '<leader>pg', function() require('telescope.builtin').git_files() end },
-    { '<leader>pe', function() require('telescope.builtin').help_tags() end },
-    { '<leader>ps', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
+    { '<leader>pf', desc = 'Find files', function() require('telescope.builtin').find_files({ hidden = true }) end },
+    { '<leader>ph', desc = 'Highlights', function() require('telescope.builtin').highlights() end },
+    { '<leader>pg', desc = 'Git files', function() require('telescope.builtin').git_files() end },
+    { '<leader>pe', desc = 'Help tags', function() require('telescope.builtin').help_tags() end },
+    { '<leader>ps', desc = 'Search', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
   },
   config = function()
     local trouble = require('trouble.sources.telescope')
