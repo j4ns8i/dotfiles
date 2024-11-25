@@ -1,6 +1,5 @@
-[shell]
-args = ["-l"]
-program = "tmux"
+[terminal.shell]
+program = "zsh"
 
 [window]
 decorations = "None"
