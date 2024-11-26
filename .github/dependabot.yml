@@ -7,3 +7,6 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    groups:
+      dev:
+        dependency-type: "development"
