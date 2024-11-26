@@ -34,7 +34,6 @@
       go
       nodejs_22
       pnpm_9
-      nodePackages.neovim
       lua-language-server
 
     ] ++ lib.optionals config.j4ns8i.graphicalApps [
