@@ -28,6 +28,7 @@
       zoxide
       xdg-utils
       file
+      devenv
 
       # programming languages
       rustup
