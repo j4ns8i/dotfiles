@@ -17,5 +17,6 @@
     neovim.enable = true;
     tmux.enable = true;
     zsh.enable = true;
+    bat.enable = true;
   };
 }
