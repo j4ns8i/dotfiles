@@ -98,6 +98,7 @@ local function config()
     { 'pyright' },
     { 'volar' },
     { 'terraformls' },
+    { 'helm_ls' },
     { 'tflint' },
     { 'bashls' },
     { 'jsonnet_ls' },
