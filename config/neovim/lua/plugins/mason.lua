@@ -32,6 +32,7 @@ return {
         'bashls',
         'docker_compose_language_service',
         'dockerls',
+        'starlark_rust',
         'tailwindcss',
         'emmet_language_server',
         'cssls',
