@@ -2,6 +2,18 @@ local function hi(name, args)
   vim.api.nvim_set_hl(0, name, args)
 end
 
+-- Favorites:
+-- base16-decaf
+-- base16-everforest
+-- base16-horizon-terminal-dark
+-- base16-nord
+-- base16-onedark
+-- base16-qualia
+-- base16-stella
+-- base16-tender
+-- base16-kimber
+-- base16-rose-pine-moon
+
 vim.cmd.colorscheme 'base16-nord'
 local colors = require('base16-colorscheme').colors
 
@@ -31,7 +43,7 @@ hi('FloatBorder', { fg = colors.base02 })
 hi('LineNr', { fg = colors.base03 })
 
 hi('TSNamespace', { fg = colors.base0A })
-hi('TSVariable', { fg = colors.base04 })
+hi('TSVariable', { fg = colors.base05 })
 
 hi('@constant', { fg = colors.base08 })
 hi('@lsp.mod.readonly', { link = '@constant' })
