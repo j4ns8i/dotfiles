@@ -2,7 +2,7 @@
 import = [
     "~/.config/alacritty/os.toml",
     "~/.config/alacritty/colors.toml",
-    "~/.config/alacritty/base16-themes/colors/base16-nord.toml",
+    "~/.config/alacritty/base16-themes/colors/base16-catppuccin-mocha.toml",
 ]
 
 [font.normal]
