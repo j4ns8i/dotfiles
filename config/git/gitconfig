@@ -9,6 +9,7 @@
     ff = only
 [alias]
     pi = pull --rebase=interactive
+    pf = push --force-with-lease
     bl = branch -ra
     la = "!git config -l | grep alias | cut -c 7-"
     ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(cyan)\\ %<|(40,trunc)%an\\ |\\ %Creset%s%Cred%d" --decorate --date=relative
