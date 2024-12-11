@@ -6,6 +6,9 @@ end
 
 return {
   'lukas-reineke/indent-blankline.nvim',
+  dependencies = {
+    'rrethy/base16-nvim',
+  },
   config = function()
     set_highlights()
     require('ibl').setup({

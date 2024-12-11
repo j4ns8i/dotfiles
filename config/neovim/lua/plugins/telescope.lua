@@ -18,6 +18,7 @@ return {
     { 'nvim-telescope/telescope-live-grep-args.nvim', version = '^1.0.0', },
     { 'nvim-tree/nvim-web-devicons' },
     { 'folke/trouble.nvim' },
+    { 'rrethy/base16-nvim' },
   },
   keys = {
     { '<leader>pf', desc = 'Find files', function() require('telescope.builtin').find_files({ hidden = true }) end },

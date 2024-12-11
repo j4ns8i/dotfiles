@@ -21,6 +21,9 @@ end
 
 return {
   'RRethy/vim-illuminate',
+  dependencies = {
+    'rrethy/base16-nvim',
+  },
   ft = filetypes,
   config = function()
     set_highlights()

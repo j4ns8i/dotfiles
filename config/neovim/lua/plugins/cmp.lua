@@ -25,6 +25,7 @@ return {
         end
       },
       { 'justin' },
+      { 'rrethy/base16-nvim' },
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
     config = function()

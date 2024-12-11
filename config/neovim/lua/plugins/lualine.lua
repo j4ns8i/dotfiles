@@ -12,7 +12,10 @@ end
 
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'rrethy/base16-nvim',
+  },
   opts = function()
     set_highlights()
     return {

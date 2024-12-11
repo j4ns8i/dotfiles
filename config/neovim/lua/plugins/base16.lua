@@ -1,3 +1,3 @@
 return {
-  "rrethy/nvim-base16"
+  "rrethy/base16-nvim"
 }

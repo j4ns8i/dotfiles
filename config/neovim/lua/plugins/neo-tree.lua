@@ -17,6 +17,7 @@ return {
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
       'folke/which-key.nvim',
+      'rrethy/base16-nvim',
     },
     keys = {
       { '<leader>n<leader>', '<cmd>Neotree reveal_file=%s<cr>', desc = "Reveal file" },
