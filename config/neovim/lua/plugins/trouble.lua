@@ -48,17 +48,27 @@ return {
       desc = "LSP Document Symbols",
     },
   },
-  opts = {
-    focus = true,
-    modes = {
-      lsp_document_symbols = {
-        mode = "lsp_document_symbols",
-        win = { position = "right", size = 40 },
-        format = '{kind_icon} {symbol.name}',
-      },
-      lsp_incoming_calls = {
-        auto_jump = true,
+  opts = function()
+
+    vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+      callback = function()
+        vim.cmd([[Trouble qflist open]])
+      end,
+    })
+
+    return {
+      focus = true,
+      modes = {
+        lsp_document_symbols = {
+          mode = "lsp_document_symbols",
+          win = { position = "left", size = 40 },
+          format = '{kind_icon} {symbol.name}',
+        },
+        lsp_incoming_calls = {
+          auto_jump = true,
+        }
       }
     }
-  },
+
+  end
 }

@@ -20,16 +20,20 @@ return {
     { 'folke/trouble.nvim' },
     { 'rrethy/base16-nvim' },
   },
+  cmd = {
+    'Telescope',
+  },
   keys = {
     { '<leader>pf', desc = 'Find files', function() require('telescope.builtin').find_files({ hidden = true }) end },
     { '<leader>ph', desc = 'Highlights', function() require('telescope.builtin').highlights() end },
     { '<leader>pg', desc = 'Git files', function() require('telescope.builtin').git_files() end },
     { '<leader>pe', desc = 'Help tags', function() require('telescope.builtin').help_tags() end },
     { '<leader>ps', desc = 'Search', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
+    { '<leader>py', desc = 'Symbols', function () require('telescope.builtin').lsp_dynamic_workspace_symbols() end },
   },
   config = function()
-    local trouble = require('trouble.sources.telescope')
     local lga = require('telescope-live-grep-args.actions')
+    local actions = require('telescope.actions')
     local opts = {
       extensions = {
         fzf = {
@@ -53,10 +57,16 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<c-q>"] = trouble.open,
+            ["<c-q>"] = function(bufnr)
+              actions.smart_send_to_qflist(bufnr)
+              vim.cmd([[Trouble qflist open]])
+            end,
           },
           n = {
-            ["<c-q>"] = trouble.open,
+            ["<c-q>"] = function(bufnr)
+              actions.smart_send_to_qflist(bufnr)
+              vim.cmd([[Trouble qflist open]])
+            end,
           },
         },
         file_ignore_patterns = { '.git/' },
