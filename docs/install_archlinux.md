@@ -17,12 +17,6 @@ $ sfdisk --label gpt /dev/sda -N <part-num> <<< 'start=513MiB, size=200GiB, type
 
 The LUKS container is generally referred to as cryptlvm in this setup.
 
-## Install
-
-```bash
-$ ansible-playbook install_archlinux.yaml -e 'install_esp=/dev/sda1 install_partition=/dev/sda2'
-```
-
 ## Maintenance
 
 Opening the LUKS container can be done like so:
