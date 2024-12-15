@@ -39,7 +39,6 @@
 
     ] ++ lib.optionals config.j4ns8i.graphicalApps [
       discord
-      kitty
       obsidian
       slack
       spotify
