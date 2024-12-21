@@ -62,7 +62,6 @@ zle -N self-insert url-quote-magic
 export LANG=en_US.UTF-8
 export EDITOR=nvim
 export GOPATH="$HOME/code"
-export GIT_PAGER="less -FRX"
 export LESS="-R -j 10"
 export SRC="$GOPATH/src"
 export TRACKS_DIR=$HOME/scratch/tracks
@@ -120,6 +119,8 @@ alias elocal="vim ~/.config/zsh/share/runcommands/local.zsh; source ~/.config/zs
 alias k=kubectl
 alias -g L="| less"
 alias -g R="2>&1"
+alias -g B="| bat"
+alias -g F="| fzf --ansi"
 alias vc="nvim ~/.config/nvim -c 'cd ~/.config/nvim'"
 alias kx="kubectx"
 alias kc="kubectl --context"

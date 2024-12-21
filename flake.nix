@@ -27,7 +27,7 @@
         "j4ns8i@proton-3" = {
           modules = [ ./machines/proton.nix ];
         };
-        "justin.smalkowski@YJ0VNX32G2.local" = {
+        "justin.smalkowski@justin.smalkowski-YJ0VNX32G2" = {
           modules = [ ./machines/macarm.nix ];
           system = "aarch64-darwin";
           setupCfg = {

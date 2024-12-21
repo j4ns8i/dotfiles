@@ -1,5 +1,12 @@
 [core]
     excludesfile = ~/.config/git/ignore
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    syntax-theme = base16
+    diff-so-fancy = true
 [user]
     name = j4ns8i
     email = jsmalkowski+github@gmail.com
@@ -47,8 +54,7 @@
 [init]
     defaultBranch = main
 [merge]
-    tool = nvimdiff
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [mergetool]
     prompt = false
 [mergetool.nvimdiff]

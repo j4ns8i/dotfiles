@@ -29,6 +29,7 @@
       xdg-utils
       file
       devenv
+      delta
 
       # programming languages
       rustup
