@@ -1,47 +1,36 @@
-# File structure:
-# ❯ tree ~/.config/zsh
-# ~/.config/zsh
-# ├── completions
-# │   ├── _ggo
-# │   ├── _ggr
-# │   ├── _nvm -> ~/code/src/github.com/robbyrussell/oh-my-zsh/plugins/nvm/_nvm
-# │   ├── _pip
-# │   ├── _status
-# │   └── _track
-# ├── functions
-# │   ├── async
-# │   ├── colored-man-pages.plugin.zsh
-# │   ├── nvm.plugin.zsh -> ~/code/src/github.com/robbyrussell/oh-my-zsh/plugins/nvm/nvm.plugin.zsh
-# │   ├── pip.plugin.zsh
-# │   └── prompt_pure_setup
-# └── runcommands
-#     ├── atg.zsh -> ~/code/src/git.viasat.com/ATG/stdlib/bash/atg.sh
-#     ├── lfcd.sh -> ~/code/src/github.com/gokcehan/lf/etc/lfcd.sh
-#     ├── local.zsh
-#     ├── viasat.zsh
-#     └── zsh-history-substring-search.zsh -> ~/code/src/github.com/zsh-users/zsh-history-substring-search/zsh-history-substring-search.zsh
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+local function run_in_tmux() {
+    tmux new-session
+    exit 0 # exit out after the session ends or is detached
+}
 
-# Uncomment for profiling
-# zmodload zsh/zprof
+local function run_normally() {
+    # Uncomment for profiling
+    # zmodload zsh/zprof
 
-export ZSH_CONFIG_DIR=~/.config/zsh
+    export ZSH_CONFIG_DIR=~/.config/zsh
 
-fpath=(
-    ${ZSH_CONFIG_DIR}/pure
-    ${ZSH_CONFIG_DIR}/functions
-    ${ZSH_CONFIG_DIR}/completions
-    ${ZSH_CONFIG_DIR}/share/functions
-    ${ZSH_CONFIG_DIR}/share/completions
-    $fpath
-)
+    fpath=(
+        ${ZSH_CONFIG_DIR}/pure
+        ${ZSH_CONFIG_DIR}/functions
+        ${ZSH_CONFIG_DIR}/completions
+        ${ZSH_CONFIG_DIR}/share/functions
+        ${ZSH_CONFIG_DIR}/share/completions
+        $fpath
+    )
 
-# (N) sets NULL_GLOB to return nothing when no matches are found.
-# See `man zshexpn` > Glob Qualifiers.
-for rc in ${ZSH_CONFIG_DIR}/*.zsh(N); do source $rc; done
-for rc in ${ZSH_CONFIG_DIR}/share/runcommands/*.zsh(N); do source $rc; done
-for rc in ${ZSH_CONFIG_DIR}/after/*.zsh(N); do source $rc; done
+    # (N) sets NULL_GLOB to return nothing when no matches are found.
+    # See `man zshexpn` > Glob Qualifiers.
+    for rc in ${ZSH_CONFIG_DIR}/*.zsh(N); do source $rc; done
+    for rc in ${ZSH_CONFIG_DIR}/share/runcommands/*.zsh(N); do source $rc; done
+    for rc in ${ZSH_CONFIG_DIR}/after/*.zsh(N); do source $rc; done
 
-# Uncomment for profiling
-# zprof
+    # Uncomment for profiling
+    # zprof
+}
+
+# if TMUX is set or if you don't have tmux, load normally
+if [[ -n "$TMUX" ]] || ! command -v tmux &>/dev/null; then
+    run_normally
+else
+    run_in_tmux
+fi
