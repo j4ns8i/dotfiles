@@ -13,6 +13,7 @@
     firefox.enable = false;
     fonts.enable = true;
     fzf.enable = true;
+    ghostty.enable = true;
     git.enable = true;
     neovim.enable = true;
     tmux.enable = true;
