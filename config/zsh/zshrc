@@ -29,7 +29,7 @@ local function run_normally() {
 }
 
 # if TMUX is set or if you don't have tmux, load normally
-if [[ -n "$TMUX" ]] || ! command -v tmux &>/dev/null; then
+if [[ -n "$TMUX" ]] || [[ -f ~/.disable_tmux ]] || ! command -v tmux &>/dev/null; then
     run_normally
 else
     run_in_tmux

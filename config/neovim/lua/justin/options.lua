@@ -22,6 +22,13 @@ vim.o.showbreak   = '  \\ ' -- Format line breaks
 
 vim.o.scrolloff = 3 -- Start scrolling before cursor hits top/bottom
 
+-- Different terminals handle mouse scroll events differently. E.g. ghostty
+-- appears to translate one event into 5 lines by default, while alacritty
+-- chooses 3. These are configurable. My strategy is to inherit these values in
+-- neovim rather than trying to configure them myself. By setting these to 1,
+-- neovim will effectively use the terminal's multiplier.
+vim.o.mousescroll = 'ver:1,hor:1'
+
 -- When splitting windows, keep what you're working on in the "main" position
 vim.o.splitbelow = true
 vim.o.splitright = true
