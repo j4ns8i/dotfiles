@@ -150,7 +150,7 @@ local function config()
   }
 
   local lspconfig = require('lspconfig')
-  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('blink.cmp').get_lsp_capabilities()
 
   for _, opts in pairs(lsps) do
     setup_lsp(lspconfig, capabilities, opts)
@@ -161,7 +161,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
+      'saghen/blink.cmp',
       'justin',
     },
     lazy = false,
