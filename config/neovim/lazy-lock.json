@@ -29,7 +29,6 @@
   "vim-gitgutter": { "branch": "main", "commit": "7b0b5098e3e57be86bb96cfbf2b8902381eef57c" },
   "vim-helm": { "branch": "master", "commit": "ae1ebc160d2b9b90108477ab10df7a4fc501e358" },
   "vim-illuminate": { "branch": "master", "commit": "5eeb7951fc630682c322e88a9bbdae5c224ff0aa" },
-  "vim-obsession": { "branch": "master", "commit": "ed9dfc7c2cc917ace8b24f4f9f80a91e05614b63" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-tmux-navigator": { "branch": "master", "commit": "d847ea942a5bb4d4fab6efebc9f30d787fd96e65" },
   "which-key.nvim": { "branch": "main", "commit": "1f8d414f61e0b05958c342df9b6a4c89ce268766" }

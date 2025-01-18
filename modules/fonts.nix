@@ -5,7 +5,7 @@
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [
         noto-fonts-emoji
-        (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+        nerd-fonts.jetbrains-mono
       ];
       fonts.fontconfig = {
         enable = true;
