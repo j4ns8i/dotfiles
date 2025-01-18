@@ -14,7 +14,7 @@ end
 -- base16-kimber
 -- base16-rose-pine-moon
 
-vim.cmd.colorscheme 'base16-catppuccin-mocha'
+vim.cmd.colorscheme 'base16-rose-pine'
 local colors = require('base16-colorscheme').colors
 
 -- From https://github.com/chriskempson/base16/blob/main/styling.md:
