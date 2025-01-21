@@ -16,7 +16,7 @@ fi
 
 # Make ctrl-R full screen with fzf
 export FZF_DEFAULT_OPTS='--cycle --exact --border --info=inline
---color=bg+:8,gutter:0
+--color=bg+:-1,gutter:-1
 --color=hl:4,hl+:4
 --color=info:7,border:7
 --color=prompt:2,pointer:6,marker:14:bold
@@ -43,7 +43,7 @@ bindkey '^[[Z' reverse-menu-complete
 
 autoload -U edit-command-line
 zle -N edit-command-line
-bindkey '^xe' edit-command-line
+bindkey '^[e' edit-command-line
 
 # Rebind these to avoid conflict with vim-tmux-navigator
 bindkey -r '\C-h'
