@@ -40,7 +40,12 @@ hi('DiffChange', { fg = colors.base0A })
 hi('DiagnosticHint', { fg = colors.base03 })
 hi('FloatBorder', { fg = colors.base02 })
 
+hi('Comment', { fg = colors.base03 })
+hi('TSComment', { link = 'Comment' })
+
 hi('LineNr', { fg = colors.base03 })
+hi('CursorLine', { bg = colors.base01 })
+hi('ColorColumn', { link = 'CursorLine' })
 
 hi('TSNamespace', { fg = colors.base0A })
 hi('TSVariable', { fg = colors.base05 })

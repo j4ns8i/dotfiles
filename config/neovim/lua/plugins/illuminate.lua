@@ -14,7 +14,7 @@ local filetypes = {
 
 local function set_highlights()
   local colors = require('base16-colorscheme').colors
-  vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = colors.base01 })
+  vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = colors.base02 })
   vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'IlluminatedWordText' })
   vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'IlluminatedWordText' })
 end
