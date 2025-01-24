@@ -15,6 +15,8 @@
 [pull]
     ff = only
 [alias]
+    a = add
+    d = diff
     pi = pull --rebase=interactive
     pf = push --force-with-lease
     bl = branch -ra
@@ -22,6 +24,7 @@
     ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(cyan)\\ %<|(40,trunc)%an\\ |\\ %Creset%s%Cred%d" --decorate --date=relative
     ll = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(red)%d\\ %C(reset)%s%C(cyan)\\ [%an]" --decorate --stat --date=relative
     sl = ls -10
+    pl = pull
     co = checkout
     ci = commit
     br = branch
