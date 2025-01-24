@@ -41,6 +41,7 @@
     open = !open $(git remote get-url origin | sed -E 's/.*@([[:alnum:]\\.-]*):([[:alnum:]-]*)\\/([[:alnum:]-]*)(\\.git)?/https:\\/\\/\\1\\/\\2\\/\\3/')
     fp = fetch --all --prune
     mc = merge --no-commit --no-ff
+    dc = d --cached
     diffc = diff --cached
     # `diff origin..` will look at HEAD of origin which may have advanced, hence --merge-base below
     bd = diff --merge-base origin

@@ -1,6 +1,7 @@
 alias g="git"
 alias ga="git a"
 alias gd="git d"
+alias gdc="git dc"
 alias gpi="git pi"
 alias gpf="git pf"
 alias gbl="git bl"
