@@ -14,6 +14,21 @@
     default = simple
 [pull]
     ff = only
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname # sort versions numerically, so e.g. v1.101 comes before v1.1000
+[diff]
+    algorithm = histogram
+    mnemonicPrefix = true # for (i)ndex, (w)orktree, (c)ommit, and (o)bject prefixes to file names
+    renames = true
+[commit]
+    verbose = true # include diff in commit message editor
+[rebase]
+    autosSquash = true
+    updateRefs = true
 [alias]
     a = add
     d = diff
@@ -21,8 +36,10 @@
     pf = push --force-with-lease
     bl = branch -ra
     la = "!git config -l | grep alias | cut -c 7-"
-    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(cyan)\\ %<|(40,trunc)%an\\ |\\ %Creset%s%Cred%d" --decorate --date=relative
-    ll = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%C(red)%d\\ %C(reset)%s%C(cyan)\\ [%an]" --decorate --stat --date=relative
+    ls = log --pretty=format:'%C(bold blue)%h %C(bold green)[%ad] %C(reset)%s%C(bold red)%d%C(reset)%C(dim white) (%an)' --decorate --date=relative
+    ll = ls --stat
+    lsg = ls --graph
+    lsga = ls --graph --all
     sl = ls -10
     pl = pull
     co = checkout
@@ -35,7 +52,6 @@
     reo = reset origin
     wt = worktree
     cane = commit --amend --no-edit
-    hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     sub = submodule
     sb = status -sb
     open = !open $(git remote get-url origin | sed -E 's/.*@([[:alnum:]\\.-]*):([[:alnum:]-]*)\\/([[:alnum:]-]*)(\\.git)?/https:\\/\\/\\1\\/\\2\\/\\3/')
@@ -46,11 +62,12 @@
     # `diff origin..` will look at HEAD of origin which may have advanced, hence --merge-base below
     bd = diff --merge-base origin
     bdc = diff --cached --merge-base origin
-    mb = merge-base origin HEAD
+    mb = "!f() { git merge-base ${1:-origin} --fork-point; }; f"
     rpsh = rev-parse --short HEAD
     psuo = !git push -u origin $(git branch --show-current)
     lsb = ls origin..
     llb = ll origin..
+    mbr = "!f() { git rebase -i $(git merge-base $1 --fork-point); }; f" # From https://news.ycombinator.com/item?id=42953388, changed to mbr for "merge-base rebase"
 [filter "lfs"]
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
@@ -69,3 +86,11 @@
 
 [includeIf "gitdir:work/"]
     path = ~/.config/git/config.work
+
+# References:
+# * https://blog.gitbutler.com/how-git-core-devs-configure-git/
+# * https://beej.us/guide/bggit/html/
+# * https://news.ycombinator.com/item?id=42953388
+# * https://andrewlock.net/working-with-stacked-branches-in-git-is-easier-with-update-refs/
+
+# vim: set ft=gitconfig :
