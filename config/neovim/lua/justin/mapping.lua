@@ -50,9 +50,6 @@ vim.keymap.set('n', '<leader>/<space>', vim.cmd.nohlsearch)
 vim.keymap.set('n', 'gg', 'mjgg')
 vim.keymap.set('n', 'G', 'mkG')
 
-vim.keymap.set('n', '<up>', ':cp<cr>zz')
-vim.keymap.set('n', '<down>', ':cn<cr>zz')
-
 vim.keymap.set('n', '<leader>in', vim.cmd.Inspect)
 
 vim.keymap.set('n', '<leader>cl', vim.cmd.cclose)

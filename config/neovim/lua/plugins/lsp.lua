@@ -9,6 +9,8 @@ local on_attach = function(_, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', 'gC', vim.lsp.buf.incoming_calls, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
@@ -65,7 +67,6 @@ local function config()
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '<M-k>', vim.diagnostic.goto_prev, opts)
   vim.keymap.set('n', '<M-j>', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
   -- Set "<" prefix before diagnostic virtual text
   vim.diagnostic.config({

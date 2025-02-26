@@ -8,7 +8,7 @@ return {
   },
   keys = {
     {
-      '<leader>xx',
+      '<leader>x<bs>',
       function() require('trouble').close() end,
       desc = "Close Trouble",
     },
@@ -33,7 +33,7 @@ return {
       desc = "Location List",
     },
     {
-      'gR',
+      '<leader>xR',
       function() require('trouble').open('lsp_references') end,
       desc = "LSP References",
     },
@@ -49,7 +49,6 @@ return {
     },
   },
   opts = function()
-
     vim.api.nvim_create_autocmd("QuickFixCmdPost", {
       callback = function()
         vim.cmd([[Trouble qflist open]])
@@ -66,6 +65,11 @@ return {
         },
         lsp_incoming_calls = {
           auto_jump = true,
+        },
+        lsp_base = {
+          params = {
+            include_current = true,
+          }
         }
       }
     }
