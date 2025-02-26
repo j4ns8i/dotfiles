@@ -109,7 +109,6 @@ command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
-alias ls='noglob gls --color'
 alias l='ls --color -AF'
 alias ll='ls --color -AlhF'
 alias llt='ls --color -thrAlF'
