@@ -1,6 +1,8 @@
 local function set_highlights()
   -- cannot link to groups because they will not properly sit on top of bg color
   local colors = require('base16-colorscheme').colors
+  vim.api.nvim_set_hl(0, 'LuaLineBranch',          { fg = colors.base03, bg = colors.base02 })
+  vim.api.nvim_set_hl(0, 'LuaLineFilename',        { fg = colors.base03, bg = colors.base01 })
   vim.api.nvim_set_hl(0, 'LuaLineDiffAdd',         { fg = colors.base0B, bg = colors.base02 })
   vim.api.nvim_set_hl(0, 'LuaLineDiffChange',      { fg = colors.base0D, bg = colors.base02 })
   vim.api.nvim_set_hl(0, 'LuaLineDiffDelete',      { fg = colors.base08, bg = colors.base02 })
@@ -20,13 +22,16 @@ return {
     set_highlights()
     return {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         component_separators = '|',
         section_separators = '',
       },
       sections = {
         lualine_b = {
-          { 'branch' },
+          {
+            'branch',
+            color = 'LuaLineBranch',
+          },
           {
             'diff',
             diff_color = {
@@ -43,6 +48,12 @@ return {
               info  = 'LuaLineDiagnosticInfo',
               hint  = 'LuaLineDiagnosticHint',
             },
+          },
+        },
+        lualine_c = {
+          {
+            'filename',
+            color = 'LuaLineFilename',
           },
         },
       },

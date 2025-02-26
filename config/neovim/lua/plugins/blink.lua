@@ -6,7 +6,10 @@ return {
     },
     version = "*",
     opts = {
-      keymap = { preset = "super-tab" },
+      keymap = {
+        preset = "super-tab",
+        ["<C-n>"] = { "show", "select_next", "fallback" },
+      },
       completion = {
         documentation = {
           auto_show = true,
