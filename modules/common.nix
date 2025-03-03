@@ -37,6 +37,7 @@
       nodejs_22
       pnpm_9
       lua-language-server
+      uv
 
     ] ++ lib.optionals config.j4ns8i.graphicalApps [
       discord
