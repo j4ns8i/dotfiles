@@ -5,7 +5,9 @@
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [
         noto-fonts-emoji
-        nerd-fonts.jetbrains-mono
+        jetbrains-mono
+        geist-font
+        roboto-mono
       ];
       fonts.fontconfig = {
         enable = true;
@@ -14,6 +16,8 @@
         ];
         defaultFonts.monospace = [
           "JetBrains Mono"
+          "Geist Mono"
+          "Roboto Mono"
           "Noto Color Emoji"
         ];
       };
