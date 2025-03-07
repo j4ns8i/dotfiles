@@ -27,6 +27,9 @@
         "j4ns8i@proton-3" = {
           modules = [ ./machines/proton.nix ];
         };
+        "j4ns8i@woos" = {
+          modules = [ ./machines/woos.nix ];
+        };
         "justin.smalkowski@justin.smalkowski-YJ0VNX32G2" = {
           modules = [ ./machines/macarm.nix ];
           system = "aarch64-darwin";
