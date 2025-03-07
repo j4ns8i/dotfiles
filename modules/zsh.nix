@@ -20,18 +20,13 @@
 
             fpath=(
                 ''${ZSH_CONFIG_DIR}/pure
-                ''${ZSH_CONFIG_DIR}/functions
-                ''${ZSH_CONFIG_DIR}/completions
-                ''${ZSH_CONFIG_DIR}/share/functions
-                ''${ZSH_CONFIG_DIR}/share/completions
                 $fpath
             )
 
             # (N) sets NULL_GLOB to return nothing when no matches are found.
             # See `man zshexpn` > Glob Qualifiers.
             for rc in ''${ZSH_CONFIG_DIR}/*.zsh(N); do source $rc; done
-            for rc in ''${ZSH_CONFIG_DIR}/share/runcommands/*.zsh(N); do source $rc; done
-            for rc in ''${ZSH_CONFIG_DIR}/after/*.zsh(N); do source $rc; done
+            for rc in ''${ZSH_CONFIG_DIR}/share/*.zsh(N); do source $rc; done
 
             # Uncomment for profiling
             # zprof
