@@ -5,7 +5,7 @@
     lib.mkIf cfg.enable {
       programs.fzf = {
         enable = true;
-        enableZshIntegration = config.zsh.enable;
+        enableZshIntegration = config.programs.zsh.enable;
       };
     };
 }
