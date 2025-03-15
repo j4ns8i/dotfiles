@@ -22,6 +22,7 @@
       gomplate
       htop
       jq
+      yq-go
       ripgrep
       tree
       unzip
