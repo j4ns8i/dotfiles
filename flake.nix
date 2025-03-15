@@ -18,7 +18,9 @@
           config.allowUnfree = true;
         };
         inherit (cfg) modules;
-        extraSpecialArgs.setupCfg = cfg.setupCfg or {};
+        extraSpecialArgs.setupCfg = cfg.setupCfg or {} // {
+          hostName = nixpkgs.lib.last (nixpkgs.lib.splitString "@" name);
+        };
       };
       setups = {
         "j4ns8i@laptar-2" = {
