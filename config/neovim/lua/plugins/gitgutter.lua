@@ -12,11 +12,11 @@ return {
   'airblade/vim-gitgutter',
   dependencies = { 'justin' },
   keys = {
-    { '<leader>ggs', '<cmd>GitGutterStageHunk<cr>',   desc = 'Stage hunk' },
-    { '<leader>ggu', '<cmd>GitGutterUndoHunk<cr>',    desc = 'Undo hunk' },
-    { '<leader>ggp', '<cmd>GitGutterPreviewHunk<cr>', desc = 'Preview hunk' },
-    { '<leader>j',   '<cmd>GitGutterNextHunk<cr>',    desc = 'GitGutter Next hunk' },
-    { '<leader>k',   '<cmd>GitGutterPrevHunk<cr>',    desc = 'GitGutter Previous hunk' },
+    { '<leader>gs', '<cmd>GitGutterStageHunk<cr>',   desc = 'Stage hunk' },
+    { '<leader>gu', '<cmd>GitGutterUndoHunk<cr>',    desc = 'Undo hunk' },
+    { '<leader>gp', '<cmd>GitGutterPreviewHunk<cr>', desc = 'Preview hunk' },
+    { '<End>',      '<cmd>GitGutterNextHunk<cr>',    desc = 'GitGutter Next hunk' },
+    { '<Home>',     '<cmd>GitGutterPrevHunk<cr>',    desc = 'GitGutter Previous hunk' },
   },
   event = 'VeryLazy',
   config = function()
