@@ -12,6 +12,8 @@
     home.username = setupCfg.username or "j4ns8i";
     home.homeDirectory = setupCfg.homeDirectory or "/home/j4ns8i";
 
+    home.shell.enableZshIntegration = true;
+
     home.packages = with pkgs; [
 
       # utilities
@@ -26,7 +28,6 @@
       ripgrep
       tree
       unzip
-      zoxide
       xdg-utils
       file
       devenv

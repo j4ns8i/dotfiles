@@ -19,5 +19,6 @@
     tmux.enable = true;
     zsh.enable = true;
     bat.enable = true;
+    zoxide.enable = true;
   };
 }

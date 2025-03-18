@@ -65,9 +65,7 @@ export GOPATH="$HOME/code"
 export LESS="-R -j 10"
 export SRC="$GOPATH/src"
 export TRACKS_DIR=$HOME/scratch/tracks
-# export PURE_PREPROMPT='%F{blue}%2~%f'
 export WORDCHARS=${WORDCHARS/\/}
-export PYENV_ROOT="$HOME/.pyenv"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 
 # Add new paths to $PATH if they dont already exist
@@ -104,10 +102,6 @@ zstyle :compinstall filename '/Users/jsmalkowski/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-
-command -v pyenv &>/dev/null && eval "$(pyenv init -)"
-command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
-command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
 alias l='ls --color -AF'
 alias ll='ls --color -AlhF'
