@@ -9,8 +9,11 @@
         ### END init from dotfiles/modules/zsh.nix ###
       '';
     in lib.mkIf config.j4ns8i.zsh.enable {
-      programs.zsh.enable = true;
-      programs.zsh.initExtra = zshrcExtra;
+      programs.zsh = {
+        enable = true;
+        initExtra = zshrcExtra;
+        completionInit = "";
+      };
       home.packages = with pkgs; [ zsh ];
       home.file = let
         symlink = config.lib.file.mkOutOfStoreSymlink;
