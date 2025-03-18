@@ -46,6 +46,8 @@ vim.o.foldlevel  = 99       -- Start with all folds expanded
 
 vim.opt.nrformats:append { 'alpha' } -- Add or subtract letters with ctrl-a / ctrl-x
 
+vim.opt.completeopt:append { 'noinsert', 'popup' }
+
 vim.o.textwidth = 80 -- 80 is just a good width, ok?
 vim.o.wrap = false
 

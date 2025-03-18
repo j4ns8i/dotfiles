@@ -5,6 +5,7 @@ return {
       'zbirenbaum/copilot.lua',
       'nvim-lua/plenary.nvim',
     },
+    config = true,
     keys = {
       { '<leader>cpc', vim.cmd.CopilotChat,        mode = { 'n', 'v' }, desc = 'Copilot Chat' },
       { '<leader>cpe', vim.cmd.CopilotChatExplain, mode = { 'v' }, desc = 'Copilot Explain' },
@@ -26,6 +27,14 @@ return {
       'CopilotChatReview',
       'CopilotChatTests',
       'CopilotChatDocs',
+      'CopilotChatModels',
+      'CopilotChatAgents',
+      'CopilotChatPrompts',
+      'CopilotChatSave',
+      'CopilotChatLoad',
+      'CopilotChatReset',
+      'CopilotChatStop',
+      'CopilotChatToggle',
       'CopilotChatOptimize',
     }
   },
