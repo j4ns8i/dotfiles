@@ -10,6 +10,7 @@
 
     alacritty.enable = true;
     direnv.enable = true;
+    fd.enable = true;
     firefox.enable = false;
     fonts.enable = true;
     fzf.enable = true;

@@ -24,7 +24,8 @@ export FZF_DEFAULT_OPTS='--cycle --exact --border --info=inline
 '
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='--height=~20'
-export FZF_CTRL_T_OPTS='--height=~20 --reverse --walker=file,follow'
+export FZF_CTRL_T_COMMAND='fd --type f --no-ignore-vcs --hidden'
+export FZF_CTRL_T_OPTS='--height=~20 --reverse'
 export FZF_CTRL_R_OPTS='--height=~20 --reverse'
 export FZF_GIT_OPTS='--height=~20 --reverse'
 
