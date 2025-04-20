@@ -22,6 +22,7 @@ return {
     keys = {
       { '<leader>n<leader>', '<cmd>Neotree reveal_file=%s<cr>', desc = "Reveal file" },
       { '<leader>nt',        '<cmd>Neotree toggle<cr>',         desc = "Toggle" },
+      { '<leader>n<bs>',     '<cmd>Neotree close<cr>',          desc = "Close" },
     },
     cmd = 'Neotree',
     init = function()

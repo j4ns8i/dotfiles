@@ -7,7 +7,6 @@ local function qf_next_quickfix()
   if qf_info.idx ~= qf_info.size then
     vim.cmd.cnext()
   end
-  vim.cmd.normal('zz')
 end
 
 local function qf_next_trouble()
@@ -17,9 +16,10 @@ end
 local function qf_next()
   if is_quickfix_open() then
     qf_next_quickfix()
-    return
+  else
+    qf_next_trouble()
   end
-  qf_next_trouble()
+  vim.cmd [[ normal zz ]]
 end
 
 local function qf_previous_quickfix()
@@ -27,7 +27,6 @@ local function qf_previous_quickfix()
   if qf_info.idx ~= 1 then
     vim.cmd.cprevious()
   end
-  vim.cmd.normal('zz')
 end
 
 local function qf_previous_trouble()
@@ -40,6 +39,7 @@ local function qf_previous()
   else
     qf_previous_trouble()
   end
+  vim.cmd [[ normal zz ]]
 end
 
 vim.keymap.set('n', '<up>', qf_previous, { desc = "Next quickfix / trouble entry" })
@@ -47,3 +47,5 @@ vim.keymap.set('n', '<down>', qf_next, { desc = "Previous quickfix / trouble ent
 
 vim.keymap.set('n', '<leader>q<bs>', vim.cmd.cclose, { desc = "Close quickfix window" })
 vim.keymap.set('n', '<leader>qd', vim.diagnostic.setqflist, { desc = "Open diagnostics in quickfix list" })
+
+vim.keymap.set('n', '<leader>l<bs>', vim.cmd.lclose, { desc = "Close location list" })
