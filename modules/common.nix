@@ -32,6 +32,8 @@
       file
       devenv
       delta
+      httpie
+      yazi
 
       # programming languages
       rustup
