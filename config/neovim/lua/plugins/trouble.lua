@@ -60,7 +60,7 @@ return {
       modes = {
         lsp_document_symbols = {
           mode = "lsp_document_symbols",
-          win = { position = "left", size = 40 },
+          win = { position = "right", size = 40 },
           format = '{kind_icon} {symbol.name}',
         },
         lsp_incoming_calls = {

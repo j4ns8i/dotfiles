@@ -16,7 +16,9 @@ return {
     { '<leader>gu', '<cmd>GitGutterUndoHunk<cr>',    desc = 'Undo hunk' },
     { '<leader>gp', '<cmd>GitGutterPreviewHunk<cr>', desc = 'Preview hunk' },
     { '<End>',      '<cmd>GitGutterNextHunk<cr>',    desc = 'GitGutter Next hunk' },
+    { '<leader>j',  '<cmd>GitGutterNextHunk<cr>',    desc = 'GitGutter Next hunk' },
     { '<Home>',     '<cmd>GitGutterPrevHunk<cr>',    desc = 'GitGutter Previous hunk' },
+    { '<leader>k',  '<cmd>GitGutterPrevHunk<cr>',    desc = 'GitGutter Previous hunk' },
   },
   event = 'VeryLazy',
   config = function()

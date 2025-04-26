@@ -46,6 +46,7 @@ hi('TSComment', { link = 'Comment' })
 
 hi('LineNr', { fg = colors.base03 })
 hi('CursorLine', { bg = colors.base01 })
+hi('CursorLineNr', { bg = colors.base03 })
 hi('ColorColumn', { link = 'CursorLine' })
 
 hi('TSNamespace', { fg = colors.base0A })

@@ -19,7 +19,7 @@ local function qf_next()
   else
     qf_next_trouble()
   end
-  vim.cmd [[ normal zz ]]
+  vim.cmd [[ normal zz<cr> ]]
 end
 
 local function qf_previous_quickfix()
@@ -39,7 +39,7 @@ local function qf_previous()
   else
     qf_previous_trouble()
   end
-  vim.cmd [[ normal zz ]]
+  vim.cmd [[ normal zz<cr> ]]
 end
 
 vim.keymap.set('n', '<up>', qf_previous, { desc = "Next quickfix / trouble entry" })
