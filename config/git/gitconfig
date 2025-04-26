@@ -27,7 +27,7 @@
 [commit]
     verbose = true # include diff in commit message editor
 [rebase]
-    autosSquash = true
+    autoSquash = true
     updateRefs = true
 [alias]
     a = add
@@ -41,20 +41,26 @@
     lsg = ls --graph
     lsga = ls --graph --all
     sl = ls -10
+    slga = ls -10 --graph --all
     pl = pull
     co = checkout
     ci = commit
     br = branch
     st = status
     sw = switch
+    rb = rebase
+    rba = rebase --abort
+    rbc = rebase --continue
     rs = restore
     re = reset
     reo = reset origin
+    sh = stash
+    shs = stash show
     wt = worktree
     cane = commit --amend --no-edit
     sub = submodule
     sb = status -sb
-    open = !open $(git remote get-url origin | sed -E 's/.*@([[:alnum:]\\.-]*):([[:alnum:]-]*)\\/([[:alnum:]-]*)(\\.git)?/https:\\/\\/\\1\\/\\2\\/\\3/')
+    open = "!open $(git remote get-url origin | sed -E 's/.*@([[:alnum:]\\.-]*):([[:alnum:]-]*)\\/([[:alnum:]-]*)(\\.git)?/https:\\/\\/\\1\\/\\2\\/\\3/')"
     fp = fetch --all --prune
     mc = merge --no-commit --no-ff
     dc = d --cached
@@ -64,7 +70,7 @@
     bdc = diff --cached --merge-base origin
     mb = "!f() { git merge-base ${1:-origin} --fork-point; }; f"
     rpsh = rev-parse --short HEAD
-    psuo = !git push -u origin $(git branch --show-current)
+    psuo = "!git push -u origin $(git branch --show-current)"
     lsb = ls origin..
     llb = ll origin..
     mbr = "!f() { git rebase -i $(git merge-base $1 --fork-point); }; f" # From https://news.ycombinator.com/item?id=42953388, changed to mbr for "merge-base rebase"

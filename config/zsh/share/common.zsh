@@ -63,7 +63,8 @@ zle -N self-insert url-quote-magic
 export LANG=en_US.UTF-8
 export EDITOR=nvim
 export GOPATH="$HOME/code"
-export LESS="-R -j 10"
+export LESS="-R -j .5"
+export DELTA_PAGER="less -j 2" # Set n/N jump point as line number 2
 export SRC="$GOPATH/src"
 export TRACKS_DIR=$HOME/scratch/tracks
 export WORDCHARS=${WORDCHARS/\/}
