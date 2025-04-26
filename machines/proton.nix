@@ -8,7 +8,7 @@
   j4ns8i = {
     graphicalApps = true;
 
-    alacritty.enable = true;
+    alacritty.enable = false;
     direnv.enable = true;
     fd.enable = true;
     firefox.enable = true;
