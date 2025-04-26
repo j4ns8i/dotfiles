@@ -40,12 +40,12 @@ local function config()
 
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+  vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition)
   vim.keymap.set('n', 'gC', vim.lsp.buf.incoming_calls)
   vim.keymap.set('n', '<F2>', vim.lsp.buf.rename)
   vim.keymap.set('i', '<c-g>', vim.lsp.buf.signature_help)
   vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end)
-  vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end)
-  vim.keymap.set('n', '<leader>co',
+  vim.keymap.set('n', 'go',
     function()
       vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
     end

@@ -1,7 +1,8 @@
 vim.filetype.add(
   {
-    filename = {
-      ["Tiltfile"] = "starlark"
+    pattern = {
+      ["Tiltfile"] = "starlark",
+      [".*%.[Tt]iltfile"] = "starlark"
     }
   }
 )
