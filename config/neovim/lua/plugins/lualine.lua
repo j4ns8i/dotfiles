@@ -1,15 +1,24 @@
 local function set_highlights()
-  -- cannot link to groups because they will not properly sit on top of bg color
   local colors = require('base16-colorscheme').colors
-  vim.api.nvim_set_hl(0, 'LuaLineBranch',          { fg = colors.base03, bg = colors.base02 })
-  vim.api.nvim_set_hl(0, 'LuaLineFilename',        { fg = colors.base03, bg = colors.base01 })
-  vim.api.nvim_set_hl(0, 'LuaLineDiffAdd',         { fg = colors.base0B, bg = colors.base02 })
-  vim.api.nvim_set_hl(0, 'LuaLineDiffChange',      { fg = colors.base0D, bg = colors.base02 })
-  vim.api.nvim_set_hl(0, 'LuaLineDiffDelete',      { fg = colors.base08, bg = colors.base02 })
-  vim.api.nvim_set_hl(0, 'LuaLineDiagnosticError', { fg = colors.base08, bg = colors.base02 })
-  vim.api.nvim_set_hl(0, 'LuaLineDiagnosticWarn',  { fg = colors.base0A, bg = colors.base02 })
-  vim.api.nvim_set_hl(0, 'LuaLineDiagnosticInfo',  { fg = colors.base06, bg = colors.base02 })
-  vim.api.nvim_set_hl(0, 'LuaLineDiagnosticHint',  { fg = colors.base04, bg = colors.base02 })
+
+  -- mode_color returns a common set of mode color themes with one primary color
+  -- as the 'a' and 'z' section backgrounds
+  local mode_color = function(primary_bg)
+    return {
+      a = { bg = primary_bg, fg = colors.base00 },
+      b = { bg = colors.base02, fg = colors.base04 },
+      c = { bg = colors.base01, fg = colors.base03 }
+    }
+  end
+  local theme = {
+    normal = mode_color(colors.base0D),
+    insert = mode_color(colors.base0B),
+    visual = mode_color(colors.base0E),
+    replace = mode_color(colors.base08),
+    command = mode_color(colors.base09),
+    inactive = mode_color(colors.base03),
+  }
+  return theme
 end
 
 return {
@@ -19,62 +28,48 @@ return {
     'rrethy/base16-nvim',
   },
   opts = function()
-    set_highlights()
+    local theme = set_highlights()
     return {
       options = {
         icons_enabled = true,
-        component_separators = '|',
-        section_separators = '',
+        component_separators = '',
+        section_separators = { left = '', right = '' },
+        theme = theme,
       },
       sections = {
+        lualine_a = {
+          { 'mode', separator = { left = '', right = '' }, fmt = function(s) return s:sub(1,1) end, padding = 0 },
+        },
         lualine_b = {
-          {
-            'branch',
-            color = 'LuaLineBranch',
-          },
-          {
-            'diff',
-            diff_color = {
-              added    = 'LuaLineDiffAdd',
-              modified = 'LuaLineDiffChange',
-              removed  = 'LuaLineDiffDelete',
-            },
-          },
-          {
-            'diagnostics',
-            diagnostics_color = {
-              error = 'LuaLineDiagnosticError',
-              warn  = 'LuaLineDiagnosticWarn',
-              info  = 'LuaLineDiagnosticInfo',
-              hint  = 'LuaLineDiagnosticHint',
-            },
-          },
+          { 'filename', separator = { left = '', right = '' }, newfile_status = true, path = 1, },
         },
         lualine_c = {
-          {
-            'filename',
-            color = 'LuaLineFilename',
-          },
+          { 'diff', },
+          { 'diagnostics', },
+        },
+        lualine_x = {
+          { 'filetype', },
+          { 'lsp_status', icon = '⏻', },
+        },
+        lualine_y = {
+          { 'progress', },
+        },
+        lualine_z = {
+          { 'location', separator = { left = '', right = '' }, padding = 0, },
         },
       },
-      -- Note: relative paths in filename component seems to be broken...
-      -- sections = {
-      --   lualine_a = {'mode'},
-      --   lualine_b = {'branch', 'diff', 'diagnostics'},
-      --   lualine_c = {{'filename', path = 1}},
-      --   lualine_x = {'encoding', 'fileformat', 'filetype'},
-      --   lualine_y = {'progress'},
-      --   lualine_z = {'location'}
-      -- },
-      -- inactive_sections = {
-      --   lualine_a = {},
-      --   lualine_b = {},
-      --   lualine_c = {{'filename', path = 2}},
-      --   lualine_x = {'location'},
-      --   lualine_y = {},
-      --   lualine_z = {}
-      -- },
-      -- section_sep
+      inactive_sections = {
+        lualine_c = {
+          { 'filename', newfile_status = true, path = 1, },
+        },
+      },
+      extensions = {
+        'fugitive',
+        'fzf',
+        'neo-tree',
+        'quickfix',
+        'trouble',
+      }
     }
   end
 }

@@ -9,6 +9,8 @@ zstyle :prompt:pure:git:dirty      color 13
 zstyle :prompt:pure:git:arrow      color 6
 prompt pure
 
+export PURE_PROMPT_SYMBOL="●"
+
 # load fzf configuration
 if [[ -f ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh

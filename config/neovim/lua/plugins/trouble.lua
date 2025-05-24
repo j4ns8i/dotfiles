@@ -13,7 +13,7 @@ return {
       desc = "Close Trouble",
     },
     {
-      '<leader>xc',
+      '<leader>xC',
       function() require('trouble').open('lsp_incoming_calls') end,
       desc = "LSP Incoming Calls",
     },
@@ -33,7 +33,7 @@ return {
       desc = "Location List",
     },
     {
-      '<leader>xR',
+      '<leader>xr',
       function() require('trouble').open('lsp_references') end,
       desc = "LSP References",
     },
@@ -43,7 +43,7 @@ return {
       desc = "LSP Implementations",
     },
     {
-      '<leader>xs',
+      '<leader>xO',
       function() require('trouble').open('lsp_document_symbols') end,
       desc = "LSP Document Symbols",
     },

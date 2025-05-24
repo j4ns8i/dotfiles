@@ -62,6 +62,8 @@ vim.opt.formatoptions = {
   ['r'] = true, -- auto-insert comment leader with <cr> in insert mode
 }
 
+vim.o.showmode = false -- Don't show mode, e.g. "-- INSERT --", in command line
+
 vim.o.undofile = true -- Persist undo information
 
 -- Sometimes I like to wipe out ~/.local/state/nvim for testing installations
