@@ -11,8 +11,7 @@
     in lib.mkIf config.j4ns8i.zsh.enable {
       programs.zsh = {
         enable = true;
-        initExtra = zshrcExtra;
-        completionInit = "";
+        initContent = zshrcExtra;
       };
       home.packages = with pkgs; [ zsh ];
       home.file = let

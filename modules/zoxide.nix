@@ -3,6 +3,8 @@
   config =
     let cfg = config.j4ns8i.zoxide; in
     lib.mkIf cfg.enable {
-      programs.zoxide.enable = true;
+      programs.zoxide = {
+        enable = true;
+      };
     };
 }
