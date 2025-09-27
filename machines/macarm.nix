@@ -9,10 +9,10 @@
     graphicalApps = false;
 
     alacritty.enable = false;
-    cursor.enable = false;
+    cursor.enable = true;
     direnv.enable = true;
     fd.enable = true;
-    firefox.enable = false;
+    firefox.enable = true;
     fonts.enable = true;
     fzf.enable = true;
     ghostty.enable = true;
