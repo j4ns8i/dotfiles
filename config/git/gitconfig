@@ -27,6 +27,7 @@
 [commit]
     verbose = true # include diff in commit message editor
 [rebase]
+    autoStash = true
     autoSquash = true
     updateRefs = true
 [alias]
@@ -43,6 +44,7 @@
     sl = ls -10
     slga = ls -10 --graph --all
     pl = pull
+    psh = push
     co = checkout
     ci = commit
     br = branch
@@ -54,9 +56,11 @@
     rs = restore
     re = reset
     reo = reset origin
+    remb = "!f() { git reset $(git mb); }; f"
     sh = stash
     shs = stash show
     wt = worktree
+    root = "!if [[ \"$(git rev-parse --is-inside-work-tree)\" == \"true\" ]]; then echo \"$(git rev-parse --git-common-dir)\"; else echo \"$(git rev-parse --absolute-git-dir)\"; fi"
     cane = commit --amend --no-edit
     sub = submodule
     sb = status -sb
@@ -69,7 +73,8 @@
     bd = diff --merge-base origin
     bdc = diff --cached --merge-base origin
     mb = "!f() { git merge-base ${1:-origin} --fork-point; }; f"
-    rpsh = rev-parse --short HEAD
+    rp = rev-parse
+    rpsh = rp --short HEAD
     psuo = "!git push -u origin $(git branch --show-current)"
     lsb = ls origin..
     llb = ll origin..
