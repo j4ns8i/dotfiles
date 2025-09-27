@@ -25,6 +25,7 @@ local function config()
     'lua_ls',
     'nil_ls',
     'pyright',
+    'ruff',
     'rust_analyzer',
     'starlark_rust',
     -- 'tailwindcss',
@@ -32,7 +33,7 @@ local function config()
     'terraformls',
     'tflint',
     'ts_ls',
-    'volar',
+    'vue_ls',
     'yamlls',
     'zls',
   })

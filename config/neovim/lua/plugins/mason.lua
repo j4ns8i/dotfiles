@@ -26,7 +26,6 @@ return {
       ensure_installed = {
         'gopls',
         'pyright',
-        'rust_analyzer',
         'terraformls',
         'tflint',
         'bashls',

@@ -83,7 +83,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     keys = {
-      { '<leader>tsp', "TSPlaygroundToggle<cr>" },
+      { '<leader>tsp', "<cmd>TSPlaygroundToggle<cr>" },
     },
   }
 }
