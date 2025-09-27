@@ -14,10 +14,13 @@ local function run_normally() {
         $fpath
     )
 
-    # (N) sets NULL_GLOB to return nothing when no matches are found.
+    # Glob qualifiers used:
+    # N: sets NULL_GLOB to return nothing when no matches are found.
+    # -: dereferences symbolic links
+    # .: finds "plain" files, which only includes existing files
     # See `man zshexpn` > Glob Qualifiers.
-    for rc in ${ZSH_CONFIG_DIR}/local/*.zsh(N); do source $rc; done
-    for rc in ${ZSH_CONFIG_DIR}/share/*.zsh(N); do source $rc; done
+    for rc in ${ZSH_CONFIG_DIR}/local/*.zsh(N-.); do source $rc; done
+    for rc in ${ZSH_CONFIG_DIR}/share/*.zsh(N-.); do source $rc; done
 
     # Uncomment for profiling
     # zprof
