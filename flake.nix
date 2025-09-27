@@ -40,8 +40,17 @@
             homeDirectory = "/Users/justin.smalkowski";
           };
         };
+        "justinsmalkowski@yuzu" = {
+          modules = [ ./machines/yuzu.nix ];
+          system = "aarch64-darwin";
+          setupCfg = {
+            username = "justinsmalkowski";
+            homeDirectory = "/Users/justinsmalkowski";
+          };
+        };
       };
     in {
       homeConfigurations = nixpkgs.lib.mapAttrs mkHome setups;
     };
 }
+# vim: sw=2 ts=2 sts=2 et ai
