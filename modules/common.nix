@@ -37,7 +37,6 @@
 
       # programming languages
       rustup
-      go
       nodejs_22
       pnpm_9
       lua-language-server

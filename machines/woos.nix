@@ -16,6 +16,7 @@
     fzf.enable = true;
     ghostty.enable = true;
     git.enable = true;
+    go.enable = true;
     neovim.enable = true;
     tmux.enable = true;
     zsh.enable = true;
