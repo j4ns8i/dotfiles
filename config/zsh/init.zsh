@@ -10,7 +10,6 @@ local function run_normally() {
     export ZSH_CONFIG_DIR=~/.config/zsh
 
     fpath=(
-        ${ZSH_CONFIG_DIR}/pure
         $fpath
     )
 
@@ -21,6 +20,7 @@ local function run_normally() {
     # See `man zshexpn` > Glob Qualifiers.
     for rc in ${ZSH_CONFIG_DIR}/local/*.zsh(N-.); do source $rc; done
     for rc in ${ZSH_CONFIG_DIR}/share/*.zsh(N-.); do source $rc; done
+    for rc in ${ZSH_CONFIG_DIR}/plugins/*.zsh(N-.); do source $rc; done
 
     # Uncomment for profiling
     # zprof

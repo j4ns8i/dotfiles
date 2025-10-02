@@ -21,6 +21,7 @@
     neovim.enable = true;
     tmux.enable = true;
     zsh.enable = true;
+    starship.enable = true;
     bat.enable = true;
     zoxide.enable = true;
   };
