@@ -33,6 +33,7 @@
 [alias]
     a = add
     d = diff
+    f = fetch
     pi = pull --rebase=interactive
     pf = push --force-with-lease
     bl = branch -ra
@@ -65,7 +66,8 @@
     sub = submodule
     sb = status -sb
     open = "!open $(git remote get-url origin | sed -E 's/.*@([[:alnum:]\\.-]*):([[:alnum:]-]*)\\/([[:alnum:]-]*)(\\.git)?/https:\\/\\/\\1\\/\\2\\/\\3/')"
-    fp = fetch --all --prune
+    fa = fetch --all
+    fap = fetch --all --prune
     mc = merge --no-commit --no-ff
     dc = d --cached
     diffc = diff --cached
