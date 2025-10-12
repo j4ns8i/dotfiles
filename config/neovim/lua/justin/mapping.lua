@@ -10,9 +10,9 @@ vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('n', '<Tab>', '>>')
 vim.keymap.set('n', '<S-Tab>', '<<')
--- imap <S-Tab> moved to after/plugin/lsp.lua because of conflict
 vim.keymap.set('v', '<Tab>', '>', { remap = true })
 vim.keymap.set('v', '<S-Tab>', '<', { remap = true })
+vim.keymap.set('i', '<S-Tab>', '<C-d>', { remap = true })
 
 -- Move lines with <Shift-Alt-j/k>
 vim.keymap.set('n', '<S-M-k>', ":m .-2<CR>==")
