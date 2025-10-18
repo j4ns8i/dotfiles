@@ -1,2 +1,2 @@
 set -x
-pnpm commitlint -e "$1"
+bun commitlint -e "$1"
