@@ -1,7 +1,7 @@
 {
     "window.commandCenter": true,
     "git.autofetch": true,
-    "go.goroot": "${env:HOME}/.nix-profile/share/go",
+    "go.goroot": "/opt/homebrew/opt/go/libexec",
     "go.gopath": "${env:HOME}/code",
     "editor.fontFamily": "'Jetbrains Mono', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontSize": 15,
@@ -9,8 +9,10 @@
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.profiles.osx": {
         "zsh": {
-            "path": "zsh",
-            "args": ["-l"],
+            "path": "${env:HOME}/.nix-profile/bin/zsh",
+            "args": [
+                "-l"
+            ],
             "env": {
                 "TMUX": "0"
             }
@@ -19,48 +21,56 @@
     "workbench.colorTheme": "Rosé Pine Moon (no italics)",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": ["g", "r", "r"],
-            "commands": ["references-view.findReferences"]
+            "before": [ "g", "r", "r" ],
+            "commands": [ "references-view.findReferences" ]
         },
         {
-            "before": ["g", "i"],
-            "commands": ["editor.action.goToImplementation"]
+            "before": [ "g", "i" ],
+            "commands": [ "editor.action.goToImplementation" ]
         },
         {
-            "before": ["<space>", "w", "t"],
-            "commands": ["editor.action.toggleWordWrap"]
+            "before": [ "<space>", "w", "t" ],
+            "commands": [ "editor.action.toggleWordWrap" ]
         },
         {
-            "before": ["<space>", "d"],
-            "commands": ["editor.action.goToTypeDefinition"]
+            "before": [ "<space>", "d" ],
+            "commands": [ "editor.action.goToTypeDefinition" ]
         },
         {
-            "before": ["<space>", "g", "p"],
-            "commands": ["editor.action.dirtydiff.next"]
+            "before": [ "<space>", "g", "p" ],
+            "commands": [ "editor.action.dirtydiff.next" ]
         },
         {
-            "before": ["[", "c"],
-            "commands": ["workbench.action.editor.previousChange"]
+            "before": [ "[", "c" ],
+            "commands": [ "workbench.action.editor.previousChange" ]
         },
         {
-            "before": ["]", "c"],
-            "commands": ["workbench.action.editor.nextChange"]
+            "before": [ "]", "c" ],
+            "commands": [ "workbench.action.editor.nextChange" ]
         },
         {
-            "before": ["[", "d"],
-            "commands": ["editor.action.marker.prev"]
+            "before": [ "[", "d" ],
+            "commands": [ "editor.action.marker.prev" ]
         },
         {
-            "before": ["]", "d"],
-            "commands": ["editor.action.marker.next"]
+            "before": [ "]", "d" ],
+            "commands": [ "editor.action.marker.next" ]
         },
         {
-            "before": ["<C-p>"],
-            "commands": ["extension.vim_ctrl+i"]
+            "before": [ "<C-p>" ],
+            "commands": [ "extension.vim_ctrl+i" ]
         },
         {
-            "before": ["g", "r", "i"],
-            "commands": ["editor.action.goToImplementation"]
+            "before": [ "g", "r", "i" ],
+            "commands": [ "editor.action.goToImplementation" ]
+        },
+        {
+            "before": [ "<space>", "n", "<space>" ],
+            "commands": [ "workbench.files.action.showActiveFileInExplorer" ]
+        },
+        {
+            "before": [ "<space>", "g", "s" ],
+            "commands": [ "git.diff.stageHunk" ]
         },
     ],
     "editor.lineNumbers": "relative",
@@ -69,6 +79,22 @@
     "terminal.integrated.macOptionIsMeta": true,
     "makefile.configureOnOpen": false,
     "git.blame.editorDecoration.enabled": false,
-    "git.blame.statusBarItem.enabled": true
+    "git.blame.statusBarItem.enabled": true,
+    "[json]": {
+        "editor.formatOnSave": false
+    },
+    "[jsonc]": {
+        "editor.formatOnSave": false
+    },
+    "redhat.telemetry.enabled": false,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    }
 }
 // vim: ft=jsonc

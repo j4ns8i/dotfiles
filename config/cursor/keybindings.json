@@ -5,14 +5,6 @@
         "command": "composerMode.agent"
     },
     {
-        "key": "cmd+e",
-        "command": "composerMode.background"
-    },
-    {
-        "key": "cmd+e",
-        "command": "composerMode.background"
-    },
-    {
         "key": "f11",
         "command": "workbench.action.toggleMaximizedPanel"
     },
@@ -25,6 +17,21 @@
         "key": "cmd+r cmd+i",
         "command": "-editor.action.showHover",
         "when": "editorTextFocus"
-    }
+    },
+    {
+        "key": "a",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "x",
+        "command": "deleteFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+    },
+    {
+        "key": "alt+cmd+backspace",
+        "command": "-deleteFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !inputFocus"
+    },
 ]
 // vim: ft=jsonc
