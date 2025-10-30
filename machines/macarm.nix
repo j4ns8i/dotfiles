@@ -9,6 +9,7 @@
     graphicalApps = false;
 
     alacritty.enable = false;
+    bun.enable = true;
     cursor.enable = true;
     direnv.enable = true;
     fd.enable = true;
