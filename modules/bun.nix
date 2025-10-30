@@ -8,7 +8,7 @@
         symlink = config.lib.file.mkOutOfStoreSymlink;
         hmDir = config.j4ns8i.hmDir;
       in {
-        ".config/zsh/plugins/bun.zsh".source = symlink "${hmDir}/config/zsh/share/bun.zsh";
+        ".config/zsh/plugins/bun.zsh".source = symlink "${hmDir}/config/bun/bun.zsh";
       };
     };
 }
