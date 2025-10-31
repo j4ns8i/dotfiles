@@ -8,7 +8,7 @@
   j4ns8i = {
     graphicalApps = false;
 
-    alacritty.enable = false;
+    bat.enable = true;
     bun.enable = true;
     cursor.enable = true;
     direnv.enable = true;
@@ -18,13 +18,11 @@
     fzf.enable = true;
     ghostty.enable = true;
     git.enable = true;
-    go.enable = false; # installed with Homebrew in nix-config instead
-    neovim.enable = true;
-    tmux.enable = true;
     lazygit.enable = true;
-    zsh.enable = true;
+    neovim.enable = true;
     starship.enable = true;
-    bat.enable = true;
+    tmux.enable = true;
     zoxide.enable = true;
+    zsh.enable = true;
   };
 }

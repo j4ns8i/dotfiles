@@ -8,9 +8,8 @@
   j4ns8i = {
     graphicalApps = false;
 
-    alacritty.enable = false;
+    bat.enable = true;
     bun.enable = true;
-    cursor.enable = false;
     direnv.enable = true;
     fd.enable = true;
     firefox.enable = true;
@@ -20,10 +19,9 @@
     git.enable = true;
     lazygit.enable = true;
     neovim.enable = true;
-    tmux.enable = true;
-    zsh.enable = true;
     starship.enable = true;
-    bat.enable = true;
+    tmux.enable = true;
     zoxide.enable = true;
+    zsh.enable = true;
   };
 }
