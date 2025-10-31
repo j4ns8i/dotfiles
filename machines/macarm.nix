@@ -21,6 +21,7 @@
     go.enable = false; # installed with Homebrew in nix-config instead
     neovim.enable = true;
     tmux.enable = true;
+    lazygit.enable = true;
     zsh.enable = true;
     starship.enable = true;
     bat.enable = true;
