@@ -41,6 +41,7 @@
       pnpm_9
       lua-language-server
       uv
+      nixfmt
 
     ] ++ lib.optionals config.j4ns8i.graphicalApps [
       discord
