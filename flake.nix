@@ -22,16 +22,17 @@
       mkHome =
         name: cfg:
         let
+          pkgs = import nixpkgs {
+            system = cfg.system or "x86_64-linux";
+            config.allowUnfree = true;
+          };
           hostName = nixpkgs.lib.last (nixpkgs.lib.splitString "@" name);
           setupCfg = (cfg.setupCfg or { }) // {
             inherit hostName;
           };
         in
         home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = cfg.system or "x86_64-linux";
-            config.allowUnfree = true;
-          };
+          inherit pkgs;
           inherit (cfg) modules;
           extraSpecialArgs.setupCfg = setupCfg;
         };
