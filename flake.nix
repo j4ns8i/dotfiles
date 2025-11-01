@@ -15,15 +15,19 @@
     let
       mkHome =
         name: cfg:
+        let
+          hostName = nixpkgs.lib.last (nixpkgs.lib.splitString "@" name);
+          setupCfg = (cfg.setupCfg or { }) // {
+            inherit hostName;
+          };
+        in
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = cfg.system or "x86_64-linux";
             config.allowUnfree = true;
           };
           inherit (cfg) modules;
-          extraSpecialArgs.setupCfg = (cfg.setupCfg or { }) // {
-            hostName = nixpkgs.lib.last (nixpkgs.lib.splitString "@" name);
-          };
+          extraSpecialArgs.setupCfg = setupCfg;
         };
       setups = {
         "j4ns8i@laptar-2" = {
