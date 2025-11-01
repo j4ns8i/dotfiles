@@ -4,19 +4,19 @@ version: '3'
 
 tasks:
   default:
+    desc: List all tasks
     cmds:
       - task -l
-    desc: List all tasks
     silent: true
 
   switch:
+    desc: Build and switch to the latest home-manager config
     cmds:
       - home-manager switch
-    desc: Build and switch to the latest home-manager config
     aliases:
       - sw
 
   format:
+    desc: Format all Nix files
     cmds:
       - fd -e nix | xargs nixfmt
-    desc: Format all Nix files
