@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    desc: List all tasks
+    silent: true
+
+  switch:
+    cmds:
+      - home-manager switch
+    desc: Build and switch to the latest home-manager config
+    aliases:
+      - sw
+
+  format:
+    cmds:
+      - fd -e nix | xargs nixfmt
+    desc: Format all Nix files

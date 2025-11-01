@@ -8,10 +8,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    {
+      nixpkgs,
+      home-manager,
+      utils,
+      ...
+    }:
     let
       mkHome =
         name: cfg:
@@ -59,6 +65,24 @@
     in
     {
       homeConfigurations = nixpkgs.lib.mapAttrs mkHome setups;
-    };
+    }
+    // utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            bun
+            go-task
+            fd
+          ];
+          shellHook = ''
+            bun husky
+          '';
+        };
+      }
+    );
 }
 # vim: sw=2 ts=2 sts=2 et ai
