@@ -20,3 +20,8 @@ tasks:
     desc: Format all Nix files
     cmds:
       - fd -e nix | xargs nixfmt
+
+  check:
+    desc: Check Nix configuration
+    cmds:
+      - nix flake check --all-systems
