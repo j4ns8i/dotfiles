@@ -1,9 +1,7 @@
 {
   imports =
     with builtins;
-    map
-      (filename: toString (../modules) + "/${filename}")
-      (attrNames (readDir ../modules));
+    map (filename: toString (../modules) + "/${filename}") (attrNames (readDir ../modules));
 
   j4ns8i = {
     graphicalApps = false;

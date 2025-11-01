@@ -10,18 +10,21 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs =
+    { nixpkgs, home-manager, ... }:
     let
-      mkHome = name: cfg: home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = cfg.system or "x86_64-linux";
-          config.allowUnfree = true;
+      mkHome =
+        name: cfg:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = cfg.system or "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          inherit (cfg) modules;
+          extraSpecialArgs.setupCfg = (cfg.setupCfg or { }) // {
+            hostName = nixpkgs.lib.last (nixpkgs.lib.splitString "@" name);
+          };
         };
-        inherit (cfg) modules;
-        extraSpecialArgs.setupCfg = cfg.setupCfg or {} // {
-          hostName = nixpkgs.lib.last (nixpkgs.lib.splitString "@" name);
-        };
-      };
       setups = {
         "j4ns8i@laptar-2" = {
           modules = [ ./machines/laptar.nix ];
@@ -49,7 +52,8 @@
           };
         };
       };
-    in {
+    in
+    {
       homeConfigurations = nixpkgs.lib.mapAttrs mkHome setups;
     };
 }

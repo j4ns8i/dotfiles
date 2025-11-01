@@ -1,4 +1,11 @@
-{ config, lib, pkgs, setupCfg, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  setupCfg,
+  ...
+}:
+{
   options.j4ns8i = {
     hmDir = lib.mkOption {
       type = lib.types.str;
@@ -14,42 +21,45 @@
 
     home.shell.enableZshIntegration = true;
 
-    home.packages = with pkgs; [
+    home.packages =
+      with pkgs;
+      [
 
-      # utilities
-      gnumake
-      zlib
-      bat
-      fontconfig
-      gomplate
-      htop
-      jq
-      yq-go
-      ripgrep
-      tree
-      unzip
-      xdg-utils
-      file
-      devenv
-      delta
-      httpie
-      yazi
+        # utilities
+        gnumake
+        zlib
+        bat
+        fontconfig
+        gomplate
+        htop
+        jq
+        yq-go
+        ripgrep
+        tree
+        unzip
+        xdg-utils
+        file
+        devenv
+        delta
+        httpie
+        yazi
 
-      # programming languages
-      rustup
-      nodejs_22
-      pnpm_9
-      lua-language-server
-      uv
-      nixfmt
+        # programming languages
+        rustup
+        nodejs_22
+        pnpm_9
+        lua-language-server
+        uv
+        nixfmt
 
-    ] ++ lib.optionals config.j4ns8i.graphicalApps [
-      discord
-      obsidian
-      slack
-      spotify
-      wezterm
-    ];
+      ]
+      ++ lib.optionals config.j4ns8i.graphicalApps [
+        discord
+        obsidian
+        slack
+        spotify
+        wezterm
+      ];
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;

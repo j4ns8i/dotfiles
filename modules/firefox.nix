@@ -1,7 +1,10 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   options.j4ns8i.firefox.enable = lib.mkEnableOption "firefox";
   config =
-    let cfg = config.j4ns8i.firefox; in
+    let
+      cfg = config.j4ns8i.firefox;
+    in
     lib.mkIf cfg.enable {
       programs.firefox = {
         enable = true;
