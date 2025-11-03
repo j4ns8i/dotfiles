@@ -11,13 +11,9 @@
       cfg = config.j4ns8i.neovim;
     in
     lib.mkIf cfg.enable {
-      home.file =
-        let
-          symlink = config.lib.file.mkOutOfStoreSymlink;
-        in
-        {
-          ".config/nvim".source = symlink "${config.j4ns8i.hmDir}/config/neovim";
-        };
+      home.file = {
+        ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.j4ns8i.hmDir}/config/neovim";
+      };
       home.packages = with pkgs; [
         helm-ls
       ];

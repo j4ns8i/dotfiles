@@ -9,16 +9,13 @@
   config =
     let
       cfg = config.j4ns8i.bun;
+      hmDir = config.j4ns8i.hmDir;
     in
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [ bun ];
-      home.file =
-        let
-          symlink = config.lib.file.mkOutOfStoreSymlink;
-          hmDir = config.j4ns8i.hmDir;
-        in
-        {
-          ".config/zsh/plugins/bun.zsh".source = symlink "${hmDir}/config/bun/bun.zsh";
-        };
+      home.file = {
+        ".config/zsh/plugins/bun.zsh".source =
+          config.lib.file.mkOutOfStoreSymlink "${hmDir}/config/bun/bun.zsh";
+      };
     };
 }

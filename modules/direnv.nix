@@ -7,12 +7,9 @@
     in
     lib.mkIf cfg.enable {
       programs.direnv.enable = true;
-      home.file =
-        let
-          symlink = config.lib.file.mkOutOfStoreSymlink;
-        in
-        {
-          ".config/direnv/direnvrc".source = symlink "${config.j4ns8i.hmDir}/config/direnv/direnvrc";
-        };
+      home.file = {
+        ".config/direnv/direnvrc".source =
+          config.lib.file.mkOutOfStoreSymlink "${config.j4ns8i.hmDir}/config/direnv/direnvrc";
+      };
     };
 }
