@@ -33,6 +33,7 @@
     d = diff
     f = fetch
     pi = pull --rebase=interactive
+    pio = pull --rebase=interactive origin HEAD
     pf = push --force-with-lease
     bl = branch -ra
     la = "!git config -l | grep alias | cut -c 7-"
