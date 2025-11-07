@@ -7,7 +7,7 @@ return {
       'nvim-lua/plenary.nvim',
     },
     opts = {
-      model = 'claude-sonnet-4',
+      model = 'claude-sonnet-4.5',
     },
     keys = {
       { '<leader>cpc', vim.cmd.CopilotChat,        mode = { 'n', 'v' }, desc = 'Copilot Chat' },
