@@ -19,7 +19,8 @@
     kubernetes.enable = true;
     lazygit.enable = true;
     neovim.enable = true;
-    starship.enable = true;
+    pure.enable = true;
+    starship.enable = false;
     tmux.enable = true;
     zoxide.enable = true;
     zsh.enable = true;

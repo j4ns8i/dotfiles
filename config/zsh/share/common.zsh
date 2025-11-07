@@ -1,5 +1,4 @@
 autoload -U zmv
-autoload -U promptinit; promptinit
 
 # load fzf configuration
 if [[ -f ~/.fzf.zsh ]]; then

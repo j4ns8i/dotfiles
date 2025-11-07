@@ -29,7 +29,7 @@
       home.file = {
         ".config/zsh/pure".source = fetchGit {
           url = "https://github.com/sindresorhus/pure";
-          rev = "a02209d36c8509c0e62f44324127632999c9c0cf";
+          rev = "58fe1ac501df94f5458b8c7d08fbea8e5bd86426";
         };
         ".config/zsh/share".source = symlink "${hmDir}/config/zsh/share";
         ".config/zsh/local/os.zsh".source = symlink "${hmDir}/config/zsh/${osZsh}";
