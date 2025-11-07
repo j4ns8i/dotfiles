@@ -33,6 +33,13 @@ vim.keymap.set('n', '<C-p>', '<C-i>zz')
 vim.keymap.set('n', '<C-U>', '<C-U>zz')
 vim.keymap.set('n', '<C-D>', '<C-D>zz')
 
+vim.keymap.set('n', '``', '``zz')
+vim.keymap.set('n', "`'", "`'zz")
+vim.keymap.set('n', "'`", "'`zz")
+vim.keymap.set('n', "''", "''zz")
+vim.keymap.set('n', '`.', '`.zz')
+vim.keymap.set('n', "'.", "'.zz")
+
 vim.keymap.set('n', '<leader>[', ':bp<cr>')
 vim.keymap.set('n', '<leader>]', ':bn<cr>')
 vim.keymap.set('n', '<leader><bs>', '<c-^>')
