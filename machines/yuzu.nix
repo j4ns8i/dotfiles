@@ -15,6 +15,7 @@
     fzf.enable = true;
     ghostty.enable = true;
     git.enable = true;
+    kubernetes.enable = true;
     lazygit.enable = true;
     neovim.enable = true;
     starship.enable = true;
