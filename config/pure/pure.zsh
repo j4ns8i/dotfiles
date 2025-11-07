@@ -1,5 +1,5 @@
 fpath=(
-    ${ZSH_CONFIG_DIR}/pure
+    ${ZSH_CONFIG_DIR}/plugins/pure
     $fpath
 )
 autoload -U promptinit; promptinit
