@@ -1,3 +1,9 @@
+# Exit early if interactive option unset, which is common for command line AI agents.
+# Note: the $NONINTERACTIVE var is a custom override, not prescribed by any tool (that I know of)
+if [[ ! -o interactive ]] || [[ -n "$NONINTERACTIVE" ]]; then
+    return
+fi
+
 local function run_in_tmux() {
     tmux new-session
     exit 0 # exit out after the session ends or is detached
