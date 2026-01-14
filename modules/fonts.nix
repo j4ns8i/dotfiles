@@ -12,7 +12,7 @@
     in
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [
-        noto-fonts-emoji
+        noto-fonts-color-emoji
         jetbrains-mono
         geist-font
         roboto-mono
