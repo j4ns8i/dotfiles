@@ -57,7 +57,11 @@ return {
 
     return {
       focus = true,
+      auto_refresh = false,
       modes = {
+        diagnostics = {
+          auto_refresh = true,
+        },
         lsp_document_symbols = {
           mode = "lsp_document_symbols",
           win = { position = "right", size = 40 },
