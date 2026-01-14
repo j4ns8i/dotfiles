@@ -32,6 +32,8 @@
     a = add
     d = diff
     f = fetch
+    pr = pull --rebase
+    pro = pull --rebase origin HEAD
     pi = pull --rebase=interactive
     pio = pull --rebase=interactive origin HEAD
     pf = push --force-with-lease
@@ -60,6 +62,7 @@
     sh = stash
     shs = stash show
     wt = worktree
+    wtah = "!f() { git worktree add --detach $1 origin/HEAD; }; f"
     root = "!if [[ \"$(git rev-parse --is-inside-work-tree)\" == \"true\" ]]; then echo \"$(git rev-parse --git-common-dir)\"; else echo \"$(git rev-parse --absolute-git-dir)\"; fi"
     cane = commit --amend --no-edit
     sub = submodule
