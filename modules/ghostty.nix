@@ -22,5 +22,7 @@
       };
       home.file.".config/ghostty/themes/catppuccin-mocha".source =
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/ghostty/themes/catppuccin/themes/catppuccin-mocha.conf";
+      home.file.".config/ghostty/themes/black-metal-nile".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.j4ns8i.hmDir}/config/ghostty/black-metal-nile";
     };
 }

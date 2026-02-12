@@ -15,7 +15,7 @@ end
 -- base16-rose-pine-moon
 -- base16-tomorrow-night -- but the matching ghostty theme's dark gray is too dark
 
-vim.cmd.colorscheme 'base16-rose-pine-moon'
+vim.cmd.colorscheme 'base16-black-metal-nile'
 local colors = require('base16-colorscheme').colors
 
 -- From https://github.com/chriskempson/base16/blob/main/styling.md:
