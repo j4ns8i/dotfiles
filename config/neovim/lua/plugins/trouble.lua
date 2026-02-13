@@ -57,11 +57,7 @@ return {
 
     return {
       focus = true,
-      auto_refresh = false,
       modes = {
-        diagnostics = {
-          auto_refresh = true,
-        },
         lsp_document_symbols = {
           mode = "lsp_document_symbols",
           win = { position = "right", size = 40 },
@@ -69,12 +65,16 @@ return {
         },
         lsp_incoming_calls = {
           auto_jump = true,
+          auto_refresh = false,
         },
         lsp_base = {
           params = {
             include_current = true,
           }
-        }
+        },
+        lsp_references = {
+          auto_refresh = false,
+        },
       }
     }
 
