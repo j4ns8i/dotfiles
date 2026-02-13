@@ -61,9 +61,12 @@
     remb = "!f() { git reset $(git mb); }; f"
     sh = stash
     shs = stash show
+    root = "rev-parse --git-common-dir"
     wt = worktree
-    wtah = "!f() { git worktree add --detach $1 origin/HEAD; }; f"
-    root = "!if [[ \"$(git rev-parse --is-inside-work-tree)\" == \"true\" ]]; then echo \"$(git rev-parse --git-common-dir)\"; else echo \"$(git rev-parse --absolute-git-dir)\"; fi"
+    wtl = "worktree list"
+    wtrm = "worktree remove"
+    wta = "!f() { set -e; dir=$(git rev-parse --git-common-dir)/src/$1; git worktree add --detach $dir; echo $dir; }; f"
+    wtah = "!f() { set -e; dir=$(git rev-parse --git-common-dir)/src/$1; git worktree add --detach $dir origin/HEAD; echo $dir; }; f"
     cane = commit --amend --no-edit
     sub = submodule
     sb = status -sb
