@@ -9,6 +9,10 @@ return {
     keys = {
       { '<leader>cpc', '<cmd>CodeCompanionChat Toggle<cr>' },
     },
+    cmd = {
+      'CodeCompanion',
+      'CodeCompanionChat',
+    },
     opts = {
       interactions = {
         chat = {

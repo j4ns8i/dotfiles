@@ -67,6 +67,10 @@ return {
           auto_jump = true,
           auto_refresh = false,
         },
+        lsp_implementations = {
+          auto_jump = true,
+          auto_refresh = false,
+        },
         lsp_base = {
           params = {
             include_current = true,
