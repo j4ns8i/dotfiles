@@ -10,7 +10,7 @@
       home.file = {
         ".config/zsh/plugins/pure".source = fetchGit {
           url = "https://github.com/sindresorhus/pure";
-          rev = "58fe1ac501df94f5458b8c7d08fbea8e5bd86426";
+          rev = "dbefd0dcafaa3ac7d7222ca50890d9d0c97f7ca2";
         };
         ".config/zsh/plugins/pure.zsh".source = symlink "config/pure/pure.zsh";
       };
