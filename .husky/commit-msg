@@ -1,2 +1,0 @@
-set -x
-bun commitlint -e "$1"

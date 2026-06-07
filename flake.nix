@@ -1,90 +1,79 @@
 {
-  description = "Home Manager configuration of j4ns8i";
+  description = ''
+    All-in-one system configuration.
+  '';
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    darwin.url = "github:nix-darwin/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    {
-      nixpkgs,
+    inputs@{
       home-manager,
-      utils,
+      darwin,
+      nixpkgs,
       ...
     }:
     let
-      mkHome =
-        name: cfg:
-        let
-          pkgs = import nixpkgs {
-            system = cfg.system or "x86_64-linux";
-            config.allowUnfree = true;
-          };
-          hostName = nixpkgs.lib.last (nixpkgs.lib.splitString "@" name);
-          setupCfg = (cfg.setupCfg or { }) // {
-            inherit hostName;
-          };
-        in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          inherit (cfg) modules;
-          extraSpecialArgs.setupCfg = setupCfg;
+      mkDarwin =
+        name: system:
+        darwin.lib.darwinSystem {
+          system = system;
+          specialArgs = { inherit inputs system; };
+          modules = [
+            ./modules/dotfiles
+            ./modules/nix-darwin
+            ./machines/${name}
+            home-manager.darwinModules.home-manager
+            (
+              { config, ... }:
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = false;
+                home-manager.sharedModules = [
+                  ./modules/dotfiles
+                  ./machines/${name}
+                ];
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                };
+                home-manager.users.${config.dotfiles.general.username} = ./modules/home-manager;
+              }
+            )
+          ];
         };
-      setups = {
-        "j4ns8i@laptar-2" = {
-          modules = [ ./machines/laptar.nix ];
+      mkNixos =
+        name: system:
+        nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./modules/dotfiles
+            ./machines/${name}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = false;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.sharedModules = [
+                ./modules/dotfiles
+                ./machines/${name}/dotfiles.nix
+              ];
+              home-manager.users.j4ns8i = ./modules/home-manager;
+            }
+          ];
         };
-        "j4ns8i@proton-3" = {
-          modules = [ ./machines/proton.nix ];
-        };
-        "j4ns8i@woos" = {
-          modules = [ ./machines/woos.nix ];
-        };
-        "justin.smalkowski@justin.smalkowski-YJ0VNX32G2" = {
-          modules = [ ./machines/macarm.nix ];
-          system = "aarch64-darwin";
-          setupCfg = {
-            username = "justin.smalkowski";
-            homeDirectory = "/Users/justin.smalkowski";
-          };
-        };
-        "justinsmalkowski@yuzu" = {
-          modules = [ ./machines/yuzu.nix ];
-          system = "aarch64-darwin";
-          setupCfg = {
-            username = "justinsmalkowski";
-            homeDirectory = "/Users/justinsmalkowski";
-          };
-        };
-      };
     in
     {
-      homeConfigurations = nixpkgs.lib.mapAttrs mkHome setups;
-    }
-    // utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            nixfmt
-            bun
-            go-task
-            fd
-          ];
-          shellHook = ''
-            bun husky
-          '';
-        };
-      }
-    );
+      darwinConfigurations = {
+        yuzu = mkDarwin "yuzu" "aarch64-darwin";
+        justinsmalkowski-YJ0VNX32G2 = mkDarwin "apogee" "aarch64-darwin";
+      };
+      nixosConfigurations = {
+        laptar-2 = mkNixos "laptar" "x86_64-linux";
+      };
+    };
 }
-# vim: sw=2 ts=2 sts=2 et ai
