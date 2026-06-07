@@ -68,6 +68,7 @@
           "jq"
           "libiconv"
           "libvterm"
+          "logcli"
           "lpeg"
           "lua"
           "lua-language-server"
