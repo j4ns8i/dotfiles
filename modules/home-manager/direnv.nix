@@ -9,7 +9,11 @@
       cfg = config.dotfiles.home-manager.direnv;
     in
     lib.mkIf cfg.enable {
-      programs.direnv.enable = true;
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+
       home.file = {
         ".config/direnv/direnvrc".source =
           config.lib.file.mkOutOfStoreSymlink "${config.dotfiles.general.root}/config/direnv/direnvrc";
