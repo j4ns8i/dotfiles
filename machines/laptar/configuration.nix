@@ -177,6 +177,7 @@ in
     tlp
     file
     opencode
+    yazi
 
     # apps
     firefox
