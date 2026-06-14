@@ -181,6 +181,11 @@ in
     shell = pkgs.zsh;
   };
 
+  # Disable suspend on lid close
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+  };
+
   # Enable automatic login for the user.
   services.displayManager = {
     autoLogin = {

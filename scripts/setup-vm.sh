@@ -10,6 +10,7 @@ fi
 virt-install \
   --name haos \
   --description "Home Assistant OS" \
+  --autostart \
   --os-variant=generic \
   --ram=3072 \
   --vcpus=6 \
