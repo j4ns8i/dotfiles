@@ -271,6 +271,8 @@ in
     "br0"
   ];
 
+  virtualisation.podman.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -310,6 +312,7 @@ in
 
   networking.hostName = config.dotfiles.general.hostname;
 
+  documentation.man.cache.enable = true;
 }
 
 # vim: set sw=2 :
