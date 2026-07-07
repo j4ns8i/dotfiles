@@ -1,4 +1,4 @@
 return {
   cmd = { 'starlark', '--lsp' },
-  filetypes = { 'starlark', 'star', 'bzl', 'BUILD.bazel' },
+  filetypes = { 'tiltfile', 'starlark', 'star', 'bzl', 'BUILD.bazel' },
 }

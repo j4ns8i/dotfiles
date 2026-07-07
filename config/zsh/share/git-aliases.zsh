@@ -6,21 +6,29 @@ done
 # Create worktree from current branch and cd into it
 ggwta() {
     setopt localoptions pipefail
-    if [[ -z "$1" ]]; then
+    if [[ -z "$@" ]]; then
         echo need an argument
         return 1
     fi
-    dir=$(gwta $1 | tail -n1)
+    dir=$(gwta $@ | tail -n1)
+    rc=$?
+    if [[ $rc -ne 0 ]]; then
+        return $rc
+    fi
     cd $dir
 }
 
 # Create worktree from origin/HEAD and cd into it
 ggwtah() {
     setopt localoptions pipefail
-    if [[ -z "$1" ]]; then
+    if [[ -z "$@" ]]; then
         echo need an argument
         return
     fi
-    dir=$(gwtah $1 | tail -n1)
+    dir=$(gwtah $@ | tail -n1)
+    rc=$?
+    if [[ $rc -ne 0 ]]; then
+        return $rc
+    fi
     cd $dir
 }

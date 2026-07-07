@@ -19,11 +19,11 @@ return {
       },
       {
         '<leader>j',
-        '<cmd>Gitsigns nav_hunk next --wrap=false<cr>',
+        '<cmd>Gitsigns nav_hunk next --wrap=false --target=all<cr>',
       },
       {
         '<leader>k',
-        '<cmd>Gitsigns nav_hunk prev --wrap=false<cr>',
+        '<cmd>Gitsigns nav_hunk prev --wrap=false --target=all<cr>',
       },
       {
         '<leader>gp',

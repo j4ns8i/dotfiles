@@ -109,6 +109,7 @@
 
         taps = [
           "oven-sh/bun"
+          "grafana/grafana/gcx"
         ];
 
         casks = [
