@@ -14,7 +14,7 @@
       home.file = {
         ".config/zsh/plugins/pure".source = fetchGit {
           url = "https://github.com/sindresorhus/pure";
-          rev = "dbefd0dcafaa3ac7d7222ca50890d9d0c97f7ca2";
+          rev = "a075119689fb164a7501624b21936f74e533c6eb";
         };
         ".config/zsh/plugins/pure.zsh".source = config.lib.file.mkOutOfStoreSymlink "${config.dotfiles.general.root}/config/pure/pure.zsh";
       };
