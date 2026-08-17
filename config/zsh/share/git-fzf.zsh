@@ -32,14 +32,26 @@ _git_reflog() {
     CURSOR=$cursor
 }
 
+_git_worktrees() {
+    local cursor=$CURSOR
+    zle push-input
+    local output=($(git worktree list | fzf ${=FZF_GIT_OPTS} | awk '{print $1}'))
+    zle reset-prompt
+    zle get-line
+    zle -U "$output"
+    CURSOR=$cursor
+}
+
 
 # Step 2: Create a new ZLE command and bind it to your shell function
 zle -N _git_branches
 zle -N _git_ls
 zle -N _git_reflog
+zle -N _git_worktrees
 
 # Step 3: Bind your new ZLE command to a key sequence
 bindkey -r "^g"
 bindkey "^[gb" _git_branches
 bindkey "^[gc" _git_ls
 bindkey "^[gr" _git_reflog
+bindkey "^[gw" _git_worktrees
