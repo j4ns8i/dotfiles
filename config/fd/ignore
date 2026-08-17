@@ -2,3 +2,5 @@
 **/.git/objects/
 **/node_modules/
 **/.git/
+.local/worktrees
+.claude/worktrees

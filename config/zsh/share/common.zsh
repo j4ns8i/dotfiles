@@ -55,7 +55,7 @@ export LANG=en_US.UTF-8
 export EDITOR=nvim
 export GOPATH="$HOME/code"
 export LESS="-R -j .5"
-export DELTA_PAGER="less -X -F -j 2" # Don't clear screen if not needed, exit early, and set n/N jump point as line number 2
+export DELTA_PAGER="less $LESS"
 export SRC="$GOPATH/src"
 export TRACKS_DIR=$HOME/scratch/tracks
 export WORDCHARS=${WORDCHARS/\/}
@@ -109,6 +109,7 @@ alias -g BJ="| bat -l json"
 alias -g OBY="-oyaml | bat -l yaml"
 alias -g OBJ="-ojson | bat -l json"
 alias -g F="| fzf --ansi"
+alias NP="LESS=-FRXj.5"
 alias vc="nvim ~/.config/nvim -c 'cd ~/.config/nvim'"
 alias kx="kubectx"
 alias kc="kubectl --context"

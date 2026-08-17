@@ -44,7 +44,7 @@
     pf = push --force-with-lease
     bl = branch -ra
     la = "!git config -l | grep alias | cut -c 7-"
-    ls = log --pretty=format:'%C(bold blue)%h %C(bold green)[%ad] %C(reset)%s%C(bold red)%d%C(reset)%C(dim white) (%an)' --decorate --date=relative
+    ls = log --pretty=format:'%C(blue)%h %C(green)[%ad] %C(reset)%s%C(red)%d%C(reset)%C(dim white) (%an)%C(reset)' --decorate --date=relative
     ll = ls --stat
     lsg = ls --graph
     lsga = ls --graph --all
